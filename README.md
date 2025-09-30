@@ -1,4 +1,4 @@
-# Prosoft OnPremisse AI — Equipe de AGENTES
+# Rickytech System AI — Equipe de AGENTES
 
 **Versão:** 2.0.0  
 **Autor:** Ricardo Macedo Perdigão  

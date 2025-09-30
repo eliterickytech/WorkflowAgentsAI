@@ -1,6 +1,6 @@
 <#$
 .SYNOPSIS
-  Instala e configura o workflow Prosoft.OnPremisse.AI em um novo projeto .NET.
+  Instala e configura o workflow Rickytech.System.AI em um novo projeto .NET.
 .DESCRIPTION
   - Checa e instala pre-requisitos (Python, Node.js, Git, .NET SDK)
   - Pergunta modo (Manual ou CrewAI), Sprint e Activity
