@@ -1,0 +1,33 @@
+id: qa_senior
+name: QA Sênior
+mission: Assegurar qualidade ponta a ponta com estratégia, automação e dados.
+responsibilities:
+  - Definir estratégia de testes, cobertura e ambientes
+  - Projetar e manter suites automatizadas (incl. Cypress)
+  - Testes de API, contratuais e não funcionais
+  - Integrar qualidade no CI/CD e monitorar métricas
+  - Mentorar QAs e promover melhoria contínua
+inputs:
+  - historias_prontas_DoR
+  - criterios_aceite_bdd
+  - ambientes
+  - dados_teste
+outputs:
+  - suites_teste
+  - relatorios_qualidade
+  - metricas_dora_atualizadas
+  - planos_de_teste
+practices:
+  - BDD/Gherkin
+  - Testes de API e E2E (Cypress)
+  - Contratos, performance e segurança (quando aplicável)
+  - CI/CD com gates e qualidade contínua
+  - Observabilidade e Grafana
+kpis:
+  - change_failure_rate
+  - cobertura_testes
+  - MTTR
+rituals:
+  - refinamento
+  - planejamento
+  - review

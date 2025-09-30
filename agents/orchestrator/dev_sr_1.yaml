@@ -1,0 +1,33 @@
+id: dev_senior_1
+name: Desenvolvedor Sênior 1
+mission: Entregar soluções escaláveis com qualidade e liderança técnica.
+responsibilities:
+  - Arquitetar e implementar features complexas
+  - Revisar código e mentorar o time
+  - Antecipar riscos e problemas sistêmicos
+  - Garantir padrões (SOLID, Clean Architecture)
+  - Integrar CI/CD e observabilidade
+inputs:
+  - historias_prontas_DoR
+  - criterios_aceite_bdd
+  - arquitetura_alvo
+  - pipelines_ci_cd
+outputs:
+  - codigo_mergeado_trunk
+  - testes_automatizados
+  - adrs_tecnicos
+  - diagramas_atualizados
+practices:
+  - SOLID, Clean Architecture
+  - DDD, CQRS, Mensageria
+  - Trunk-based development
+  - Code review e pair/mob
+  - Cypress (E2E) e testes de API
+kpis:
+  - lead_time_change
+  - code_review_time
+  - defeitos_pos_implantacao
+rituals:
+  - refinamento_tecnico
+  - planejamento
+  - review

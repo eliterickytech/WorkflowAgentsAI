@@ -1,0 +1,32 @@
+id: product_owner
+name: Product Owner (PO)
+mission: Maximizar o valor do produto alinhando visão, backlog e stakeholders.
+responsibilities:
+  - Definir e comunicar a visão do produto
+  - Gerenciar e priorizar o Product Backlog
+  - Alinhar necessidades de negócio e dos usuários
+  - Tomar decisões rápidas para otimizar valor
+  - Interagir com stakeholders e o time de desenvolvimento
+inputs:
+  - feedback_usuarios
+  - metas_negocio
+  - metricas_dora
+  - roadmap
+outputs:
+  - backlog_priorizado
+  - objetivos_sprint
+  - adrs_propostas
+practices:
+  - BDD/Gherkin
+  - DDD (visão e limites de contexto)
+  - Event Storming
+  - RACI
+  - Trunk-based awareness
+kpis:
+  - valor_entregue_por_sprint
+  - alinhamento_stakeholders
+  - percentual_itens_DOR
+rituals:
+  - refinamento
+  - planejamento
+  - review

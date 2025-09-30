@@ -1,0 +1,278 @@
+{
+  "agentsDirectory": "agents/manual/",
+  "lastUpdated": "2025-09-28",
+  "agents": [
+    {
+      "id": "product-owner",
+      "name": "🎯 Product Owner Agent", 
+      "description": "Entende solicitacoes do cliente, define visao do produto e prioriza funcionalidades por valor de negocio",
+      "playbook": "agents/manual/product-owner.agent.md",
+      "specialties": [
+        "Analise de solicitacoes de cliente",
+        "Definicao de visao de produto",
+        "Priorizacao por valor de negocio",
+        "Comunicacao com stakeholders",
+        "Gestao de expectativas",
+        "Criterios de aceitacao"
+      ],
+      "inputs": [
+        "Solicitacoes do cliente",
+        "Requisitos de negocio",
+        "Objetivos estrategicos",
+        "Feedback de stakeholders",
+        "Restricoes de mercado"
+      ],
+      "outputs": [
+        "Requirements Brief estruturado",
+        "Business Context documentado",
+        "User Stories priorizadas",
+        "Criterios de aceitacao definidos",
+        "Roadmap de entregas",
+        "Briefing para equipe tecnica"
+      ],
+      "keyReferences": [
+        "Scrum Guide",
+        "Product Owner best practices",
+        "Business analysis techniques",
+        "Stakeholder management"
+      ],
+      "triggers": [
+        "solicitacao cliente",
+        "requisitos negocio",
+        "product owner",
+        "visao produto",
+        "priorizacao",
+        "stakeholder"
+      ]
+    },
+    {
+      "id": "requirements-analyst",
+      "name": "📊 Requirements Analyst Agent", 
+      "description": "Transforma documentos de especificacao (.docx, .xlsx) em regras de negocio estruturadas seguindo padrao RN-00xx.md",
+  "playbook": "agents/manual/requirements-analyst.agent.md",
+      "specialties": [
+        "Analise de documentos docx/xlsx",
+        "Extracao de regras de negocio",
+        "Criacao de arquivos RN-00xx.md",
+        "Mapeamento de dependencias entre regras",
+        "Validacao de consistencia terminologica"
+      ],
+      "inputs": [
+  "Documentos .docx em references-data/datas/business-rules-files/",
+        "Planilhas .xlsx de validacao",
+        "Contexto do dominio (anexos, bases, formulas)",
+        "Numero da regra (RN-00xx) alvo"
+      ],
+      "outputs": [
+  "Arquivo references-data/business-rules/RN-00xx.md estruturado",
+        "Casos de teste derivados em formato tabular",
+        "Mapeamento de dependencias e impactos",
+        "Validacao cruzada com regras existentes"
+      ],
+      "keyReferences": [
+  "references-data/pgdas-anexo-*.md",
+  "references-data/business-rules/RN-0001.md",
+  "references-data/datas/business-rules-files/",
+  "references-data/datas/tables/validation-business-rules-files/"
+      ],
+      "triggers": [
+        "analise de requisitos",
+        "documento docx",
+        "planilha xlsx", 
+        "regra RN-",
+        "extracao de regras",
+        "business rules"
+      ]
+    },
+    {
+      "id": "systems-architect", 
+      "name": "🏗️ Systems Architect Agent",
+      "description": "Projeta e estrutura arquitetura do sistema seguindo principios DDD, SOLID e Clean Architecture",
+  "playbook": "agents/manual/systems-architect.agent.md",
+      "specialties": [
+        "Design orientado a dominio (DDD)",
+        "Arquitetura em camadas (Domain/Application/Infra/Api)",
+        "Definicao de bounded contexts e agregados",
+        "Contratos de servicos e interfaces",
+        "Estrategias de persistencia e integracao",
+        "Padroes SOLID e Clean Architecture"
+      ],
+      "inputs": [
+        "Especificacoes de regras de negocio (RN-00xx.md)",
+        "Requisitos funcionais e nao-funcionais", 
+        "Restricoes tecnicas (.NET 4.8, PostgreSQL)",
+        "Padroes arquiteturais existentes",
+        "Terminologia do dominio (RBA, RBAA, etc.)"
+      ],
+      "outputs": [
+        "Diagramas de contexto e componentes",
+        "Estrutura de pastas e organizacao de projetos",
+        "Definicao de entidades, agregados e value objects",
+        "Contratos de servicos e interfaces",
+        "Estrategia de testes por camada",
+        "ADR (Architecture Decision Records)"
+      ],
+      "keyReferences": [
+  "src/ (estrutura atual)",
+        "Domain-Driven Design principles", 
+        "SOLID principles",
+        "Clean Architecture patterns",
+        ".NET Framework 4.8 constraints"
+      ],
+      "triggers": [
+        "arquitetura",
+        "design de sistema",
+        "DDD",
+        "bounded context",
+        "entidades",
+        "agregados",
+        "clean architecture"
+      ]
+    },
+    {
+      "id": "expert-developer",
+      "name": "💻 Expert Developer Agent", 
+      "description": "Implementa codigo de alta qualidade seguindo principios DDD, SOLID e padroes estabelecidos no projeto",
+  "playbook": "agents/manual/expert-developer.agent.md",
+      "specialties": [
+        "Implementacao em .NET Framework 4.8",
+        "Aplicacao de padroes DDD e SOLID",
+        "Validacoes com FluentValidation",
+        "Mapeamentos entre camadas",
+        "Injecao de dependencia",
+        "Logs estruturados com Serilog",
+        "Documentacao XML"
+      ],
+      "inputs": [
+        "Especificacao arquitetural (entidades, interfaces)",
+        "Regras de negocio documentadas (RN-00xx.md)",
+        "Contratos de API e DTOs definidos",
+        "Estrategia de testes estabelecida",
+        "Padroes e convencoes do projeto"
+      ],
+      "outputs": [
+        "Classes implementadas com documentacao XML",
+        "Validadores FluentValidation configurados", 
+        "Mapeamentos entre DTOs e entidades",
+        "Configuracao de DI atualizada",
+        "Logs estruturados implementados",
+        "Codigo pronto para testes unitarios"
+      ],
+      "keyReferences": [
+        "src/ (codigo existente)",
+        "Padroes de nomenclatura do projeto",
+        "FluentValidation patterns",
+        "Serilog configuration",
+        "Result envelope pattern"
+      ],
+      "triggers": [
+        "implementacao",
+        "desenvolvimento",
+        "codigo C#",
+        "entity",
+        "service",
+        "controller",
+        "validation"
+      ]
+    },
+    {
+      "id": "testing-specialist",
+      "name": "🧪 Testing Specialist Agent",
+      "description": "Cria cenarios de teste abrangentes garantindo 90%+ cobertura e validacao de regras de negocio",
+  "playbook": "agents/manual/testing-specialist.agent.md", 
+      "specialties": [
+        "Testes unitarios xUnit",
+        "Testes de integracao end-to-end",
+        "Geracao de dados com Bogus",
+        "Validacao de regras RN-00xx",
+        "Cobertura de codigo 90%+",
+        "Testes de performance",
+        "Cenarios extremos e edge cases"
+      ],
+      "inputs": [
+        "Codigo implementado (entidades, servicos, controllers)",
+        "Especificacoes de regras de negocio (RN-00xx.md)",
+        "Casos de teste derivados da analise",
+        "Configuracao de ambiente de teste",
+        "Dados de validacao de referencia"
+      ],
+      "outputs": [
+        "Testes unitarios organizados por camada",
+        "Testes de integracao funcionais", 
+        "Fixtures e builders para geracao de dados",
+        "Relatorio de cobertura de codigo",
+        "Documentacao de cenarios criticos",
+        "Suite de testes executavel"
+      ],
+      "keyReferences": [
+  "tests/ (testes existentes)",
+        "xUnit framework",
+        "Bogus library",
+        "FluentAssertions",
+        "Moq framework",
+  "references-data/business-rules/"
+      ],
+      "triggers": [
+        "testes",
+        "test coverage",
+        "unit tests",
+        "integration tests", 
+        "xunit",
+        "bogus",
+        "cobertura",
+        "edge cases"
+      ]
+    }
+  ],
+  "integrationPoints": {
+    "copilot": {
+  "instructionsFile": ".github/copilot-instructions.md",
+      "syncRequired": true
+    },
+    "mcp": {
+      "supported": true,
+      "configFile": "agents.index.json"
+    }
+  },
+  "workflowPatterns": {
+    "newFeature": [
+      "product-owner",
+      "requirements-analyst",
+      "systems-architect", 
+      "expert-developer",
+      "testing-specialist"
+    ],
+    "bugfix": [
+      "expert-developer",
+      "testing-specialist"
+    ],
+    "refactoring": [
+      "systems-architect",
+      "expert-developer", 
+      "testing-specialist"
+    ],
+    "documentation": [
+      "requirements-analyst"
+    ]
+  },
+  "qualityGates": {
+    "codeCompliance": {
+      "dotnetVersion": ".NET Framework 4.8",
+      "codingStandards": "SOLID principles, DDD patterns",
+      "documentation": "XML comments required",
+      "naming": "English for code, Portuguese for messages"
+    },
+    "testingStandards": {
+      "minCoverage": "90%",
+      "framework": "xUnit",
+      "dataGeneration": "Bogus",
+      "assertions": "FluentAssertions"
+    },
+    "architecturalConstraints": {
+      "layerSeparation": "Clean Architecture",
+      "persistence": "PostgreSQL primary",
+      "messaging": "Asynchronous when applicable", 
+      "validation": "FluentValidation required"
+    }
+  }
+}

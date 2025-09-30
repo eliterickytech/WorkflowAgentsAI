@@ -1,0 +1,13 @@
+%% Mermaid flowchart: Inicio do processo automatico - CrewAI
+flowchart TD
+  A[Start - SPRINT e ACTIVITY opcional] --> B[Config env e provider model defaults]
+  B --> C{USE_CREWAI igual a 1}
+  C -- Nao --> Z[Apenas artefatos base sem CrewAI]
+  C -- Sim --> D[Carregar agentes manuais]
+  D --> E[Instanciar LLM por agente com preferencia de modelo]
+  E --> F[Construir tarefas por agente com template de tarefa]
+  F --> G[Crew kickoff]
+  G --> H[Gerar backlog e ceremonies]
+  H --> I[Outcomes em outcomes crewai report]
+  I --> J[Engineering em out sprint engineering - Autogen opcional]
+  J --> K[Finish]

@@ -1,0 +1,44 @@
+ceremonies:
+  refinamento:
+    participants: [product_owner, analista_negocio_tecnico, dev_senior_1, dev_senior_2, qa_senior]
+    inputs: [feedback_usuarios, metas_negocio, backlog]
+    outputs: [historias_prontas_DoR, criterios_aceite_bdd, tarefas_divididas, diagramas]
+    practices: [Event_Storming, BDD_Gherkin, Mermaid]
+    gates:
+      - historias_com_criterios_bdd
+      - estimativa_preliminar
+  planejamento:
+    participants: [product_owner, analista_negocio_tecnico, dev_senior_1, dev_senior_2, qa_senior]
+    inputs: [historias_prontas_DoR, capacidade_time]
+    outputs: [sprint_backlog, objetivos_sprint]
+    practices: [Trunk_Based, DoD, RACI]
+    gates:
+      - DoD_acordado
+      - riscos_identificados
+  execucao:
+    participants: [dev_senior_1, dev_senior_2, qa_senior]
+    inputs: [sprint_backlog, pipelines_ci_cd]
+    outputs: [codigo_mergeado_trunk, suites_teste, builds_verdes]
+    practices: [Clean_Architecture, SOLID, DDD, CQRS, Mensageria, CI_CD, Cypress]
+    gates:
+      - testes_passando
+      - code_review_aprovado
+  review:
+    participants: [product_owner, analista_negocio_tecnico, dev_senior_1, dev_senior_2, qa_senior, stakeholders]
+    inputs: [incremento, metricas_dora]
+    outputs: [feedback, adrs_propostas, roadmap_atualizado]
+    practices: [Medição_DORA, Demo, ADRs]
+    gates:
+      - incremento_potencialmente_entregavel
+artifacts:
+  - backlog_priorizado
+  - historias_prontas_DoR
+  - criterios_aceite_bdd
+  - sprint_backlog
+  - incrementos
+  - adrs
+  - diagramas_mermaid
+  - relatorios_qualidade
+metrics:
+  dora: [lead_time, deployment_frequency, MTTR, change_failure_rate]
+  qualidade: [cobertura_testes, tempo_build, tempo_code_review]

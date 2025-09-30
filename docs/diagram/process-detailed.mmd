@@ -1,0 +1,24 @@
+%% Mermaid diagram: Detalhamento do processo completo
+%% Evitar caracteres especiais para compatibilidade com mmdc
+flowchart TB
+  subgraph Setup
+    S1[Ambiente venv ativado]
+    S2[Arquivo env configurado com LLM PROVIDER MODELS USE flags]
+    S3[Inputs em pasta in sprint activity attachments]
+  end
+  subgraph Manual
+    M1[Script start manual cria estrutura]
+    M2[Agentes manuais e Prompts]
+    M3[Outputs base 01 a 05 e pastas features adrs diagrams]
+  end
+  subgraph Automatic
+    A1[Runner CrewAI]
+    A2[Carrega agentes manuais e front matter]
+    A3[LLM por agente com preferencia de modelo]
+    A4[Tarefas com template]
+    A5[Crew kickoff gera outcomes]
+    A6[Runner Autogen opcional]
+  end
+  Setup --> Manual --> Automatic
+  Manual -->|artefatos| Automatic
+  Automatic -->|engineering| M3

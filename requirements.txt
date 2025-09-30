@@ -1,0 +1,10 @@
+pyyaml
+rich
+python-dotenv
+crewai>=0.28.0
+pyautogen>=0.3.0
+# Optional providers/connectors
+openai>=1.40.0
+# azure-ai-inference or azure-openai can be added if using Azure
+# azure-ai-inference
+# azure-ai-openai

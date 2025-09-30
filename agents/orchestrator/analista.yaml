@@ -1,0 +1,34 @@
+id: analista_negocio_tecnico
+name: Analista de Negócio e Técnico
+mission: Preparar itens do backlog com clareza funcional e técnica para execução.
+responsibilities:
+  - Especificar histórias de usuário e critérios de aceite
+  - Detalhar aspectos técnicos (dívida, testes, DevOps)
+  - Dividir épicos em histórias e tarefas
+  - Identificar dependências e riscos
+  - Produzir diagramas e mockups
+inputs:
+  - backlog
+  - visao_po
+  - arquitetura_alvo
+  - politicas_qualidade
+outputs:
+  - historias_prontas_DoR
+  - criterios_aceite_bdd
+  - tarefas_divididas
+  - diagramas
+practices:
+  - BDD/Gherkin
+  - DDD (ubiquitous language)
+  - Clean Architecture
+  - CQRS e Mensageria quando aplicável
+  - Estimativa (t-shirt sizing)
+  - Mermaid para diagramas
+kpis:
+  - taxa_itens_em_DoR
+  - retrabalho_por_falta_de_clareza
+  - tempo_medio_refinamento
+rituals:
+  - refinamento
+  - refinamento_tecnico
+  - planejamento

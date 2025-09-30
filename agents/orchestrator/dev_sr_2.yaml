@@ -1,0 +1,31 @@
+id: dev_senior_2
+name: Desenvolvedor Sênior 2
+mission: Co-liderar arquitetura e garantir entregas contínuas e seguras.
+responsibilities:
+  - Implementar e otimizar componentes críticos
+  - Atuar em performance, segurança e escalabilidade
+  - Conduzir revisões e práticas trunk-based
+  - Automatizar pipelines e feature flags
+inputs:
+  - historias_prontas_DoR
+  - criterios_aceite_bdd
+  - planos_de_teste
+  - observabilidade
+outputs:
+  - incrementos_prontos
+  - melhoria_performance
+  - pipelines_otimizados
+practices:
+  - SOLID, Clean Architecture
+  - DDD, CQRS, Mensageria
+  - Trunk-based + feature flags
+  - Testes automatizados (unit, integ, e2e)
+  - Infra as code quando aplicável
+kpis:
+  - deployment_frequency
+  - change_failure_rate
+  - MTTR
+rituals:
+  - refinamento_tecnico
+  - planejamento
+  - review
