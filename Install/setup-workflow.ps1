@@ -1,11 +1,11 @@
 <#$
 .SYNOPSIS
-  Instala e configura o workflow Rickytech.System.AI em um novo projeto .NET.
+  Instala e configura os Agentes AgileDevAgent em um diretório especificado.
 .DESCRIPTION
   - Checa e instala pre-requisitos (Python, Node.js, Git, .NET SDK)
   - Pergunta modo (Manual ou CrewAI), Sprint e Activity
   - Configura variaveis de ambiente para esta sessao
-  - Copia pastas essenciais e opcionais para o projeto informado
+  - Copia agentes e estrutura de workflow para o local informado
   - (Opcional) Cria .venv-1 e instala requirements
   - (Opcional) Enriquece agentes com instrucoes personalizadas de uma pasta
 .NOTES
@@ -1409,11 +1409,79 @@ function Analyze-MultiProjectCopilot($analysis) {
   Write-Info "Total de projetos com Copilot: $(1 + $analysis.MultiProjectCopilot.Count)"
 }
 
+function Create-DotNetProject($projectPath, $projectName) {
+  Write-Info "Criando projeto .NET em: $projectPath"
+  try {
+    Set-Location $projectPath
+    & dotnet new sln -n $projectName
+    & dotnet new webapi -n "$projectName.API" -o "src"
+    & dotnet sln add "src/$projectName.API.csproj"
+    New-Item -ItemType Directory -Path "docs" -Force | Out-Null
+    Write-Info "Projeto .NET '$projectName' criado com sucesso!"
+  } catch {
+    Write-Warn "Erro ao criar projeto .NET: $_"
+  }
+}
+
+function Create-NodeJsProject($projectPath, $projectName) {
+  Write-Info "Criando projeto Node.js em: $projectPath"
+  try {
+    Ensure-Dir $projectPath
+    Set-Location $projectPath
+    & npm init -y
+    & npm install express
+    New-Item -ItemType Directory -Path "src" -Force | Out-Null
+    "console.log('Projeto $projectName iniciado!');" | Out-File -FilePath "src/index.js" -Encoding UTF8
+    Write-Info "Projeto Node.js '$projectName' criado com sucesso!"
+  } catch {
+    Write-Warn "Erro ao criar projeto Node.js: $_"
+  }
+}
+
+function Create-AngularProject($projectPath, $projectName) {
+  Write-Info "Criando projeto Angular em: $projectPath"
+  try {
+    $parentPath = Split-Path $projectPath
+    Set-Location $parentPath
+    $folderName = Split-Path $projectPath -Leaf
+    & ng new $folderName --routing --style=scss --skip-git
+    Write-Info "Projeto Angular '$projectName' criado com sucesso!"
+  } catch {
+    Write-Warn "Erro ao criar projeto Angular: $_. Certifique-se de ter Angular CLI instalado."
+  }
+}
+
+function Create-ReactProject($projectPath, $projectName) {
+  Write-Info "Criando projeto React em: $projectPath"
+  try {
+    $parentPath = Split-Path $projectPath
+    Set-Location $parentPath
+    $folderName = Split-Path $projectPath -Leaf
+    & npx create-react-app $folderName --template typescript
+    Write-Info "Projeto React '$projectName' criado com sucesso!"
+  } catch {
+    Write-Warn "Erro ao criar projeto React: $_"
+  }
+}
+
+function Create-GenericProject($projectPath, $projectName) {
+  Write-Info "Criando projeto generico em: $projectPath"
+  try {
+    Ensure-Dir $projectPath
+    New-Item -ItemType Directory -Path "$projectPath/src" -Force | Out-Null
+    New-Item -ItemType Directory -Path "$projectPath/docs" -Force | Out-Null
+    "# $projectName`n`nProjeto criado via AgileDevAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
+    Write-Info "Projeto generico '$projectName' criado com sucesso!"
+  } catch {
+    Write-Warn "Erro ao criar projeto generico: $_"
+  }
+}
+
 try {
   if (-not $TargetProjectPath) {
-    $TargetProjectPath = Ask 'Caminho do projeto .NET (destino da copia)'
+    $TargetProjectPath = Ask 'Onde quer que gere os Agentes? (ex: C:\Projetos\MeuProjeto)'
   }
-  if ([string]::IsNullOrWhiteSpace($TargetProjectPath)) { throw 'Caminho do projeto nao informado.' }
+  if ([string]::IsNullOrWhiteSpace($TargetProjectPath)) { throw 'Caminho para gerar os agentes nao informado.' }
   Ensure-Dir $TargetProjectPath
 
   Ensure-Prereqs
@@ -1423,15 +1491,27 @@ try {
   $activity = Ask 'Qual a activity? (ex.: rn0001)' 'rn0001'
   $projectName = Ask 'Qual o nome do projeto? (ex.: CalculationEngine, SistemaVendas)' 'MeuProjeto'
   
-  # Perguntar sobre tipo de projeto para análise contextual
+  # Perguntar sobre tipo de projeto e caminhos específicos
   $projectType = Ask 'Tipo de trabalho: (1) Projeto novo ou (2) Implementacao em projeto existente?' '1'
+  $projectPath = ""
   $existingProjectPath = ""
-  if ($projectType -eq '2') {
-    $existingProjectPath = Ask 'Caminho do projeto existente para analise (.NET/Node/Angular/React) (ex.: C:\Projetos\MeuSistema)'
+  
+  if ($projectType -eq '1') {
+    # Projeto novo - perguntar onde CRIAR o projeto
+    $projectPath = Ask 'Onde CRIAR o novo projeto? (ex: C:\Projetos\MeuNovoSistema)'
+    if ([string]::IsNullOrWhiteSpace($projectPath)) {
+      Write-Warn "Caminho para criar projeto nao informado. Usando apenas agentes sem criacao de projeto."
+      $projectPath = ""
+    } else {
+      Write-Info "Novo projeto sera criado em: $projectPath"
+    }
+  } else {
+    # Projeto existente - perguntar onde ESTA o projeto
+    $existingProjectPath = Ask 'Onde ESTA o projeto existente? (ex: C:\Projetos\MeuSistema)'
     if (-not [string]::IsNullOrWhiteSpace($existingProjectPath) -and (Test-Path $existingProjectPath)) {
       Write-Info "Projeto existente encontrado em: $existingProjectPath"
     } else {
-      Write-Warn "Caminho do projeto existente nao encontrado. Continuando como projeto novo."
+      Write-Warn "Caminho do projeto existente nao encontrado. Continuando apenas com agentes."
       $existingProjectPath = ""
     }
   }
@@ -1445,6 +1525,25 @@ try {
 
   # Configurar super-prompt com dados do projeto
   Configure-SuperPrompt -target $TargetProjectPath -sprint $sprint -activity $activity -projectName $projectName
+
+  # Criar estrutura do projeto novo se solicitado
+  if ($projectType -eq '1' -and (-not [string]::IsNullOrWhiteSpace($projectPath))) {
+    $createProject = Ask 'Criar estrutura basica do projeto agora? (s/n)' 's'
+    if ($createProject -match '^[sSyY]') {
+      Write-Info "Criando estrutura basica do projeto em: $projectPath"
+      Ensure-Dir $projectPath
+      
+      # Determinar tipo de projeto a criar
+      $newProjectType = Ask 'Tipo de projeto: (1) .NET, (2) Node.js, (3) Angular, (4) React, (5) Generico' '1'
+      switch ($newProjectType) {
+        '2' { Create-NodeJsProject -projectPath $projectPath -projectName $projectName }
+        '3' { Create-AngularProject -projectPath $projectPath -projectName $projectName }
+        '4' { Create-ReactProject -projectPath $projectPath -projectName $projectName }
+        '5' { Create-GenericProject -projectPath $projectPath -projectName $projectName }
+        default { Create-DotNetProject -projectPath $projectPath -projectName $projectName }
+      }
+    }
+  }
 
   # Analisar projeto existente se informado
   if (-not [string]::IsNullOrWhiteSpace($existingProjectPath)) {
