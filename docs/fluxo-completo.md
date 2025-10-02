@@ -108,7 +108,11 @@ C:\Projetos\MeuSistema\ia\
 - **Input:** Arquitetura + requisitos
 - **Output:** `04-desenvolvimento.md`
 
-### 5.4 Testing Specialist (Claude 4)
+### 5.4 Frontend Specialist (GPT-4o)
+- **Input:** Arquitetura + requisitos + mockups
+- **Output:** `04-frontend-implementation.md`
+
+### 5.5 Testing Specialist (Claude 4)
 - **Input:** Todos os artefatos anteriores
 - **Output:** `05-qa-plano.md`
 
@@ -123,6 +127,9 @@ out\sprint01\01\
 ├── 02-requisitos-bdd.md          ← Requirements Analyst
 ├── 03-arquitetura.md             ← Systems Architect
 ├── 04-desenvolvimento.md         ← Expert Developer
+├── 04-frontend-implementation.md ← Frontend Specialist
+├── 04-components\                ← Estrutura de componentes frontend
+├── 04-ui-guidelines.md           ← Guidelines de UI/UX
 ├── 05-qa-plano.md                ← Testing Specialist
 ├── features\                     ← Arquivos .feature (BDD)
 ├── adrs\                         ← Architecture Decision Records

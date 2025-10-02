@@ -13,6 +13,7 @@ Este diretório reúne os guias e diagramas do projeto.
 - Novo projeto .NET (do zero): ./new-dotnet-project-setup.md
 	- Instalador PowerShell: ./../Install/setup-workflow.ps1
 - **🏢 Workspace Multi-Projeto:** ./workspace-multi-projeto.md ← **NOVO**
+- **🎨 Frontend Specialist:** Agente especialista em Angular, React, PO-UI, Material Design
 - Atualizar instruções dos agentes: ./updating-agents.md
 - Diagramas Mermaid: ./diagram/
 
@@ -29,7 +30,7 @@ Este diretório reúne os guias e diagramas do projeto.
 - [ ] Criada estrutura com `powershell/start-manual.ps1`
 - [ ] Entradas em `in/sprint<sprint>/<activity>/attachments/`
 - [ ] Seguido `prompts-manual/prompts/super-prompt.md`
-- [ ] Verificado 01..05 e pastas features/adrs/diagrams
+- [ ] Verificado 01..05 e pastas features/adrs/diagrams/components
 
 ## Dica: renderizando diagramas Mermaid
 - Opção 1: Use extensões de VS Code (ex.: Markdown Preview Mermaid Support) ou ferramentas online para visualizar *.mmd.

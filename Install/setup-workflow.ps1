@@ -1,6 +1,6 @@
 <#$
 .SYNOPSIS
-  Instala e configura os Agentes AgileDevAgent em um diretório especificado.
+  Instala e configura os Agentes RickytechAgileAgent em um diretório especificado.
 .DESCRIPTION
   - Checa e instala pre-requisitos (Python, Node.js, Git, .NET SDK)
   - Pergunta modo (Manual ou CrewAI), Sprint e Activity
@@ -33,6 +33,12 @@ function Ensure-Dir($p) { if (-not (Test-Path $p)) { New-Item -ItemType Director
 function Check-Command($name) {
   $cmd = Get-Command $name -ErrorAction SilentlyContinue
   return $null -ne $cmd
+}
+
+function Get-SafeCount($obj) {
+  if ($obj -eq $null) { return 0 }
+  if ($obj -is [array]) { return $obj.Count }
+  return 1
 }
 
 function Install-With-Winget($id, $display) {
@@ -670,7 +676,12 @@ function Analyze-ExistingProject($projectPath, $target) {
   # Detectar se é workspace multi-projeto
   $detectedProjects = Detect-MultiProjectWorkspace -workspacePath $projectPath
   
-  if ($detectedProjects.Count -gt 1) {
+  # Garantir que $detectedProjects seja um array e obter contagem segura
+  if (-not $detectedProjects) { $detectedProjects = @() }
+  if ($detectedProjects -isnot [array]) { $detectedProjects = @($detectedProjects) }
+  $projectCount = if ($detectedProjects -is [array]) { $detectedProjects.Count } else { if ($detectedProjects) { 1 } else { 0 } }
+  
+  if ($projectCount -gt 1) {
     $analysis.IsMultiProject = $true
     $projectSelection = Choose-ProjectsForAnalysis -projects $detectedProjects
     
@@ -684,7 +695,8 @@ function Analyze-ExistingProject($projectPath, $target) {
     
     Write-Info "Workspace multi-projeto detectado!"
     Write-Info "Projeto principal: $($projectSelection.MainProject.Name) (tipo: $projectType)"
-    Write-Info "Projetos adicionais: $($projectSelection.OtherProjects.Count)"
+    $otherProjectsCount = if ($projectSelection.OtherProjects -is [array]) { $projectSelection.OtherProjects.Count } else { if ($projectSelection.OtherProjects) { 1 } else { 0 } }
+    Write-Info "Projetos adicionais: $otherProjectsCount"
   } else {
     # Projeto único - usar fluxo original
     $projectType = Detect-ProjectType -projectPath $projectPath
@@ -694,10 +706,10 @@ function Analyze-ExistingProject($projectPath, $target) {
   
   # Analisar estrutura básica (comum a todos os tipos)
   if (Test-Path "$projectPath\src") { $analysis.ProjectStructure += "Código fonte organizado (/src)" }
-  if (Test-Path "$projectPath\test" -or (Test-Path "$projectPath\tests") -or (Test-Path "$projectPath\Tests")) { 
+  if ((Test-Path "$projectPath\test") -or (Test-Path "$projectPath\tests") -or (Test-Path "$projectPath\Tests")) { 
     $analysis.ProjectStructure += "Pasta de testes dedicada" 
   }
-  if (Test-Path "$projectPath\docs" -or (Test-Path "$projectPath\doc")) { 
+  if ((Test-Path "$projectPath\docs") -or (Test-Path "$projectPath\doc")) { 
     $analysis.ProjectStructure += "Documentação organizada" 
   }
   
@@ -756,7 +768,7 @@ function Generate-ProjectContext($analysis, $target) {
 
 **Projeto analisado:** ``$($analysis.ProjectPath)``
 **Tipo de projeto:** ``$($analysis.ProjectType.ToUpper())``
-**Workspace:** $( if ($analysis.IsMultiProject) { "Multi-projeto ($($analysis.OtherProjects.Count + 1) projetos)" } else { "Projeto unico" } )
+**Workspace:** $( if ($analysis.IsMultiProject) { "Multi-projeto ($((Get-SafeCount $analysis.OtherProjects) + 1) projetos)" } else { "Projeto unico" } )
 **Data da analise:** $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
 
 ## Resumo Executivo
@@ -765,7 +777,7 @@ $( if ($analysis.IsMultiProject) {
   } else { 
     "Este e um projeto **$($analysis.ProjectType)**"
   } ) com as seguintes caracteristicas principais:
-$( if ($analysis.Technologies.Count -gt 3) { 
+$( if ((Get-SafeCount $analysis.Technologies) -gt 3) { 
     "- Stack principal: " + (($analysis.Technologies | Select-Object -First 3) -join ", ")
   } else { 
     "- Tecnologias: " + ($analysis.Technologies -join ", ") 
@@ -777,55 +789,55 @@ $( if ($analysis.HasCopilotInstructions) {
   } )
 
 ## Estrutura do Projeto
-$( if ($analysis.ProjectStructure.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.ProjectStructure) -gt 0) { 
     ($analysis.ProjectStructure | ForEach-Object { "- $_" }) -join "`n" 
   } else { 
     "- Estrutura padrao detectada" 
   } )
 
 ## Padroes Arquiteturais Identificados
-$( if ($analysis.Patterns.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.Patterns) -gt 0) { 
     ($analysis.Patterns | ForEach-Object { "- $_" }) -join "`n" 
   } else { 
     "- Nenhum padrao arquitetural especifico detectado" 
   } )
 
 ## Stack Tecnologico Completo
-$( if ($analysis.Technologies.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.Technologies) -gt 0) { 
     ($analysis.Technologies | ForEach-Object { "- $_" }) -join "`n" 
   } else { 
     "- Stack padrao para $($analysis.ProjectType)" 
   } )
 
 ## Persistencia de Dados
-$( if ($analysis.DatabaseContext.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.DatabaseContext) -gt 0) { 
     ($analysis.DatabaseContext | ForEach-Object { "- $_" }) -join "`n" 
   } else { 
     "- Nao identificado ou nao configurado" 
   } )
 
 ## Estrategia de Testes
-$( if ($analysis.TestFrameworks.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.TestFrameworks) -gt 0) { 
     ($analysis.TestFrameworks | ForEach-Object { "- $_" }) -join "`n" 
   } else { 
     "- Nenhum framework de teste identificado" 
   } )
 
 ## Ferramentas de Build e Deploy
-$( if ($analysis.BuildTools.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.BuildTools) -gt 0) { 
     ($analysis.BuildTools | ForEach-Object { "- $_" }) -join "`n" 
   } else { 
     "- Build tools padrao para $($analysis.ProjectType)" 
   } )
 
-$( if ($analysis.Scripts.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.Scripts) -gt 0) { 
     "## Scripts Disponiveis`n" + ($analysis.Scripts | ForEach-Object { "- ``$_``" }) -join "`n" + "`n"
   } else { 
     "" 
   } )
 
 ## Convencoes de Codigo
-$( if ($analysis.Conventions.Count -gt 0) { 
+$( if ((Get-SafeCount $analysis.Conventions) -gt 0) { 
     ($analysis.Conventions | ForEach-Object { "- ``$_``" }) -join "`n" 
   } else { 
     "- Convencoes padrao para $($analysis.ProjectType)" 
@@ -850,7 +862,7 @@ $( if ($analysis.IsMultiProject) {
     ""
   } )
 
-$( if ($analysis.HasCopilotInstructions -or $analysis.MultiProjectCopilot.Count -gt 0) { 
+$( if ($analysis.HasCopilotInstructions -or (Get-SafeCount $analysis.MultiProjectCopilot) -gt 0) { 
     "## GitHub Copilot Integration`n`n" +
     "### Status: DETECTADO E INTEGRADO $(if ($analysis.IsMultiProject) { '(MULTI-PROJETO)' } else { '' })`n`n" +
     $(if ($analysis.HasCopilotInstructions) { 
@@ -860,7 +872,7 @@ $( if ($analysis.HasCopilotInstructions -or $analysis.MultiProjectCopilot.Count 
       "#### Instrucoes Copilot do Projeto Principal:`n" +
       "````markdown`n" + $analysis.CopilotInstructions + "`n````n`n"
     } else { "" }) +
-    $(if ($analysis.MultiProjectCopilot.Count -gt 0) { 
+    $(if ((Get-SafeCount $analysis.MultiProjectCopilot) -gt 0) { 
       "### Outros Projetos com Copilot`n" +
       ($analysis.MultiProjectCopilot | ForEach-Object { 
         "#### $($_.ProjectName) ($($_.ProjectType))`n" +
@@ -888,7 +900,7 @@ $( if ($analysis.HasCopilotInstructions -or $analysis.MultiProjectCopilot.Count 
 
 **Todos os agentes devem INTEGRAR suas propostas com o projeto existente, mantendo consistencia total com a stack e padroes ja estabelecidos.**
 
-$( if ($analysis.HasCopilotInstructions -or $analysis.MultiProjectCopilot.Count -gt 0) { 
+$( if ($analysis.HasCopilotInstructions -or (Get-SafeCount $analysis.MultiProjectCopilot) -gt 0) { 
     "### **INTEGRACAO GITHUB COPILOT DETECTADA" + $(if ($analysis.IsMultiProject) { " (MULTI-PROJETO)" } else { "" }) + "**`n`n" +
     "**CRITICO:** " + $(if ($analysis.IsMultiProject) { "Este workspace possui multiplos projetos com instrucoes Copilot." } else { "Este projeto possui instrucoes GitHub Copilot configuradas." }) + " Os agentes devem:`n" +
     "- **SEGUIR** as diretrizes do projeto principal ($($analysis.MainProject.Name))`n" +
@@ -965,7 +977,7 @@ function Detect-ProjectType($projectPath) {
   if (Test-Path $packageJson) {
     try {
       $packageContent = Get-Content $packageJson -Raw | ConvertFrom-Json
-      if ($packageContent.dependencies.react -or $packageContent.devDependencies.react) {
+      if (($packageContent.dependencies.react) -or ($packageContent.devDependencies.react)) {
         return "react"
       }
       # Se não é React mas tem package.json, é Node.js
@@ -979,7 +991,7 @@ function Detect-ProjectType($projectPath) {
   # .NET - verificar arquivos .csproj ou .sln
   $csprojFiles = Get-ChildItem "$projectPath" -Recurse -Filter "*.csproj" -ErrorAction SilentlyContinue
   $slnFiles = Get-ChildItem "$projectPath" -Filter "*.sln" -ErrorAction SilentlyContinue
-  if ($csprojFiles -or $slnFiles) { return "dotnet" }
+  if (($csprojFiles) -or ($slnFiles)) { return "dotnet" }
   
   # Default para projetos não identificados
   return "generic"
@@ -989,7 +1001,20 @@ function Detect-MultiProjectWorkspace($workspacePath) {
   Write-Info "Verificando workspace multi-projeto em: $workspacePath"
   
   $projects = @()
+  
+  # Verificar se o caminho existe
+  if (-not (Test-Path $workspacePath)) {
+    Write-Warn "Caminho não encontrado: $workspacePath"
+    return @()
+  }
+  
   $childDirectories = Get-ChildItem $workspacePath -Directory -ErrorAction SilentlyContinue
+  
+  # Se não há diretórios filhos, retorna array vazio
+  if (-not $childDirectories) {
+    Write-Info "Nenhum diretório encontrado em $workspacePath"
+    return @()
+  }
   
   foreach ($dir in $childDirectories) {
     # Pular pastas comuns que não são projetos
@@ -1002,7 +1027,7 @@ function Detect-MultiProjectWorkspace($workspacePath) {
       $copilotFile = Join-Path $dir.FullName ".github\copilot-instructions.md"
       $hasCopilot = Test-Path $copilotFile
       
-      $project = @{
+      $project = New-Object PSObject -Property @{
         Name = $dir.Name
         Path = $dir.FullName
         Type = $projectType
@@ -1015,10 +1040,20 @@ function Detect-MultiProjectWorkspace($workspacePath) {
     }
   }
   
-  return $projects
+  # Garantir que sempre retorna um array, mesmo vazio
+  if ($projects.Count -eq 0) {
+    Write-Info "Nenhum projeto válido detectado no workspace"
+    return @()
+  }
+  
+  return [array]$projects
 }
 
 function Choose-ProjectsForAnalysis($projects) {
+  # Garantir que $projects seja um array e tratar casos nulos/vazios
+  if (-not $projects) { $projects = @() }
+  if ($projects -isnot [array]) { $projects = @($projects) }
+  
   if ($projects.Count -eq 0) {
     Write-Warn "Nenhum projeto detectado no workspace"
     return @{ MainProject = $null; OtherProjects = @() }
@@ -1034,14 +1069,16 @@ function Choose-ProjectsForAnalysis($projects) {
   
   for ($i = 0; $i -lt $projects.Count; $i++) {
     $project = $projects[$i]
-    $copilotInfo = if ($project.HasCopilot) { " [Copilot: sim]" } else { " [Copilot: nao]" }
+    # Verificar se a propriedade HasCopilot existe
+    $hasCopilot = if ($project.PSObject.Properties['HasCopilot']) { $project.HasCopilot } else { $false }
+    $copilotInfo = if ($hasCopilot) { " [Copilot: sim]" } else { " [Copilot: nao]" }
     Write-Host "  $($i + 1)) $($project.Name) ($($project.Type))$copilotInfo" -ForegroundColor Cyan
   }
   
   $mainChoice = Ask "Selecione projeto PRINCIPAL para analise detalhada (1-$($projects.Count))" "1"
   $mainIndex = [int]$mainChoice - 1
   
-  if ($mainIndex -lt 0 -or $mainIndex -ge $projects.Count) {
+  if (($mainIndex -lt 0) -or ($mainIndex -ge $projects.Count)) {
     Write-Warn "Selecao invalida, usando primeiro projeto"
     $mainIndex = 0
   }
@@ -1068,13 +1105,13 @@ function Analyze-DotNetProject($projectPath, $analysis) {
   # Analisar estrutura interna de /src para detectar padrões DDD/Clean Architecture
   $srcPath = Join-Path $projectPath "src"
   if (Test-Path $srcPath) {
-    if (Test-Path "$srcPath\Domain" -or (Get-ChildItem $srcPath -Directory -Filter "*Domain*")) { 
+    if ((Test-Path "$srcPath\Domain") -or (Get-ChildItem $srcPath -Directory -Filter "*Domain*")) { 
       $analysis.Patterns += "DDD (Domain-Driven Design)" 
     }
-    if (Test-Path "$srcPath\Infrastructure" -or (Get-ChildItem $srcPath -Directory -Filter "*Infrastructure*")) { 
+    if ((Test-Path "$srcPath\Infrastructure") -or (Get-ChildItem $srcPath -Directory -Filter "*Infrastructure*")) { 
       $analysis.Patterns += "Infrastructure Layer" 
     }
-    if (Test-Path "$srcPath\Application" -or (Get-ChildItem $srcPath -Directory -Filter "*Application*")) { 
+    if ((Test-Path "$srcPath\Application") -or (Get-ChildItem $srcPath -Directory -Filter "*Application*")) { 
       $analysis.Patterns += "Application Layer (Clean Architecture)" 
     }
     if ((Get-ChildItem $srcPath -Directory -Filter "*API*") -or (Get-ChildItem $srcPath -Directory -Filter "*Web*")) { 
@@ -1168,7 +1205,7 @@ function Analyze-NodeJsProject($projectPath, $analysis) {
     # Banco de dados
     if ($packageContent.dependencies.mongoose) { $analysis.DatabaseContext += "MongoDB (Mongoose)" }
     if ($packageContent.dependencies.pg) { $analysis.DatabaseContext += "PostgreSQL" }
-    if ($packageContent.dependencies.mysql2 -or $packageContent.dependencies.mysql) { $analysis.DatabaseContext += "MySQL" }
+    if (($packageContent.dependencies.mysql2) -or ($packageContent.dependencies.mysql)) { $analysis.DatabaseContext += "MySQL" }
     if ($packageContent.dependencies.sqlite3) { $analysis.DatabaseContext += "SQLite" }
     
     # ORMs
@@ -1177,7 +1214,7 @@ function Analyze-NodeJsProject($projectPath, $analysis) {
     if ($packageContent.dependencies.prisma) { $analysis.Technologies += "Prisma ORM" }
     
     # Linguagem
-    if ($packageContent.dependencies.typescript -or $packageContent.devDependencies.typescript) { 
+    if (($packageContent.dependencies.typescript) -or ($packageContent.devDependencies.typescript)) { 
       $analysis.Technologies += "TypeScript" 
     } else {
       $analysis.Technologies += "JavaScript"
@@ -1267,7 +1304,7 @@ function Analyze-ReactProject($projectPath, $analysis) {
       }
       
       # Linguagem
-      if ($packageContent.dependencies.typescript -or $packageContent.devDependencies.typescript) {
+      if (($packageContent.dependencies.typescript) -or ($packageContent.devDependencies.typescript)) {
         $analysis.Technologies += "TypeScript"
       } else {
         $analysis.Technologies += "JavaScript"
@@ -1370,7 +1407,8 @@ function Analyze-MultiProjectCopilot($analysis) {
   Write-Info "Analisando instrucoes Copilot multi-projeto..."
   
   # Analisar Copilot do projeto principal
-  if ($analysis.MainProject.HasCopilot) {
+  $mainHasCopilot = if ($analysis.MainProject.PSObject.Properties['HasCopilot']) { $analysis.MainProject.HasCopilot } else { $false }
+  if ($mainHasCopilot) {
     try {
       $mainCopilotContent = Get-Content $analysis.MainProject.CopilotPath -Raw -ErrorAction SilentlyContinue
       if (-not [string]::IsNullOrWhiteSpace($mainCopilotContent)) {
@@ -1386,7 +1424,8 @@ function Analyze-MultiProjectCopilot($analysis) {
   
   # Analisar Copilot dos outros projetos
   foreach ($project in $analysis.OtherProjects) {
-    if ($project.HasCopilot) {
+    $projectHasCopilot = if ($project.PSObject.Properties['HasCopilot']) { $project.HasCopilot } else { $false }
+    if ($projectHasCopilot) {
       try {
         $projectCopilotContent = Get-Content $project.CopilotPath -Raw -ErrorAction SilentlyContinue
         if (-not [string]::IsNullOrWhiteSpace($projectCopilotContent)) {
@@ -1406,7 +1445,7 @@ function Analyze-MultiProjectCopilot($analysis) {
     }
   }
   
-  Write-Info "Total de projetos com Copilot: $(1 + $analysis.MultiProjectCopilot.Count)"
+  Write-Info "Total de projetos com Copilot: $(1 + (Get-SafeCount $analysis.MultiProjectCopilot))"
 }
 
 function Create-DotNetProject($projectPath, $projectName) {
@@ -1470,7 +1509,7 @@ function Create-GenericProject($projectPath, $projectName) {
     Ensure-Dir $projectPath
     New-Item -ItemType Directory -Path "$projectPath/src" -Force | Out-Null
     New-Item -ItemType Directory -Path "$projectPath/docs" -Force | Out-Null
-    "# $projectName`n`nProjeto criado via AgileDevAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
+    "# $projectName`n`nProjeto criado via RickytechAgileAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
     Write-Info "Projeto generico '$projectName' criado com sucesso!"
   } catch {
     Write-Warn "Erro ao criar projeto generico: $_"

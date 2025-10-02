@@ -24,12 +24,30 @@ prompts:
     Conduza discussoes, sintetize contribuicoes, resolva conflitos tecnicos e leve o grupo ao consenso com plano acionavel.
     Formato sugerido:
     - Abertura (5 min): objetivos, regras e agenda
-    - Rodada inicial (20 min - 5 min cada): RA, SA, Dev, QA
+    - Rodada inicial (25 min - 5 min cada): RA, SA, Dev, Frontend, QA
     - Debate livre (15 min): convergencias, dependencias, riscos, trade-offs
     - Convergencia (10 min): abordagem consensual, ordem de implementacao, criterios de aceite, proximos passos
+    
+    PARTICIPANTES DA MESA REDONDA:
+    - Requirements Analyst (RA): Regras de negocio, BDD, validacoes
+    - Systems Architect (SA): Arquitetura, DDD, Clean Architecture, integracao
+    - Expert Developer (Dev): Implementacao backend, .NET, dominio e aplicacao
+    - Frontend Specialist (UI/UX): Interface, experiencia do usuario, componentes, responsividade
+    - Testing Specialist (QA): Testes, qualidade, cobertura, cenarios criticos
+    
+    TOPICOS ESSENCIAIS FRONTEND:
+    - Framework escolhido (Angular/React) e justificativa
+    - UI Library (PO-UI, Material, Sean Themes) adequada ao contexto
+    - Responsividade e acessibilidade (WCAG)
+    - Integracao frontend-backend (APIs, contratos)
+    - Performance e otimizacao (bundle size, lazy loading)
+    - Temas e personalizacao
+    - Componentes reutilizaveis vs especificos
+    
     Regras de facilitacao:
     - Foco tecnico; garantir especialidade de cada agente; intervir para manter produtividade
     - Sintetizar pontos; buscar consenso; evitar monopolizacao e abstracoes excessivas
+    - Garantir alinhamento frontend-backend desde o inicio
     
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da mesa redonda
@@ -39,8 +57,11 @@ prompts:
   task_template: |
     Conduza a reuniao e produza {minutes_path} contendo:
     - Participantes e contribuicoes principais
-    - Decisoes tecnicas acordadas
-    - Riscos e mitigacoes
+    - Decisoes tecnicas acordadas (backend + frontend + integracao)
+    - Escolhas de tecnologia frontend (framework, UI library, temas)
+    - Estrategia de responsividade e acessibilidade
+    - Contratos de API e integracao frontend-backend
+    - Riscos e mitigacoes (tecnicas e UX)
     - Plano de implementacao refinado e ordem de execucao
     - Action items com responsaveis e criterios de aceite por etapa
     
