@@ -13,9 +13,10 @@ $null = New-Item -ItemType Directory -Force -Path (Join-Path $base "engineering\
 $null = New-Item -ItemType Directory -Force -Path (Join-Path $base "engineering\tests")
 $null = New-Item -ItemType Directory -Force -Path (Join-Path $base "engineering\reports")
 $null = New-Item -ItemType Directory -Force -Path (Join-Path $base "attachments")
-# Sprint-local: ADRs e Diagramas ao lado de engineering
+# Sprint-local: ADRs, Diagramas e Componentes Frontend
 $null = New-Item -ItemType Directory -Force -Path (Join-Path $base "adrs")
 $null = New-Item -ItemType Directory -Force -Path (Join-Path $base "diagrams")
+$null = New-Item -ItemType Directory -Force -Path (Join-Path $base "04-components")
 
 # Caminhos relativos para links no runbook
 $relRoot = "..\..\"
@@ -65,6 +66,7 @@ Arquivos-alvo nesta sprint/atividade:
 - 02-requisitos-bdd.md + features/*.feature
 - 03-arquitetura.md (ADRs em adrs/; diagramas em diagrams/)
 - 04-desenvolvimento.md
+- **04-frontend-implementation.md + 04-components/ + 04-ui-guidelines.md** (Frontend Specialist)
 - 05-qa-plano.md
 - **99-checklist-final.md** (Product Owner Final - ÚLTIMO)
 
@@ -94,6 +96,11 @@ Politica: Nao faca perguntas; se faltar informacao, adote ate 3 suposicoes razoa
 
 💻 **DEVELOPMENT:** @agents/manual/expert-developer.agent.md  
    - Implementação → 04-desenvolvimento.md + engineering/src/ + tests/
+   - **APROVAÇÃO:** [SIM] ou [NÃO] para prosseguir
+   - **SE SIM:** Executa automaticamente Frontend Specialist
+
+🎨 **FRONTEND:** @agents/manual/frontend-specialist.agent.md
+   - Interface → 04-frontend-implementation.md + 04-components/ + 04-ui-guidelines.md
    - **APROVAÇÃO:** [SIM] ou [NÃO] para prosseguir
    - **SE SIM:** Executa automaticamente Testing Specialist
 
@@ -317,6 +324,99 @@ Testes: $base\engineering\tests
 "@
 New-FileIfMissing -Path $f04 -Content $c04
 
+# 04 - Frontend Implementation
+$f04Frontend = Join-Path $base "04-frontend-implementation.md"
+$c04Frontend = @"
+# 04 - Frontend Implementation — Sprint $Sprint$suffix
+
+## Technology Stack
+- **Framework:** [Angular/React]
+- **UI Library:** [PO-UI/Material/Sean Themes]
+- **State Management:** [NgRx/Redux/Context]
+- **Styling:** [SCSS/Styled-Components/Tailwind]
+
+## Component Architecture
+### Atomic Components
+- Button, Input, Card, Modal...
+
+### Composite Components  
+- DataTable, Form, Navigation...
+
+### Page Components
+- Dashboard, Profile, Settings...
+
+## Performance Strategy
+- Bundle size targets: <250KB initial
+- Lazy loading implementation
+- Caching strategies
+
+## Testing Coverage
+- Unit: 90%+ coverage
+- Integration: Key user flows
+- E2E: Critical paths
+
+## Accessibility Compliance
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader optimization
+
+Componentes: $base\04-components\
+UI Guidelines: $base\04-ui-guidelines.md
+"@
+New-FileIfMissing -Path $f04Frontend -Content $c04Frontend
+
+# 04 - UI Guidelines
+$f04UiGuidelines = Join-Path $base "04-ui-guidelines.md"
+$c04UiGuidelines = @"
+# 04 - UI Guidelines — Sprint $Sprint$suffix
+
+## Design Tokens
+```scss
+// Colors
+--primary-50: #f0f9ff;
+--primary-500: #3b82f6;
+--primary-900: #1e3a8a;
+
+// Typography
+--font-family-sans: 'Inter', system-ui, sans-serif;
+--font-size-base: 1rem;
+
+// Spacing
+--space-xs: 0.25rem;
+--space-sm: 0.5rem;
+--space-md: 1rem;
+```
+
+## Component Patterns
+### Button States
+- Default, Hover, Active, Disabled
+- Primary, Secondary, Tertiary variants
+
+### Form Validation
+- Real-time validation
+- Error state styling
+- Success feedback
+
+## Responsive Breakpoints
+- xs: 0px
+- sm: 576px
+- md: 768px
+- lg: 992px
+- xl: 1200px
+
+## Accessibility Standards
+- Color contrast ratio 4.5:1
+- Keyboard navigation support
+- Screen reader compatibility
+- ARIA labels implementation
+
+## Animation Guidelines
+- Transition duration: 200-300ms
+- Easing: ease-in-out
+- Micro-interactions for feedback
+"@
+New-FileIfMissing -Path $f04UiGuidelines -Content $c04UiGuidelines
+
 # 05 - Plano de QA
 $f05 = Join-Path $base "05-qa-plano.md"
 $c05 = @"
@@ -392,7 +492,10 @@ $c99 = @"
 - [ ] diagrams/*.mmd - Diagramas técnicos claros
 
 ### ✅ Implementação
-- [ ] 04-desenvolvimento.md - Notas de desenvolvimento
+- [ ] 04-desenvolvimento.md - Notas de desenvolvimento backend
+- [ ] 04-frontend-implementation.md - Implementação frontend
+- [ ] 04-components/ - Estrutura de componentes
+- [ ] 04-ui-guidelines.md - Guidelines de interface
 - [ ] engineering/src/ - Código implementado
 - [ ] engineering/tests/ - Testes unitários
 

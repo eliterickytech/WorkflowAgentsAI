@@ -1,4 +1,4 @@
-# AgileDevAgent - AI Coding Assistant Instructions
+# RickytechAgileAgent - AI Coding Assistant Instructions
 
 This is an **AI Agent Development Framework** for building .NET applications using **automated workflows** with **Scrum practices**, **BDD**, **DDD**, and **Clean Architecture**.
 
@@ -8,13 +8,13 @@ This is an **AI Agent Development Framework** for building .NET applications usi
 - **Manual agents** (`agents/manual/`): GitHub Copilot Chat compatible agents with YAML frontmatter configuration
 - **Automated orchestration** (`orchestrators/`): CrewAI and AutoGen scripts for agent coordination (preview)
 - **Structured workflows** (`powershell/`): PowerShell scripts for setup and execution automation
-- **Input/Output model**: `in/sprint{X}/{activity}/` → `out/sprint{X}/{activity}/` with standardized artifacts
+- **Input/Output model**: `in/sprint{X}/{activity}/` -> `out/sprint{X}/{activity}/` with standardized artifacts
 
 ### Agent Workflow Pattern
 ```mermaid
 graph TD
     PO[Product Owner] --> RT[Roundtable]
-    RT --> RA[Requirements Analyst] 
+    RT --> RA[Requirements Analyst]
     RA --> SA[Systems Architect]
     SA --> ED[Expert Developer]
     ED --> TS[Testing Specialist]
@@ -106,14 +106,14 @@ Follow the market standard commit pattern with gitemoji:
 - `🔧 chore - Update NuGet packages to latest versions`
 
 **Common Gitemojis:**
-- ✨ `:sparkles:` - New feature
-- 🐛 `:bug:` - Bug fix
-- 📝 `:memo:` - Documentation
-- ♻️ `:recycle:` - Refactoring
-- ✅ `:white_check_mark:` - Tests
-- 🔧 `:wrench:` - Configuration/tooling
-- 🚀 `:rocket:` - Performance improvements
-- 🔒 `:lock:` - Security fixes
+- `✨` - New feature
+- `🐛` - Bug fix
+- `📝` - Documentation
+- `♻️` - Refactoring
+- `✅` - Tests
+- `🔧` - Configuration/tooling
+- `🚀` - Performance improvements
+- `🔒` - Security fixes
 
 ## Integration Points
 

@@ -1,0 +1,49 @@
+%% Mermaid diagram: Fluxo completo com Frontend Specialist
+%% Fluxo de agentes incluindo especialista frontend
+graph TD
+    A[Product Owner] --> B[Mesa Redonda]
+    B --> C[Requirements Analyst]
+    C --> D[Systems Architect]
+    D --> E[Expert Developer]
+    D --> F[Frontend Specialist]
+    E --> G[Testing Specialist]
+    F --> G
+    
+    subgraph "Artefatos Backend"
+        H[04-desenvolvimento.md]
+        I[Entidades e Servicos]
+        J[APIs e Controllers]
+    end
+    
+    subgraph "Artefatos Frontend"
+        K[04-frontend-implementation.md]
+        L[04-components/]
+        M[04-ui-guidelines.md]
+        N[Componentes React/Angular]
+        O[Temas e Estilos]
+    end
+    
+    subgraph "Integracao"
+        P[Contratos API]
+        Q[Mapeamentos DTO]
+        R[Validacoes Frontend/Backend]
+    end
+    
+    E --> H
+    E --> I  
+    E --> J
+    F --> K
+    F --> L
+    F --> M
+    F --> N
+    F --> O
+    
+    D --> P
+    E --> Q
+    F --> Q
+    C --> R
+    E --> R
+    F --> R
+    
+    G --> S[05-qa-plano.md]
+    G --> T[Testes Backend + Frontend]

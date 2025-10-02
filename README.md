@@ -1,12 +1,12 @@
-# AgileDevAgent - Agentes de Desenvolvimento Ágil
+# RickytechAgileAgent - Agentes de Desenvolvimento Ágil
 
 **Versão:** 2.0.0  
 **Autor:** Ricardo Macedo Perdigão  
 **Data:** 30 de Setembro de 2025
 
-## 🎯 **O que é o AgileDevAgent?**
+## 🎯 **O que é o RickytechAgileAgent?**
 
-O AgileDevAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
+O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
 
 **Para Desenvolvedores:** Imagine ter uma equipe de especialistas (Product Owner, Arquiteto, Desenvolvedor Sênior, etc.) que trabalha automaticamente para você, gerando toda a documentação e código necessário para implementar uma funcionalidade.
 
@@ -67,8 +67,8 @@ O sistema possui **7 agentes especializados** que trabalham em sequência:
 **Abra o PowerShell como Administrador e execute:**
 
 ```powershell
-# Navegue até a pasta do AgileDevAgent
-cd "C:\Projetos\EliteRickytech\AgileDevAgent"
+# Navegue até a pasta do Rickytech.System.AI.OnPremisse.AI
+cd "C:\Projetos\Rickytech.System.AI.OnPremisse.AI"
 
 # Execute o instalador
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
@@ -600,8 +600,9 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 
 ## 👤 **Autor e Informações**
 
-**👨‍💻 Proprietário:** Ricardo Macedo Perdigão  
-**�‍🏫 Mentora:** Fabiana Rodrigues Martins  
+**👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão  
+**‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte  
+**‍🏫 Desenvolvedor 2:** Marcos Araujo  
 **�📅 Versão:** 2.0.1 - Documentação do sistema  
 **📅 Última atualização:** 30 de Setembro de 2025  
 **✅ Status:** Produção (processo manual) | ⚠️ Preview (processos automáticos)
@@ -624,6 +625,6 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 
 ```powershell
 # Comando para começar AGORA:
-cd "C:\Projetos\EliteRickytech\AgileDevAgent"
+cd "C:\Projetos\Rickytech.System.AI"
 .\Install\setup-workflow.ps1
 ```

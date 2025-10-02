@@ -9,16 +9,16 @@ flowchart TB
   subgraph Manual
     M1[Script start manual cria estrutura]
     M2[Agentes manuais e Prompts]
-    M3[Outputs base 01 a 05 e pastas features adrs diagrams]
+    M3[Outputs base 01 a 05 e pastas features adrs diagrams components]
   end
   subgraph Automatic
     A1[Runner CrewAI]
     A2[Carrega agentes manuais e front matter]
     A3[LLM por agente com preferencia de modelo]
-    A4[Tarefas com template]
+    A4[Tarefas com template incluindo Frontend]
     A5[Crew kickoff gera outcomes]
     A6[Runner Autogen opcional]
   end
   Setup --> Manual --> Automatic
   Manual -->|artefatos| Automatic
-  Automatic -->|engineering| M3
+  Automatic -->|engineering + frontend| M3
