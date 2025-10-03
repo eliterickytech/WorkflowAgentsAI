@@ -49,9 +49,9 @@ prompts:
     
     AO FINALIZAR:
     - Apresentar resumo da arquitetura projetada
-    - SOLICITAR APROVACAO: "Arquitetura finalizada. Prosseguir com Expert Developer?"
+    - SOLICITAR APROVACAO: "Arquitetura finalizada. Prosseguir com Testing Specialist (TDD)?"
     - OPCOES: [SIM] ou [NAO]
-    - SE [SIM]: Executar automaticamente @agents/manual/expert-developer.agent.md
+    - SE [SIM]: Executar automaticamente @agents/manual/testing-specialist.agent.md
 artifacts:
   attachments_path: in/sprint{sprint}/{activity}/attachments/
   architecture_path: out/sprint{sprint}/{activity}/03-arquitetura.md

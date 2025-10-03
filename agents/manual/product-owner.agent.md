@@ -5,7 +5,7 @@ role: business
 version: 1.0.0
 model_preferences:
   - provider: openai
-    model: gpt-4o
+    model: gemini-2.5-pro
     purpose: default
 inputs:
   business_request: in/sprint{sprint}/{activity}/business_request/
@@ -13,9 +13,12 @@ inputs:
 outputs:
   requirements_brief: out/sprint{sprint}/{activity}/00-requirements-brief.md
   business_context: out/sprint{sprint}/{activity}/00-business-context.md
+  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
 responsibilities:
   - Entender solicitacoes do cliente e requisitos de negocio
   - Definir visao do produto e objetivos estrategicos
+  - CRIAR CRITERIOS DE ACEITE detalhados baseados nas solicitacoes do cliente
+  - Estabelecer checklist de validacao para entrega final
   - Priorizar funcionalidades por valor de negocio
   - Comunicar requisitos claramente para a equipe tecnica
   - Validar entregas com stakeholders
@@ -47,10 +50,20 @@ prompts:
     1. Analise a solicitacao do cliente identificando objetivos de negocio
     2. Defina a visao do produto e metas estrategicas
     3. Identifique stakeholders principais e suas necessidades
-    4. Priorize funcionalidades por valor de negocio e impacto
-    5. Elabore briefing claro para a equipe tecnica
-    6. Defina criterios de aceitacao e metricas de sucesso
-    7. Estabeleca cronograma e marcos importantes
+    4. **CRIE CRITERIOS DE ACEITE DETALHADOS** baseados exatamente nas solicitacoes do cliente
+    5. **ESTABELECA CHECKLIST DE VALIDACAO** para entrega final da atividade
+    6. Priorize funcionalidades por valor de negocio e impacto
+    7. Elabore briefing claro para a equipe tecnica
+    8. Defina metricas de sucesso mensuravelmente
+    9. Estabeleca cronograma e marcos importantes
+
+    CRITERIOS DE ACEITE - FORMATO OBRIGATORIO:
+    Crie arquivo "00-acceptance-criteria.md" com:
+    - Lista numerada de criterios ESPECIFICOS e MENSURAVEIS
+    - Cada criterio deve ser TESTAVEL e VERIFICAVEL
+    - Incluir criterios funcionais E nao-funcionais
+    - Definir "Definition of Done" para a atividade
+    - Estabelecer evidencias necessarias para validacao
 
     CRITERIOS DE QUALIDADE:
     - Visao de produto clara e alinhada com objetivos de negocio
@@ -110,12 +123,21 @@ prompts:
     - https://www.scrum.org/resources/blog/top-5-pitfalls-new-product-owners-and-how-avoid-them
     - https://www.scrum.org/resources/blog/18-characteristics-great-product-owner
   task_template: |
-    Contexto: solicitacao do cliente em {business_request}. Meta: transformar demanda em requisitos claros.
-    Produza {requirements_brief} e {business_context}. Prepare briefing para mesa redonda.
+    Contexto: solicitacao do cliente em {business_request}. 
+    Meta: transformar demanda em requisitos claros COM CRITERIOS DE ACEITE DETALHADOS.
+    
+    Produza:
+    - {requirements_brief}: Resumo executivo 
+    - {business_context}: Contexto de negocio
+    - {acceptance_criteria}: CRITERIOS DE ACEITE ESPECIFICOS E MENSURAVEIS
+    
+    IMPORTANTE: O arquivo acceptance_criteria sera a BASE para toda a equipe.
+    Prepare briefing para mesa redonda.
 artifacts:
   business_request: in/sprint{sprint}/{activity}/business_request/
   requirements_brief: out/sprint{sprint}/{activity}/00-requirements-brief.md
   business_context: out/sprint{sprint}/{activity}/00-business-context.md
+  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
 ---
 
 # Guia — Product Owner (Manual)

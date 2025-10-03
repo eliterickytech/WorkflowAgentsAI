@@ -9,16 +9,18 @@ model_preferences:
     purpose: default
 inputs:
   attachments_path: in/sprint{sprint}/{activity}/attachments/
+  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
   accepted_types: [docx, xlsx, txt, html, jpg, git, png]
 outputs:
   bdd_path: out/sprint{sprint}/{activity}/02-requisitos-bdd.md
   features_glob: out/sprint{sprint}/{activity}/features/*.feature
 responsibilities:
-  - Extrair regras de negocio e formulas
-  - Produzir BDD e casos de teste
+  - **ANALISAR CRITERIOS DE ACEITE** do Product Owner como base principal
+  - Extrair regras de negocio que CUBRAM TODOS OS CRITERIOS DE ACEITE
+  - Produzir BDD e casos de teste que VALIDEM cada criterio de aceite
   - Mapear dependencias entre regras e correlacoes
   - Validar consistencia com RN existentes e terminologia
-  - Derivar cenarios de teste abrangentes
+  - Derivar cenarios de teste abrangentes para TODOS os criterios
 parameters: [sprint, activity]
 policies:
   no_questions: true
@@ -29,11 +31,13 @@ prompts:
 
     Instruções:
 
-    1) Leia o(s) documento(s) e extraia entidades de domínio, atores, regras de negócio e eventos.
+    0) **PRIMEIRA PRIORIDADE**: Leia e analise CRITERIOS DE ACEITE (00-acceptance-criteria.md) do Product Owner
 
-    2) Construa Glossário (ID, termo, definição, fonte).
+    1) Leia o(s) documento(s) e extraia entidades de domínio, atores, regras de negócio e eventos QUE ATENDAM OS CRITERIOS DE ACEITE.
 
-    3) Especifique FR no formato: FR-<ID> — [Nome]
+    2) Construa Glossário (ID, termo, definição, fonte) ALINHADO aos criterios de aceite.
+
+    3) Especifique FR no formato: FR-<ID> — [Nome] **CADA FR DEVE MAPEAR PARA UM OU MAIS CRITERIOS DE ACEITE**
        - Descrição (o sistema DEVE …)
        - Fluxo primário (passos) / Exceções
        - Pré-condições / Pós-condições
@@ -44,13 +48,15 @@ prompts:
        - Medida verificável (métrica/limiar, método de teste)
        - Escopo (módulo/serviço), Prioridade
 
-    5) Gere Casos de Teste BDD por FR/NFR: Feature → Scenarios (Given/When/Then) + aceitação e dados de teste.
+    5) Gere Casos de Teste BDD por FR/NFR: Feature → Scenarios (Given/When/Then) **GARANTINDO COBERTURA COMPLETA DOS CRITERIOS DE ACEITE**.
 
-    6) Monte Matriz de Rastreabilidade (FR/NFR ↔ Testes ↔ Fontes).
+    6) Monte Matriz de Rastreabilidade (FR/NFR ↔ Testes ↔ **CRITERIOS DE ACEITE** ↔ Fontes).
 
-    7) Execute plano de verificação (CoV): liste as verificações feitas e ajuste a resposta final.
+    7) **VALIDACAO DE COBERTURA**: Verifique que TODOS os criterios de aceite estao cobertos por pelo menos um FR e um caso de teste.
 
-    8) Valide terminologia: toda ocorrência deve referenciar um termo do Glossário.
+    8) Execute plano de verificação (CoV): liste as verificações feitas e ajuste a resposta final.
+
+    9) Valide terminologia: toda ocorrência deve referenciar um termo do Glossário.
 
     Saídas: SRS.md, NFR_Catalog.md, TestSuite_BDD.md, Glossary.md, Traceability.csv.
 

@@ -4,6 +4,12 @@ Este diretório reúne os guias e diagramas do projeto.
 
 ## 🚀 Comece Aqui
 - **FLUXO PRINCIPAL:** [Fluxo Completo: Do Zero à Mesa Redonda](./fluxo-completo.md) ← **LEIA PRIMEIRO**
+- **� EXEMPLOS PRÁTICOS:** [Pasta Examples - Exemplos Reais dos 10 Agentes](./examples/) ← **NOVO: TEMPLATES PROFISSIONAIS PRONTOS**
+- **�🚀 PARALELIZAÇÃO:** [Guia de Execução Paralela](./guia-paralelizacao.md) ← **MÚLTIPLAS ATIVIDADES SIMULTÂNEAS**
+- **🎯 AGENTES INDIVIDUAIS:** [Guia Completo Agentes Individuais](./guia-agentes-individuais.md) ← **USAR AGENTES SEPARADAMENTE**
+- **📋 REFERÊNCIA RÁPIDA:** [Guia de Referência Rápida](./guia-referencia-rapida-agentes.md) ← **PROMPTS PROFISSIONAIS DOS 10 AGENTES**
+- **🎨 DESIGN & WIREFRAMES:** [Guia Design e Wireframes](./guia-design-wireframes.md) ← **FERRAMENTAS VISUAIS INTEGRADAS**
+- **🧪 NOVO TDD:** [Exemplo Fluxo TDD Completo](./exemplo-fluxo-tdd-completo.md) ← **FLUXO TDD COM TESTING VALIDATOR**
 
 ## Índice rápido
 - Processo Automático (CrewAI): ./automatic-process.md

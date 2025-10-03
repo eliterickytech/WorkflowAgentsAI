@@ -222,6 +222,47 @@
       ]
     },
     {
+      "id": "testing-validator",
+      "name": "Testing Validator Agent", 
+      "description": "Valida pos-implementacao se todos os testes planejados foram implementados corretamente no fluxo TDD",
+      "playbook": "agents/manual/testing-validator.agent.md",
+      "specialties": [
+        "Validacao de implementacao TDD",
+        "Comparacao plano vs execucao",
+        "Verificacao de cobertura de testes",
+        "Validacao de evidencias por criterio",
+        "Execucao e verificacao de testes",
+        "Parecer de conformidade com QA Plan"
+      ],
+      "inputs": [
+        "Plano de QA (05-qa-plano.md)", 
+        "Notas de desenvolvimento (04-desenvolvimento.md)",
+        "Criterios de aceite definidos",
+        "Codigo implementado com testes"
+      ],
+      "outputs": [
+        "Relatorio de validacao (05.1-testing-validation.md)",
+        "Comparativo planejado vs implementado",
+        "Verificacao de cobertura real vs meta",
+        "Evidencias por criterio de aceite",
+        "Parecer final: APROVADO ou NECESSITA CORRECOES"
+      ],
+      "keyReferences": [
+        "Test-Driven Development practices",
+        "Quality assurance validation",
+        "Coverage analysis tools",
+        "Evidence-based validation"
+      ],
+      "triggers": [
+        "validacao tdd",
+        "verificacao testes",
+        "cobertura",
+        "evidencias",
+        "conformidade qa",
+        "validacao pos-implementacao"
+      ]
+    },
+    {
       "id": "frontend-specialist",
       "name": "Frontend Specialist Agent",
       "description": "Especialista em desenvolvimento frontend com Angular, React, PO-UI, Material, Sean Themes e WPF",
@@ -288,6 +329,15 @@
     }
   },
   "workflowPatterns": {
+    "newFeatureTDD": [
+      "product-owner",
+      "requirements-analyst", 
+      "systems-architect",
+      "testing-specialist",
+      "expert-developer",
+      "testing-validator",
+      "product-owner-final"
+    ],
     "newFeature": [
       "product-owner",
       "requirements-analyst",
@@ -301,6 +351,11 @@
       "requirements-analyst",
       "frontend-specialist",
       "testing-specialist"
+    ],
+    "bugfixTDD": [
+      "testing-specialist",
+      "expert-developer", 
+      "testing-validator"
     ],
     "bugfix": [
       "expert-developer",
