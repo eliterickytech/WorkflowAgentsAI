@@ -109,25 +109,13 @@ C:\Projetos\MeuSistema\ia\
 - **Output:** `05-ux-wireframes.md` + estrutura de wireframes
 - **Ferramentas:** `setup-design-tools.ps1` + `view-wireframes.ps1`
 
-### 5.4 Testing Specialist (Claude 4)
-- **Input:** Arquitetura + wireframes + requisitos  
-- **Output:** `05-qa-plano.md` (Plano TDD completo)
+### 5.4 Frontend Specialist (GPT-4o)
+- **Input:** Arquitetura + requisitos + mockups
+- **Output:** `04-frontend-implementation.md`
 
-### 5.5 Expert Developer (Claude 4)
-- **Input:** Arquitetura + wireframes + plano TDD
-- **Output:** `04-desenvolvimento.md` + código implementado
-
-### 5.6 Testing Validator (GPT-4o) 🆕
-- **Input:** Plano TDD + implementação + critérios aceite
-- **Output:** `05.1-testing-validation.md` (Validação independente)
-
-### 5.7 Code Reviewer (Claude 4) - OPCIONAL
-- **Input:** Código implementado + padrões projeto
-- **Output:** `04.1-code-review.md` (Auditoria qualidade)
-
-### 5.8 Product Owner Final (GPT-5)
-- **Input:** Todos artefatos + critérios aceite originais
-- **Output:** `99-checklist-final.md` (Aprovação/rejeição entrega)
+### 5.5 Testing Specialist (Claude 4)
+- **Input:** Todos os artefatos anteriores
+- **Output:** `05-qa-plano.md`
 
 ## 📊 **Resultado Final**
 
