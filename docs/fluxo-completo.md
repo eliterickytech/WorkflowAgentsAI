@@ -104,9 +104,10 @@ C:\Projetos\MeuSistema\ia\
 - **Input:** Requisitos + contexto técnico
 - **Output:** `03-arquitetura.md`
 
-### 5.3 Expert Developer (Claude 4)
-- **Input:** Arquitetura + requisitos
-- **Output:** `04-desenvolvimento.md`
+### 5.3 UX/UI Specialist (GPT-4o) 🆕
+- **Input:** Arquitetura + requisitos + mockups existentes
+- **Output:** `05-ux-wireframes.md` + estrutura de wireframes
+- **Ferramentas:** `setup-design-tools.ps1` + `view-wireframes.ps1`
 
 ### 5.4 Frontend Specialist (GPT-4o)
 - **Input:** Arquitetura + requisitos + mockups

@@ -288,6 +288,15 @@
     }
   },
   "workflowPatterns": {
+    "newFeatureTDD": [
+      "product-owner",
+      "requirements-analyst", 
+      "systems-architect",
+      "testing-specialist",
+      "expert-developer",
+      "testing-validator",
+      "product-owner-final"
+    ],
     "newFeature": [
       "product-owner",
       "requirements-analyst",
@@ -301,6 +310,17 @@
       "requirements-analyst",
       "frontend-specialist",
       "testing-specialist"
+    ],
+    "frontendFeature": [
+      "product-owner",
+      "requirements-analyst",
+      "frontend-specialist",
+      "testing-specialist"
+    ],
+    "bugfixTDD": [
+      "testing-specialist",
+      "expert-developer", 
+      "testing-validator"
     ],
     "bugfix": [
       "expert-developer",
