@@ -2,6 +2,78 @@
 
 This is an **AI Agent Development Framework** for building .NET applications using **automated workflows** with **Scrum practices**, **BDD**, **DDD**, and **Clean Architecture**.
 
+## ⚠️ CRITICAL: File Encoding and Formatting Standards
+
+### 🎯 MANDATORY ENCODING RULES - ALWAYS FOLLOW
+
+**BEFORE creating, editing, or saving ANY file in this project, you MUST:**
+
+1. **Use UTF-8 encoding WITHOUT BOM** for all files except C#
+2. **NEVER use UTF-8 WITH BOM** for Markdown, PowerShell, YAML, JSON, or Gherkin files
+3. **Check encoding in VS Code** (bottom-right corner) before saving
+4. **Validate line endings** match the file type requirements
+
+### 📋 Official Encoding Standards by File Type
+
+| File Type | Encoding | BOM | Line Ending | Indent |
+|-----------|----------|-----|-------------|--------|
+| **Markdown** (.md) | UTF-8 | ❌ NO BOM | CRLF | 2 spaces |
+| **PowerShell** (.ps1, .psm1) | UTF-8 | ❌ NO BOM | CRLF | 4 spaces |
+| **YAML** (.yaml, .yml) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
+| **JSON** (.json) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
+| **Gherkin** (.feature) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
+| **C#** (.cs) | UTF-8 | ✅ WITH BOM | CRLF | 4 spaces |
+| **TypeScript/JS** (.ts, .js) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
+| **HTML** (.html) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
+
+### 🚨 CRITICAL VALIDATION CHECKLIST
+
+**Before every file creation/edit operation:**
+- [ ] Verify encoding is UTF-8 (without BOM for most files)
+- [ ] Confirm line endings match file type (CRLF vs LF)
+- [ ] Check indentation (2 or 4 spaces, NO TABS)
+- [ ] Ensure final newline is present
+- [ ] Trim trailing whitespace (except Markdown)
+
+### 🛠️ How to Verify Encoding in VS Code
+
+1. Look at **bottom-right corner** of VS Code window
+2. Should display: `UTF-8` (NOT "UTF-8 with BOM")
+3. If incorrect:
+   - Click on encoding indicator
+   - Select "Save with Encoding"
+   - Choose `UTF-8` (without BOM)
+
+### ✅ Configuration Files (Already Set Up)
+
+- **`.editorconfig`** (root) - Universal encoding rules for all editors
+- **`.vscode/settings.json`** - VS Code specific encoding configuration
+- **`docs/PADRAO-ENCODING-FORMATACAO.md`** - Complete encoding documentation (400+ lines)
+
+### 🔍 Portuguese Characters Must Display Correctly
+
+These characters MUST appear correctly in all files:
+- `ç` (cedilha) - NOT `Ã§` or `ÃÂ§`
+- `ã` (a-til) - NOT `Ã£` or `ÃÂ£`
+- `é` (e-agudo) - NOT `Ã©` or `ÃÂ©`
+- `á` (a-agudo) - NOT `Ã¡` or `ÃÂ¡`
+- `ó` (o-agudo) - NOT `Ã³` or `ÃÂ³`
+
+### 🚫 NEVER Create Files With:
+- ❌ Double UTF-8 encoding (Ã§ instead of ç)
+- ❌ Triple UTF-8 encoding (ÃÂ§ instead of ç)
+- ❌ Mixed line endings (CRLF + LF in same file)
+- ❌ Tabs instead of spaces
+- ❌ UTF-8 BOM on Markdown/PowerShell/YAML files
+- ❌ Missing BOM on C# files
+
+### 📖 Full Documentation Reference
+
+For complete encoding standards, troubleshooting, and examples:
+- Read: `docs/PADRAO-ENCODING-FORMATACAO.md`
+- Includes: UTF-8 byte sequences, character tables, validation scripts
+- Status: Project is 100% compliant (87/87 files correct)
+
 ## Architecture Overview
 
 ### Multi-Modal Agent System
@@ -22,6 +94,139 @@ graph TD
 ```
 
 Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent in sequence.
+
+## 📝 File Creation and Editing Guidelines
+
+### 🎯 MANDATORY PROCESS FOR ALL FILE OPERATIONS
+
+**When creating or editing ANY file:**
+
+1. **BEFORE Creating:**
+   - Check file type and determine correct encoding from table above
+   - Verify if BOM is required (only C# files need BOM)
+   - Confirm correct line ending (CRLF for Windows files, LF for Unix files)
+   - Set correct indentation (2 spaces or 4 spaces, NEVER tabs)
+
+2. **DURING Creation:**
+   - Use UTF-8 encoding without BOM (except C#)
+   - Apply correct line endings per file type
+   - Use spaces for indentation (NO TABS)
+   - Ensure proper formatting according to `.editorconfig`
+
+3. **AFTER Saving:**
+   - Verify encoding in VS Code (bottom-right corner)
+   - Check that Portuguese characters display correctly (ç, ã, é, á, ó)
+   - Confirm no BOM markers for non-C# files
+   - Validate final newline is present
+
+### 🚨 CRITICAL: Portuguese Language Support
+
+**All Portuguese text MUST be readable:**
+- ✅ `configuração` - NOT `configuraÃ§Ã£o`
+- ✅ `validação` - NOT `validaÃ§Ã£o`
+- ✅ `implementação` - NOT `implementaÃ§Ã£o`
+- ✅ `documentação` - NOT `documentaÃ§Ã£o`
+
+**If you see corrupted characters:**
+1. STOP immediately
+2. Reopen file with correct encoding (UTF-8)
+3. Fix characters manually if needed
+4. Save with UTF-8 without BOM
+
+### 📋 File Type Specific Rules
+
+**Markdown Files (.md):**
+- Encoding: UTF-8 without BOM
+- Line endings: CRLF (Windows)
+- Indentation: 2 spaces
+- Allow trailing whitespace for line breaks
+- Must include final newline
+
+**PowerShell Files (.ps1, .psm1):**
+- Encoding: UTF-8 without BOM
+- Line endings: CRLF (Windows)
+- Indentation: 4 spaces
+- Trim trailing whitespace
+- Must include final newline
+
+**YAML Files (.yaml, .yml):**
+- Encoding: UTF-8 without BOM
+- Line endings: LF (Unix)
+- Indentation: 2 spaces (CRITICAL for YAML syntax)
+- Trim trailing whitespace
+- Must include final newline
+
+**JSON Files (.json):**
+- Encoding: UTF-8 without BOM
+- Line endings: LF (Unix)
+- Indentation: 2 spaces
+- Trim trailing whitespace
+- Must include final newline
+
+**Gherkin Files (.feature):**
+- Encoding: UTF-8 without BOM
+- Line endings: LF (Unix)
+- Indentation: 2 spaces
+- Trim trailing whitespace
+- Must include final newline
+- Portuguese keywords: `Funcionalidade:`, `Cenário:`, `Dado`, `Quando`, `Então`
+
+**C# Files (.cs):**
+- Encoding: UTF-8 **WITH BOM** (ONLY exception)
+- Line endings: CRLF (Windows)
+- Indentation: 4 spaces
+- Trim trailing whitespace
+- Must include final newline
+
+### 🔧 VS Code Configuration
+
+**Check these settings in VS Code:**
+```json
+{
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "[markdown]": {
+    "files.encoding": "utf8",
+    "files.eol": "\r\n"
+  },
+  "[powershell]": {
+    "files.encoding": "utf8",
+    "files.eol": "\r\n"
+  },
+  "[yaml]": {
+    "files.encoding": "utf8",
+    "files.eol": "\n"
+  }
+}
+```
+
+### ⚠️ Common Mistakes to Avoid
+
+1. **NEVER save with wrong encoding:**
+   - ❌ Using Latin-1/ISO-8859-1 instead of UTF-8
+   - ❌ Adding BOM to Markdown/PowerShell/YAML files
+   - ❌ Forgetting BOM on C# files
+
+2. **NEVER mix line endings:**
+   - ❌ CRLF in YAML files (must be LF)
+   - ❌ LF in PowerShell files (must be CRLF)
+
+3. **NEVER use tabs:**
+   - ❌ Tabs in any file type
+   - ✅ Always use spaces (2 or 4 depending on file type)
+
+4. **NEVER skip validation:**
+   - ❌ Assuming encoding is correct
+   - ✅ Always check VS Code encoding indicator after saving
+
+### 📖 Reference Documentation
+
+For complete details, consult:
+- `docs/PADRAO-ENCODING-FORMATACAO.md` - Complete encoding guide (400+ lines)
+- `.editorconfig` - Project-wide formatting rules
+- `.vscode/settings.json` - VS Code specific settings
 
 ## Essential Development Patterns
 
@@ -147,3 +352,46 @@ The framework includes automatic project analysis:
 5. Contextualizes all agents with existing project knowledge
 
 When working on existing codebases, **always reference `project-analysis.md` first** to maintain consistency with established patterns and technologies.
+
+## 🎯 Quick Reference: File Creation Checklist
+
+**Every time you create or edit a file, follow this checklist:**
+
+### ✅ Pre-Creation
+- [ ] Identify file type (.md, .ps1, .yaml, .json, .feature, .cs, .ts, .html)
+- [ ] Check encoding table: UTF-8 with or without BOM?
+- [ ] Check line ending: CRLF (Windows) or LF (Unix)?
+- [ ] Check indentation: 2 spaces or 4 spaces?
+
+### ✅ During Creation
+- [ ] Use correct encoding (UTF-8 without BOM for most files)
+- [ ] Apply correct line endings
+- [ ] Use spaces for indentation (NEVER tabs)
+- [ ] Follow language-specific conventions
+
+### ✅ Post-Save Validation
+- [ ] VS Code encoding indicator shows "UTF-8" (not "UTF-8 with BOM" unless C#)
+- [ ] Portuguese characters display correctly: ç ã é á ó
+- [ ] No encoding corruption visible: NOT Ã§, ÃÂ§, configuraÃ§Ã£o
+- [ ] Final newline is present
+- [ ] No trailing whitespace (except Markdown)
+
+### 🚨 Red Flags - STOP if you see:
+- ❌ `Ã§` instead of `ç`
+- ❌ `ÃÂ§` instead of `ç`
+- ❌ `configuraÃ§Ã£o` instead of `configuração`
+- ❌ VS Code shows "UTF-8 with BOM" for .md, .ps1, .yaml files
+- ❌ Mixed tabs and spaces
+- ❌ Mixed line endings (CRLF + LF in same file)
+
+**If you see any red flag:** Reopen file with correct encoding, fix, and save with UTF-8 (without BOM).
+
+## 📊 Project Status
+
+- **Total files:** 87
+- **Encoding compliance:** 100% ✅
+- **Files with correct UTF-8:** 87/87
+- **Files needing correction:** 0
+- **Configuration files:** `.editorconfig` ✅ | `.vscode/settings.json` ✅
+
+**All encoding standards are documented in:** `docs/PADRAO-ENCODING-FORMATACAO.md`

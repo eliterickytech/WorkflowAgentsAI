@@ -1,8 +1,10 @@
 # RickytechAgileAgent - Agentes de Desenvolvimento Ágil
 
-**Versão:** 2.2.0 - **Parallel Execution Edition**  
-**Autor:** Ricardo Macedo Perdigão  
+**Versão:** 2.2.0 - **Parallel Execution Edition**
+**Autor:** Ricardo Macedo Perdigão
 **Data:** 30 de Setembro de 2025
+
+> ⚠️ **IMPORTANTE:** Antes de criar/editar arquivos, leia o [Guia de Encoding](#-padro-de-encoding-e-formatao) abaixo para evitar corrupção de caracteres!
 
 ## 🎯 **O que é o RickytechAgileAgent?**
 
@@ -16,18 +18,18 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 
 ```
 1️⃣ Product Owner       → Analisa o negócio
-2️⃣ Mesa Redonda        → Alinha tecnicamente  
+2️⃣ Mesa Redonda        → Alinha tecnicamente
 3️⃣ Requirements        → Cria cenários BDD
 4️⃣ Arquiteto           → Define a solução
 5️⃣ UX/UI Specialist    → Cria wireframes e design system
 6️⃣ Testing Specialist  → Cria plano de QA (TDD)
 7️⃣ Desenvolvedor       → Implementa seguindo TDD
-8️⃣ Testing Validator   → Valida implementação  
+8️⃣ Testing Validator   → Valida implementação
 9️⃣ Code Reviewer       → Auditoria qualidade (opcional)
 🔟 PO Final            → Valida critérios aceite
 ```
 
-**🆕 NOVO: Fluxo TDD integrado** com Testing Specialist criando o plano ANTES do desenvolvimento!  
+**🆕 NOVO: Fluxo TDD integrado** com Testing Specialist criando o plano ANTES do desenvolvimento!
 **Cada agente pede sua aprovação antes de continuar para o próximo!**
 
 ## 📚 Índice Geral de Documentação
@@ -45,7 +47,7 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[📚 prompts-manual/prompts/reference/README.md](./prompts-manual/prompts/reference/README.md)** - Exemplos de referência para uso individual
 - **[📁 prompts-manual/prompts/deprecated/README.md](./prompts-manual/prompts/deprecated/README.md)** - Prompts descontinuados (arquivo histórico)
 
-### 📦 **Resultados**  
+### 📦 **Resultados**
 - **[📊 out/README.md](./out/README.md)** - Estrutura e organização dos artefatos gerados
 
 ### 📄 **Exemplos e Instruções**
@@ -54,7 +56,30 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[🔍 docs/analise-projeto-existente.md](./docs/analise-projeto-existente.md)** - Análise automática de projetos existentes
 - **[🤖 docs/integracao-github-copilot.md](./docs/integracao-github-copilot.md)** - **NOVO:** Integração automática com GitHub Copilot
 
-## 📋 **Pré-requisitos (O que você precisa ter instalado)**
+## � **Padrão de Encoding e Formatação**
+
+### ⚠️ **CRÍTICO: Leia Antes de Criar/Editar Arquivos**
+
+**Todos os arquivos devem seguir UTF-8 sem BOM** (exceto C#). Isso previne corrupção de caracteres (ç, ã, é, etc).
+
+| Tipo | Encoding | BOM | Line End | Indent |
+|------|----------|-----|----------|--------|
+| Markdown (.md) | UTF-8 | ❌ NÃO | CRLF | 2 sp |
+| PowerShell (.ps1) | UTF-8 | ❌ NÃO | CRLF | 4 sp |
+| YAML (.yaml) | UTF-8 | ❌ NÃO | LF | 2 sp |
+| JSON (.json) | UTF-8 | ❌ NÃO | LF | 2 sp |
+| C# (.cs) | UTF-8 | ✅ SIM | CRLF | 4 sp |
+
+**Documentação completa:**
+- 📖 [Guia Rápido de Arquivos](./docs/GUIA-RAPIDO-ARQUIVOS.md) - **Referência rápida**
+- 📘 [Padrão Completo de Encoding](./docs/PADRAO-ENCODING-FORMATACAO.md) - **400+ linhas de documentação**
+- ⚙️ [Copilot Instructions](./.github/copilot-instructions.md) - **Instruções para IA**
+
+**Status:** ✅ **100% compliant** (87/87 arquivos corretos)
+
+---
+
+## �📋 **Pré-requisitos (O que você precisa ter instalado)**
 
 - **Windows 10/11** com PowerShell
 - **Git** (para controle de versão)
@@ -67,11 +92,11 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 
 **📖 [Acesse o Guia Completo](./docs/guia-agentes-individuais.md)**
 
-Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora você pode! 
+Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora você pode!
 
 **Exemplos rápidos:**
 - 🎯 **Product Owner** apenas: Analisar viabilidade de uma ideia
-- 🤝 **Mesa Redonda** apenas: Debater decisão arquitetural complexa  
+- 🤝 **Mesa Redonda** apenas: Debater decisão arquitetural complexa
 - 🧪 **Testing Specialist** apenas: Criar plano de testes TDD
 - 💻 **Expert Developer** apenas: Implementar funcionalidade específica
 - ✅ **Product Owner Final** apenas: Validar critérios de aceite
@@ -90,7 +115,7 @@ Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora voc
 
 **📖 [Acesse o Guia Completo](./docs/guia-paralelizacao.md)**
 
-Agora você pode trabalhar com **múltiplas atividades simultaneamente**! 
+Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 
 ### **⚡ Quick Start Paralelo:**
 ```powershell
@@ -109,7 +134,7 @@ Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 # Dashboard de status das atividades
 .\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
-# Próximas execuções recomendadas  
+# Próximas execuções recomendadas
 .\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
 ```
 
@@ -122,7 +147,7 @@ Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 
 ### **📋 Guias Automáticos Gerados:**
 - `parallel-execution-guide.md` - Instruções de execução paralela
-- `pipeline-schedule.md` - Cronograma otimizado por semanas  
+- `pipeline-schedule.md` - Cronograma otimizado por semanas
 - `dependency-matrix.md` - Análise de dependências entre atividades
 
 **Perfeito para:** projetos grandes, múltiplos squads, otimização de throughput, pipelines complexos.
@@ -161,7 +186,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 
 4️⃣ Sistema pergunta informações do projeto:
    → Sprint: 01
-   → Activity: rn0001  
+   → Activity: rn0001
    → Nome do projeto: MeuSistema
 
 5️⃣ Sistema pergunta: "Tipo de trabalho:"
@@ -255,7 +280,7 @@ mmdc -i wireframes/mermaid/user-flow.md -o user-flow.png
 # Abrir workspace de design
 code out/sprint01/rn0001/04-wireframes/
 
-# Gerar Storybook para componentes  
+# Gerar Storybook para componentes
 .\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -GenerateStorybook
 ```
 
@@ -297,7 +322,7 @@ Os usuários querem acessar o sistema usando sua conta Google
 
 ### **📱 2.2: Iniciar o Processo Manual**
 
-**QUEM INICIA:** Sempre o **Product Owner** (PO)  
+**QUEM INICIA:** Sempre o **Product Owner** (PO)
 **COMO INICIAR:** GitHub Copilot Chat no VS Code
 
 ```powershell
@@ -389,7 +414,7 @@ Contexto: "E-commerce B2B com integração ERP - preciso debater arquitetura"
 - DADO pedido válido QUANDO sincronizar ERP ENTÃO atualizar estoque
 - Validação de crédito automática via API financeira"
 
-### Systems Architect (SA):  
+### Systems Architect (SA):
 "Concordo com RA. Proponho Clean Architecture:
 - Domain: Pedido, Cliente, Produto (DDD)
 - Application: CQRS para consultas vs comandos
@@ -427,7 +452,7 @@ SA: "REST resolve. GraphQL adiciona complexidade desnecessária."
 
 ## ✅ CONVERGÊNCIA E DECISÕES FINAIS
 - Backend: .NET + Clean Architecture + CQRS
-- Frontend: Angular + PO-UI  
+- Frontend: Angular + PO-UI
 - Banco: PostgreSQL + Redis
 - Testes: 90% cobertura + Cypress E2E
 ```
@@ -451,7 +476,7 @@ SA: "REST resolve. GraphQL adiciona complexidade desnecessária."
 "FOCO ESPECÍFICO: Debater apenas arquitetura de dados.
 Participantes devem decidir entre:
 - Microserviços + Event Sourcing
-- Monólito Modular + CQRS  
+- Monólito Modular + CQRS
 - Serverless + DynamoDB
 
 Cada especialista deve defender UMA opção com prós/contras detalhados."
@@ -463,7 +488,7 @@ Cada especialista deve defender UMA opção com prós/contras detalhados."
 
 "CENÁRIO DE CONFLITO: Cliente quer delivery em 2 meses vs qualidade enterprise.
 - SA deve defender arquitetura robusta (6 meses)
-- Dev deve defender solução rápida (MVP em 2 meses)  
+- Dev deve defender solução rápida (MVP em 2 meses)
 - QA deve apresentar riscos de cada abordagem
 - Frontend deve mostrar impacto na UX
 Facilitador deve levar ao consenso prático."
@@ -474,15 +499,15 @@ Facilitador deve levar ao consenso prático."
 # Rodada 1: Arquitetura Geral
 @agents/manual/roundtable-facilitator.agent.md
 "Debater visão geral da solução"
-# → Você aprova: [SIM] 
+# → Você aprova: [SIM]
 
-# Rodada 2: Detalhamento Frontend  
+# Rodada 2: Detalhamento Frontend
 @agents/manual/roundtable-facilitator.agent.md
 "FOCO: Apenas decisões de UI/UX, componentes e integração com backend"
 # → Você aprova: [SIM]
 
 # Rodada 3: Estratégia de Testes
-@agents/manual/roundtable-facilitator.agent.md  
+@agents/manual/roundtable-facilitator.agent.md
 "FOCO: Apenas cobertura, performance e automação de testes"
 # → Você aprova: [SIM] → Continua fluxo normal
 ```
@@ -499,7 +524,7 @@ Facilitador deve levar ao consenso prático."
 
 # 2️⃣ Se aprovado, continua automaticamente:
 # → Requirements Analyst (BDD detalhado)
-# → Systems Architect (ADRs + diagramas)  
+# → Systems Architect (ADRs + diagramas)
 # → Expert Developer (código + testes)
 # → Testing Specialist (QA + validação)
 # → Product Owner Final (checklist)
@@ -512,7 +537,7 @@ Facilitador deve levar ao consenso prático."
 @agents/manual/roundtable-facilitator.agent.md
 "Sistema de gestão escolar - debater se usar microserviços ou monólito modular"
 
-# Exemplo 2: Refatoração  
+# Exemplo 2: Refatoração
 @agents/manual/roundtable-facilitator.agent.md
 "Sistema legado em .NET Framework - migrar para .NET 8 + Clean Architecture"
 
@@ -534,12 +559,12 @@ Facilitador deve levar ao consenso prático."
 @agents/manual/roundtable-facilitator.agent.md
 "Visão geral - arquitetura, tecnologias, cronograma"
 
-# Mesa Técnica: Aprofundamento  
+# Mesa Técnica: Aprofundamento
 @agents/manual/roundtable-facilitator.agent.md
 "Redebater apenas aspectos de performance, escalabilidade e otimização"
 
 # Mesa de Segurança: Compliance
-@agents/manual/roundtable-facilitator.agent.md  
+@agents/manual/roundtable-facilitator.agent.md
 "Redebater apenas segurança, LGPD, auditoria e compliance"
 
 # Mesa de UX: Experiência
@@ -578,7 +603,7 @@ Facilitador deve levar ao consenso prático."
 👤 Se você digitar: REVISAR
 🤖 Sistema mostra: "Arquivos gerados: 02-requisitos-bdd.md, features/login.feature"
 
-👤 Se você digitar: SIM  
+👤 Se você digitar: SIM
 🤖 Sistema executa: Systems Architect automaticamente
 
 👤 Se você digitar: NAO
@@ -827,15 +852,15 @@ public class User : BaseEntity
     {
         var validator = new UserValidator();
         var validationResult = validator.Validate(new { username, displayName });
-        
+
         if (!validationResult.IsValid)
             return Result<User>.Failure(validationResult.Errors);
 
-        return Result<User>.Success(new User 
-        { 
+        return Result<User>.Success(new User
+        {
             Username = username,
             DisplayName = displayName,
-            Role = UserRole.Standard 
+            Role = UserRole.Standard
         });
     }
 
@@ -897,7 +922,7 @@ out/sprint02/sistema-login/
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -912,12 +937,12 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.invalid) return;
-    
+
     this.isLoading = true;
-    
+
     try {
       const result = await this.authService.authenticate(this.loginForm.value);
-      
+
       if (result.success) {
         this.notificationService.success(`Bem-vindo, ${result.user.displayName}`);
         this.router.navigate(['/dashboard']);
@@ -981,16 +1006,16 @@ out/sprint02/sistema-login/
 describe('Sistema de Autenticação', () => {
   it('deve realizar login com credenciais válidas', () => {
     cy.visit('/login');
-    
+
     cy.get('[data-testid="username-input"]')
       .type('joao.silva');
-    
+
     cy.get('[data-testid="password-input"]')
       .type('senha123');
-    
+
     cy.get('[data-testid="login-button"]')
       .click();
-    
+
     cy.url().should('include', '/dashboard');
     cy.get('[data-testid="welcome-message"]')
       .should('contain', 'Bem-vindo, João Silva');
@@ -998,14 +1023,14 @@ describe('Sistema de Autenticação', () => {
 
   it('deve funcionar offline com cache local', () => {
     cy.mockOfflineMode();
-    
+
     cy.get('[data-testid="username-input"]').type('usuario.cached');
     cy.get('[data-testid="password-input"]').type('senha123');
     cy.get('[data-testid="login-button"]').click();
-    
+
     cy.get('[data-testid="offline-indicator"]')
       .should('be.visible');
-    
+
     cy.url().should('include', '/dashboard');
   });
 });
@@ -1042,7 +1067,7 @@ Contexto: "Auditoria independente da implementação - todos os critérios foram
 out/sprint02/sistema-login/
 └── 04.1-code-review.md          ← Parecer técnico independente
     ├── Critério 1: ✅ APROVADO
-    ├── Critério 2: ❌ NECESSITA CORREÇÕES  
+    ├── Critério 2: ❌ NECESSITA CORREÇÕES
     ├── Critério 3: ✅ APROVADO
     └── DECISÃO: NECESSITA CORREÇÕES
 ```
@@ -1051,9 +1076,9 @@ out/sprint02/sistema-login/
 ```markdown
 ## Code Review Report - Sistema Login
 
-## ✅ PADRÕES DE DESENVOLVIMENTO  
+## ✅ PADRÕES DE DESENVOLVIMENTO
 - **NOMENCLATURA**: ✅ PascalCase classes, camelCase variáveis, nomes descritivos
-- **INDENTAÇÃO**: ✅ Consistente, 4 espaços, sem tabs mistos  
+- **INDENTAÇÃO**: ✅ Consistente, 4 espaços, sem tabs mistos
 - **COMMITS**: ❌ INCORRETO - "fix login" → Deveria ser "🐛 fix - Resolve AD timeout issue"
 - **ESTRUTURA**: ✅ Clean Architecture respeitada (Core/Application/Infrastructure/API)
 - **DOCUMENTAÇÃO**: ✅ XML docs presentes, README atualizado
@@ -1065,11 +1090,11 @@ out/sprint02/sistema-login/
 - **IMPLEMENTAÇÃO**: AuthenticationService.cs - Bem estruturada
 - **QUALIDADE**: Clean Architecture respeitada, SOLID aplicado
 - **PADRÕES**: Nomenclatura e indentação corretas
-- **TESTES**: AuthenticationTests.cs - Cobertura adequada  
+- **TESTES**: AuthenticationTests.cs - Cobertura adequada
 - **EVIDÊNCIA**: Comando "dotnet test" validado - funcional
 - **OBSERVAÇÕES**: Excelente tratamento de exceções
 
-### Critério 2: Interface Responsiva  
+### Critério 2: Interface Responsiva
 - **STATUS**: ✅ APROVADO
 - **IMPLEMENTAÇÃO**: LoginComponent.ts - Estrutura correta
 - **QUALIDADE**: Código limpo e bem organizado
@@ -1079,7 +1104,7 @@ out/sprint02/sistema-login/
 - **OBSERVAÇÕES**: Implementação exemplar
 
 ### DECISÃO FINAL: ❌ NECESSITA CORREÇÕES
-**Pendências**: 
+**Pendências**:
 - Corrigir mensagens de commit para seguir padrão gitemoji
 - Exemplo: "🐛 fix - Resolve AD timeout in authentication service"
 ```
@@ -1107,7 +1132,7 @@ out/sprint02/sistema-login/
 ```
 @agents/manual/testing-validator.agent.md
 
-Sprint: 02, Activity: sistema-login  
+Sprint: 02, Activity: sistema-login
 Contexto: "Validar se implementação seguiu o plano de QA definido - todos os testes foram implementados corretamente?"
 ```
 
@@ -1123,7 +1148,7 @@ out/sprint02/sistema-login/
 
 ### Cenários Implementados vs. Planejados:
 - ✅ Cenário 01: Login válido → Implementado e PASSA
-- ✅ Cenário 02: Senha inválida → Implementado e PASSA  
+- ✅ Cenário 02: Senha inválida → Implementado e PASSA
 - ❌ Cenário 03: Usuário bloqueado → NÃO IMPLEMENTADO
 - ✅ Cenário 04: Timeout AD → Implementado e PASSA
 
@@ -1194,7 +1219,7 @@ out/sprint02/sistema-login/
 - ✅ **ATENDIDO** - Evidência: Código em AuthenticationService.cs + testes em ADIntegrationTests.cs
 - ✅ **ATENDIDO** - Tempo resposta: 1.2s (meta < 2s) - Evidência: Relatório performance
 
-### Critério 2: Interface Responsiva  
+### Critério 2: Interface Responsiva
 - ✅ **ATENDIDO** - Evidência: CSS responsivo + testes E2E em múltiplas resoluções
 - ✅ **ATENDIDO** - Acessibilidade WCAG 2.1 - Evidência: Auditoria automática passando
 
@@ -1360,7 +1385,7 @@ graph TD
 
 ### Expert Developer (Auto-Validação):
 - ✅ Implementado em: AuthenticationService.cs
-- ✅ Teste unitário: AuthenticationTests.cs  
+- ✅ Teste unitário: AuthenticationTests.cs
 - ✅ Evidência: "dotnet test --filter AuthenticationAD"
 
 ### Code Reviewer (Auditoria):
@@ -1370,7 +1395,7 @@ graph TD
 
 ### Testing Specialist (Validação):
 - ✅ APROVADO - Teste executado com sucesso
-- ✅ APROVADO - Performance 1.2s (meta < 2s)  
+- ✅ APROVADO - Performance 1.2s (meta < 2s)
 - ✅ APROVADO - Cenários de falha cobertos
 
 ### Product Owner Final:
@@ -1384,7 +1409,7 @@ graph TD
 @agents/manual/expert-developer.agent.md
 # → Auto-validação + matriz de rastreabilidade
 
-@agents/manual/testing-specialist.agent.md  
+@agents/manual/testing-specialist.agent.md
 # → Validação rigorosa das evidências
 
 @agents/manual/product-owner-final.agent.md
@@ -1420,7 +1445,7 @@ graph TD
 ```csharp
 // Classes: PascalCase
 public class AuthenticationService
-public class UserRepository  
+public class UserRepository
 
 // Métodos: PascalCase
 public async Task<Result> AuthenticateAsync()
@@ -1468,7 +1493,7 @@ private string UserName;            // deveria ser camelCase
 ```bash
 # ❌ Sem padrão, não descritivos
 "fix bug"
-"update code" 
+"update code"
 "added feature"
 "changes"
 "wip"
@@ -1481,28 +1506,28 @@ private string UserName;            // deveria ser camelCase
 public class AuthenticationService
 {
     private readonly IUserRepository _userRepository;
-    
+
     public AuthenticationService(IUserRepository userRepository)
     {
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
     }
-    
+
     public async Task<Result<User>> AuthenticateAsync(string username, string password)
     {
         if (string.IsNullOrWhiteSpace(username))
         {
             return Result<User>.Failure("Username is required");
         }
-        
+
         try
         {
             var user = await _userRepository.GetByUsernameAsync(username);
-            
+
             if (user == null)
             {
                 return Result<User>.Failure("Invalid credentials");
             }
-            
+
             return Result<User>.Success(user);
         }
         catch (Exception ex)
@@ -1564,7 +1589,7 @@ public async Task<Result<User>> AuthenticateAsync(string username, string passwo
 
 ### Nomenclatura:
 - [ ] Classes em PascalCase e descritivas
-- [ ] Métodos em PascalCase e verbos claros  
+- [ ] Métodos em PascalCase e verbos claros
 - [ ] Variáveis em camelCase e descritivas
 - [ ] Sem abreviações ou nomes ambíguos
 
@@ -1599,17 +1624,17 @@ public async Task<Result<User>> AuthenticateAsync(string username, string passwo
 graph TD
     A[Product Owner] --> B[00-acceptance-criteria.md]
     B --> C[Requirements Analyst]
-    B --> D[Systems Architect] 
+    B --> D[Systems Architect]
     B --> E[Expert Developer]
     B --> F[Testing Specialist]
     B --> G[Product Owner Final]
-    
+
     C --> H[Regras que cobrem TODOS os critérios]
     D --> I[Arquitetura que atende os critérios]
     E --> J[Código que implementa os critérios]
     F --> K[Testes que validam os critérios]
     G --> L[ATIVIDADE ENTREGUE ✅]
-    
+
     G --> M{Todos os critérios atendidos?}
     M -->|SIM| L
     M -->|NÃO| N[NECESSITA AJUSTES ❌]
@@ -1664,7 +1689,7 @@ graph TD
 
 # 1. Product Owner cria critérios específicos:
 # - Critério 1: Autenticação AD em < 2s
-# - Critério 2: Interface responsiva (desktop + mobile)  
+# - Critério 2: Interface responsiva (desktop + mobile)
 # - Critério 3: Auditoria completa de acessos
 
 # 2. Toda a equipe trabalha para atender esses 3 critérios
@@ -1690,7 +1715,7 @@ graph TD
 @agents/manual/systems-architect.agent.md
 
 Sprint: 04, Activity: refactoring-usuarios
-Contexto: "Refatorar módulo usuários (5 anos, God classes, 0% cobertura). 
+Contexto: "Refatorar módulo usuários (5 anos, God classes, 0% cobertura).
 Aplicar SOLID + Clean Architecture mantendo compatibilidade API."
 
 Problema atual:
@@ -1706,8 +1731,8 @@ Meta: Clean Architecture + 90% cobertura
 ```
 @agents/manual/ux-ui-specialist.agent.md
 
-Sprint: 02, Activity: dashboard-executivo  
-Contexto: "Dashboard para C-Level com KPIs real-time, gráficos interativos, 
+Sprint: 02, Activity: dashboard-executivo
+Contexto: "Dashboard para C-Level com KPIs real-time, gráficos interativos,
 filtros avançados. Prioridade: informação crítica 'above the fold'."
 
 Usuários: CEO, CFO, diretores (baixa literacy digital)
@@ -1720,12 +1745,12 @@ Restrições: Identidade visual corporativa + acessibilidade WCAG 2.1 AA
 @agents/manual/testing-specialist.agent.md
 
 Sprint: 03, Activity: calculo-comissao
-Contexto: "Criar plano TDD ANTES da implementação. Regras complexas: 
+Contexto: "Criar plano TDD ANTES da implementação. Regras complexas:
 base + performance + metas + bônus trimestral."
 
 Critérios de aceite:
 1. Cálculo correto conforme RN-0030 a RN-0035
-2. Performance < 100ms para 1000 vendedores  
+2. Performance < 100ms para 1000 vendedores
 3. Tratamento de cenários extremos (vendas negativas)
 4. Auditoria completa de cálculos
 
@@ -1737,12 +1762,12 @@ Meta: 95% cobertura + evidências automatizadas
 @agents/manual/testing-validator.agent.md
 
 Sprint: 03, Activity: validacao-modulo-pagamentos
-Contexto: "Validar se Expert Developer implementou corretamente o plano 
+Contexto: "Validar se Expert Developer implementou corretamente o plano
 TDD. Verificar todos cenários, cobertura real vs planejada."
 
 Entrada necessária:
 - 05-qa-plano.md (plano original do Testing Specialist)
-- 04-desenvolvimento.md (implementação do Expert Developer)  
+- 04-desenvolvimento.md (implementação do Expert Developer)
 - Código fonte + testes implementados
 
 Validar: Conformidade plano → implementação
@@ -1752,7 +1777,7 @@ Validar: Conformidade plano → implementação
 ```
 @agents/manual/roundtable-facilitator.agent.md
 
-Contexto: "Decisão: Microserviços vs Monolito Modular para novo módulo 
+Contexto: "Decisão: Microserviços vs Monolito Modular para novo módulo
 de relatórios. Avaliar: escalabilidade, complexidade, skills do time, prazo 6 meses."
 
 Restrições conhecidas:
@@ -1769,7 +1794,7 @@ Foco: arquitetura, manutenibilidade, time skills
 @agents/manual/expert-developer.agent.md
 
 Sprint: 03, Activity: implementar-notificacoes
-Contexto: "Implementar sistema de notificações seguindo TDD rigoroso. 
+Contexto: "Implementar sistema de notificações seguindo TDD rigoroso.
 Usar plano do Testing Specialist + arquitetura do Systems Architect."
 
 Entrada obrigatória:
@@ -1786,12 +1811,12 @@ Padrões: Clean Architecture + CQRS + Domain Events
 @agents/manual/requirements-analyst.agent.md
 
 Sprint: 02, Activity: integracao-sap
-Contexto: "Analisar integração bi-direcional com SAP ERP. Documentos: 
+Contexto: "Analisar integração bi-direcional com SAP ERP. Documentos:
 120 páginas de specs + planilhas de mapeamento + casos de teste."
 
 Arquivos de entrada:
 - SAP_Integration_Specs_v2.1.docx (120 páginas)
-- Entity_Mapping_Tables.xlsx (15 planilhas)  
+- Entity_Mapping_Tables.xlsx (15 planilhas)
 - Test_Cases_SAP_Integration.xlsx (200+ cenários)
 
 Foco: extrair regras RN-0050 a RN-0070, criar cenários BDD
@@ -1803,7 +1828,7 @@ Complexidade: sincronização real-time + tratamento conflitos
 @agents/manual/product-owner-final.agent.md
 
 Sprint: 04, Activity: go-live-sistema-vendas
-Contexto: "Validação final antes do go-live. Verificar CADA critério de 
+Contexto: "Validação final antes do go-live. Verificar CADA critério de
 aceite contra evidências técnicas. Decisão: APROVAR ou PENDÊNCIAS."
 
 Critérios para validar:
@@ -1835,12 +1860,12 @@ Entrada: Todos artefatos + código + documentação técnica
 @agents/manual/roundtable-facilitator.agent.md
 "Debater arquitetura do módulo X"
 
-# 2. Use UX/UI Specialist para wireframes rápidos  
+# 2. Use UX/UI Specialist para wireframes rápidos
 @agents/manual/ux-ui-specialist.agent.md
 "Criar protótipo da interface Y"
 
 # 3. Use Testing Specialist para plano TDD
-@agents/manual/testing-specialist.agent.md  
+@agents/manual/testing-specialist.agent.md
 "Planejar testes da funcionalidade Z"
 
 # 4. Execute fluxo completo para implementação final
@@ -1939,7 +1964,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 ```
 📁 out/sprint01/rn0001/
 ├── 00-business-context.md          ← Por que mudar a cor
-├── 00-requirements-brief.md        ← O que precisa ser feito  
+├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 01-ata-mesa-redonda.md         ← Decisões técnicas
 ├── 02-requisitos-bdd.md           ← Cenários de teste
 ├── 03-arquitetura.md              ← Como implementar
@@ -2060,7 +2085,7 @@ out/sprint02/rn0025/        ← Criada quando agentes executam
 
 **✅ Workflow após criação:**
 1. Editar `business_request/solicitacao.md` com sua demanda
-2. Adicionar documentos em `attachments/` (se necessário)  
+2. Adicionar documentos em `attachments/` (se necessário)
 3. Executar: `@agents/manual/product-owner.agent.md`
 
 ---
@@ -2092,7 +2117,7 @@ out/sprint02/rn0025/        ← Criada quando agentes executam
 
 **🔄 Processo executado:**
 ```
-Product Owner → Mesa Redonda → Requirements → Architect → 
+Product Owner → Mesa Redonda → Requirements → Architect →
 Developer → Frontend → Testing → PO Final
 ```
 
@@ -2214,7 +2239,7 @@ python .\orchestrators\autogen_dev_team.py
 # Escolher entre:
 # 1. 📝 Atividade única (tradicional)
 # 2. ⚡ Múltiplas atividades paralelas
-# 3. 📊 Gerenciar atividades existentes  
+# 3. 📊 Gerenciar atividades existentes
 # 4. 🔄 Pipeline escalonado avançado
 # 5. 🎯 Mesa Redonda específica
 # 6. ❓ Ajuda e documentação
@@ -2237,7 +2262,7 @@ python .\orchestrators\autogen_dev_team.py
 
 **🎯 Exemplos:**
 ```powershell
-# Básico - criar 3 atividades  
+# Básico - criar 3 atividades
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap")
 
 # Avançado - com pipeline completo
@@ -2282,11 +2307,11 @@ python .\orchestrators\autogen_dev_team.py
 📊 SPRINT 02 - Status das Atividades
 
 sistema-login        [████████░░] 80% - Testing Specialist
-modulo-relatorios    [██████░░░░] 60% - Systems Architect  
+modulo-relatorios    [██████░░░░] 60% - Systems Architect
 
 📈 RESUMO GERAL:
   Progresso médio: 70%
-  Atividades completas: 0/2  
+  Atividades completas: 0/2
   Atividades ativas: 2
 ```
 
@@ -2306,7 +2331,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 # ⚡ MÚLTIPLAS ATIVIDADES DIRETO
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "api", "dashboard") -ParallelSetup
 
-# 📊 DASHBOARD DE STATUS  
+# 📊 DASHBOARD DE STATUS
 .\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
 # 🆕 ATIVIDADE ÚNICA (TRADICIONAL)
@@ -2315,7 +2340,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 # ⚡ EXECUÇÃO MANUAL TRADICIONAL
 .\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030
 
-# 🎨 GERAR DIAGRAMAS  
+# 🎨 GERAR DIAGRAMAS
 .\powershell\render-diagrams.ps1
 
 # 🤖 EXECUÇÃO AUTOMATIZADA
@@ -2347,7 +2372,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 
 📁 out/sprint02/rn0025/          ← Onde os agentes vão gerar resultados
 ├── 📁 features/
-├── 📁 adrs/  
+├── 📁 adrs/
 └── 📁 diagrams/
 ```
 
@@ -2371,7 +2396,7 @@ Sprint: 02, Activity: rn0025
 # Sistema de login
 .\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
 
-# Relatório de vendas  
+# Relatório de vendas
 .\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
 
 # Integração com API externa
@@ -2382,7 +2407,7 @@ Sprint: 02, Activity: rn0025
 
 **Sprint 01:**
 - `rn0001` - Primeira funcionalidade
-- `rn0002` - Segunda funcionalidade  
+- `rn0002` - Segunda funcionalidade
 
 **Sprint 02:**
 - `rn0020` - Sistema de login
@@ -2418,7 +2443,7 @@ Tudo é salvo na pasta `out/sprint01/rn0001/` do seu workspace
 ### **🤔 "Posso usar para qualquer tipo de projeto?"**
 Sim! O sistema detecta automaticamente:
 - .NET (C#, ASP.NET Core)
-- Node.js (JavaScript, TypeScript)  
+- Node.js (JavaScript, TypeScript)
 - Angular
 - React
 - Projetos genéricos
@@ -2429,7 +2454,7 @@ Sem problema! Você pode:
 - Responder "REVISAR" para ver os arquivos gerados
 - Executar novamente com parâmetros diferentes
 
-### **🤔 "Preciso saber programar?"**  
+### **🤔 "Preciso saber programar?"**
 Para **usar** o sistema: NÃO
 Para **entender** os resultados: Ajuda, mas não é obrigatório
 O sistema gera documentação explicativa para cada parte.
@@ -2465,7 +2490,7 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 | **GitHub Copilot** | **PowerShell** |
 |--------------------|----------------|
 | ✅ Controle total de cada etapa | ✅ Execução totalmente automática |
-| ✅ Pode fazer ajustes manuais | ✅ Mais rápido para prototipagem |  
+| ✅ Pode fazer ajustes manuais | ✅ Mais rápido para prototipagem |
 | ✅ Melhor para desenvolvimento crítico | ✅ Ideal para análise exploratória |
 | ✅ **RECOMENDADO** para produção | ✅ Bom para testes e experimentação |
 
@@ -2484,14 +2509,14 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ```
 
-### **❌ "Erro: Python não encontrado"**  
+### **❌ "Erro: Python não encontrado"**
 **Solução:** O instalador deveria instalar automaticamente. Se não funcionou:
 ```powershell
 winget install Python.Python.3.12
 ```
 
 ### **❌ "Agente não responde ou dá erro"**
-**Solução:** 
+**Solução:**
 1. Verifique sua conexão com internet
 2. Verifique se GitHub Copilot está ativo
 3. Tente executar novamente
@@ -2510,7 +2535,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 ls .\in\sprint01\rn0001\business_request\
 ```
 
-### **❌ "Erro: 'Cannot find path' no PowerShell"**  
+### **❌ "Erro: 'Cannot find path' no PowerShell"**
 **Causa:** Você não está na pasta certa do projeto
 **Solução:**
 ```powershell
@@ -2524,7 +2549,7 @@ ls .\powershell\
 ### **❌ "new-activity.ps1 não cria as pastas"**
 **Verifique os parâmetros:**
 ```powershell
-# ✅ Correto: 
+# ✅ Correto:
 .\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
 
 # ❌ Incorreto (faltam parâmetros):
@@ -2550,7 +2575,7 @@ mmdc --version
 ### **❌ "Não sei o que colocar na solicitação"**
 **Exemplos simples:**
 - "Criar tela de login"
-- "Adicionar botão salvar" 
+- "Adicionar botão salvar"
 - "Mudar cor do menu"
 - "Criar relatório de vendas"
 
@@ -2731,11 +2756,11 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 
 ## 👤 **Autor e Informações**
 
-**👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão  
-**‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte  
-**‍🏫 Desenvolvedor 2:** Marcos Araujo  
-**�📅 Versão:** 2.0.1 - Documentação do sistema  
-**📅 Última atualização:** 30 de Setembro de 2025  
+**👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão
+**‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte
+**‍🏫 Desenvolvedor 2:** Marcos Araujo
+**�📅 Versão:** 2.0.1 - Documentação do sistema
+**📅 Última atualização:** 30 de Setembro de 2025
 **✅ Status:** Produção (processo manual) | ⚠️ Preview (processos automáticos)
 
 ### **🆘 Suporte:**
