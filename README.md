@@ -45,7 +45,7 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[📚 prompts-manual/prompts/reference/README.md](./prompts-manual/prompts/reference/README.md)** - Exemplos de referência para uso individual
 - **[📁 prompts-manual/prompts/deprecated/README.md](./prompts-manual/prompts/deprecated/README.md)** - Prompts descontinuados (arquivo histórico)
 
-### 📦 **Resultados**  
+### 📦 **Resultados**
 - **[📊 out/README.md](./out/README.md)** - Estrutura e organização dos artefatos gerados
 
 ### 📄 **Exemplos e Instruções**
@@ -54,7 +54,30 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[🔍 docs/analise-projeto-existente.md](./docs/analise-projeto-existente.md)** - Análise automática de projetos existentes
 - **[🤖 docs/integracao-github-copilot.md](./docs/integracao-github-copilot.md)** - **NOVO:** Integração automática com GitHub Copilot
 
-## 📋 **Pré-requisitos (O que você precisa ter instalado)**
+## � **Padrão de Encoding e Formatação**
+
+### ⚠️ **CRÍTICO: Leia Antes de Criar/Editar Arquivos**
+
+**Todos os arquivos devem seguir UTF-8 sem BOM** (exceto C#). Isso previne corrupção de caracteres (ç, ã, é, etc).
+
+| Tipo | Encoding | BOM | Line End | Indent |
+|------|----------|-----|----------|--------|
+| Markdown (.md) | UTF-8 | ❌ NÃO | CRLF | 2 sp |
+| PowerShell (.ps1) | UTF-8 | ❌ NÃO | CRLF | 4 sp |
+| YAML (.yaml) | UTF-8 | ❌ NÃO | LF | 2 sp |
+| JSON (.json) | UTF-8 | ❌ NÃO | LF | 2 sp |
+| C# (.cs) | UTF-8 | ✅ SIM | CRLF | 4 sp |
+
+**Documentação completa:**
+- 📖 [Guia Rápido de Arquivos](./docs/GUIA-RAPIDO-ARQUIVOS.md) - **Referência rápida**
+- 📘 [Padrão Completo de Encoding](./docs/PADRAO-ENCODING-FORMATACAO.md) - **400+ linhas de documentação**
+- ⚙️ [Copilot Instructions](./.github/copilot-instructions.md) - **Instruções para IA**
+
+**Status:** ✅ **100% compliant** (87/87 arquivos corretos)
+
+---
+
+## �📋 **Pré-requisitos (O que você precisa ter instalado)**
 
 - **Windows 10/11** com PowerShell
 - **Git** (para controle de versão)
@@ -161,7 +184,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 
 4️⃣ Sistema pergunta informações do projeto:
    → Sprint: 01
-   → Activity: rn0001  
+   → Activity: rn0001
    → Nome do projeto: MeuSistema
 
 5️⃣ Sistema pergunta: "Tipo de trabalho:"
@@ -1939,7 +1962,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 ```
 📁 out/sprint01/rn0001/
 ├── 00-business-context.md          ← Por que mudar a cor
-├── 00-requirements-brief.md        ← O que precisa ser feito  
+├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 01-ata-mesa-redonda.md         ← Decisões técnicas
 ├── 02-requisitos-bdd.md           ← Cenários de teste
 ├── 03-arquitetura.md              ← Como implementar
@@ -2418,7 +2441,7 @@ Tudo é salvo na pasta `out/sprint01/rn0001/` do seu workspace
 ### **🤔 "Posso usar para qualquer tipo de projeto?"**
 Sim! O sistema detecta automaticamente:
 - .NET (C#, ASP.NET Core)
-- Node.js (JavaScript, TypeScript)  
+- Node.js (JavaScript, TypeScript)
 - Angular
 - React
 - Projetos genéricos
@@ -2429,7 +2452,7 @@ Sem problema! Você pode:
 - Responder "REVISAR" para ver os arquivos gerados
 - Executar novamente com parâmetros diferentes
 
-### **🤔 "Preciso saber programar?"**  
+### **🤔 "Preciso saber programar?"**
 Para **usar** o sistema: NÃO
 Para **entender** os resultados: Ajuda, mas não é obrigatório
 O sistema gera documentação explicativa para cada parte.
@@ -2484,14 +2507,14 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ```
 
-### **❌ "Erro: Python não encontrado"**  
+### **❌ "Erro: Python não encontrado"**
 **Solução:** O instalador deveria instalar automaticamente. Se não funcionou:
 ```powershell
 winget install Python.Python.3.12
 ```
 
 ### **❌ "Agente não responde ou dá erro"**
-**Solução:** 
+**Solução:**
 1. Verifique sua conexão com internet
 2. Verifique se GitHub Copilot está ativo
 3. Tente executar novamente
@@ -2550,7 +2573,7 @@ mmdc --version
 ### **❌ "Não sei o que colocar na solicitação"**
 **Exemplos simples:**
 - "Criar tela de login"
-- "Adicionar botão salvar" 
+- "Adicionar botão salvar"
 - "Mudar cor do menu"
 - "Criar relatório de vendas"
 
