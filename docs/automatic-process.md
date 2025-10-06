@@ -27,6 +27,8 @@
 4. (Opcional) Execute `python .\Install\orchestrators\autogen_dev_team.py <sprint>` para preparar `engineering/`
 5. Confira as saídas em `data/out/sprint<sprint>[/<activity>]/...` e avalie `outcomes/crewai_report.md` (se CrewAI habilitado)
 
+> Importante: o instalador NUNCA copia/overwrite a pasta `.github` deste repositório para o projeto destino. A `.github` do projeto cliente é sempre preservada como fonte da verdade (inclusive `copilot-instructions.md`).
+
 ## Saídas
 - data/out/sprint<sprint>[/<activity>]/backlog.md
 - data/out/sprint<sprint>[/<activity>]/ceremonies.md

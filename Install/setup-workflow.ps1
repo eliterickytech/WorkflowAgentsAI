@@ -132,6 +132,16 @@ function Copy-Workflow($target) {
     Write-Info "Install dir: $root"
     Write-Info "Repo root: $repoRoot"
     Write-Info "Copiando pastas do workflow para: $target"
+
+    # Politica para .github:
+    # - Nunca copiamos a pasta .github deste repositório para o projeto destino
+    # - Sempre preservamos a .github existente no projeto destino
+    $targetGithub = Join-Path $target '.github'
+    if (Test-Path $targetGithub) {
+      Write-Info "Pasta .github do projeto destino encontrada e será preservada (nenhuma cópia/substituição será feita)."
+    } else {
+      Write-Info "Nenhuma pasta .github será criada/alterada pelo instalador (use a do projeto destino)."
+    }
   }
   catch {
     Write-Err "Erro ao detectar caminhos: $_"
@@ -151,7 +161,15 @@ function Copy-Workflow($target) {
       if ($m -eq 'Install/orchestrators') {
         $dst = Join-Path $target 'orchestrators'
       }
-      Copy-Item -Path $src -Destination $dst -Recurse -Force
+      # Defesa extra: nunca copiar subpastas ".github" por engano
+      if (Test-Path $src) {
+        Copy-Item -Path $src -Destination $dst -Recurse -Force
+        $accidentalGithub = Join-Path $dst '.github'
+        if (Test-Path $accidentalGithub) {
+          Write-Warn "Subpasta .github detectada em $dst (origem do template). Removendo para preservar o projeto destino..."
+          Remove-Item -Path $accidentalGithub -Recurse -Force -ErrorAction SilentlyContinue
+        }
+      }
     } else { Write-Warn "Item obrigatório não encontrado: $m" }
   }
   foreach ($o in $optional) {
@@ -162,6 +180,13 @@ function Copy-Workflow($target) {
       if ($ans -match '^[sSyY]') {
         Write-Info "Copiando $o ..."
         Copy-Item -Path $src -Destination $dst -Recurse -Force
+
+        # Defesa extra: caso o opcional contenha uma .github, remova para nao sobrepor o projeto destino
+        $accidentalGithub = Join-Path $dst '.github'
+        if (Test-Path $accidentalGithub) {
+          Write-Warn "Subpasta .github detectada em opcional '$o'. Removendo para preservar a pasta .github do projeto destino..."
+          Remove-Item -Path $accidentalGithub -Recurse -Force -ErrorAction SilentlyContinue
+        }
 
         # Remover pasta deprecated se existir
         $deprecatedPath = Join-Path $dst "prompts/deprecated"
@@ -455,7 +480,8 @@ SAIDAS:
 function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $superPromptPath = Join-Path $target 'prompts-manual/prompts/super-prompt.md'
   if (-not (Test-Path $superPromptPath)) {
-    Write-Warn "Super-prompt não encontrado em $superPromptPath"
+    Write-Info "Super-prompt não encontrado (opcional): $superPromptPath"
+    Write-Info "Dica: crie um arquivo 'prompts-manual/prompts/super-prompt.md' no projeto destino, ou ignore se não utilizar super-prompt."
     return
   }
 
@@ -588,7 +614,7 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
 }
 
 function Start-ManualWorkflow($target, $sprint, $activity) {
-  $startScript = Join-Path $target 'powershell/start-manual.ps1'
+  $startScript = Join-Path $target 'scripts/powershell/start-manual.ps1'
   if (-not (Test-Path $startScript)) {
     Write-Warn "Script start-manual.ps1 nao encontrado em $startScript"
     return
@@ -607,7 +633,7 @@ function Start-ManualWorkflow($target, $sprint, $activity) {
   catch {
     Write-Warn "Erro ao executar o fluxo manual: $_"
     Write-Info "Você pode executar manualmente com o comando:"
-    Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -File .\\powershell\\start-manual.ps1 -Sprint $sprint -Activity $activity" -ForegroundColor Gray
+    Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\powershell\\start-manual.ps1 -Sprint $sprint -Activity $activity" -ForegroundColor Gray
   }
 }
 
@@ -1565,8 +1591,32 @@ try {
   # Criar arquivo .env com as configuracoes
   Create-EnvFile -target $TargetProjectPath -mode $mode -sprint $sprint -activity $activity -projectName $projectName
 
-  # Configurar super-prompt com dados do projeto
-  Configure-SuperPrompt -target $TargetProjectPath -sprint $sprint -activity $activity -projectName $projectName
+  # Configurar super-prompt com dados do projeto (opcional: somente se existir)
+  $maybeSuper = Join-Path $TargetProjectPath 'prompts-manual/prompts/super-prompt.md'
+  if (Test-Path $maybeSuper) {
+    Configure-SuperPrompt -target $TargetProjectPath -sprint $sprint -activity $activity -projectName $projectName
+  } else {
+    Write-Info "Pulando configuração de super-prompt (arquivo não encontrado no projeto destino)."
+    # Oferecer copiar um template se desejar
+    $copyTpl = Ask 'Deseja copiar um template de super-prompt para o projeto? (s/n)' 'n'
+    if ($copyTpl -match '^[sSyY]') {
+      $tpl = Join-Path $repoRoot 'docs/prompts/super-prompt-template.md'
+      $destDir = Split-Path $maybeSuper -Parent
+      if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
+      if (Test-Path $tpl) {
+        $doOverwrite = if (Test-Path $maybeSuper) { Ask 'Arquivo super-prompt.md já existe; sobrescrever? (s/n)' 'n' } else { 's' }
+        if (($doOverwrite -match '^[sSyY]')) {
+          Copy-Item -Path $tpl -Destination $maybeSuper -Force
+          Write-Info "Template de super-prompt copiado para: $maybeSuper"
+          Configure-SuperPrompt -target $TargetProjectPath -sprint $sprint -activity $activity -projectName $projectName
+        } else {
+          Write-Info 'Mantendo arquivo existente (sem sobrescrever).'
+        }
+      } else {
+        Write-Warn "Template não encontrado no repositório: $tpl"
+      }
+    }
+  }
 
   # Criar estrutura do projeto novo se solicitado
   if ($projectType -eq '1' -and (-not [string]::IsNullOrWhiteSpace($projectPath))) {
