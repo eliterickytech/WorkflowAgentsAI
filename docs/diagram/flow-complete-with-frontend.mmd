@@ -8,7 +8,7 @@ graph TD
     D --> F[Frontend Specialist]
     E --> G[Testing Specialist]
     G --> F
-
+    
     subgraph "TDD - Testing First"
         H[05-qa-plano.md - Testing Specialist]
         I[Plano de Testes Completo]
@@ -19,7 +19,7 @@ graph TD
         K[Entidades e Servicos]
         L[APIs e Controllers]
     end
-
+    
     subgraph "Artefatos Frontend"
         M[04-frontend-implementation.md]
         N[04-components/]
@@ -27,14 +27,14 @@ graph TD
         P[Componentes React/Angular]
         Q[Temas e Estilos]
     end
-
+    
     subgraph "Validacao"
         R[Testing Validator]
         S[05.1-testing-validation.md]
     end
-
+    
     E --> H
-    E --> I
+    E --> I  
     F --> J
     F --> K
     F --> L
@@ -47,7 +47,12 @@ graph TD
     H --> F
     I --> F
     H --> G
-
+    
+    D --> P
+    E --> Q
+    F --> Q
+    C --> R
+    E --> R
     F --> R
     G --> R
     R --> S

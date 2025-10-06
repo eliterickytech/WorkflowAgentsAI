@@ -30,7 +30,7 @@ Nossa equipe de vendas precisa acompanhar métricas em tempo real para tomar dec
 
 ## Funcionalidades Necessárias
 1. **Visão Geral**: KPIs principais (receita, leads, metas)
-2. **Gráficos**: Performance últimos 30 dias
+2. **Gráficos**: Performance últimos 30 dias  
 3. **Lista de Leads**: Gestão e acompanhamento
 4. **Filtros**: Por período, vendedor, produto
 
@@ -84,7 +84,7 @@ Criar wireframes e design system completo.
 
 ## Análise de Usuários
 - **Gerentes**: Precisam visão macro + drill-down
-- **Vendedores**: Foco em suas métricas pessoais
+- **Vendedores**: Foco em suas métricas pessoais  
 - **Diretoria**: Relatórios executivos consolidados
 
 ## Jornada do Usuário Principal
@@ -158,35 +158,35 @@ Criar wireframes e design system completo.
 ```mermaid
 graph TD
     A[🏠 Login] --> B[📊 Dashboard Principal]
-
+    
     B --> C[💰 Visualizar KPIs]
     B --> D[📈 Analisar Gráficos]
     B --> E[👥 Gerenciar Leads]
     B --> F[⚙️ Configurações]
-
+    
     C --> C1[📊 Drill-down Receita]
     C --> C2[🎯 Verificar Metas]
     C --> C3[📞 Calls Report]
-
+    
     D --> D1[📅 Filtrar Período]
     D --> D2[👤 Por Vendedor]
     D --> D3[🏷️ Por Produto]
     D --> D4[📤 Exportar Dados]
-
+    
     E --> E1[🔍 Buscar Lead]
     E --> E2[➕ Novo Lead]
     E --> E3[📋 Lista Completa]
     E --> E4[📞 Agendar Follow-up]
-
+    
     D1 --> D5[📊 Atualizar Gráfico]
     D2 --> D5
     D3 --> D5
-
+    
     E1 --> E5[📝 Detalhes do Lead]
     E5 --> E6[✏️ Editar]
     E5 --> E7[📞 Ligar]
     E5 --> E8[📧 Email]
-
+    
     style B fill:#e8f5e8
     style C fill:#fff3e0
     style D fill:#f3e5f5
@@ -201,7 +201,7 @@ graph TD
     "colors": {
       "primary": {
         "main": "#1976d2",
-        "light": "#42a5f5",
+        "light": "#42a5f5", 
         "dark": "#0d47a1"
       },
       "success": "#4caf50",
@@ -225,7 +225,7 @@ graph TD
     },
     "layout": {
       "header": "64px",
-      "kpiRow": "120px",
+      "kpiRow": "120px", 
       "filterBar": "40px",
       "chartArea": "400px",
       "sidebar": "240px"
@@ -270,13 +270,13 @@ graph TD
     <option>📅 Últimos 7 dias</option>
     <option>📅 Este mês</option>
   </select>
-
+  
   <select class="filter-select" data-filter="user">
     <option>👤 Todos os vendedores</option>
     <option>👤 João Silva</option>
     <option>👤 Maria Santos</option>
   </select>
-
+  
   <button class="btn btn-primary btn-sm">
     🔍 Aplicar Filtros
   </button>
@@ -306,7 +306,7 @@ graph TD
 # Abrir workspace completo no VS Code
 code out\sprint01\dashboard-vendas\
 
-# Visualizar wireframes interativos
+# Visualizar wireframes interativos  
 .\powershell\view-wireframes.ps1 -Sprint 01 -Activity dashboard-vendas -OpenBrowser
 
 # Exportar diagramas para apresentação
@@ -341,10 +341,10 @@ Após implementação, validar:
 ```
 data/out/sprint01/dashboard-vendas/
 ├── 00-business-context.md
-├── 02-requisitos-bdd.md
+├── 02-requisitos-bdd.md  
 ├── 03-arquitetura.md
 ├── 05-ux-analysis.md              ← Análise UX
-├── 05-ux-wireframes.md            ← Wireframes ASCII + Mermaid
+├── 05-ux-wireframes.md            ← Wireframes ASCII + Mermaid  
 ├── 04-wireframes/
 │   ├── ascii/
 │   │   ├── desktop-layout.md

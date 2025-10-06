@@ -27,10 +27,10 @@ $createdActivities = @()
 
 foreach ($activity in $Activities) {
     Write-Host "  📂 Criando: $activity" -ForegroundColor Gray
-
+    
     # Executar start-manual.ps1 para cada atividade
     $context = if ($SharedContext) { "$SharedContext - Atividade: $activity" } else { "Sprint $Sprint - $activity" }
-
+    
     try {
         & $startManualScript -Sprint $Sprint -Activity $activity -Context $context
         $createdActivities += $activity
@@ -48,7 +48,7 @@ Write-Host "✅ Estruturas criadas: $($createdActivities.Count)/$($Activities.Co
 $dependencies = @{}
 if ($AutoDetectDependencies) {
     Write-Host "🔍 Analisando dependências automáticas..." -ForegroundColor Yellow
-
+    
     # Palavras-chave que indicam dependências
     $depKeywords = @{
         "login|auth|autenticacao|usuario" = @("sistema-login", "autenticacao", "usuarios")
@@ -57,7 +57,7 @@ if ($AutoDetectDependencies) {
         "sap|erp|integracao" = @("integracao-sap", "erp", "integracao-externa")
         "api|servico|web" = @("api", "webservice", "microservico")
     }
-
+    
     foreach ($activity in $createdActivities) {
         $deps = @()
         foreach ($keyword in $depKeywords.Keys) {
@@ -73,13 +73,13 @@ if ($AutoDetectDependencies) {
 # Criar contexto compartilhado nos arquivos
 if ($SharedContext -or $dependencies.Count -gt 0) {
     Write-Host "🔗 Adicionando contexto compartilhado..." -ForegroundColor Yellow
-
+    
     foreach ($activity in $createdActivities) {
         $businessContextFile = Join-Path $baseDir "$activity\00-business-context.md"
-
+        
         if (Test-Path $businessContextFile) {
             $content = Get-Content $businessContextFile -Raw
-
+            
             $relationSection = @"
 
 ---
@@ -104,7 +104,7 @@ $SharedContext
 
 ### Outras Atividades do Sprint
 "@
-
+            
             $otherActivities = $createdActivities | Where-Object { $_ -ne $activity }
             foreach ($other in $otherActivities) {
                 $relationSection += "`n- **$other**: Atividade paralela"
@@ -119,7 +119,7 @@ $SharedContext
 # Criar guia de execução paralela
 if ($ParallelSetup) {
     Write-Host "⚡ Criando guia de execução paralela..." -ForegroundColor Yellow
-
+    
     $parallelGuide = @"
 # 🚀 Guia de Execução Paralela - Sprint $Sprint
 
@@ -149,7 +149,7 @@ Todos os **Product Owner** podem ser executados em paralelo:
 @agents/manual/product-owner.agent.md
 Sprint: $Sprint, Activity: $($createdActivities[0])
 
-# Terminal/VS Code 2
+# Terminal/VS Code 2  
 @agents/manual/product-owner.agent.md
 Sprint: $Sprint, Activity: $($createdActivities[1])
 "@
@@ -159,7 +159,7 @@ Sprint: $Sprint, Activity: $($createdActivities[1])
             $parallelGuide += @"
 
 # Terminal/VS Code $($i + 1)
-@agents/manual/product-owner.agent.md
+@agents/manual/product-owner.agent.md  
 Sprint: $Sprint, Activity: $($createdActivities[$i])
 "@
         }
@@ -176,9 +176,9 @@ Após todos os Product Owner concluírem, execute **Mesa Redonda** para cada:
 # Aguardar conclusão de todos os POs, depois:
 @agents/manual/roundtable-facilitator.agent.md
 Sprint: $Sprint, Activity: $($createdActivities[0])
-# [Aguardar conclusão]
+# [Aguardar conclusão] 
 
-@agents/manual/roundtable-facilitator.agent.md
+@agents/manual/roundtable-facilitator.agent.md  
 Sprint: $Sprint, Activity: $($createdActivities[1])
 # [Aguardar conclusão]
 ``````
@@ -187,7 +187,7 @@ Sprint: $Sprint, Activity: $($createdActivities[1])
 
 ### 📈 Pipeline Escalonado:
 1. **Semana 1**: Product Owner (todas atividades em paralelo)
-2. **Semana 2**: Mesa Redonda + Requirements (sequencial)
+2. **Semana 2**: Mesa Redonda + Requirements (sequencial)  
 3. **Semana 3**: Systems Architect (sequencial)
 4. **Semana 4**: Development + Testing (paralelo para atividades independentes)
 
@@ -203,7 +203,7 @@ Sprint: $Sprint, Activity: $($createdActivities[1])
 # Status geral
 .\powershell\manage-parallel-execution.ps1 -Sprint $Sprint -Action status
 
-# Próximos passos
+# Próximos passos  
 .\powershell\manage-parallel-execution.ps1 -Sprint $Sprint -Action next
 
 # Detectar conflitos
@@ -235,7 +235,7 @@ Sprint: $Sprint, Activity: $($createdActivities[1])
 # Criar matriz de dependências
 if ($dependencies.Count -gt 0) {
     Write-Host "📊 Criando matriz de dependências..." -ForegroundColor Yellow
-
+    
     $depMatrix = @"
 # 🕸️ Matriz de Dependências - Sprint $Sprint
 
@@ -255,7 +255,7 @@ if ($dependencies.Count -gt 0) {
             {$_ -le 2} { "🟡 Médio" }
             default { "🔴 Alto" }
         }
-
+        
         $depList = if ($deps.Count -gt 0) { $deps -join ', ' } else { "Nenhuma" }
         $depMatrix += "`n| $activity | $depList | Aguardando | $riskLevel |"
     }
@@ -294,7 +294,7 @@ graph TD
     foreach ($activity in $createdActivities) {
         $cleanActivity = $activity -replace '[^a-zA-Z0-9]', ''
         $depMatrix += "`n    $cleanActivity[$activity]"
-
+        
         foreach ($dep in $dependencies[$activity]) {
             $cleanDep = $dep -replace '[^a-zA-Z0-9]', ''
             $depMatrix += "`n    $cleanDep --> $cleanActivity"
@@ -316,7 +316,7 @@ graph TD
 # Criar cronograma de pipeline
 if ($CreatePipeline) {
     Write-Host "📅 Criando cronograma de pipeline..." -ForegroundColor Yellow
-
+    
     $pipeline = @"
 # 📅 Pipeline Escalonado - Sprint $Sprint
 
@@ -360,7 +360,7 @@ if ($CreatePipeline) {
 | 📋 Requirements | $($createdActivities[0..1] -join ', ') | Sequencial prioritário | 1 por vez |
 | 🎯 Product Owner | Novas atividades | Preparar próxima onda | Paralelo |
 
-### 📅 Semana 3: Arquitetura (Otimizado)
+### 📅 Semana 3: Arquitetura (Otimizado)  
 **Objetivo**: Design técnico e validação de dependências
 
 | Agente | Atividades | Estratégia | Observações |
@@ -381,7 +381,7 @@ if ($CreatePipeline) {
 
 ### ⚡ Paralelização Inteligente:
 1. **Product Owner**: Todas atividades simultaneamente (máxima eficiência)
-2. **Mesa Redonda**: Sequencial (evita contexto misturado)
+2. **Mesa Redonda**: Sequencial (evita contexto misturado)  
 3. **Requirements**: 2 paralelos máximo (qualidade > velocidade)
 4. **Architecture**: Sequencial com dependências (consistência)
 5. **Development**: Paralelo para independentes (velocidade)
@@ -436,6 +436,6 @@ if ($CreatePipeline) {
 Write-Host ""
 Write-Host "🚀 Próximos passos:" -ForegroundColor Magenta
 Write-Host "1. Execute Product Owner para todas atividades em paralelo" -ForegroundColor White
-Write-Host "2. Use os guias gerados para otimizar a execução" -ForegroundColor White
+Write-Host "2. Use os guias gerados para otimizar a execução" -ForegroundColor White  
 Write-Host "3. Monitore progresso com manage-parallel-execution.ps1" -ForegroundColor White
 Write-Host ""

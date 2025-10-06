@@ -24,6 +24,8 @@ param(
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..\\..')).Path
 )
 
+    estão com encoding correto (UTF-8 sem BOM para maioria dos arquivos)
+
 $ErrorActionPreference = 'Stop'
 
 function Write-ColoredOutput {
@@ -50,7 +52,7 @@ function Set-FileEncodingUTF8 {
     $content = Get-Content -Path $FilePath -Raw -Encoding UTF8
     $utf8 = New-Object System.Text.UTF8Encoding($WithBOM)
     [System.IO.File]::WriteAllText($FilePath, $content, $utf8)
-}
+    }
 
 # Regras de BOM por extensão
 $encodingRules = @{
@@ -60,7 +62,7 @@ $encodingRules = @{
     '.yaml'    = @{ ExpectBOM = $false; Name = 'YAML' }
     '.yml'     = @{ ExpectBOM = $false; Name = 'YAML' }
     '.json'    = @{ ExpectBOM = $false; Name = 'JSON' }
-    '.feature' = @{ ExpectBOM = $false; Name = 'Gherkin' }
+        '.feature' = @{ ExpectBOM = $false; Name = 'Gherkin' }
     '.ts'      = @{ ExpectBOM = $false; Name = 'TypeScript' }
     '.js'      = @{ ExpectBOM = $false; Name = 'JavaScript' }
     '.html'    = @{ ExpectBOM = $false; Name = 'HTML' }
@@ -102,7 +104,7 @@ foreach ($f in $files) {
         Expected = $expectedText
         Actual   = $actualText
         Fixed    = $false
-    }
+            }
 
     if ($Fix) {
         try {
@@ -119,14 +121,67 @@ foreach ($f in $files) {
             }
         } catch {
             Write-ColoredOutput "  ERRO: Falha ao corrigir: $($f.FullName) - $($_.Exception.Message)" 'Error'
-        }
+}
+
+    $expectBOM = $rule.ExpectBOM
+
+# Resumo    $hasBOM = $encoding.HasBOM
+
+Write-Host "`n$("=" * 70)"
+
+Write-Host "RESUMO DA VALIDACAO" -ForegroundColor Cyan    if ($expectBOM -eq $hasBOM) {
+
+Write-Host ("=" * 70)        $correctFiles++
+
     } else {
+
+Write-Host "`nTotal de arquivos: $totalFiles"        $incorrectFiles++
+
+Write-Host "Corretos: $correctFiles" -ForegroundColor Green
+
+        $expected = if($expectBOM) { "UTF-8 COM BOM" } else { "UTF-8 SEM BOM" }
+
+if ($incorrectFiles -gt 0) {        $actual = if($hasBOM) { "UTF-8 COM BOM" } else { "UTF-8 SEM BOM" }
+
+    Write-Host "Incorretos: $incorrectFiles" -ForegroundColor Red
+
+            $errorObj = [PSCustomObject]@{
+
+    if ($Fix) {            File = $file.FullName.Replace($PSScriptRoot, '.')
+
+        Write-Host "Corrigidos: $fixedFiles" -ForegroundColor Green            Type = $rule.Name
+
+        if ($fixedFiles -lt $incorrectFiles) {            Expected = $expected
+
+            Write-Host "Nao corrigidos: $($incorrectFiles - $fixedFiles)" -ForegroundColor Yellow            Actual = $actual
+
+        }            Fixed = $false
+
+    }        }
+
+} else {
+
+    Write-Host "`nTodos os arquivos estao com encoding correto!" -ForegroundColor Green        if ($Fix -and -not $expectBOM -and $hasBOM) {
+
+}            Write-ColoredOutput "  🔧 Corrigindo: $($errorObj.File)" 'Warning'
+
+            if (Repair-FileEncoding -FilePath $file.FullName) {
+
+# Detalhes                $errorObj.Fixed = $true
+
+if ($validationErrors.Count -gt 0 -and -not $Fix) {                $fixedFiles++
+
+    Write-Host "`nARQUIVOS COM PROBLEMAS:" -ForegroundColor Red                Write-ColoredOutput "    ✅ Corrigido!" 'Success'
+
+    $validationErrors | Format-Table -AutoSize File, Type, Expected, Actual            }
+
+            } else {
     Write-ColoredOutput "  ERRO: $($f.FullName) - Esperado: $expectedText | Encontrado: $actualText" 'Error'
     }
 
     $issues += $issue
     $bad++
-}
+    }
 
 Write-ColoredOutput "`nRESUMO" 'Info'
 Write-ColoredOutput ("Total: $total | Corretos: $ok | Incorretos: $bad" ) 'Info'
@@ -183,15 +238,17 @@ foreach ($f in $files) {
         if (-not $hasLFOnly -and $hasCRLF) {
             $badEOL++
             $eolIssues += [pscustomobject]@{ File=$f.FullName; Expected='LF'; Found='CRLF or mixed' }
-            if ($Fix) {
+    if ($Fix) {
                 $lines = Get-Content -Path $f.FullName
                 $new = [string]::Join("`n", $lines)
                 [IO.File]::WriteAllText($f.FullName, $new, (New-Object System.Text.UTF8Encoding($false)))
                 $fixedEOL++
                 Write-ColoredOutput "  [FIX] Normalizado LF: $($f.FullName)" 'Warning'
-            }
         }
     }
+} else {
+    Write-ColoredOutput "`n🎉 Todos os arquivos estão com encoding correto!" 'Success'
+}
 
     $hasMoji = $false
     if ($content.IndexOf($repChar) -ge 0) { $hasMoji = $true }

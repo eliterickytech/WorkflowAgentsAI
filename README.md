@@ -1,17 +1,21 @@
 # RickytechAgileAgent - Agentes de Desenvolvimento Ágil
+# RickytechAgileAgent - Agentes de Desenvolvimento Ágil
 
 **Versão:** 2.2.0 - **Parallel Execution Edition**
 **Autor:** Ricardo Macedo Perdigão
 **Data:** 30 de Setembro de 2025
 
 ## 🎯 **O que é o RickytechAgileAgent?**
+## 🎯 **O que é o RickytechAgileAgent?**
 
+O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
 O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
 
 **Para Desenvolvedores:** Imagine ter uma equipe de especialistas (Product Owner, Arquiteto, Desenvolvedor Sênior, etc.) que trabalha automaticamente para você, gerando toda a documentação e código necessário para implementar uma funcionalidade.
 
 ## 🚀 **Como Funciona o Sistema?**
 
+O sistema possui **10 agentes especializados** que trabalham em sequência:
 O sistema possui **10 agentes especializados** que trabalham em sequência:
 
 ```
@@ -42,6 +46,11 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[🎯 docs/guia-agentes-individuais.md](./docs/guia-agentes-individuais.md)** - **NOVO: Como usar cada agente individualmente**
 - **[🧪 docs/exemplo-fluxo-tdd-completo.md](./docs/exemplo-fluxo-tdd-completo.md)** - **NOVO: Exemplo prático TDD completo**
 - **[📖 docs/README.md](./docs/README.md)** - Índice completo da documentação técnica
+- **[📖 docs/fluxo-completo.md](./docs/fluxo-completo.md)** - **GUIA PRINCIPAL: Do zero à mesa redonda**
+- **[🚀 docs/guia-paralelizacao.md](./docs/guia-paralelizacao.md)** - **NOVO: Execução paralela de múltiplas atividades**
+- **[🎯 docs/guia-agentes-individuais.md](./docs/guia-agentes-individuais.md)** - **NOVO: Como usar cada agente individualmente**
+- **[🧪 docs/exemplo-fluxo-tdd-completo.md](./docs/exemplo-fluxo-tdd-completo.md)** - **NOVO: Exemplo prático TDD completo**
+- **[📖 docs/README.md](./docs/README.md)** - Índice completo da documentação técnica
 - **[📋 docs/resumo-melhorias-setup.md](./docs/resumo-melhorias-setup.md)** - Últimas melhorias implementadas no instalador
 
 ### 🛠️ **Prompts e Agentes**
@@ -49,6 +58,7 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[📚 prompts-manual/prompts/reference/README.md](./prompts-manual/prompts/reference/README.md)** - Exemplos de referência para uso individual
 - **[📁 prompts-manual/prompts/deprecated/README.md](./prompts-manual/prompts/deprecated/README.md)** - Prompts descontinuados (arquivo histórico)
 
+### 📦 **Resultados**
 ### 📦 **Resultados**
 - **[📊 out/README.md](./out/README.md)** - Estrutura e organização dos artefatos gerados
 
@@ -188,6 +198,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 
 4️⃣ Sistema pergunta informações do projeto:
    → Sprint: 01
+   → Activity: rn0001
    → Activity: rn0001
    → Nome do projeto: MeuSistema
 
@@ -375,6 +386,13 @@ Você responde: SIM
 | **1️⃣ Product Owner** | Analisa o negócio | Requirements + Context | Posso fazer mesa redonda? |
 | **2️⃣ Mesa Redonda** | Alinha tecnicamente | Ata da reunião | Posso analisar requisitos? |
 | **3️⃣ Requirements** | Cria cenários BDD | Features de teste | Posso fazer arquitetura? |
+| **4️⃣ Systems Architect** | Define solução | ADRs + Diagramas | Posso criar wireframes? |
+| **5️⃣ UX/UI Specialist** | Cria wireframes | Design System + Protótipos | Posso criar plano TDD? |
+| **6️⃣ Testing Specialist** | Plano TDD | Estratégia de testes | Posso implementar código? |
+| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Posso validar implementação? |
+| **8️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
+| **9️⃣ Code Reviewer** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
+| **🔟 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
 | **4️⃣ Systems Architect** | Define solução | ADRs + Diagramas | Posso criar wireframes? |
 | **5️⃣ UX/UI Specialist** | Cria wireframes | Design System + Protótipos | Posso criar plano TDD? |
 | **6️⃣ Testing Specialist** | Plano TDD | Estratégia de testes | Posso implementar código? |
@@ -1967,6 +1985,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 📁 data/out/sprint01/rn0001/
 ├── 00-business-context.md          ← Por que mudar a cor
 ├── 00-requirements-brief.md        ← O que precisa ser feito
+├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 01-ata-mesa-redonda.md         ← Decisões técnicas
 ├── 02-requisitos-bdd.md           ← Cenários de teste
 ├── 03-arquitetura.md              ← Como implementar
@@ -1982,6 +2001,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 
 ## 🛠️ **Scripts PowerShell Disponíveis**
 
+**Para Desenvolvedores:** Além do GitHub Copilot, você pode usar scripts PowerShell para automação avançada e gerenciamento de atividades.
 **Para Desenvolvedores:** Além do GitHub Copilot, você pode usar scripts PowerShell para automação avançada e gerenciamento de atividades.
 
 ### **📜 Scripts Disponíveis:**
@@ -2446,6 +2466,7 @@ Tudo é salvo na pasta `data/out/sprint01/rn0001/` do seu workspace
 Sim! O sistema detecta automaticamente:
 - .NET (C#, ASP.NET Core)
 - Node.js (JavaScript, TypeScript)
+- Node.js (JavaScript, TypeScript)
 - Angular
 - React
 - Projetos genéricos
@@ -2456,6 +2477,7 @@ Sem problema! Você pode:
 - Responder "REVISAR" para ver os arquivos gerados
 - Executar novamente com parâmetros diferentes
 
+### **🤔 "Preciso saber programar?"**
 ### **🤔 "Preciso saber programar?"**
 Para **usar** o sistema: NÃO
 Para **entender** os resultados: Ajuda, mas não é obrigatório
@@ -2512,12 +2534,14 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ```
 
 ### **❌ "Erro: Python não encontrado"**
+### **❌ "Erro: Python não encontrado"**
 **Solução:** O instalador deveria instalar automaticamente. Se não funcionou:
 ```powershell
 winget install Python.Python.3.12
 ```
 
 ### **❌ "Agente não responde ou dá erro"**
+**Solução:**
 **Solução:**
 1. Verifique sua conexão com internet
 2. Verifique se GitHub Copilot está ativo
@@ -2578,8 +2602,14 @@ mmdc --version
 **Exemplos simples:**
 - "Criar tela de login"
 - "Adicionar botão salvar"
+- "Adicionar botão salvar"
 - "Mudar cor do menu"
 - "Criar relatório de vendas"
+
+**Exemplos avançados:**
+- "Sistema de autenticação com JWT para API .NET"
+- "Dashboard responsivo com gráficos em Angular"
+- "Integração com API do Correios para cálculo de frete"
 
 **Exemplos avançados:**
 - "Sistema de autenticação com JWT para API .NET"
@@ -2664,6 +2694,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\render-
 ### **📥 Primeira instalação:**
 1. **[📖 Fluxo Completo: Do Zero à Mesa Redonda](./docs/fluxo-completo.md)** ← **COMECE AQUI**
 2. **[⚡ Instalador PowerShell](./Install/setup-workflow.ps1)** - Configuração automática
+### **📥 Primeira instalação:**
+1. **[📖 Fluxo Completo: Do Zero à Mesa Redonda](./docs/fluxo-completo.md)** ← **COMECE AQUI**
+2. **[⚡ Instalador PowerShell](./Install/setup-workflow.ps1)** - Configuração automática
 3. **[🆕 Novo projeto .NET](./docs/new-dotnet-project-setup.md)** - Guia técnico detalhado
 
 ### **🔄 Trabalhando com novas atividades:**
@@ -2700,6 +2733,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\render-
 - Pasta com os agentes manuais: [`agents/manual`](./agents/manual)
   - **🆕 Product Owner**: [`agents/manual/product-owner.agent.md`](./agents/manual/product-owner.agent.md) - **Início automático**
   - **🆕 Product Owner Final**: [`agents/manual/product-owner-final.agent.md`](./agents/manual/product-owner-final.agent.md) - **Checklist final**
+  - **🔥 Mesa Redonda**: [`agents/manual/roundtable-facilitator.agent.md`](./agents/manual/roundtable-facilitator.agent.md) - ⭐ **DESTAQUE: Simula debate entre 5 especialistas**
   - **🔥 Mesa Redonda**: [`agents/manual/roundtable-facilitator.agent.md`](./agents/manual/roundtable-facilitator.agent.md) - ⭐ **DESTAQUE: Simula debate entre 5 especialistas**
   - Requirements Analyst: [`agents/manual/requirements-analyst.agent.md`](./agents/manual/requirements-analyst.agent.md)
   - Systems Architect: [`agents/manual/systems-architect.agent.md`](./agents/manual/systems-architect.agent.md)
@@ -2783,6 +2817,7 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 
 ```powershell
 # Comando para começar AGORA:
+cd "C:\Projetos\Rickytech.System.AI"
 cd "C:\Projetos\Rickytech.System.AI"
 .\Install\setup-workflow.ps1
 ```

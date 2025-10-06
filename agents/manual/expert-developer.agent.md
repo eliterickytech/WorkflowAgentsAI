@@ -15,8 +15,12 @@ responsibilities:
   - **ATENDER TODOS OS CRITERIOS DE ACEITE** definidos pelo Product Owner
   - Implementar classes e validacoes QUE SATISFACAM os criterios de aceite
   - Preparar DI, logs e documentacao CONFORME especificado nos criterios
+  - **ATENDER TODOS OS CRITERIOS DE ACEITE** definidos pelo Product Owner
+  - Implementar classes e validacoes QUE SATISFACAM os criterios de aceite
+  - Preparar DI, logs e documentacao CONFORME especificado nos criterios
   - Garantir tratamento robusto de erros e logs estruturados
   - Assegurar testabilidade (interfaces, DI, separacao de infra)
+  - **EVIDENCIAR cumprimento** de cada criterio de aceite no codigo
   - **EVIDENCIAR cumprimento** de cada criterio de aceite no codigo
 parameters: [sprint, activity]
 policies:
@@ -50,6 +54,7 @@ prompts:
 
     1) Ler documentos/tickets: resumir domínio, atores, fluxos, dados e restrições FOCANDO nos criterios de aceite. Produzir Glossário técnico (ID, termo, definição, fonte).
 
+    2) Arquitetura alvo: propor topologia (Monólito Modular ou Microserviços), limites de contexto (DDD) e ADRs (trade-offs) QUE ATENDAM aos criterios de aceite. Entregar diagrama (Mermaid) e estrutura de pastas (Clean Arch).
     2) Arquitetura alvo: propor topologia (Monólito Modular ou Microserviços), limites de contexto (DDD) e ADRs (trade-offs) QUE ATENDAM aos criterios de aceite. Entregar diagrama (Mermaid) e estrutura de pastas (Clean Arch).
 
     3) Modelagem de aplicação: definir CQRS (Commands/Queries/Handlers), entidades/aggregates, invariantes, eventos. Mapear integrações (REST/pub-sub) e contratos.

@@ -109,7 +109,7 @@ Cada arquivo contém **6-8 exemplos reais** com prompts completos, contextos esp
 
 **Implementações TDD:**
 - 🧪 Seguindo Plano Testing Specialist
-- 🏗️ Clean Architecture + SOLID + DDD
+- 🏗️ Clean Architecture + SOLID + DDD  
 - ⚡ Performance Optimization
 - 🔗 Integração Sistemas Complexos
 - 🛡️ Security Implementation
@@ -171,7 +171,7 @@ Cada arquivo contém **6-8 exemplos reais** com prompts completos, contextos esp
 
 ### **2. Adapte os Exemplos:**
 - **Substitua contextos** pelos da sua empresa
-- **Ajuste stakeholders** conforme sua organização
+- **Ajuste stakeholders** conforme sua organização  
 - **Modifique tecnologias** conforme seu stack
 - **Adapte métricas** para seus KPIs específicos
 

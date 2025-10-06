@@ -7,12 +7,12 @@ param(
 function Write-Info($msg) { Write-Host "[INFO] $msg" -ForegroundColor Cyan }
 
 # Validar parâmetros
-if ([string]::IsNullOrWhiteSpace($Sprint)) {
+if ([string]::IsNullOrWhiteSpace($Sprint)) { 
   Write-Error "Sprint é obrigatório (ex: 01, 02, 03)"
   exit 1
 }
 
-if ([string]::IsNullOrWhiteSpace($Activity)) {
+if ([string]::IsNullOrWhiteSpace($Activity)) { 
   Write-Error "Activity é obrigatória (ex: rn0001, rn0025)"
   exit 1
 }
@@ -47,15 +47,15 @@ $templateContent = @"
 
 ## ✅ Critérios de Sucesso
 - [ ] Critério 1
-- [ ] Critério 2
+- [ ] Critério 2  
 - [ ] Critério 3
 
 ## 📎 Informações Adicionais
 [Qualquer contexto extra, stakeholders, prioridades, etc.]
 
 ---
-**Sprint:** $Sprint
-**Activity:** $Activity
+**Sprint:** $Sprint  
+**Activity:** $Activity  
 **Data:** $(Get-Date -Format 'dd/MM/yyyy')
 "@
 
@@ -68,7 +68,7 @@ Write-Host "📁 Estrutura criada:" -ForegroundColor Yellow
 Write-Host "   📥 ENTRADA:" -ForegroundColor Cyan
 Write-Host "   - $businessRequestPath" -ForegroundColor Gray
 Write-Host "   - $attachmentsPath" -ForegroundColor Gray
-Write-Host "   📤 SAÍDA:" -ForegroundColor Cyan
+Write-Host "   📤 SAÍDA:" -ForegroundColor Cyan  
 Write-Host "   - $outputBase" -ForegroundColor Gray
 Write-Host ""
 Write-Host "📝 Próximos passos:" -ForegroundColor Yellow
