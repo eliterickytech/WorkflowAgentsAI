@@ -2,9 +2,9 @@
 
 This is an **AI Agent Development Framework** for building .NET applications using **automated workflows** with **Scrum practices**, **BDD**, **DDD**, and **Clean Architecture**.
 
-## ⚠️ CRITICAL: File Encoding and Formatting Standards
+## �s�️ CRITICAL: File Encoding and Formatting Standards
 
-### 🎯 MANDATORY ENCODING RULES - ALWAYS FOLLOW
+### �YZ� MANDATORY ENCODING RULES - ALWAYS FOLLOW
 
 **BEFORE creating, editing, or saving ANY file in this project, you MUST:**
 
@@ -13,20 +13,20 @@ This is an **AI Agent Development Framework** for building .NET applications usi
 3. **Check encoding in VS Code** (bottom-right corner) before saving
 4. **Validate line endings** match the file type requirements
 
-### 📋 Official Encoding Standards by File Type
+### �Y"< Official Encoding Standards by File Type
 
 | File Type | Encoding | BOM | Line Ending | Indent |
 |-----------|----------|-----|-------------|--------|
-| **Markdown** (.md) | UTF-8 | ❌ NO BOM | CRLF | 2 spaces |
-| **PowerShell** (.ps1, .psm1) | UTF-8 | ❌ NO BOM | CRLF | 4 spaces |
-| **YAML** (.yaml, .yml) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **JSON** (.json) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **Gherkin** (.feature) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **C#** (.cs) | UTF-8 | ✅ WITH BOM | CRLF | 4 spaces |
-| **TypeScript/JS** (.ts, .js) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **HTML** (.html) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
+| **Markdown** (.md) | UTF-8 | �O NO BOM | CRLF | 2 spaces |
+| **PowerShell** (.ps1, .psm1) | UTF-8 | �O NO BOM | CRLF | 4 spaces |
+| **YAML** (.yaml, .yml) | UTF-8 | �O NO BOM | LF | 2 spaces |
+| **JSON** (.json) | UTF-8 | �O NO BOM | LF | 2 spaces |
+| **Gherkin** (.feature) | UTF-8 | �O NO BOM | LF | 2 spaces |
+| **C#** (.cs) | UTF-8 | �o. WITH BOM | CRLF | 4 spaces |
+| **TypeScript/JS** (.ts, .js) | UTF-8 | �O NO BOM | LF | 2 spaces |
+| **HTML** (.html) | UTF-8 | �O NO BOM | LF | 2 spaces |
 
-### 🚨 CRITICAL VALIDATION CHECKLIST
+### �Ys� CRITICAL VALIDATION CHECKLIST
 
 **Before every file creation/edit operation:**
 - [ ] Verify encoding is UTF-8 (without BOM for most files)
@@ -35,7 +35,7 @@ This is an **AI Agent Development Framework** for building .NET applications usi
 - [ ] Ensure final newline is present
 - [ ] Trim trailing whitespace (except Markdown)
 
-### 🛠️ How to Verify Encoding in VS Code
+### �Y>�️ How to Verify Encoding in VS Code
 
 1. Look at **bottom-right corner** of VS Code window
 2. Should display: `UTF-8` (NOT "UTF-8 with BOM")
@@ -44,30 +44,30 @@ This is an **AI Agent Development Framework** for building .NET applications usi
    - Select "Save with Encoding"
    - Choose `UTF-8` (without BOM)
 
-### ✅ Configuration Files (Already Set Up)
+### �o. Configuration Files (Already Set Up)
 
 - **`.editorconfig`** (root) - Universal encoding rules for all editors
 - **`.vscode/settings.json`** - VS Code specific encoding configuration
 - **`docs/PADRAO-ENCODING-FORMATACAO.md`** - Complete encoding documentation (400+ lines)
 
-### 🔍 Portuguese Characters Must Display Correctly
+### �Y"� Portuguese Characters Must Display Correctly
 
 These characters MUST appear correctly in all files:
-- `ç` (cedilha) - NOT `Ã§` or `ÃÂ§`
-- `ã` (a-til) - NOT `Ã£` or `ÃÂ£`
-- `é` (e-agudo) - NOT `Ã©` or `ÃÂ©`
-- `á` (a-agudo) - NOT `Ã¡` or `ÃÂ¡`
-- `ó` (o-agudo) - NOT `Ã³` or `ÃÂ³`
+- `ç` (cedilha) - NOT `�f§` or `�f�,§`
+- `ã` (a-til) - NOT `�f£` or `�f�,£`
+- `é` (e-agudo) - NOT `�f©` or `�f�,©`
+- `á` (a-agudo) - NOT `�f¡` or `�f�,¡`
+- `ó` (o-agudo) - NOT `�f³` or `�f�,³`
 
-### 🚫 NEVER Create Files With:
-- ❌ Double UTF-8 encoding (Ã§ instead of ç)
-- ❌ Triple UTF-8 encoding (ÃÂ§ instead of ç)
-- ❌ Mixed line endings (CRLF + LF in same file)
-- ❌ Tabs instead of spaces
-- ❌ UTF-8 BOM on Markdown/PowerShell/YAML files
-- ❌ Missing BOM on C# files
+### �Ys� NEVER Create Files With:
+- �O Double UTF-8 encoding (�f§ instead of ç)
+- �O Triple UTF-8 encoding (�f�,§ instead of ç)
+- �O Mixed line endings (CRLF + LF in same file)
+- �O Tabs instead of spaces
+- �O UTF-8 BOM on Markdown/PowerShell/YAML files
+- �O Missing BOM on C# files
 
-### 📖 Full Documentation Reference
+### �Y"- Full Documentation Reference
 
 For complete encoding standards, troubleshooting, and examples:
 - Read: `docs/PADRAO-ENCODING-FORMATACAO.md`
@@ -78,26 +78,33 @@ For complete encoding standards, troubleshooting, and examples:
 
 ### Multi-Modal Agent System
 - **Manual agents** (`agents/manual/`): GitHub Copilot Chat compatible agents with YAML frontmatter configuration
-- **Automated orchestration** (`orchestrators/`): CrewAI and AutoGen scripts for agent coordination (preview)
-- **Structured workflows** (`powershell/`): PowerShell scripts for setup and execution automation
-- **Input/Output model**: `in/sprint{X}/{activity}/` -> `out/sprint{X}/{activity}/` with standardized artifacts
+- **Automated orchestration** (`Install/orchestrators/` in repo; `orchestrators/` in client projects): CrewAI and AutoGen scripts for agent coordination (preview)
+- **Structured workflows** (`scripts/powershell/` in repo; `powershell/` in client projects): PowerShell scripts for setup and execution automation
+- **Input/Output model**: `data/in/sprint{X}/{activity}/` (or `in/`) -> `data/out/sprint{X}/{activity}/` with standardized artifacts
 
-### Agent Workflow Pattern
+### Agent Workflow Pattern (TDD - Test-Driven Development)
 ```mermaid
 graph TD
     PO[Product Owner] --> RT[Roundtable]
     RT --> RA[Requirements Analyst]
     RA --> SA[Systems Architect]
-    SA --> ED[Expert Developer]
-    ED --> TS[Testing Specialist]
-    TS --> POF[Product Owner Final]
+    SA --> TS[Testing Specialist - Cria Plano QA]
+    TS --> ED[Expert Developer - Implementa]
+    ED --> TV[Testing Validator]
+    TV --> POF[Product Owner Final]
 ```
+
+**FLUXO TDD (Test-First):**
+1. **Systems Architect** define a arquitetura (03-arquitetura.md)
+2. **Testing Specialist** cria plano de QA ANTES do código (05-qa-plano.md)
+3. **Expert Developer** implementa seguindo os testes já definidos (04-desenvolvimento.md)
+4. **Testing Validator** valida se implementação atende aos testes planejados
 
 Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent in sequence.
 
-## 📝 File Creation and Editing Guidelines
+## �Y"� File Creation and Editing Guidelines
 
-### 🎯 MANDATORY PROCESS FOR ALL FILE OPERATIONS
+### �YZ� MANDATORY PROCESS FOR ALL FILE OPERATIONS
 
 **When creating or editing ANY file:**
 
@@ -119,13 +126,13 @@ Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent
    - Confirm no BOM markers for non-C# files
    - Validate final newline is present
 
-### 🚨 CRITICAL: Portuguese Language Support
+### �Ys� CRITICAL: Portuguese Language Support
 
 **All Portuguese text MUST be readable:**
-- ✅ `configuração` - NOT `configuraÃ§Ã£o`
-- ✅ `validação` - NOT `validaÃ§Ã£o`
-- ✅ `implementação` - NOT `implementaÃ§Ã£o`
-- ✅ `documentação` - NOT `documentaÃ§Ã£o`
+- �o. `configuração` - NOT `configura�f§�f£o`
+- �o. `validação` - NOT `valida�f§�f£o`
+- �o. `implementação` - NOT `implementa�f§�f£o`
+- �o. `documentação` - NOT `documenta�f§�f£o`
 
 **If you see corrupted characters:**
 1. STOP immediately
@@ -133,7 +140,7 @@ Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent
 3. Fix characters manually if needed
 4. Save with UTF-8 without BOM
 
-### 📋 File Type Specific Rules
+### �Y"< File Type Specific Rules
 
 **Markdown Files (.md):**
 - Encoding: UTF-8 without BOM
@@ -178,7 +185,7 @@ Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent
 - Trim trailing whitespace
 - Must include final newline
 
-### 🔧 VS Code Configuration
+### �Y"� VS Code Configuration
 
 **Check these settings in VS Code:**
 ```json
@@ -202,26 +209,26 @@ Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent
 }
 ```
 
-### ⚠️ Common Mistakes to Avoid
+### �s�️ Common Mistakes to Avoid
 
 1. **NEVER save with wrong encoding:**
-   - ❌ Using Latin-1/ISO-8859-1 instead of UTF-8
-   - ❌ Adding BOM to Markdown/PowerShell/YAML files
-   - ❌ Forgetting BOM on C# files
+   - �O Using Latin-1/ISO-8859-1 instead of UTF-8
+   - �O Adding BOM to Markdown/PowerShell/YAML files
+   - �O Forgetting BOM on C# files
 
 2. **NEVER mix line endings:**
-   - ❌ CRLF in YAML files (must be LF)
-   - ❌ LF in PowerShell files (must be CRLF)
+   - �O CRLF in YAML files (must be LF)
+   - �O LF in PowerShell files (must be CRLF)
 
 3. **NEVER use tabs:**
-   - ❌ Tabs in any file type
-   - ✅ Always use spaces (2 or 4 depending on file type)
+   - �O Tabs in any file type
+   - �o. Always use spaces (2 or 4 depending on file type)
 
 4. **NEVER skip validation:**
-   - ❌ Assuming encoding is correct
-   - ✅ Always check VS Code encoding indicator after saving
+   - �O Assuming encoding is correct
+   - �o. Always check VS Code encoding indicator after saving
 
-### 📖 Reference Documentation
+### �Y"- Reference Documentation
 
 For complete details, consult:
 - `docs/PADRAO-ENCODING-FORMATACAO.md` - Complete encoding guide (400+ lines)
@@ -238,19 +245,20 @@ id: agent_name
 model_preferences:
   - provider: openai
     model: gpt-4o
-inputs: {business_request: "in/sprint{sprint}/{activity}/business_request/"}
-outputs: {artifact_name: "out/sprint{sprint}/{activity}/00-artifact.md"}
+inputs: {business_request: "data/in/sprint{sprint}/{activity}/business_request/"}
+outputs: {artifact_name: "data/out/sprint{sprint}/{activity}/00-artifact.md"}
 parameters: [sprint, activity]
 ---
 ```
 
-### Standardized Artifacts
+### Standardized Artifacts (TDD Flow)
 - `00-business-context.md` + `00-requirements-brief.md` (Product Owner)
 - `01-ata-mesa-redonda.md` (Roundtable facilitation)
 - `02-requisitos-bdd.md` + `features/*.feature` (BDD scenarios)
 - `03-arquitetura.md` + `adrs/` + `diagrams/` (Architecture + ADRs)
-- `04-desenvolvimento.md` + `engineering/src/` + `engineering/tests/` (Implementation)
-- `05-qa-plano.md` + `engineering/reports/` (QA strategy)
+- `05-qa-plano.md` + `engineering/reports/` (QA strategy - **BEFORE implementation**)
+- `04-desenvolvimento.md` + `engineering/src/` + `engineering/tests/` (Implementation - **AFTER QA plan**)
+- `05.1-testing-validation.md` (Testing Validator - validates implementation against QA plan)
 - `99-checklist-final.md` (Final validation)
 
 ## Critical Development Commands
@@ -303,22 +311,22 @@ Follow the market standard commit pattern with gitemoji:
 ```
 
 **Examples:**
-- `✨ feat - Add user authentication system`
-- `🐛 fix - Resolve null reference in payment validation`
-- `📝 docs - Update API documentation for notification service`
-- `♻️ refactor - Restructure domain entities using DDD patterns`
-- `✅ test - Add unit tests for calculation engine`
-- `🔧 chore - Update NuGet packages to latest versions`
+- `�o� feat - Add user authentication system`
+- `�Y�> fix - Resolve null reference in payment validation`
+- `�Y"� docs - Update API documentation for notification service`
+- `�T�️ refactor - Restructure domain entities using DDD patterns`
+- `�o. test - Add unit tests for calculation engine`
+- `�Y"� chore - Update NuGet packages to latest versions`
 
 **Common Gitemojis:**
-- `✨` - New feature
-- `🐛` - Bug fix
-- `📝` - Documentation
-- `♻️` - Refactoring
-- `✅` - Tests
-- `🔧` - Configuration/tooling
-- `🚀` - Performance improvements
-- `🔒` - Security fixes
+- `�o�` - New feature
+- `�Y�>` - Bug fix
+- `�Y"�` - Documentation
+- `�T�️` - Refactoring
+- `�o.` - Tests
+- `�Y"�` - Configuration/tooling
+- `�Ys?` - Performance improvements
+- `�Y"'` - Security fixes
 
 ## Integration Points
 
@@ -332,8 +340,8 @@ Execute agents via: `@agents/manual/agent-name.agent.md` with context like:
 ```
 
 ### Orchestration Systems
-- **CrewAI** (`orchestrators/crewai_runner.py`): Multi-agent coordination (preview)
-- **AutoGen** (`orchestrators/autogen_dev_team.py`): Conversational agents (preview)
+- **CrewAI** (`Install/orchestrators/crewai_runner.py`): Multi-agent coordination (preview)
+- **AutoGen** (`Install/orchestrators/autogen_dev_team.py`): Conversational agents (preview)
 - **Manual workflow** (`powershell/start-manual.ps1`): Production-ready process
 
 ### External Dependencies
@@ -353,45 +361,45 @@ The framework includes automatic project analysis:
 
 When working on existing codebases, **always reference `project-analysis.md` first** to maintain consistency with established patterns and technologies.
 
-## 🎯 Quick Reference: File Creation Checklist
+## �YZ� Quick Reference: File Creation Checklist
 
 **Every time you create or edit a file, follow this checklist:**
 
-### ✅ Pre-Creation
+### �o. Pre-Creation
 - [ ] Identify file type (.md, .ps1, .yaml, .json, .feature, .cs, .ts, .html)
 - [ ] Check encoding table: UTF-8 with or without BOM?
 - [ ] Check line ending: CRLF (Windows) or LF (Unix)?
 - [ ] Check indentation: 2 spaces or 4 spaces?
 
-### ✅ During Creation
+### �o. During Creation
 - [ ] Use correct encoding (UTF-8 without BOM for most files)
 - [ ] Apply correct line endings
 - [ ] Use spaces for indentation (NEVER tabs)
 - [ ] Follow language-specific conventions
 
-### ✅ Post-Save Validation
+### �o. Post-Save Validation
 - [ ] VS Code encoding indicator shows "UTF-8" (not "UTF-8 with BOM" unless C#)
 - [ ] Portuguese characters display correctly: ç ã é á ó
-- [ ] No encoding corruption visible: NOT Ã§, ÃÂ§, configuraÃ§Ã£o
+- [ ] No encoding corruption visible: NOT �f§, �f�,§, configura�f§�f£o
 - [ ] Final newline is present
 - [ ] No trailing whitespace (except Markdown)
 
-### 🚨 Red Flags - STOP if you see:
-- ❌ `Ã§` instead of `ç`
-- ❌ `ÃÂ§` instead of `ç`
-- ❌ `configuraÃ§Ã£o` instead of `configuração`
-- ❌ VS Code shows "UTF-8 with BOM" for .md, .ps1, .yaml files
-- ❌ Mixed tabs and spaces
-- ❌ Mixed line endings (CRLF + LF in same file)
+### �Ys� Red Flags - STOP if you see:
+- �O `�f§` instead of `ç`
+- �O `�f�,§` instead of `ç`
+- �O `configura�f§�f£o` instead of `configuração`
+- �O VS Code shows "UTF-8 with BOM" for .md, .ps1, .yaml files
+- �O Mixed tabs and spaces
+- �O Mixed line endings (CRLF + LF in same file)
 
 **If you see any red flag:** Reopen file with correct encoding, fix, and save with UTF-8 (without BOM).
 
-## 📊 Project Status
+## �Y"S Project Status
 
 - **Total files:** 87
-- **Encoding compliance:** 100% ✅
+- **Encoding compliance:** 100% �o.
 - **Files with correct UTF-8:** 87/87
 - **Files needing correction:** 0
-- **Configuration files:** `.editorconfig` ✅ | `.vscode/settings.json` ✅
+- **Configuration files:** `.editorconfig` �o. | `.vscode/settings.json` �o.
 
 **All encoding standards are documented in:** `docs/PADRAO-ENCODING-FORMATACAO.md`

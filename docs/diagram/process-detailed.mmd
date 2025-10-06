@@ -8,8 +8,9 @@ flowchart TB
   end
   subgraph Manual
     M1[Script start manual cria estrutura]
-    M2[Agentes manuais e Prompts]
-    M3[Outputs base 01 a 05 e pastas features adrs diagrams components]
+    M2[Agentes manuais e Prompts - Fluxo TDD]
+    M3[Outputs: 00-02 Requisitos, 03 Arquitetura, 05 QA Plan, 04 Desenvolvimento]
+    M4[Pastas: features adrs diagrams components engineering]
   end
   subgraph Automatic
     A1[Runner CrewAI]
@@ -20,5 +21,6 @@ flowchart TB
     A6[Runner Autogen opcional]
   end
   Setup --> Manual --> Automatic
-  Manual -->|artefatos| Automatic
+  Manual -->|artefatos TDD| Automatic
   Automatic -->|engineering + frontend| M3
+  M3 --> M4

@@ -8,16 +8,16 @@ model_preferences:
     model: gpt-4o
     purpose: default
 inputs:
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
-  business_context: out/sprint{sprint}/{activity}/00-business-context.md
-  requirements_brief: out/sprint{sprint}/{activity}/00-requirements-brief.md
-  roundtable_minutes: out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
-  bdd_analysis: out/sprint{sprint}/{activity}/02-requisitos-bdd.md
-  architecture_doc: out/sprint{sprint}/{activity}/03-arquitetura.md
-  development_notes: out/sprint{sprint}/{activity}/04-desenvolvimento.md
-  qa_plan: out/sprint{sprint}/{activity}/05-qa-plano.md
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
+  requirements_brief: data/out/sprint{sprint}/{activity}/00-requirements-brief.md
+  roundtable_minutes: data/out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
+  bdd_analysis: data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md
+  architecture_doc: data/out/sprint{sprint}/{activity}/03-arquitetura.md
+  development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
+  qa_plan: data/out/sprint{sprint}/{activity}/05-qa-plano.md
 outputs:
-  final_checklist: out/sprint{sprint}/{activity}/99-checklist-final.md
+  final_checklist: data/out/sprint{sprint}/{activity}/99-checklist-final.md
 responsibilities:
   - **VALIDAR CADA CRITERIO DE ACEITE** definido no inicio da atividade
   - **VERIFICAR EVIDENCIAS** de que todos os criterios foram atendidos
@@ -41,7 +41,7 @@ prompts:
     - **VERIFICAR**: Se existem evidencias (código, testes, documentação) para cada critério
     - **CONSOLIDAR**: Checklist final baseado nos critérios de aceite
     - **DECIDIR**: ATIVIDADE ENTREGUE ou NECESSITA AJUSTES
-    
+
     **REGRA DE OURO**: A atividade só é considerada ENTREGUE se TODOS os critérios de aceite estiverem atendidos.
 
     FLUXO DE VALIDAÇÃO:
@@ -52,14 +52,14 @@ prompts:
     5. **DECISAO FINAL**: ATIVIDADE ENTREGUE (100% critérios) ou NECESSITA AJUSTES
 
     FORMATO DO CHECKLIST (BASEADO NOS CRITERIOS DE ACEITE):
-    
+
     ## VALIDACAO DOS CRITERIOS DE ACEITE
     Para cada critério definido em "00-acceptance-criteria.md":
-    
+
     ### Critério [N]: [Descrição do critério]
     - ✅ **ATENDIDO** - Evidência: [onde encontrou a implementação/teste]
     - ❌ **NÃO ATENDIDO** - Justificativa: [o que está faltando]
-    
+
     ## DECISAO FINAL:
     - **ATIVIDADE ENTREGUE** ✅ - Todos os critérios de aceite foram atendidos
     - **NECESSITA AJUSTES** ❌ - Critérios pendentes: [lista dos não atendidos]
@@ -78,24 +78,24 @@ prompts:
     - Próximos passos (se necessário)
   task_template: |
     **PRIMEIRA PRIORIDADE**: Ler {acceptance_criteria} e listar TODOS os critérios de aceite definidos.
-    
+
     **SEGUNDA PRIORIDADE**: Para cada critério, buscar evidências nos artefatos de {business_context} a {qa_plan}.
-    
+
     **TERCEIRA PRIORIDADE**: Produza {final_checklist} com validação critério por critério.
-    
-    **DECISAO FINAL**: 
+
+    **DECISAO FINAL**:
     - Se TODOS os critérios estão atendidos: "ATIVIDADE ENTREGUE ✅"
     - Se algum critério não foi atendido: "NECESSITA AJUSTES ❌"
 artifacts:
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
-  business_context: out/sprint{sprint}/{activity}/00-business-context.md
-  requirements_brief: out/sprint{sprint}/{activity}/00-requirements-brief.md
-  roundtable_minutes: out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
-  bdd_analysis: out/sprint{sprint}/{activity}/02-requisitos-bdd.md
-  architecture_doc: out/sprint{sprint}/{activity}/03-arquitetura.md
-  development_notes: out/sprint{sprint}/{activity}/04-desenvolvimento.md
-  qa_plan: out/sprint{sprint}/{activity}/05-qa-plano.md
-  final_checklist: out/sprint{sprint}/{activity}/99-checklist-final.md
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
+  requirements_brief: data/out/sprint{sprint}/{activity}/00-requirements-brief.md
+  roundtable_minutes: data/out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
+  bdd_analysis: data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md
+  architecture_doc: data/out/sprint{sprint}/{activity}/03-arquitetura.md
+  development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
+  qa_plan: data/out/sprint{sprint}/{activity}/05-qa-plano.md
+  final_checklist: data/out/sprint{sprint}/{activity}/99-checklist-final.md
 ---
 
 # Guia — Product Owner Final (Manual)

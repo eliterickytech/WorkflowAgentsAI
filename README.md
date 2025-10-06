@@ -4,8 +4,6 @@
 **Autor:** Ricardo Macedo Perdigão
 **Data:** 30 de Setembro de 2025
 
-> ⚠️ **IMPORTANTE:** Antes de criar/editar arquivos, leia o [Guia de Encoding](#-padro-de-encoding-e-formatao) abaixo para evitar corrupção de caracteres!
-
 ## 🎯 **O que é o RickytechAgileAgent?**
 
 O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
@@ -21,15 +19,19 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 2️⃣ Mesa Redonda        → Alinha tecnicamente
 3️⃣ Requirements        → Cria cenários BDD
 4️⃣ Arquiteto           → Define a solução
-5️⃣ UX/UI Specialist    → Cria wireframes e design system
-6️⃣ Testing Specialist  → Cria plano de QA (TDD)
-7️⃣ Desenvolvedor       → Implementa seguindo TDD
-8️⃣ Testing Validator   → Valida implementação
+5️⃣ Testing Specialist  → Cria plano de QA (TDD) ⭐ ANTES do código
+6️⃣ Desenvolvedor       → Implementa seguindo TDD ⭐ DEPOIS do plano
+7️⃣ Testing Validator   → Valida implementação
+8️⃣ UX/UI Specialist    → Cria wireframes e design system (opcional)
 9️⃣ Code Reviewer       → Auditoria qualidade (opcional)
 🔟 PO Final            → Valida critérios aceite
 ```
 
-**🆕 NOVO: Fluxo TDD integrado** com Testing Specialist criando o plano ANTES do desenvolvimento!
+**🆕 FLUXO TDD (Test-Driven Development):**
+- ⭐ **Testing Specialist** cria o plano de QA **ANTES** da implementação
+- ⭐ **Expert Developer** implementa seguindo os testes já definidos
+- ⭐ **Testing Validator** valida se a implementação atende ao plano original
+
 **Cada agente pede sua aprovação antes de continuar para o próximo!**
 
 ## 📚 Índice Geral de Documentação
@@ -56,7 +58,7 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[🔍 docs/analise-projeto-existente.md](./docs/analise-projeto-existente.md)** - Análise automática de projetos existentes
 - **[🤖 docs/integracao-github-copilot.md](./docs/integracao-github-copilot.md)** - **NOVO:** Integração automática com GitHub Copilot
 
-## � **Padrão de Encoding e Formatação**
+## **Padrão de Encoding e Formatação**
 
 ### ⚠️ **CRÍTICO: Leia Antes de Criar/Editar Arquivos**
 
@@ -79,7 +81,7 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 
 ---
 
-## �📋 **Pré-requisitos (O que você precisa ter instalado)**
+## 📋 **Pré-requisitos (O que você precisa ter instalado)**
 
 - **Windows 10/11** com PowerShell
 - **Git** (para controle de versão)
@@ -120,22 +122,22 @@ Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 ### **⚡ Quick Start Paralelo:**
 ```powershell
 # Interface simplificada - escolha entre 6 modos
-.\powershell\quick-start.ps1 -Sprint 02
+.\scripts\powershell\quick-start.ps1 -Sprint 02
 ```
 
 ### **🚀 Execução Direta (Avançado):**
 ```powershell
 # Múltiplas atividades com pipeline completo
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("sistema-login", "modulo-relatorios", "integracao-sap") -ParallelSetup -CreatePipeline
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("sistema-login", "modulo-relatorios", "integracao-sap") -ParallelSetup -CreatePipeline
 ```
 
 ### **📊 Monitoramento em Tempo Real:**
 ```powershell
 # Dashboard de status das atividades
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
 # Próximas execuções recomendadas
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
 ```
 
 ### **🎯 Benefícios da Paralelização:**
@@ -165,8 +167,8 @@ Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 **Abra o PowerShell como Administrador e execute:**
 
 ```powershell
-# Navegue até a pasta do Rickytech.System.AI.OnPremisse.AI
-cd "C:\Projetos\Rickytech.System.AI.OnPremisse.AI"
+# Navegue até a pasta do WorkflowAgentsAI
+cd "C:\Projetos\WorkflowAgentsAI"
 
 # Execute o instalador
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
@@ -205,12 +207,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 
 ```
 📁 C:\Projetos\MeuWorkspace\IA\     ← AGENTES (onde ficam os workflows)
-├── agents/manual/                  ← 10 agentes especializados
-├── in/sprint01/rn0001/            ← ENTRADA (você coloca documentos aqui)
-│   ├── business_request/          ← Solicitações do cliente
-│   └── attachments/               ← Documentos técnicos
-├── out/sprint01/rn0001/           ← SAÍDA (agentes geram aqui)
-└── powershell/                    ← Scripts de automação
+├── agents/manual/                      ← 10 agentes especializados
+├── data/in/sprint01/rn0001/            ← ENTRADA (você coloca documentos aqui)
+│   ├── business_request/               ← Solicitações do cliente
+│   └── attachments/                    ← Documentos técnicos
+├── data/out/sprint01/rn0001/           ← SAÍDA (agentes geram aqui)
+└── scripts/powershell/                 ← Scripts de automação
 
 📁 C:\Projetos\MeuSistema\          ← PROJETO (seu código fica aqui)
 ├── src/                           ← Código-fonte
@@ -224,10 +226,10 @@ O AgileDevAgent agora inclui **ferramentas visuais integradas** para criar wiref
 
 ```powershell
 # 🎨 Configurar ferramentas de design para uma atividade
-.\powershell\setup-design-tools.ps1 -Sprint 01 -Activity rn0001 -InstallDesignTools -GenerateWireframes
+.\scripts\powershell\setup-design-tools.ps1 -Sprint 01 -Activity rn0001 -InstallDesignTools -GenerateWireframes
 
 # 👁️ Visualizar wireframes no navegador
-.\powershell\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -OpenBrowser -ExportImages
+.\scripts\powershell\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -OpenBrowser -ExportImages
 ```
 
 #### **🛠️ Funcionalidades Incluídas:**
@@ -255,7 +257,7 @@ O AgileDevAgent agora inclui **ferramentas visuais integradas** para criar wiref
 #### **📊 Estrutura Gerada:**
 
 ```
-out/sprint01/rn0001/
+data/out/sprint01/rn0001/
 ├── 04-wireframes/
 │   ├── ascii/              ← Wireframes em texto
 │   ├── mermaid/            ← Diagramas de fluxo
@@ -359,7 +361,7 @@ Analise a solicitação e prepare a mesa redonda.
 Resumo: RN-0001, Média complexidade, OAuth Google, Frontend+Backend
 Posso prosseguir? [SIM/NAO/REVISAR]"
 
-� Você responde: SIM
+Você responde: SIM
 
 🤖 Sistema executa automaticamente o próximo agente...
 ```
@@ -1869,7 +1871,7 @@ Entrada: Todos artefatos + código + documentação técnica
 "Planejar testes da funcionalidade Z"
 
 # 4. Execute fluxo completo para implementação final
-.\powershell\start-manual.ps1 -Sprint 02 -Activity implementacao-completa
+.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity implementacao-completa
 # (Product Owner → Requirements → Systems Architect → Expert Developer → etc.)
 ```
 
@@ -1962,7 +1964,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 
 ### **📊 Resultado Final:**
 ```
-📁 out/sprint01/rn0001/
+📁 data/out/sprint01/rn0001/
 ├── 00-business-context.md          ← Por que mudar a cor
 ├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 01-ata-mesa-redonda.md         ← Decisões técnicas
@@ -1992,11 +1994,11 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 #### **⚙️ Scripts do Cliente (copiados na instalação):**
 | **Script** | **Objetivo** | **Quando Usar** | **Localização** |
 |------------|--------------|----------------|-----------------|
-| `new-activity.ps1` | **🆕 Criar novas atividades** | Sempre que precisar de nova funcionalidade | `.\powershell\new-activity.ps1` |
-| `start-manual.ps1` | **Executar workflow completo** | Para automação do processo manual | `.\powershell\start-manual.ps1` |
-| `render-diagrams.ps1` | **Gerar imagens dos diagramas** | Após criar diagramas Mermaid | `.\powershell\render-diagrams.ps1` |
-| `use-venv.ps1` | **Ativar ambiente Python** | Para trabalhar com CrewAI/AutoGen | `.\powershell\use-venv.ps1` |
-| `start-orchestration.ps1` | **Executar CrewAI/AutoGen** | Para processo automatizado com IA | `.\powershell\start-orchestration.ps1` |
+| `new-activity.ps1` | **🆕 Criar novas atividades** | Sempre que precisar de nova funcionalidade | `.\scripts\powershell\new-activity.ps1` |
+| `start-manual.ps1` | **Executar workflow completo** | Para automação do processo manual | `.\scripts\powershell\start-manual.ps1` |
+| `render-diagrams.ps1` | **Gerar imagens dos diagramas** | Após criar diagramas Mermaid | `.\scripts\powershell\render-diagrams.ps1` |
+| `use-venv.ps1` | **Ativar ambiente Python** | Para trabalhar com CrewAI/AutoGen | `.\scripts\powershell\use-venv.ps1` |
+| `start-orchestration.ps1` | **Executar CrewAI/AutoGen** | Para processo automatizado com IA | `.\scripts\powershell\start-orchestration.ps1` |
 
 ---
 
@@ -2029,14 +2031,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 ```
 ProjetoCliente/
 ├── agents/          ← Todos os 7 agentes copiados
-├── powershell/      ← 5 scripts funcionais (sem setup-workflow.ps1)
+├── scripts/powershell/      ← 5 scripts funcionais (sem setup-workflow.ps1)
 │   ├── new-activity.ps1
 │   ├── start-manual.ps1
 │   ├── render-diagrams.ps1
 │   ├── use-venv.ps1
 │   └── start-orchestration.ps1
 ├── orchestrators/   ← CrewAI e AutoGen
-├── in/sprint01/rn0001/  ← Primeira atividade criada
+├── data/in/sprint01/rn0001/  ← Primeira atividade criada
 └── .env             ← Configurações do projeto
 ```
 
@@ -2054,29 +2056,29 @@ ProjetoCliente/
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\new-activity.ps1 -Sprint <número> -Activity <código>
+.\scripts\powershell\new-activity.ps1 -Sprint <número> -Activity <código>
 ```
 
 **🎯 Exemplos práticos:**
 ```powershell
 # Nova funcionalidade no sprint atual
-.\powershell\new-activity.ps1 -Sprint 01 -Activity rn0025
+.\scripts\powershell\new-activity.ps1 -Sprint 01 -Activity rn0025
 
 # Feature para próximo sprint
-.\powershell\new-activity.ps1 -Sprint 02 -Activity feature001
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity feature001
 
 # Correção de bug
-.\powershell\new-activity.ps1 -Sprint 01 -Activity bug-fix-auth
+.\scripts\powershell\new-activity.ps1 -Sprint 01 -Activity bug-fix-auth
 ```
 
 **📁 Estrutura criada automaticamente:**
 ```
-in/sprint02/rn0025/
+data/in/sprint02/rn0025/
 ├── business_request/
 │   └── solicitacao.md      ← Template editável
 └── attachments/            ← Para docs técnicos
 
-out/sprint02/rn0025/        ← Criada quando agentes executam
+data/out/sprint02/rn0025/        ← Criada quando agentes executam
 ├── 00-requirements-brief.md
 ├── 01-ata-mesa-redonda.md
 ├── 02-requisitos-bdd.md
@@ -2100,19 +2102,19 @@ out/sprint02/rn0025/        ← Criada quando agentes executam
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\start-manual.ps1 -Sprint <número> -Activity <código>
+.\scripts\powershell\start-manual.ps1 -Sprint <número> -Activity <código>
 ```
 
 **🎯 Exemplos práticos:**
 ```powershell
 # Executar atividade específica
-.\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+.\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
 
 # Processamento completo de nova feature
-.\powershell\start-manual.ps1 -Sprint 02 -Activity checkout-system
+.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity checkout-system
 
 # Desenvolvimento de correção
-.\powershell\start-manual.ps1 -Sprint 01 -Activity fix-payment-bug
+.\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity fix-payment-bug
 ```
 
 **🔄 Processo executado:**
@@ -2138,15 +2140,15 @@ Developer → Frontend → Testing → PO Final
 **💻 Como executar:**
 ```powershell
 # Renderizar diagramas da atividade atual
-.\powershell\render-diagrams.ps1
+.\scripts\powershell\render-diagrams.ps1
 
 # Especificar atividade específica
-.\powershell\render-diagrams.ps1 -Sprint 01 -Activity rn0001
+.\scripts\powershell\render-diagrams.ps1 -Sprint 01 -Activity rn0001
 ```
 
 **📁 Entrada esperada:**
 ```
-out/sprint01/rn0001/diagrams/
+data/out/sprint01/rn0001/diagrams/
 ├── architecture.mmd
 ├── sequence-flow.mmd
 └── entity-relationship.mmd
@@ -2154,7 +2156,7 @@ out/sprint01/rn0001/diagrams/
 
 **📁 Saída gerada:**
 ```
-out/sprint01/rn0001/diagrams/images/
+data/out/sprint01/rn0001/diagrams/images/
 ├── architecture.png
 ├── sequence-flow.png
 └── entity-relationship.png
@@ -2176,7 +2178,7 @@ out/sprint01/rn0001/diagrams/images/
 **💻 Como usar:**
 ```powershell
 # Ativar ambiente Python
-.\powershell\use-venv.ps1
+.\scripts\powershell\use-venv.ps1
 
 # Verificar se está ativo
 python --version  # Deve mostrar Python do .venv-1
@@ -2202,13 +2204,13 @@ python .\orchestrators\autogen_dev_team.py
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\start-orchestration.ps1 -Sprint <número>
+.\scripts\powershell\start-orchestration.ps1 -Sprint <número>
 ```
 
 **🎯 Exemplo:**
 ```powershell
 # Processar sprint 01 com IA
-.\powershell\start-orchestration.ps1 -Sprint 01
+.\scripts\powershell\start-orchestration.ps1 -Sprint 01
 ```
 
 **🔄 Diferenças dos processos:**
@@ -2234,7 +2236,7 @@ python .\orchestrators\autogen_dev_team.py
 **💻 Como usar:**
 ```powershell
 # Interface guiada completa
-.\powershell\quick-start.ps1 -Sprint 02
+.\scripts\powershell\quick-start.ps1 -Sprint 02
 
 # Escolher entre:
 # 1. 📝 Atividade única (tradicional)
@@ -2257,16 +2259,16 @@ python .\orchestrators\autogen_dev_team.py
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\start-multi-activities.ps1 -Sprint <número> -Activities @("atividade1", "atividade2") [opções]
+.\scripts\powershell\start-multi-activities.ps1 -Sprint <número> -Activities @("atividade1", "atividade2") [opções]
 ```
 
 **🎯 Exemplos:**
 ```powershell
 # Básico - criar 3 atividades
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap")
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap")
 
 # Avançado - com pipeline completo
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap") -SharedContext "Sistema ERP integrado" -ParallelSetup -CreatePipeline
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap") -SharedContext "Sistema ERP integrado" -ParallelSetup -CreatePipeline
 ```
 
 **📊 Arquivos gerados:**
@@ -2287,19 +2289,19 @@ python .\orchestrators\autogen_dev_team.py
 **💻 Ações disponíveis:**
 ```powershell
 # Status geral das atividades
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
 # Próximas execuções recomendadas
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
 
 # Análise de conflitos
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action conflicts
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action conflicts
 
 # Sincronizar status dos guias
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action sync
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action sync
 
 # Reset de atividade específica
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action reset -Activity login
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action reset -Activity login
 ```
 
 **📈 Saída exemplo:**
@@ -2326,25 +2328,25 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 cd "C:\Projetos\MeuWorkspace\IA"
 
 # 🚀 INTERFACE UNIFICADA (RECOMENDADO)
-.\powershell\quick-start.ps1 -Sprint 02
+.\scripts\powershell\quick-start.ps1 -Sprint 02
 
 # ⚡ MÚLTIPLAS ATIVIDADES DIRETO
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "api", "dashboard") -ParallelSetup
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "api", "dashboard") -ParallelSetup
 
 # 📊 DASHBOARD DE STATUS
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
 # 🆕 ATIVIDADE ÚNICA (TRADICIONAL)
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
 
 # ⚡ EXECUÇÃO MANUAL TRADICIONAL
-.\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030
+.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030
 
 # 🎨 GERAR DIAGRAMAS
-.\powershell\render-diagrams.ps1
+.\scripts\powershell\render-diagrams.ps1
 
 # 🤖 EXECUÇÃO AUTOMATIZADA
-.\powershell\start-orchestration.ps1 -Sprint 02
+.\scripts\powershell\start-orchestration.ps1 -Sprint 02
 ```
 
 ---
@@ -2360,17 +2362,17 @@ cd "C:\Projetos\MeuWorkspace\IA"
 **1️⃣ Criar estrutura da nova atividade:**
 ```powershell
 cd "C:\Projetos\MeuWorkspace\IA"
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
 ```
 
 **2️⃣ O script cria automaticamente:**
 ```
-📁 in/sprint02/rn0025/
+📁 data/in/sprint02/rn0025/
 ├── 📁 business_request/
 │   └── 📄 solicitacao.md        ← Template pronto para editar
 └── 📁 attachments/              ← Para documentos técnicos
 
-📁 out/sprint02/rn0025/          ← Onde os agentes vão gerar resultados
+📁 data/out/sprint02/rn0025/          ← Onde os agentes vão gerar resultados
 ├── 📁 features/
 ├── 📁 adrs/
 └── 📁 diagrams/
@@ -2394,13 +2396,13 @@ Sprint: 02, Activity: rn0025
 
 ```powershell
 # Sistema de login
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
 
 # Relatório de vendas
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
 
 # Integração com API externa
-.\powershell\new-activity.ps1 -Sprint 03 -Activity rn0030
+.\scripts\powershell\new-activity.ps1 -Sprint 03 -Activity rn0030
 ```
 
 ### **📊 Organização por Sprint:**
@@ -2438,7 +2440,7 @@ São prompts especializados que simulam pessoas de uma equipe:
 - **Automático**: IA executa tudo sozinha (EM TESTES)
 
 ### **🤔 "Onde fico vendo os resultados?"**
-Tudo é salvo na pasta `out/sprint01/rn0001/` do seu workspace
+Tudo é salvo na pasta `data/out/sprint01/rn0001/` do seu workspace
 
 ### **🤔 "Posso usar para qualquer tipo de projeto?"**
 Sim! O sistema detecta automaticamente:
@@ -2462,7 +2464,7 @@ O sistema gera documentação explicativa para cada parte.
 ### **🤔 "Como criar uma nova atividade depois da instalação?"**
 Use o script específico para isso:
 ```powershell
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
 ```
 Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 
@@ -2471,10 +2473,10 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 | **Situação** | **Script para usar** | **Comando** | **Local** |
 |--------------|---------------------|-------------|-----------|
 | **Primeira vez (instalação)** | `setup-workflow.ps1` | `.\Install\setup-workflow.ps1` | 📁 *Repositório AgileDevAgent* |
-| **Nova funcionalidade** | `new-activity.ps1` | `.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
-| **Execução automática** | `start-manual.ps1` | `.\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
-| **Gerar imagens** | `render-diagrams.ps1` | `.\powershell\render-diagrams.ps1` | 📁 *Projeto do cliente* |
-| **Usar IA avançada** | `start-orchestration.ps1` | `.\powershell\start-orchestration.ps1 -Sprint 02` | 📁 *Projeto do cliente* |
+| **Nova funcionalidade** | `new-activity.ps1` | `.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
+| **Execução automática** | `start-manual.ps1` | `.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
+| **Gerar imagens** | `render-diagrams.ps1` | `.\scripts\powershell\render-diagrams.ps1` | 📁 *Projeto do cliente* |
+| **Usar IA avançada** | `start-orchestration.ps1` | `.\scripts\powershell\start-orchestration.ps1 -Sprint 02` | 📁 *Projeto do cliente* |
 
 ### **🤔 "Os scripts PowerShell ficam no projeto do cliente?"**
 **SIM!** Após a instalação, os scripts **operacionais** ficam funcionais no projeto do cliente:
@@ -2526,7 +2528,7 @@ winget install Python.Python.3.12
 **Possíveis soluções:**
 ```powershell
 # 1. Executar sempre com parâmetros completos:
-powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
 
 # 2. Verificar se está na pasta correta do projeto
 cd "C:\Projetos\MeuWorkspace\IA"
@@ -2543,20 +2545,20 @@ ls .\in\sprint01\rn0001\business_request\
 cd "C:\Projetos\MeuWorkspace\IA"
 
 # Verificar se pasta powershell existe
-ls .\powershell\
+ls .\scripts\powershell\
 ```
 
 ### **❌ "new-activity.ps1 não cria as pastas"**
 **Verifique os parâmetros:**
 ```powershell
 # ✅ Correto:
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
 
 # ❌ Incorreto (faltam parâmetros):
-.\powershell\new-activity.ps1
+.\scripts\powershell\new-activity.ps1
 
 # ❌ Incorreto (sintaxe errada):
-.\powershell\new-activity.ps1 02 rn0030
+.\scripts\powershell\new-activity.ps1 02 rn0030
 ```
 
 ### **❌ "render-diagrams.ps1 não gera imagens"**
@@ -2604,7 +2606,7 @@ mmdc --version
 
 **Referência:** Aqui está o que cada arquivo faz:
 
-### **📁 Pasta `out/sprint01/rn0001/`:**
+### **📁 Pasta `data/out/sprint01/rn0001/`:**
 
 | **Arquivo** | **O que contém** | **Quem usa** |
 |-------------|------------------|--------------|
@@ -2627,7 +2629,7 @@ mmdc --version
 
 ---
 
-## �🔧 Quick Start Manual (Alternativo)
+## 🔧 Quick Start Manual (Alternativo)
 
 Se preferir executar passos manualmente:
 
@@ -2641,7 +2643,7 @@ Copy-Item .\.env.example .\.env
 2) Escolher modo e executar:
 - Manual:
   ```powershell
-  powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+  powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
   ```
 - CrewAI: ⚠️ **PREVIEW - NÃO TESTADO**
   ```powershell
@@ -2649,12 +2651,12 @@ Copy-Item .\.env.example .\.env
   python .\orchestrators\crewai_runner.py 1
   ```
 
-3) Colocar insumos em `in/sprint01/rn0001/attachments/` (PDF, imagens, planilhas, etc.).
+3) Colocar insumos em `data/in/sprint01/rn0001/attachments/` (PDF, imagens, planilhas, etc.).
 
-4) Ver artefatos em `out/sprint01/rn0001/` (01..05, features, adrs, diagrams, outcomes/engineering). Opcional: renderizar diagramas:
+4) Ver artefatos em `data/out/sprint01/rn0001/` (01..05, features, adrs, diagrams, outcomes/engineering). Opcional: renderizar diagramas:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\render-diagrams.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\render-diagrams.ps1
 ```
 
 ## 🚀 Comece por aqui
@@ -2665,7 +2667,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\render-diagrams
 3. **[🆕 Novo projeto .NET](./docs/new-dotnet-project-setup.md)** - Guia técnico detalhado
 
 ### **🔄 Trabalhando com novas atividades:**
-1. **[🚀 Quick Start Paralelo](./powershell/quick-start.ps1)** ← ⭐ **NOVO: Interface unificada para múltiplas atividades**
+1. **[🚀 Quick Start Paralelo](./scripts/powershell/quick-start.ps1)** ← ⭐ **NOVO: Interface unificada para múltiplas atividades**
 2. **[🚀 Guia de Paralelização](./docs/guia-paralelizacao.md)** ← ⭐ **NOVO: Execução simultânea de atividades**
 3. **[🎯 Guia Agentes Individuais](./docs/guia-agentes-individuais.md)** ← ⭐ **Como usar cada agente separadamente**
 4. **[🔥 Mesa Redonda: "CrewAI Manual"](#-mesa-redonda-o-crewai-manual-perfeito)** ← ⭐ **RECURSO DESTAQUE - Debate entre especialistas**
@@ -2709,13 +2711,13 @@ Todos os agentes agora **pedem aprovação [SIM/NÃO]** e **executam o próximo 
 
 Observações:
 - Defina modelos por agente em `model_preferences` (front matter YAML) nos arquivos acima.
-- Entradas padrão: `in/sprint<sprint>/<activity>/attachments/`. Saídas: `out/sprint<sprint>/<activity>/`.
+- Entradas padrão: `data/in/sprint<sprint>/<activity>/attachments/`. Saídas: `data/out/sprint<sprint>/<activity>/`.
 
 ## Orquestração (scripts)
 
 - **⚠️ CrewAI (PREVIEW):** [`orchestrators/crewai_runner.py`](./orchestrators/crewai_runner.py) - **NÃO TESTADO**
 - **⚠️ AutoGen (PREVIEW):** [`orchestrators/autogen_dev_team.py`](./orchestrators/autogen_dev_team.py) - **NÃO TESTADO**
-- **✅ Scripts manuais (RECOMENDADO):** [`powershell/`](./powershell/) - **TESTADO E FUNCIONAL**
+- **✅ Scripts manuais (RECOMENDADO):** [`scripts/powershell/`](./scripts/powershell/) - **TESTADO E FUNCIONAL**
 
 Detalhes de execução e variáveis de ambiente estão nos guias da seção “Documentação principal”.
 
@@ -2759,7 +2761,7 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 **👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão
 **‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte
 **‍🏫 Desenvolvedor 2:** Marcos Araujo
-**�📅 Versão:** 2.0.1 - Documentação do sistema
+**📅 Versão:** 2.0.1 - Documentação do sistema
 **📅 Última atualização:** 30 de Setembro de 2025
 **✅ Status:** Produção (processo manual) | ⚠️ Preview (processos automáticos)
 

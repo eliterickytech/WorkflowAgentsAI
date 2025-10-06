@@ -8,12 +8,12 @@ model_preferences:
     model: gemini-2.5-pro
     purpose: default
 inputs:
-  attachments_path: in/sprint{sprint}/{activity}/attachments/
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  attachments_path: data/in/sprint{sprint}/{activity}/attachments/
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
   accepted_types: [docx, xlsx, txt, html, jpg, git, png]
 outputs:
-  bdd_path: out/sprint{sprint}/{activity}/02-requisitos-bdd.md
-  features_glob: out/sprint{sprint}/{activity}/features/*.feature
+  bdd_path: data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md
+  features_glob: data/out/sprint{sprint}/{activity}/features/*.feature
 responsibilities:
   - **ANALISAR CRITERIOS DE ACEITE** do Product Owner como base principal
   - Extrair regras de negocio que CUBRAM TODOS OS CRITERIOS DE ACEITE
@@ -65,7 +65,7 @@ prompts:
     - Terminologia padronizada (RBA, RBAA, RBT12, SINAC)
     - sinacCode sempre com 3 dígitos (regex ^\d{3}$)
     - Casos de teste abrangentes e alinhados ao domínio
-    
+
     Templates estruturais:
 
     Glossário (Markdown):
@@ -114,7 +114,7 @@ prompts:
     - Fact-Check: amostras de afirmações ancoradas e verificadas por RAG
     - Terminologia: 100% das entidades aparecem no Glossário
     - Context-Rot (se >10k tokens de entrada): sentinelas ≥ 85% de acerto; caso contrário, re-chunking
-    
+
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da análise de requisitos
     - PEDIR APROVACAO: "APROVACAO NECESSARIA - Prosseguir com Systems Architect?"
@@ -123,16 +123,16 @@ prompts:
   task_template: |
     Insumos em {attachments_path}. RN alvo: {rn}. Entregue {bdd_path} e features em {features_glob}.
     Criterios: sinacCode sempre com 3 digitos; correlacao completa com RN; casos de teste abrangentes.
-    
+
     AO FINALIZAR:
     - Apresentar resumo da análise de requisitos
     - SOLICITAR APROVACAO: "Análise de requisitos finalizada. Prosseguir com Systems Architect?"
     - OPCOES: [SIM] ou [NAO]
     - SE [SIM]: Executar automaticamente @agents/manual/systems-architect.agent.md
 artifacts:
-  attachments_path: in/sprint{sprint}/{activity}/attachments/
-  bdd_path: out/sprint{sprint}/{activity}/02-requisitos-bdd.md
-  features_glob: out/sprint{sprint}/{activity}/features/*.feature
+  attachments_path: data/in/sprint{sprint}/{activity}/attachments/
+  bdd_path: data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md
+  features_glob: data/out/sprint{sprint}/{activity}/features/*.feature
 ---
 
 # Guia — Requirements Analyst (Manual)

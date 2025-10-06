@@ -1,6 +1,6 @@
 # 🚀 Guia Completo: Execução Paralela de Atividades
 
-**Versão:** 2.1.0  
+**Versão:** 2.1.0
 **Data:** 30 de Setembro de 2025
 
 Este guia detalha como executar **múltiplas atividades simultaneamente** no AgileDevAgent, maximizando a eficiência e throughput do desenvolvimento.
@@ -58,7 +58,7 @@ Este guia detalha como executar **múltiplas atividades simultaneamente** no Agi
 
 #### **Opções disponíveis:**
 1. **📝 Atividade única** - Modo tradicional (1 atividade)
-2. **⚡ Múltiplas atividades** - Paralelização básica  
+2. **⚡ Múltiplas atividades** - Paralelização básica
 3. **📊 Gerenciar existentes** - Dashboard e controle
 4. **🔄 Pipeline escalonado** - Otimização máxima
 5. **🎯 Mesa Redonda específica** - Decisões técnicas
@@ -74,7 +74,7 @@ param(
   [string]$Sprint,           # Sprint alvo (obrigatório)
   [string[]]$Activities,     # Lista de atividades (obrigatório)
   [string]$SharedContext,    # Contexto compartilhado
-  [switch]$ParallelSetup,    # Guia de paralelização  
+  [switch]$ParallelSetup,    # Guia de paralelização
   [switch]$CreatePipeline,   # Pipeline escalonado
   [switch]$AutoDetectDependencies  # Detectar dependências automáticas
 )
@@ -89,9 +89,9 @@ param(
 
 **Resultado:**
 ```
-out/sprint03/
+data/out/sprint03/
 ├── login/           ← Estrutura completa
-├── relatorios/      ← Estrutura completa  
+├── relatorios/      ← Estrutura completa
 └── sap/             ← Estrutura completa
 ```
 
@@ -102,7 +102,7 @@ out/sprint03/
 
 **Resultado adicional:**
 ```
-out/sprint03/
+data/out/sprint03/
 ├── parallel-execution-guide.md    ← Guia de execução paralela
 ├── pipeline-schedule.md           ← Cronograma otimizado
 ├── dependency-matrix.md           ← Análise de dependências
@@ -121,7 +121,7 @@ out/sprint03/
 # Palavras-chave analisadas automaticamente:
 "login|auth|autenticacao" → Sistema de autenticação base
 "relatorio|dashboard|bi"  → Módulos de visualização
-"sap|erp|integracao"     → Integrações externas  
+"sap|erp|integracao"     → Integrações externas
 "api|servico|web"        → Camadas de serviço
 ```
 
@@ -147,18 +147,18 @@ sistema-login
   [████████░░] 80% - Testing Specialist
   Próximo: Testing Validator | Última alteração: 01/10 14:30
 
-modulo-relatorios  
+modulo-relatorios
   [██████░░░░] 60% - Systems Architect
   Próximo: Expert Developer | Última alteração: 01/10 11:15
 
 📈 RESUMO GERAL:
   Progresso médio: 70%
-  Atividades completas: 0/2  
+  Atividades completas: 0/2
   Atividades ativas: 2
 ```
 
 #### **🎯 Próximas Execuções:**
-```powershell  
+```powershell
 .\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
 ```
 
@@ -168,12 +168,12 @@ modulo-relatorios
 
 🎯 Testing Validator (1 atividade):
   ✅ PODE EXECUTAR EM PARALELO:
-  
+
   📋 sistema-login (Progresso: 80%)
   @agents/manual/testing-validator.agent.md
   Sprint: 02, Activity: sistema-login
 
-🎯 Systems Architect (1 atividade):  
+🎯 Systems Architect (1 atividade):
   📋 modulo-relatorios (Progresso: 60%)
   @agents/manual/systems-architect.agent.md
   Sprint: 02, Activity: modulo-relatorios
@@ -209,14 +209,14 @@ modulo-relatorios
 ```
 Product Owner (PARALELO - todas atividades):
 ├── Terminal 1: sistema-login
-├── Terminal 2: modulo-relatorios  
+├── Terminal 2: modulo-relatorios
 ├── Terminal 3: integracao-sap
 └── Terminal 4: dashboard-exec
 
 Mesa Redonda (SEQUENCIAL - uma por vez):
 ├── 1º: sistema-login
 ├── 2º: modulo-relatorios
-├── 3º: integracao-sap  
+├── 3º: integracao-sap
 └── 4º: dashboard-exec
 ```
 
@@ -238,11 +238,11 @@ Systems Architect (SEQUENCIAL - dependências):
 └── 4º: dashboard-exec (usa todos)
 ```
 
-#### **Semana 4+: Implementação**  
+#### **Semana 4+: Implementação TDD**
 ```
-Testing Specialist + Expert Developer (PARALELO):
-├── Squad A: sistema-login (TDD completo)
-├── Squad B: integracao-sap (independente)
+Multiple Squads (PARALELO) - cada squad segue TDD (Testing → Developer):
+├── Squad A: sistema-login (Testing Specialist → Expert Developer)
+├── Squad B: integracao-sap (Testing Specialist → Expert Developer)
 └── Squad C: modulo-relatorios (usa login pronto)
 ```
 
@@ -251,7 +251,7 @@ Testing Specialist + Expert Developer (PARALELO):
 #### **Configuração:**
 ```
 Squad A (2 pessoas):    sistema-login
-Squad B (2 pessoas):    modulo-relatorios  
+Squad B (2 pessoas):    modulo-relatorios
 Squad C (2 pessoas):    integracao-sap
 Squad D (1 pessoa):     dashboard-exec (coordenação)
 ```
@@ -280,7 +280,7 @@ PO → Mesa → Requirements → Architect → Testing → Developer → Validat
 #### **Para análises pontuais:**
 ```powershell
 # Product Owner individual para viabilidade
-@agents/manual/product-owner.agent.md  
+@agents/manual/product-owner.agent.md
 Sprint: 02, Activity: analise-viabilidade-blockchain
 ```
 
@@ -307,7 +307,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 
 #### **Benefícios:**
 - ⚡ **75% redução** no tempo de análise inicial
-- 🎯 **Visão consistente** entre módulos  
+- 🎯 **Visão consistente** entre módulos
 - 📊 **Dependências mapeadas** automaticamente
 - 🔄 **Pipeline otimizado** para 6 meses
 
@@ -345,7 +345,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 
 #### **Implementação:**
 ```powershell
-# 1. Separar por prioridade  
+# 1. Separar por prioridade
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("bugfix-pagamento", "refactor-usuarios", "refactor-relatorios") -SharedContext "Manutenção sistema legado"
 
 # 2. Execução híbrida:
@@ -354,7 +354,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 ```
 
 #### **Benefícios:**
-- 🚨 **Priorização clara** crítico vs planejado  
+- 🚨 **Priorização clara** crítico vs planejado
 - 🎯 **Context compartilhado** entre refatorações
 - 📊 **Visibilidade** do progresso de manutenção
 - 🔄 **Flexibilidade** para ajustar prioridades
@@ -367,7 +367,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 
 #### **Status em tempo real:**
 ```powershell
-# Comando principal - executar regularmente  
+# Comando principal - executar regularmente
 .\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 ```
 
@@ -386,7 +386,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 
 **O sistema recomenda:**
 - ✅ **Execuções paralelas** seguras
-- ⚠️ **Dependências** a considerar  
+- ⚠️ **Dependências** a considerar
 - 🎯 **Ordem otimizada** de execução
 - 📋 **Comandos prontos** para copiar/colar
 
@@ -400,7 +400,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 **Detecta automaticamente:**
 - ❌ **Conflitos de arquivos** (mesmo diretório)
 - ⚠️ **Dependências circulares** entre atividades
-- 🔗 **Dependências não resolvidas** 
+- 🔗 **Dependências não resolvidas**
 - 💡 **Otimizações possíveis** de ordem
 
 ### **🔄 Sincronização Automática**
@@ -413,7 +413,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 
 **Atualiza automaticamente:**
 - 📊 **Tabelas de status** nos guias
-- 🎯 **Próximas recomendações**  
+- 🎯 **Próximas recomendações**
 - 📅 **Cronogramas** baseados no progresso real
 - 🔍 **Análises de dependência** refinadas
 
@@ -449,10 +449,10 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 
 # 2. Executar apenas atividades DIFERENTES simultaneamente
 # ✅ CORRETO:
-@agents/manual/product-owner.agent.md - Activity: login  
+@agents/manual/product-owner.agent.md - Activity: login
 @agents/manual/product-owner.agent.md - Activity: relatorios
 
-# ❌ ERRADO:  
+# ❌ ERRADO:
 @agents/manual/product-owner.agent.md - Activity: login
 @agents/manual/requirements-analyst.agent.md - Activity: login
 ```
@@ -487,7 +487,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 # Onda 1: atividades 1-3
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "api", "core")
 
-# Onda 2: atividades 4-6 (após onda 1 completa)  
+# Onda 2: atividades 4-6 (após onda 1 completa)
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("dashboard", "relatorios", "integracao")
 ```
 
@@ -508,7 +508,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 #### **🆕 Recriar estrutura completa:**
 ```powershell
 # Se tudo der errado, recriar do zero
-Remove-Item "out/sprint02" -Recurse -Force
+Remove-Item "data/out/sprint02" -Recurse -Force
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios") -ParallelSetup
 ```
 
@@ -517,7 +517,7 @@ Remove-Item "out/sprint02" -Recurse -Force
 #### **Verificar status detalhado:**
 ```powershell
 # Status com informações de debug
-Get-ChildItem "out/sprint02" -Recurse | Where-Object {$_.Extension -eq ".md"} | Sort-Object LastWriteTime | Select-Object Name, LastWriteTime, Length
+Get-ChildItem "data/out/sprint02" -Recurse | Where-Object {$_.Extension -eq ".md"} | Sort-Object LastWriteTime | Select-Object Name, LastWriteTime, Length
 ```
 
 #### **Analisar logs de execução:**
@@ -534,7 +534,7 @@ Get-EventLog -LogName Application -Source PowerShell | Where-Object {$_.TimeGene
 
 #### **🎯 Paralelismo Ideal:**
 - **Product Owner**: Até 5 atividades simultâneas ✅
-- **Mesa Redonda**: Sequencial (evita confusão de contexto) ✅  
+- **Mesa Redonda**: Sequencial (evita confusão de contexto) ✅
 - **Requirements**: Até 2 atividades simultâneas ✅
 - **Architecture**: Sequencial (consistência) ✅
 - **Development**: Até 3 atividades independentes ✅
@@ -553,7 +553,7 @@ Get-Process | Where-Object {$_.ProcessName -like "*code*" -or $_.ProcessName -li
 $customTemplate = @"
 ## 🏢 PADRÕES CORPORATIVOS
 - Compliance SOX obrigatório
-- Auditoria automática habilitada  
+- Auditoria automática habilitada
 - Templates específicos carregados
 "@
 ```
@@ -586,7 +586,7 @@ $customTemplate = @"
 ```powershell
 # Calcular throughput do sprint
 $startDate = Get-Date "2025-09-01"
-$activities = Get-ChildItem "out/sprint02" -Directory
+$activities = Get-ChildItem "data/out/sprint02" -Directory
 $completedActivities = $activities | Where-Object {Test-Path "$($_.FullName)/99-checklist-final.md"}
 $throughput = $completedActivities.Count / ((Get-Date) - $startDate).Days
 
@@ -596,7 +596,7 @@ Write-Host "Throughput: $throughput atividades/dia"
 #### **🎯 Análise de gargalos:**
 ```powershell
 # Identificar agentes mais demorados
-$files = Get-ChildItem "out/sprint02" -Recurse -Filter "*.md" | Sort-Object LastWriteTime
+$files = Get-ChildItem "data/out/sprint02" -Recurse -Filter "*.md" | Sort-Object LastWriteTime
 $agentTimes = $files | Group-Object {$_.Name.Split('-')[0]} | Select-Object Name, Count, @{N="AvgDays";E={($_.Group | Measure-Object {((Get-Date) - $_.LastWriteTime).Days} -Average).Average}}
 ```
 
@@ -614,7 +614,7 @@ jobs:
   steps:
   - powershell: |
       .\powershell\start-multi-activities.ps1 -Sprint $(Build.BuildNumber) -Activities @("feature-1", "feature-2") -CreatePipeline
-  - powershell: |  
+  - powershell: |
       .\powershell\manage-parallel-execution.ps1 -Sprint $(Build.BuildNumber) -Action status
 ```
 
@@ -633,7 +633,7 @@ foreach ($activity in $activities) {
 ### **✅ Com paralelização você consegue:**
 
 1. **⚡ 300% mais velocidade** na fase de análise (Product Owner simultâneo)
-2. **🎯 70% redução** de conflitos (detecção automática)  
+2. **🎯 70% redução** de conflitos (detecção automática)
 3. **📊 Visibilidade total** do progresso (dashboard em tempo real)
 4. **🔄 Flexibilidade máxima** (squads independentes)
 5. **🧠 Inteligência integrada** (dependências automáticas)
@@ -641,7 +641,7 @@ foreach ($activity in $activities) {
 ### **🚀 Próximos passos:**
 
 1. **Comece simples**: `.\powershell\quick-start.ps1 -Sprint XX`
-2. **Experimente paralelização**: 2-3 atividades simultâneas  
+2. **Experimente paralelização**: 2-3 atividades simultâneas
 3. **Use o monitoramento**: `manage-parallel-execution.ps1`
 4. **Otimize gradualmente**: pipeline escalonado para projetos maiores
 5. **Customize conforme necessário**: templates e configurações específicas
@@ -717,7 +717,7 @@ foreach ($activity in $activities) {
 # Wave 1 (Foundation & Security): identity-management-sso, audit-compliance-framework
 #   -> Gate: Security Architecture Review Board (SARB) Approval
 # Wave 2 (Core Banking): core-banking-engine, savings-accounts
-#   -> Gate: Risk Management Committee Approval  
+#   -> Gate: Risk Management Committee Approval
 # Wave 3 (Financial Products): credit-card-processing, loan-origination, investment-platform
 #   -> Gate: Product Committee & Compliance Review
 # Wave 4 (Payment Systems): instant-payments-pix, wire-transfer-system
@@ -732,7 +732,7 @@ foreach ($activity in $activities) {
 
 ##### **⚡ Eficiência Operacional:**
 - **Requirements Analysis Phase:** 12 semanas → **3 semanas** (75% redução)
-- **Development Throughput:** 2 módulos/mês → **6 módulos/mês** (300% aumento)  
+- **Development Throughput:** 2 módulos/mês → **6 módulos/mês** (300% aumento)
 - **Defect Rate:** 40% retrabalho → **15%** (62% redução)
 - **Time-to-Market:** 18 meses → **12 meses** (33% aceleração)
 
@@ -788,7 +788,7 @@ Week 1-2: Business Analysis (5 parallel) + Technical Architecture Review (sequen
   -> Gate: Technical Architecture Review Board (TARB) + Compliance Pre-Check
 
 Week 3-4: Requirements Engineering (2 parallel) + Security Architecture (critical path)
-  -> Gate: Security Architecture Review + Risk Assessment Committee  
+  -> Gate: Security Architecture Review + Risk Assessment Committee
 
 Week 5-6: Secure Development (3 parallel) + DevSecOps Testing Pipeline
   -> Gate: Static Application Security Testing (SAST) + Dynamic Analysis (DAST)
@@ -801,7 +801,7 @@ Week 7-8: Integration Testing + Compliance Validation + Investor Demo Preparatio
 
 ##### **⚡ Development Efficiency:**
 - **Project Setup & Governance:** 3 dias → **4 horas** (89% redução)
-- **Requirements & Architecture Phase:** 2 semanas → **4 dias** (71% redução)  
+- **Requirements & Architecture Phase:** 2 semanas → **4 dias** (71% redução)
 - **Integration Defects:** 15 critical bugs → **2 minor issues** (87% redução)
 - **Security Vulnerabilities:** 8 findings → **0 critical** (100% improvement)
 - **MVP Delivery with Compliance:** 8 semanas → **7 semanas** (12% acceleration + enterprise-grade quality)
@@ -852,7 +852,7 @@ Week 7-8: Integration Testing + Compliance Validation + Investor Demo Preparatio
 ##### **🚨 Operational Excellence:**
 - **Mean Time to Resolution (MTTR):** 4 horas → **35 minutos** (85% redução)
 - **Mean Time to Detection (MTTD):** 20 minutos → **3 minutos** (85% redução)
-- **Production Incidents:** 25/semana → **4/semana** (84% redução)  
+- **Production Incidents:** 25/semana → **4/semana** (84% redução)
 - **Security Vulnerabilities:** 12 critical → **0 critical, 2 low** (100% critical elimination)
 
 ##### **⚡ Performance & Scalability:**
@@ -897,7 +897,7 @@ Tradicional: ████████████████████ (20 di
 Paralelo:    ██████ (6 dias)                    → 70% redução
 
 Definição Arquitetural:
-Tradicional: ████████████ (12 dias)  
+Tradicional: ████████████ (12 dias)
 Paralelo:    ████████ (8 dias)                  → 33% redução
 
 Implementação:
@@ -949,7 +949,7 @@ Paralelo:    ██████████████████████�
 
 #### **🎯 Resultado esperado:**
 - **Setup:** 30 minutos vs 2 dias tradicionais
-- **Análise inicial:** 3 dias vs 2 semanas tradicionais  
+- **Análise inicial:** 3 dias vs 2 semanas tradicionais
 - **Desenvolvimento:** Paralelo com roadmap claro
 - **Go-live:** 25-30% mais rápido com melhor qualidade
 
@@ -1109,13 +1109,13 @@ Projeto Simples (3 atividades):
 - Paralelo: 30-45 minutos
 - Ganho: 85% redução
 
-Projeto Médio (6 atividades):  
+Projeto Médio (6 atividades):
 - Tradicional: 1-2 dias
 - Paralelo: 2-3 horas
 - Ganho: 80% redução
 
 Projeto Grande (12 atividades):
-- Tradicional: 3-5 dias  
+- Tradicional: 3-5 dias
 - Paralelo: 4-6 horas
 - Ganho: 90% redução
 ```
@@ -1124,7 +1124,7 @@ Projeto Grande (12 atividades):
 ```
 Retrabalho por Dependências Não Identificadas:
 - Tradicional: 35-45% dos casos
-- Paralelo: 8-12% dos casos  
+- Paralelo: 8-12% dos casos
 - Ganho: 75% redução
 
 Consistência entre Módulos:
@@ -1145,12 +1145,12 @@ Atividades Completadas por Mês:
 - 1 Desenvolvedor + Paralelo: 4-6 atividades
 - Ganho: 100-150% aumento
 
-Squad (3 pessoas) Tradicional: 6-8 atividades  
+Squad (3 pessoas) Tradicional: 6-8 atividades
 Squad (3 pessoas) + Paralelo: 12-18 atividades
 Ganho: 125% aumento
 
 Enterprise (4 squads) Tradicional: 24-32 atividades
-Enterprise (4 squads) + Paralelo: 48-72 atividades  
+Enterprise (4 squads) + Paralelo: 48-72 atividades
 Ganho: 150% aumento
 ```
 
@@ -1173,7 +1173,7 @@ Implementation Investment: $5K setup + $3K training = $8K
 Annual Efficiency Gains: $168K (35% development time reduction)
 Risk Mitigation Value: $45K/year (reduced technical debt)
 Total Annual Benefits: $213K
-ROI: 2.563% annually  
+ROI: 2.563% annually
 NPV (3 years @ 10% discount): $530K
 Payback Period: 14 business days
 ```
@@ -1186,7 +1186,7 @@ Compliance & Risk Benefits: $2.1M/year (automated governance)
 Innovation Acceleration: $1.5M/year (faster time-to-market)
 Total Annual Benefits: $9.6M
 ROI: 7.580% annually
-NPV (5 years @ 6% discount): $40.4M  
+NPV (5 years @ 6% discount): $40.4M
 Payback Period: 4.8 business days
 ```
 
@@ -1198,7 +1198,7 @@ Payback Period: 4.8 business days
 
 #### **📊 Quantificação dos Benefícios:**
 - **⚡ 300% mais velocidade** na análise inicial
-- **🎯 75% redução** de retrabalho por dependências  
+- **🎯 75% redução** de retrabalho por dependências
 - **📈 150% aumento** de throughput médio
 - **💰 ROI de 3.400% a 7.400%** dependendo do porte
 
@@ -1235,7 +1235,7 @@ Payback Period: 4.8 business days
 
 #### **📊 Enterprise Reporting:**
 - **Executive Dashboard** with C-level KPIs
-- **Compliance Scorecards** automated generation  
+- **Compliance Scorecards** automated generation
 - **Risk Assessment** matrices
 - **Audit Trail** complete documentation
 - **Regulatory Reporting** ready artifacts

@@ -1,0 +1,31 @@
+%% Mermaid diagram: Fluxo TDD Completo
+%% Test-Driven Development: Testing Specialist antes de Expert Developer
+graph TB
+    PO[1. Product Owner<br/>Análise de Negócio] --> RT[2. Mesa Redonda<br/>Alinhamento Técnico]
+    RT --> RA[3. Requirements Analyst<br/>Cenários BDD]
+    RA --> SA[4. Systems Architect<br/>Arquitetura + ADRs]
+
+    SA --> TS[5. Testing Specialist<br/>⭐ CRIA PLANO QA - TDD]
+    TS --> ED[6. Expert Developer<br/>⭐ IMPLEMENTA SEGUINDO PLANO]
+
+    SA -.-> UX[UX/UI Specialist<br/>Wireframes - Opcional]
+    UX -.-> TS
+    UX -.-> ED
+
+    ED --> TV[7. Testing Validator<br/>Valida Implementação vs Plano]
+    TV --> POF[8. Product Owner Final<br/>Aprovação/Rejeição]
+
+    TS --> QA[05-qa-plano.md<br/>Estratégia de Testes]
+    ED --> DEV[04-desenvolvimento.md<br/>Código + Testes]
+    TV --> VAL[05.1-testing-validation.md<br/>Validação Independente]
+
+    style TS fill:#90EE90,stroke:#006400,stroke-width:3px
+    style ED fill:#87CEEB,stroke:#00008B,stroke-width:3px
+    style TV fill:#FFD700,stroke:#FF8C00,stroke-width:2px
+    style QA fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DEV fill:#87CEEB,stroke:#00008B,stroke-width:2px
+
+    classDef tddFirst fill:#90EE90,stroke:#006400
+    classDef tddSecond fill:#87CEEB,stroke:#00008B
+    classDef validation fill:#FFD700,stroke:#FF8C00
+

@@ -8,11 +8,11 @@ model_preferences:
     model: gpt-5
     purpose: default
 inputs:
-  attachments_path: in/sprint{sprint}/{activity}/attachments/
+  attachments_path: data/in/sprint{sprint}/{activity}/attachments/
 outputs:
-  architecture_path: out/sprint{sprint}/{activity}/03-arquitetura.md
-  adrs_dir: out/sprint{sprint}/{activity}/adrs/
-  diagrams_dir: out/sprint{sprint}/{activity}/diagrams/
+  architecture_path: data/out/sprint{sprint}/{activity}/03-arquitetura.md
+  adrs_dir: data/out/sprint{sprint}/{activity}/adrs/
+  diagrams_dir: data/out/sprint{sprint}/{activity}/diagrams/
 responsibilities:
   - Definir componentes e contratos
   - Documentar decisoes (ADR) e diagramas
@@ -37,7 +37,7 @@ prompts:
     - Plano de testes por camada
     - ADRs para decisoes complexas
     - Roadmap faseado com riscos/mitigacoes
-    
+
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da arquitetura
     - PEDIR APROVACAO: "APROVACAO NECESSARIA - Prosseguir com Expert Developer?"
@@ -46,17 +46,22 @@ prompts:
   task_template: |
     Contexto: analise de requisitos vinda do Gemini (quando existir) e RN alvo conforme sprint/activity. Anexos em {attachments_path} (quando existirem).
     Entregue {architecture_path}. Crie ADRs em {adrs_dir} e diagramas Mermaid em {diagrams_dir}.
-    
+
     AO FINALIZAR:
     - Apresentar resumo da arquitetura projetada
-    - SOLICITAR APROVACAO: "Arquitetura finalizada. Prosseguir com Testing Specialist (TDD)?"
+    - SOLICITAR APROVACAO: "Arquitetura finalizada. Prosseguir com Testing Specialist para definir testes (TDD)?"
     - OPCOES: [SIM] ou [NAO]
     - SE [SIM]: Executar automaticamente @agents/manual/testing-specialist.agent.md
+
+    FLUXO TDD (Test-Driven Development):
+    - O Testing Specialist criara o plano de QA (05-qa-plano.md) ANTES da implementacao
+    - O Expert Developer usara esse plano como guia para implementar o codigo
+    - Isso garante que o codigo seja desenvolvido para atender aos testes desde o inicio
 artifacts:
-  attachments_path: in/sprint{sprint}/{activity}/attachments/
-  architecture_path: out/sprint{sprint}/{activity}/03-arquitetura.md
-  adrs_dir: out/sprint{sprint}/{activity}/adrs/
-  diagrams_dir: out/sprint{sprint}/{activity}/diagrams/
+  attachments_path: data/in/sprint{sprint}/{activity}/attachments/
+  architecture_path: data/out/sprint{sprint}/{activity}/03-arquitetura.md
+  adrs_dir: data/out/sprint{sprint}/{activity}/adrs/
+  diagrams_dir: data/out/sprint{sprint}/{activity}/diagrams/
 ---
 
 # Guia — Systems Architect (Manual)

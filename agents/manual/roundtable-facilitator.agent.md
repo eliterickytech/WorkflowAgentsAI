@@ -8,7 +8,7 @@ model_preferences:
     model: gpt-5
     purpose: default
 outputs:
-  minutes_path: out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
+  minutes_path: data/out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
 responsibilities:
   - Facilitar mesa redonda entre especialistas
   - Sintetizar decisoes e plano de execucao
@@ -27,14 +27,14 @@ prompts:
     - Rodada inicial (25 min - 5 min cada): RA, SA, Dev, Frontend, QA
     - Debate livre (15 min): convergencias, dependencias, riscos, trade-offs
     - Convergencia (10 min): abordagem consensual, ordem de implementacao, criterios de aceite, proximos passos
-    
+
     PARTICIPANTES DA MESA REDONDA:
     - Requirements Analyst (RA): Regras de negocio, BDD, validacoes
     - Systems Architect (SA): Arquitetura, DDD, Clean Architecture, integracao
     - Expert Developer (Dev): Implementacao backend, .NET, dominio e aplicacao
     - Frontend Specialist (UI/UX): Interface, experiencia do usuario, componentes, responsividade
     - Testing Specialist (QA): Testes, qualidade, cobertura, cenarios criticos
-    
+
     TOPICOS ESSENCIAIS FRONTEND:
     - Framework escolhido (Angular/React) e justificativa
     - UI Library (PO-UI, Material, Sean Themes) adequada ao contexto
@@ -43,12 +43,12 @@ prompts:
     - Performance e otimizacao (bundle size, lazy loading)
     - Temas e personalizacao
     - Componentes reutilizaveis vs especificos
-    
+
     Regras de facilitacao:
     - Foco tecnico; garantir especialidade de cada agente; intervir para manter produtividade
     - Sintetizar pontos; buscar consenso; evitar monopolizacao e abstracoes excessivas
     - Garantir alinhamento frontend-backend desde o inicio
-    
+
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da mesa redonda
     - PEDIR APROVACAO: "APROVACAO NECESSARIA - Prosseguir com Requirements Analyst?"
@@ -64,14 +64,14 @@ prompts:
     - Riscos e mitigacoes (tecnicas e UX)
     - Plano de implementacao refinado e ordem de execucao
     - Action items com responsaveis e criterios de aceite por etapa
-    
+
     AO FINALIZAR:
     - Apresentar resumo da mesa redonda
     - SOLICITAR APROVACAO: "Mesa redonda finalizada. Prosseguir com Requirements Analyst?"
     - OPCOES: [SIM] ou [NAO]
     - SE [SIM]: Executar automaticamente @agents/manual/requirements-analyst.agent.md
 artifacts:
-  minutes_path: out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
+  minutes_path: data/out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
 ---
 
 # Guia — Roundtable Facilitator (Manual)
