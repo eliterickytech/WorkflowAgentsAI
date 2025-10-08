@@ -148,7 +148,9 @@ function Copy-Workflow($target) {
     return
   }
 
-  $mandatory = @('agents','Install/orchestrators','scripts/powershell','requirements.txt','.env.example')
+  # Observacao: no repo atual a pasta de scripts esta em 'powershell/'.
+  # Copiaremos a partir de 'powershell' para o destino padronizado 'scripts/powershell'
+  $mandatory = @('agents','Install/orchestrators','powershell','requirements.txt','.env.example')
   $optional  = @('prompts-manual','docs')
   $exclude   = @('prompts-manual/prompts/deprecated')
 
@@ -160,6 +162,10 @@ function Copy-Workflow($target) {
       # Se for Install/orchestrators, copiar como orchestrators no destino
       if ($m -eq 'Install/orchestrators') {
         $dst = Join-Path $target 'orchestrators'
+      }
+      # Se for a pasta de scripts do repo ('powershell'), padronizar destino em 'scripts/powershell'
+      if ($m -eq 'powershell') {
+        $dst = Join-Path $target 'scripts/powershell'
       }
       # Defesa extra: nunca copiar subpastas ".github" por engano
       if (Test-Path $src) {
@@ -559,13 +565,13 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += "1. Use especificacao arquitetural anterior`n"
   $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/04-desenvolvimento.md`n"
   $enrichedSuperPrompt += "3. Implemente codigo seguindo padroes do projeto $projectName`n`n"
-  $enrichedSuperPrompt += "AO FINALIZAR: Passe o codigo implementado para o Testing Specialist Agent.`n`n"
+  $enrichedSuperPrompt += "AO FINALIZAR: Opcionalmente acione UX/UI e Frontend para alinhamento/implementacao visual. Em seguida, passe para o Testing Validator Agent.`n`n"
 
   $enrichedSuperPrompt += "=" * 80 + "`n"
-  $enrichedSuperPrompt += "ETAPA 4 - TESTING SPECIALIST AGENT:`n`n"
+  $enrichedSuperPrompt += "ETAPA 4 - TESTING SPECIALIST AGENT (TDD - ANTES DO CODIGO):`n`n"
   $enrichedSuperPrompt += $testingPrompt + "`n`n"
   $enrichedSuperPrompt += "TAREFA ESPECIFICA:`n"
-  $enrichedSuperPrompt += "1. Use codigo da etapa anterior`n"
+  $enrichedSuperPrompt += "1. Defina plano de QA e cenarios ANTES da implementacao`n"
   $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/05-qa-plano.md`n`n"
 
   $enrichedSuperPrompt += "=" * 80 + "`n"
@@ -614,10 +620,17 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
 }
 
 function Start-ManualWorkflow($target, $sprint, $activity) {
+  # Preferencialmente procurar em scripts/powershell (padrao de destino)
   $startScript = Join-Path $target 'scripts/powershell/start-manual.ps1'
   if (-not (Test-Path $startScript)) {
-    Write-Warn "Script start-manual.ps1 nao encontrado em $startScript"
-    return
+    # Fallback para 'powershell' na raiz, caso o usuario tenha movido os scripts manualmente
+    $fallbackScript = Join-Path $target 'powershell/start-manual.ps1'
+    if (Test-Path $fallbackScript) {
+      $startScript = $fallbackScript
+    } else {
+      Write-Warn "Script start-manual.ps1 nao encontrado em $startScript nem em $fallbackScript"
+      return
+    }
   }
 
   Write-Info "Executando o fluxo manual automaticamente..."
@@ -1600,7 +1613,14 @@ try {
     # Oferecer copiar um template se desejar
     $copyTpl = Ask 'Deseja copiar um template de super-prompt para o projeto? (s/n)' 'n'
     if ($copyTpl -match '^[sSyY]') {
-      $tpl = Join-Path $repoRoot 'docs/prompts/super-prompt-template.md'
+      # Determinar o repo root neste escopo
+      $scriptPathMain = $PSCommandPath
+      if (-not $scriptPathMain) { $scriptPathMain = $MyInvocation.MyCommand.Definition }
+      if (-not $scriptPathMain) { $scriptPathMain = $MyInvocation.MyCommand.Source }
+      $installDir = Split-Path -Parent $scriptPathMain
+      $repoRootMain = Split-Path -Parent $installDir
+
+      $tpl = Join-Path $repoRootMain 'docs/prompts/super-prompt-template.md'
       $destDir = Split-Path $maybeSuper -Parent
       if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
       if (Test-Path $tpl) {
@@ -1659,7 +1679,7 @@ try {
       Start-ManualWorkflow -target $TargetProjectPath -sprint $sprint -activity $activity
     } else {
       Write-Host "Dica: rode o fluxo manual:" -ForegroundColor Yellow
-      Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -File .\\powershell\\start-manual.ps1 -Sprint $sprint -Activity $activity" -ForegroundColor Gray
+      Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\powershell\\start-manual.ps1 -Sprint $sprint -Activity $activity" -ForegroundColor Gray
     }
   } else {
     Write-Host "Dica: rode o fluxo CrewAI:" -ForegroundColor Yellow

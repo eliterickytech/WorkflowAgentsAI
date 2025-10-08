@@ -1,43 +1,46 @@
-# 🎯 Guia Completo: Executando Agentes Individuais
+﻿# ðŸŽ¯ Guia Completo: Executando Agentes Individuais
 
-**Versão:** 2.1.0  
+**VersÃ£o:** 2.1.0  
 **Data:** 30 de Setembro de 2025
 
-Este guia detalha como usar **cada um dos 10 agentes de forma independente**, com exemplos práticos, contextos específicos e casos de uso reais.
+Este guia detalha como usar **cada um dos 11 agentes de forma independente**, com exemplos prÃ¡ticos, contextos especÃ­ficos e casos de uso reais.
+
+> Atualizacao 2025-10: o portifolio de agentes agora possui 11 especialistas. Esta revisao reorganiza os indices e adiciona orientacoes dedicadas para o Frontend Specialist Agent.
 
 ---
 
-## 📋 **Índice dos Agentes**
+## **Indice Atualizado dos Agentes**
 
-1. [🎯 Product Owner Agent](#1-product-owner-agent)
-2. [🤝 Mesa Redonda Agent](#2-mesa-redonda-agent)  
-3. [📊 Requirements Analyst Agent](#3-requirements-analyst-agent)
-4. [🏗️ Systems Architect Agent](#4-systems-architect-agent)
-5. [🎨 UX/UI Specialist Agent](#5-uxui-specialist-agent)
-6. [🧪 Testing Specialist Agent](#6-testing-specialist-agent)
-7. [💻 Expert Developer Agent](#7-expert-developer-agent)
-8. [🔍 Testing Validator Agent](#8-testing-validator-agent)
-9. [🛡️ Code Reviewer Agent](#9-code-reviewer-agent)
-10. [✅ Product Owner Final Agent](#10-product-owner-final-agent)
+1. [Product Owner Agent](#1-product-owner-agent) - Descoberta e alinhamento inicial
+2. [Mesa Redonda Agent](#2-mesa-redonda-agent) - Facilitacao de debates tecnicos
+3. [Requirements Analyst Agent](#3-requirements-analyst-agent) - Modelagem de requisitos
+4. [Systems Architect Agent](#4-systems-architect-agent) - Definicao de arquitetura
+5. [UX/UI Specialist Agent](#5-uxui-specialist-agent) - Experiencia e interface
+6. [Frontend Specialist Agent](#6-frontend-specialist-agent) - Implementacao de interface
+7. [Testing Specialist Agent](#7-testing-specialist-agent) - Plano de qualidade
+8. [Expert Developer Agent](#8-expert-developer-agent) - Engenharia e implementacao
+9. [Testing Validator Agent](#9-testing-validator-agent) - Validacao de testes
+10. [Code Reviewer Agent](#10-code-reviewer-agent) - Revisao tecnica de codigo
+11. [Product Owner Final Agent](#11-product-owner-final-agent) - Encerramento e aprovacao
 
 ---
 
-## **1. 🎯 Product Owner Agent**
+## **1. Product Owner Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Refinamento de backlog** - transformar ideias vagas em requirements
-- ✅ **Análise de viabilidade** - entender impacto e prioridade
-- ✅ **Comunicação com stakeholders** - traduzir técnico para negócio
-- ✅ **Validação de escopo** - confirmar entendimento antes do desenvolvimento
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **Refinamento de backlog** - transformar ideias vagas em requirements
+- âœ… **AnÃ¡lise de viabilidade** - entender impacto e prioridade
+- âœ… **ComunicaÃ§Ã£o com stakeholders** - traduzir tÃ©cnico para negÃ³cio
+- âœ… **ValidaÃ§Ã£o de escopo** - confirmar entendimento antes do desenvolvimento
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
-#### **Exemplo 1: Análise de Nova Funcionalidade**
+#### **Exemplo 1: AnÃ¡lise de Nova Funcionalidade**
 ```
 @agents/manual/product-owner.agent.md
 
 Sprint: 03, Activity: sistema-backup  
-Contexto: "Cliente solicita backup automático dos dados. Preciso entender: requisitos, prioridade, impacto nos usuários e viabilidade técnica."
+Contexto: "Cliente solicita backup automÃ¡tico dos dados. Preciso entender: requisitos, prioridade, impacto nos usuÃ¡rios e viabilidade tÃ©cnica."
 ```
 
 #### **Exemplo 2: Refinamento de User Story Vaga**
@@ -45,58 +48,58 @@ Contexto: "Cliente solicita backup automático dos dados. Preciso entender: requ
 @agents/manual/product-owner.agent.md
 
 Sprint: 02, Activity: melhorias-performance
-Contexto: "Stakeholder reclama que 'sistema está lento'. Preciso transformar isso em requirements específicos com critérios mensuráveis."
+Contexto: "Stakeholder reclama que 'sistema estÃ¡ lento'. Preciso transformar isso em requirements especÃ­ficos com critÃ©rios mensurÃ¡veis."
 ```
 
-#### **Exemplo 3: Validação de Escopo Complexo**
+#### **Exemplo 3: ValidaÃ§Ã£o de Escopo Complexo**
 ```
 @agents/manual/product-owner.agent.md
 
 Sprint: 04, Activity: integracao-erp
-Contexto: "Integração com SAP ERP. Múltiplos stakeholders, requisitos conflitantes. Preciso alinhar visão e priorizar funcionalidades."
+Contexto: "IntegraÃ§Ã£o com SAP ERP. MÃºltiplos stakeholders, requisitos conflitantes. Preciso alinhar visÃ£o e priorizar funcionalidades."
 
-Anexos necessários:
+Anexos necessÃ¡rios:
 - Documento de requisitos inicial (se houver)
 - Lista de stakeholders e suas necessidades
-- Restrições técnicas conhecidas
+- RestriÃ§Ãµes tÃ©cnicas conhecidas
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/sistema-backup/
-├── 00-business-context.md      ← Análise do contexto de negócio
-└── 00-requirements-brief.md    ← Requirements estruturados
+â”œâ”€â”€ 00-business-context.md      â† AnÃ¡lise do contexto de negÃ³cio
+â””â”€â”€ 00-requirements-brief.md    â† Requirements estruturados
 ```
 
-### **🎯 Dicas de uso:**
-- **Seja específico no contexto** - quanto mais informações, melhor a análise
+### **ðŸŽ¯ Dicas de uso:**
+- **Seja especÃ­fico no contexto** - quanto mais informaÃ§Ãµes, melhor a anÃ¡lise
 - **Inclua anexos** se tiver documentos existentes
-- **Mencione stakeholders** e suas necessidades específicas
-- **Defina prazo/urgência** se relevante
+- **Mencione stakeholders** e suas necessidades especÃ­ficas
+- **Defina prazo/urgÃªncia** se relevante
 
 ---
 
-## **2. 🤝 Mesa Redonda Agent** 
+## **2. Mesa Redonda Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Decisões arquiteturais complexas** - precisa de múltiplas perspectivas
-- ✅ **Resolução de conflitos técnicos** - diferentes abordagens possíveis  
-- ✅ **Brainstorming de soluções** - explorar alternativas antes de decidir
-- ✅ **Validação de estratégias** - confirmar direção técnica
-- ✅ **Análise de trade-offs** - avaliar prós/contras de decisões
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **DecisÃµes arquiteturais complexas** - precisa de mÃºltiplas perspectivas
+- âœ… **ResoluÃ§Ã£o de conflitos tÃ©cnicos** - diferentes abordagens possÃ­veis  
+- âœ… **Brainstorming de soluÃ§Ãµes** - explorar alternativas antes de decidir
+- âœ… **ValidaÃ§Ã£o de estratÃ©gias** - confirmar direÃ§Ã£o tÃ©cnica
+- âœ… **AnÃ¡lise de trade-offs** - avaliar prÃ³s/contras de decisÃµes
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
-#### **Exemplo 1: Decisão Arquitetural**
+#### **Exemplo 1: DecisÃ£o Arquitetural**
 ```
 @agents/manual/roundtable-facilitator.agent.md
 
-Contexto: "Decisão: Microserviços vs Monolito Modular para novo módulo de relatórios. Avaliar: escalabilidade, complexidade, time skills, prazo 6 meses."
+Contexto: "DecisÃ£o: MicroserviÃ§os vs Monolito Modular para novo mÃ³dulo de relatÃ³rios. Avaliar: escalabilidade, complexidade, time skills, prazo 6 meses."
 
 Foco: arquitetura, escalabilidade, manutenibilidade
 ```
 
-#### **Exemplo 2: Resolução de Conflito Técnico**
+#### **Exemplo 2: ResoluÃ§Ã£o de Conflito TÃ©cnico**
 ```
 @agents/manual/roundtable-facilitator.agent.md  
 
@@ -105,204 +108,204 @@ Contexto: "Conflito: Frontend quer GraphQL, Backend prefere REST para nova API. 
 Foco: APIs, performance, produtividade  
 ```
 
-#### **Exemplo 3: Estratégia de Migração**
+#### **Exemplo 3: EstratÃ©gia de MigraÃ§Ã£o**
 ```
 @agents/manual/roundtable-facilitator.agent.md
 
-Contexto: "Migração .NET Framework 4.8 → .NET 8. 200+ classes, 5 anos legacy. Estratégia: big-bang vs incremental vs strangler fig pattern."
+Contexto: "MigraÃ§Ã£o .NET Framework 4.8 â†’ .NET 8. 200+ classes, 5 anos legacy. EstratÃ©gia: big-bang vs incremental vs strangler fig pattern."
 
-Foco: migração, riscos, estratégia
+Foco: migraÃ§Ã£o, riscos, estratÃ©gia
 ```
 
-#### **Exemplo 4: Mesa Focada em Problema Específico**
+#### **Exemplo 4: Mesa Focada em Problema EspecÃ­fico**
 ```
 @agents/manual/roundtable-facilitator.agent.md
 
-"Redebater apenas performance e caching - sistema com 10k usuários simultâneos"
+"Redebater apenas performance e caching - sistema com 10k usuÃ¡rios simultÃ¢neos"
 
-Foco: performance, caching, otimização
+Foco: performance, caching, otimizaÃ§Ã£o
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/decisao-arquitetura/
-└── 01-ata-mesa-redonda.md     ← Debate registrado com consenso
+â””â”€â”€ 01-ata-mesa-redonda.md     â† Debate registrado com consenso
 ```
 
-### **🎯 Dicas de uso:**
-- **Defina o foco** claramente (ex: "apenas performance", "só frontend")
-- **Inclua restrições** conhecidas (orçamento, prazo, skills do time)
-- **Mencione contexto** do projeto (tamanho, criticidade, usuários)
-- **Use para decisões importantes** - não para implementações simples
+### **ðŸŽ¯ Dicas de uso:**
+- **Defina o foco** claramente (ex: "apenas performance", "sÃ³ frontend")
+- **Inclua restriÃ§Ãµes** conhecidas (orÃ§amento, prazo, skills do time)
+- **Mencione contexto** do projeto (tamanho, criticidade, usuÃ¡rios)
+- **Use para decisÃµes importantes** - nÃ£o para implementaÃ§Ãµes simples
 
 ---
 
-## **3. 📊 Requirements Analyst Agent**
+## **3. Requirements Analyst Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Análise de documentos** .docx/.xlsx para extrair regras
-- ✅ **Criação de arquivos RN-00xx.md** padronizados
-- ✅ **Mapeamento de dependências** entre regras de negócio
-- ✅ **Validação de consistência** terminológica
-- ✅ **Transformação BDD** de requisitos em cenários Gherkin
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **AnÃ¡lise de documentos** .docx/.xlsx para extrair regras
+- âœ… **CriaÃ§Ã£o de arquivos RN-00xx.md** padronizados
+- âœ… **Mapeamento de dependÃªncias** entre regras de negÃ³cio
+- âœ… **ValidaÃ§Ã£o de consistÃªncia** terminolÃ³gica
+- âœ… **TransformaÃ§Ã£o BDD** de requisitos em cenÃ¡rios Gherkin
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
-#### **Exemplo 1: Extração de Regras de Documento**
+#### **Exemplo 1: ExtraÃ§Ã£o de Regras de Documento**
 ```
 @agents/manual/requirements-analyst.agent.md
 
 Sprint: 02, Activity: calculo-impostos
-Contexto: "Transformar documento 'Regras_Tributacao_2024.docx' em regras estruturadas RN-0045 a RN-0052. Focar em: alíquotas, isenções, casos especiais."
+Contexto: "Transformar documento 'Regras_Tributacao_2024.docx' em regras estruturadas RN-0045 a RN-0052. Focar em: alÃ­quotas, isenÃ§Ãµes, casos especiais."
 
 Arquivos de entrada:
 - references-data/datas/business-rules-files/Regras_Tributacao_2024.docx
 - references-data/datas/tables/validation-business-rules-files/casos_teste_tributacao.xlsx
 ```
 
-#### **Exemplo 2: Criação de Cenários BDD**
+#### **Exemplo 2: CriaÃ§Ã£o de CenÃ¡rios BDD**
 ```
 @agents/manual/requirements-analyst.agent.md
 
 Sprint: 03, Activity: workflow-aprovacao  
-Contexto: "Criar cenários BDD para workflow de aprovação em 3 níveis. Regras: Valor < 1000 (auto), 1000-10000 (gestor), >10000 (diretor)."
+Contexto: "Criar cenÃ¡rios BDD para workflow de aprovaÃ§Ã£o em 3 nÃ­veis. Regras: Valor < 1000 (auto), 1000-10000 (gestor), >10000 (diretor)."
 
-Entrada: Especificação textual do workflow
-Saída: Cenários Gherkin estruturados
+Entrada: EspecificaÃ§Ã£o textual do workflow
+SaÃ­da: CenÃ¡rios Gherkin estruturados
 ```
 
-#### **Exemplo 3: Mapeamento de Dependências**
+#### **Exemplo 3: Mapeamento de DependÃªncias**
 ```
 @agents/manual/requirements-analyst.agent.md
 
 Sprint: 04, Activity: auditoria-regras
-Contexto: "Mapear dependências entre RN-0001 (cálculo base) e RN-0015 a RN-0025 (regras derivadas). Identificar impactos de mudanças."
+Contexto: "Mapear dependÃªncias entre RN-0001 (cÃ¡lculo base) e RN-0015 a RN-0025 (regras derivadas). Identificar impactos de mudanÃ§as."
 
-Foco: análise de impacto, dependências
+Foco: anÃ¡lise de impacto, dependÃªncias
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint02/calculo-impostos/
-├── 02-requisitos-bdd.md               ← Análise estruturada
-├── features/
-│   ├── calculo-aliquota.feature      ← Cenários Gherkin
-│   └── casos-especiais.feature       
-└── references-data/business-rules/
-    ├── RN-0045.md                    ← Regras extraídas
-    ├── RN-0046.md
-    └── ...
+â”œâ”€â”€ 02-requisitos-bdd.md               â† AnÃ¡lise estruturada
+â”œâ”€â”€ features/
+â”‚   â”œâ”€â”€ calculo-aliquota.feature      â† CenÃ¡rios Gherkin
+â”‚   â””â”€â”€ casos-especiais.feature       
+â””â”€â”€ references-data/business-rules/
+    â”œâ”€â”€ RN-0045.md                    â† Regras extraÃ­das
+    â”œâ”€â”€ RN-0046.md
+    â””â”€â”€ ...
 ```
 
-### **🎯 Dicas de uso:**
+### **ðŸŽ¯ Dicas de uso:**
 - **Prepare os arquivos** nas pastas corretas antes de executar
-- **Seja específico** sobre quais regras extrair (números RN-00xx)
-- **Inclua contexto de domínio** (financeiro, tributário, etc.)
+- **Seja especÃ­fico** sobre quais regras extrair (nÃºmeros RN-00xx)
+- **Inclua contexto de domÃ­nio** (financeiro, tributÃ¡rio, etc.)
 - **Valide termologia** - use termos consistentes com o sistema
 
 ---
 
-## **4. 🏗️ Systems Architect Agent**
+## **4. Systems Architect Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Design de arquitetura** para novas funcionalidades
-- ✅ **Refatoração arquitetural** de módulos existentes
-- ✅ **Definição de bounded contexts** e agregados (DDD)
-- ✅ **Estratégias de integração** com sistemas externos
-- ✅ **Decisões técnicas estruturais** (patterns, frameworks)
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **Design de arquitetura** para novas funcionalidades
+- âœ… **RefatoraÃ§Ã£o arquitetural** de mÃ³dulos existentes
+- âœ… **DefiniÃ§Ã£o de bounded contexts** e agregados (DDD)
+- âœ… **EstratÃ©gias de integraÃ§Ã£o** com sistemas externos
+- âœ… **DecisÃµes tÃ©cnicas estruturais** (patterns, frameworks)
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
 #### **Exemplo 1: Arquitetura Nova Funcionalidade**
 ```
 @agents/manual/systems-architect.agent.md
 
 Sprint: 03, Activity: modulo-relatorios
-Contexto: "Projetar arquitetura para módulo de relatórios customizáveis. Requisitos: 500+ usuários simultâneos, exportação PDF/Excel, agendamento, cache inteligente."
+Contexto: "Projetar arquitetura para mÃ³dulo de relatÃ³rios customizÃ¡veis. Requisitos: 500+ usuÃ¡rios simultÃ¢neos, exportaÃ§Ã£o PDF/Excel, agendamento, cache inteligente."
 
-Restrições:
+RestriÃ§Ãµes:
 - .NET Framework 4.8
 - PostgreSQL existente
 - Infraestrutura on-premise
 - Time conhece Entity Framework
 ```
 
-#### **Exemplo 2: Refatoração de Módulo Legacy**
+#### **Exemplo 2: RefatoraÃ§Ã£o de MÃ³dulo Legacy**
 ```
 @agents/manual/systems-architect.agent.md  
 
 Sprint: 04, Activity: refactoring-pagamentos
-Contexto: "Refatorar módulo de pagamentos de 3 anos. Problemas: God classes, dependências circulares, difícil testar. Meta: Clean Architecture + SOLID."
+Contexto: "Refatorar mÃ³dulo de pagamentos de 3 anos. Problemas: God classes, dependÃªncias circulares, difÃ­cil testar. Meta: Clean Architecture + SOLID."
 
 Contexto atual:
 - 15 classes principais
-- Lógica espalhada nas Controllers  
-- Sem testes unitários
+- LÃ³gica espalhada nas Controllers  
+- Sem testes unitÃ¡rios
 - Performance degradada
 ```
 
-#### **Exemplo 3: Integração Sistema Externo**
+#### **Exemplo 3: IntegraÃ§Ã£o Sistema Externo**
 ```
 @agents/manual/systems-architect.agent.md
 
 Sprint: 05, Activity: integracao-sap
-Contexto: "Integração bi-direcional com SAP ERP. Sincronizar: produtos, clientes, pedidos. Requisitos: real-time crítico, fallback offline, auditoria completa."
+Contexto: "IntegraÃ§Ã£o bi-direcional com SAP ERP. Sincronizar: produtos, clientes, pedidos. Requisitos: real-time crÃ­tico, fallback offline, auditoria completa."
 
-Considerações:
+ConsideraÃ§Ãµes:
 - SAP RFC vs Web Services  
-- Estratégia de retry/circuit breaker
+- EstratÃ©gia de retry/circuit breaker
 - Mapeamento de entidades
 - Tratamento de conflitos
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/modulo-relatorios/
-├── 03-arquitetura.md                 ← Documento arquitetural
-├── diagrams/
-│   ├── contexto-relatorios.mmd      ← Diagramas Mermaid
-│   ├── componentes-sistema.mmd
-│   └── fluxo-dados.mmd
-└── adrs/
-    ├── ADR-001-escolha-cache.md     ← Architecture Decision Records
-    └── ADR-002-estrategia-export.md
+â”œâ”€â”€ 03-arquitetura.md                 â† Documento arquitetural
+â”œâ”€â”€ diagrams/
+â”‚   â”œâ”€â”€ contexto-relatorios.mmd      â† Diagramas Mermaid
+â”‚   â”œâ”€â”€ componentes-sistema.mmd
+â”‚   â””â”€â”€ fluxo-dados.mmd
+â””â”€â”€ adrs/
+    â”œâ”€â”€ ADR-001-escolha-cache.md     â† Architecture Decision Records
+    â””â”€â”€ ADR-002-estrategia-export.md
 ```
 
-### **🎯 Dicas de uso:**
-- **Inclua restrições técnicas** conhecidas (.NET version, infraestrutura)
-- **Mencione requisitos não-funcionais** (performance, escala, segurança)
-- **Descreva contexto atual** se for refatoração
-- **Especifique integrações** necessárias com sistemas existentes
+### **ðŸŽ¯ Dicas de uso:**
+- **Inclua restriÃ§Ãµes tÃ©cnicas** conhecidas (.NET version, infraestrutura)
+- **Mencione requisitos nÃ£o-funcionais** (performance, escala, seguranÃ§a)
+- **Descreva contexto atual** se for refatoraÃ§Ã£o
+- **Especifique integraÃ§Ãµes** necessÃ¡rias com sistemas existentes
 
 ---
 
-## **5. 🎨 UX/UI Specialist Agent**
+## **5. UX/UI Specialist Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Criação de wireframes** ASCII versionáveis no Git
-- ✅ **Design de user flows** e arquitetura de informação
-- ✅ **Definição de design system** com tokens e componentes
-- ✅ **Prototipação rápida** com HTML interativo
-- ✅ **Guidelines de acessibilidade** WCAG 2.1 AA
-- ✅ **Especificações para desenvolvedores** com CSS e HTML
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **CriaÃ§Ã£o de wireframes** ASCII versionÃ¡veis no Git
+- âœ… **Design de user flows** e arquitetura de informaÃ§Ã£o
+- âœ… **DefiniÃ§Ã£o de design system** com tokens e componentes
+- âœ… **PrototipaÃ§Ã£o rÃ¡pida** com HTML interativo
+- âœ… **Guidelines de acessibilidade** WCAG 2.1 AA
+- âœ… **EspecificaÃ§Ãµes para desenvolvedores** com CSS e HTML
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
 #### **Exemplo 1: Dashboard Executivo Completo**
 ```
 @agents/manual/ux-ui-specialist.agent.md
 
 Sprint: 03, Activity: dashboard-executivo
-Contexto: "Criar interface para dashboard executivo com KPIs real-time, gráficos interativos e filtros avançados. Usuários: C-Level, gerentes, analistas."
+Contexto: "Criar interface para dashboard executivo com KPIs real-time, grÃ¡ficos interativos e filtros avanÃ§ados. UsuÃ¡rios: C-Level, gerentes, analistas."
 
 Requisitos UX:
-- Informação crítica "above the fold" 
-- Máximo 3 cliques para qualquer ação
+- InformaÃ§Ã£o crÃ­tica "above the fold" 
+- MÃ¡ximo 3 cliques para qualquer aÃ§Ã£o
 - Responsivo (mobile executives)
 - Performance visual < 2s carregamento
-- Acessível para deficientes visuais
+- AcessÃ­vel para deficientes visuais
 
-Entrada: 03-arquitetura.md (componentes técnicos)
+Entrada: 03-arquitetura.md (componentes tÃ©cnicos)
 ```
 
 #### **Exemplo 2: Sistema de Login Corporativo**
@@ -310,15 +313,15 @@ Entrada: 03-arquitetura.md (componentes técnicos)
 @agents/manual/ux-ui-specialist.agent.md
 
 Sprint: 02, Activity: login-corporativo  
-Contexto: "Interface de login empresarial com SSO, 2FA e recuperação de senha. Design moderno mas conservador para ambiente corporativo."
+Contexto: "Interface de login empresarial com SSO, 2FA e recuperaÃ§Ã£o de senha. Design moderno mas conservador para ambiente corporativo."
 
-Restrições de design:
+RestriÃ§Ãµes de design:
 - Identidade visual existente (logo, cores)
 - Compatibilidade IE11+ (legado)
-- Integração com Active Directory
+- IntegraÃ§Ã£o com Active Directory
 - Auditoria de acessos
 
-Foco: Segurança + usabilidade + compliance
+Foco: SeguranÃ§a + usabilidade + compliance
 ```
 
 #### **Exemplo 3: App Mobile de Vendas**
@@ -326,14 +329,14 @@ Foco: Segurança + usabilidade + compliance
 @agents/manual/ux-ui-specialist.agent.md
 
 Sprint: 04, Activity: mobile-vendas
-Contexto: "App mobile para vendedores externos: CRM, catálogo produtos, pedidos offline-first. Usuários com baixa literacy digital."
+Contexto: "App mobile para vendedores externos: CRM, catÃ¡logo produtos, pedidos offline-first. UsuÃ¡rios com baixa literacy digital."
 
-Considerações mobile:
-- Funciona offline (sync automático)
+ConsideraÃ§Ãµes mobile:
+- Funciona offline (sync automÃ¡tico)
 - Touch-friendly (dedos grandes)
 - Leitura sob sol forte (contraste alto)
-- Bateria limitada (animações leves)
-- Conexão instável (loading states)
+- Bateria limitada (animaÃ§Ãµes leves)
+- ConexÃ£o instÃ¡vel (loading states)
 
 Prioridade: Simplicidade + performance + offline
 ```
@@ -343,51 +346,52 @@ Prioridade: Simplicidade + performance + offline
 @agents/manual/ux-ui-specialist.agent.md
 
 Sprint: 01, Activity: refinar-wireframes-checkout
-Contexto: "Melhorar wireframes do checkout baseado em feedback de usabilidade. Principais problemas: abandono no pagamento, formulário confuso."
+Contexto: "Melhorar wireframes do checkout baseado em feedback de usabilidade. Principais problemas: abandono no pagamento, formulÃ¡rio confuso."
 
-Entrada: Wireframes atuais + relatório de UX research
+Entrada: Wireframes atuais + relatÃ³rio de UX research
 Problemas identificados:
-- Muitos campos obrigatórios  
-- Informações de segurança não claras
-- Botão "Finalizar" pouco visível
+- Muitos campos obrigatÃ³rios  
+- InformaÃ§Ãµes de seguranÃ§a nÃ£o claras
+- BotÃ£o "Finalizar" pouco visÃ­vel
 - Processo parece longo demais
 
-Foco: Conversão + confiança + simplicidade
+Foco: ConversÃ£o + confianÃ§a + simplicidade
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/dashboard-executivo/
-├── 05-ux-analysis.md                 ← Análise de usuários e jornadas  
-├── 05-ux-wireframes.md               ← Wireframes ASCII + Mermaid
-├── 04-wireframes/
-│   ├── ascii/
-│   │   ├── desktop-layout.md         ← Layout principal
-│   │   ├── mobile-layout.md          ← Versão mobile
-│   │   └── component-specs.md        ← Especificações detalhadas
-│   ├── mermaid/
-│   │   ├── user-flow.md              ← Fluxos de navegação
-│   │   ├── sitemap.md                ← Arquitetura informação
-│   │   └── component-tree.md         ← Hierarquia componentes
-│   ├── html-preview/
-│   │   ├── desktop-prototype.html    ← Protótipo clicável
-│   │   └── mobile-prototype.html     ← Versão mobile
-│   └── images/                       ← PNGs exportados (se solicitado)
-├── 04-design-system.md               ← Tokens, cores, tipografia
-├── 04-component-library.md           ← Specs CSS + HTML semântico
-└── 04-accessibility-guide.md         ← Guidelines WCAG 2.1 AA
+â”œâ”€â”€ 05-ux-analysis.md                 â† AnÃ¡lise de usuÃ¡rios e jornadas  
+â”œâ”€â”€ 05-ux-wireframes.md               â† Wireframes ASCII + Mermaid
+â”œâ”€â”€ 04-wireframes/
+â”‚   â”œâ”€â”€ ascii/
+â”‚   â”‚   â”œâ”€â”€ desktop-layout.md         â† Layout principal
+â”‚   â”‚   â”œâ”€â”€ mobile-layout.md          â† VersÃ£o mobile
+â”‚   â”‚   â””â”€â”€ component-specs.md        â† EspecificaÃ§Ãµes detalhadas
+â”‚   â”œâ”€â”€ mermaid/
+â”‚   â”‚   â”œâ”€â”€ user-flow.md              â† Fluxos de navegaÃ§Ã£o
+â”‚   â”‚   â”œâ”€â”€ sitemap.md                â† Arquitetura informaÃ§Ã£o
+â”‚   â”‚   â””â”€â”€ component-tree.md         â† Hierarquia componentes
+â”‚   â”œâ”€â”€ html-preview/
+â”‚   â”‚   â”œâ”€â”€ desktop-prototype.html    â† ProtÃ³tipo clicÃ¡vel
+â”‚   â”‚   â””â”€â”€ mobile-prototype.html     â† VersÃ£o mobile
+â”‚   â””â”€â”€ images/                       â† PNGs exportados (se solicitado)
+â”œâ”€â”€ 04-design-system.md               â† Tokens, cores, tipografia
+â”œâ”€â”€ 04-component-library.md           â† Specs CSS + HTML semÃ¢ntico
+â””â”€â”€ 04-accessibility-guide.md         â† Guidelines WCAG 2.1 AA
 ```
 
-### **🎯 Dicas de uso:**
-- **Forneça contexto de usuários** específico (perfil, skills, limitações)
-- **Inclua restrições técnicas** conhecidas (browsers, devices, performance)
+### **ðŸŽ¯ Dicas de uso:**
+- **ForneÃ§a contexto de usuÃ¡rios** especÃ­fico (perfil, skills, limitaÃ§Ãµes)
+- **Inclua restriÃ§Ãµes tÃ©cnicas** conhecidas (browsers, devices, performance)
 - **Mencione identidade visual** existente se houver
-- **Especifique prioridades** (conversão vs usabilidade vs acessibilidade)
-- **Referencie arquitetura** (03-arquitetura.md) para componentes técnicos
-- **Use após Systems Architect** - pode rodar em paralelo ou antes de Testing Specialist
-- **Saídas alimentam** Testing Specialist e Expert Developer
+- **Especifique prioridades** (conversÃ£o vs usabilidade vs acessibilidade)
+- **Referencie arquitetura** (03-arquitetura.md) para componentes tÃ©cnicos
+- **Use apÃ³s Systems Architect** - pode rodar em paralelo ou antes de Testing Specialist
+- **SaÃ­das alimentam** Testing Specialist e Expert Developer
+- **Encaminhe entregaveis** ao Frontend Specialist para orientar implementacao, versionamento de componentes e checklist de acessibilidade
 
-### **🛠️ Ferramentas complementares:**
+### **ðŸ› ï¸ Ferramentas complementares:**
 ```powershell
 # Configurar ferramentas de design
 .\powershell\setup-design-tools.ps1 -Sprint 03 -Activity dashboard-executivo -GenerateWireframes
@@ -395,134 +399,199 @@ data/out/sprint03/dashboard-executivo/
 # Visualizar no navegador  
 .\powershell\view-wireframes.ps1 -Sprint 03 -Activity dashboard-executivo -OpenBrowser
 
-# Exportar para apresentação
+# Exportar para apresentaÃ§Ã£o
 .\powershell\view-wireframes.ps1 -Sprint 03 -Activity dashboard-executivo -ExportImages
 ```
 
 ---
 
-## **6. 🧪 Testing Specialist Agent**
+## **6. Frontend Specialist Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Planejamento TDD** - criar plano de testes ANTES da implementação
-- ✅ **Estratégia de testes** para funcionalidades complexas
-- ✅ **Análise de cobertura** e identificação de gaps
-- ✅ **Testes de edge cases** e cenários extremos
-- ✅ **Planos de performance** e testes de carga
+### **Quando usar individualmente:**
+- Desenvolver novas interfaces ou fluxos SPA alinhados ao design system
+- Criar provas de conceito frontend para validar requisitos de usabilidade e performance
+- Estruturar bibliotecas de componentes reutilizaveis e guidelines de UI compartilhaveis
+- Liderar ajustes tecnicos de acessibilidade, performance e observabilidade no frontend
 
-### **💻 Como executar:**
+### **Como executar:**
+
+#### **Exemplo 1: Implementacao de dashboard modular**
+```
+@agents/manual/frontend-specialist.agent.md
+
+Sprint: 07, Activity: analytics-dashboard
+Contexto: "Precisamos de um dashboard modular em React com suporte a filtros dinamicos, graficos responsivos e integracao com WebSocket."
+
+Entradas chave:
+- 02-requisitos-bdd.md com cenarios de analytics
+- 03-arquitetura.md destacando integracoes e limites de performance
+```
+
+#### **Exemplo 2: Evolucao de design system**
+```
+@agents/manual/frontend-specialist.agent.md
+
+Sprint: 05, Activity: ds-refactor
+Contexto: "Atualizar o design system PO-UI com novos tokens de cor, componentes de formulario acessiveis e documentacao no Storybook."
+
+Entradas chave:
+- Arquivos de UI fornecidos pelo UX/UI Specialist
+- Guidelines atuais de branding e acessibilidade
+```
+
+#### **Exemplo 3: Analise de migracao tecnologica**
+```
+@agents/manual/frontend-specialist.agent.md
+
+Sprint: 09, Activity: migrate-angular17
+Contexto: "Plano incremental para migrar o portal Angular 12 para Angular 17 com integracao de SSR e testes E2E com Cypress."
+
+Entradas chave:
+- Levantamento de arquitetura atual do Systems Architect Agent
+- Plano de testes do Testing Specialist Agent para cobrir regressao
+```
+
+### **Saidas esperadas:**
+```
+data/out/sprint07/analytics-dashboard/
+- 04-frontend-implementation.md   # Plano detalhado de implementacao
+- 04-components/                  # Estrutura de componentes versionada
+- 04-ui-guidelines.md             # Guidelines de estilo e tokens
+```
+
+### **Dicas de uso:**
+- Reforce metas de performance (Largest Contentful Paint, bundle inicial, tempo para interacao)
+- Indique navegadores alvo e preferencias de build (Vite, Webpack, Nx)
+- Liste dependencias criticas (PO-UI, Material, Redux, NgRx) e restricoes de versao
+- Combine com o UX/UI Specialist para garantir coerencia visual e com o Testing Specialist para alinhar cobertura automatizada
+
+### **Checklist rapido entregavel:**
+- Plano de componentes com responsabilidades claras
+- Sugestoes de testes unitarios (Jest, Vitest ou Karma) e E2E (Cypress ou Playwright)
+- Estrategia de monitoramento (Lighthouse, Web Vitals, Sentry) e acessibilidade (WCAG 2.1 AA)
+- Orientacoes de deploy e observabilidade frontend integradas ao pipeline
+## **7. Testing Specialist Agent**
+
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **Planejamento TDD** - criar plano de testes ANTES da implementaÃ§Ã£o
+- âœ… **EstratÃ©gia de testes** para funcionalidades complexas
+- âœ… **AnÃ¡lise de cobertura** e identificaÃ§Ã£o de gaps
+- âœ… **Testes de edge cases** e cenÃ¡rios extremos
+- âœ… **Planos de performance** e testes de carga
+
+### **ðŸ’» Como executar:**
 
 #### **Exemplo 1: Planejamento TDD Completo**
 ```
 @agents/manual/testing-specialist.agent.md
 
 Sprint: 03, Activity: calculo-comissao
-Contexto: "Criar plano TDD para cálculo de comissão por vendedor. Regras complexas: base + performance + metas + bônus trimestral. Meta: 95% cobertura."
+Contexto: "Criar plano TDD para cÃ¡lculo de comissÃ£o por vendedor. Regras complexas: base + performance + metas + bÃ´nus trimestral. Meta: 95% cobertura."
 
-Critérios de aceite:
-1. Cálculo correto conforme RN-0030 a RN-0035
+CritÃ©rios de aceite:
+1. CÃ¡lculo correto conforme RN-0030 a RN-0035
 2. Performance < 100ms para 1000 vendedores  
-3. Tratamento de cenários extremos (vendas negativas, etc.)
-4. Auditoria completa de cálculos
+3. Tratamento de cenÃ¡rios extremos (vendas negativas, etc.)
+4. Auditoria completa de cÃ¡lculos
 ```
 
-#### **Exemplo 2: Estratégia de Testes para Integração**
+#### **Exemplo 2: EstratÃ©gia de Testes para IntegraÃ§Ã£o**
 ```
 @agents/manual/testing-specialist.agent.md
 
 Sprint: 04, Activity: teste-integracao-sap  
-Contexto: "Plano de testes para integração SAP. Cenários: conexão OK, timeout, dados inválidos, volume alto. Incluir testes automatizados e manuais."
+Contexto: "Plano de testes para integraÃ§Ã£o SAP. CenÃ¡rios: conexÃ£o OK, timeout, dados invÃ¡lidos, volume alto. Incluir testes automatizados e manuais."
 
 Foco: 
-- Testes de integração end-to-end
-- Simulação de falhas de rede
+- Testes de integraÃ§Ã£o end-to-end
+- SimulaÃ§Ã£o de falhas de rede
 - Testes de volume (1000+ registros)
-- Validação de retry/fallback
+- ValidaÃ§Ã£o de retry/fallback
 ```
 
-#### **Exemplo 3: Análise de Cobertura Existente**
+#### **Exemplo 3: AnÃ¡lise de Cobertura Existente**
 ```
 @agents/manual/testing-specialist.agent.md
 
 Sprint: 02, Activity: auditoria-testes-pagamento
-Contexto: "Auditar cobertura atual do módulo de pagamentos. Identificar gaps críticos, criar plano para atingir 90%. Priorizar: casos de erro, validações, edge cases."
+Contexto: "Auditar cobertura atual do mÃ³dulo de pagamentos. Identificar gaps crÃ­ticos, criar plano para atingir 90%. Priorizar: casos de erro, validaÃ§Ãµes, edge cases."
 
-Entrada: Código existente do módulo pagamentos
-Foco: Análise de gaps + plano de melhoria
+Entrada: CÃ³digo existente do mÃ³dulo pagamentos
+Foco: AnÃ¡lise de gaps + plano de melhoria
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/calculo-comissao/
-├── 05-qa-plano.md                    ← Plano de QA detalhado
-├── engineering/
-│   └── tests/
-│       ├── Unit/                     ← Estrutura de testes
-│       │   ├── Domain/
-│       │   ├── Application/
-│       │   └── Infrastructure/
-│       ├── Integration/
-│       └── Performance/
-└── qa-evidence/
-    └── cobertura-alvo-95.md         ← Meta de cobertura
+â”œâ”€â”€ 05-qa-plano.md                    â† Plano de QA detalhado
+â”œâ”€â”€ engineering/
+â”‚   â””â”€â”€ tests/
+â”‚       â”œâ”€â”€ Unit/                     â† Estrutura de testes
+â”‚       â”‚   â”œâ”€â”€ Domain/
+â”‚       â”‚   â”œâ”€â”€ Application/
+â”‚       â”‚   â””â”€â”€ Infrastructure/
+â”‚       â”œâ”€â”€ Integration/
+â”‚       â””â”€â”€ Performance/
+â””â”€â”€ qa-evidence/
+    â””â”€â”€ cobertura-alvo-95.md         â† Meta de cobertura
 ```
 
-### **🎯 Dicas de uso:**
+### **ðŸŽ¯ Dicas de uso:**
 - **Defina metas claras** de cobertura (ex: 95%, 90%)
-- **Especifique tipos de teste** (unitário, integração, E2E, performance)  
-- **Inclua regras de negócio** específicas (RN-00xx) para validar
-- **Mencione cenários críticos** que não podem falhar
+- **Especifique tipos de teste** (unitÃ¡rio, integraÃ§Ã£o, E2E, performance)  
+- **Inclua regras de negÃ³cio** especÃ­ficas (RN-00xx) para validar
+- **Mencione cenÃ¡rios crÃ­ticos** que nÃ£o podem falhar
 
 ---
 
-## **7. 💻 Expert Developer Agent**
+## **8. Expert Developer Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Implementação guiada por TDD** seguindo plano de testes
-- ✅ **Refatoração de código legacy** aplicando SOLID + DDD
-- ✅ **Implementação de funcionalidades complexas** com arquitetura definida
-- ✅ **Correção de bugs críticos** com abordagem estruturada
-- ✅ **Mentoria técnica** através de código exemplar
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **ImplementaÃ§Ã£o guiada por TDD** seguindo plano de testes
+- âœ… **RefatoraÃ§Ã£o de cÃ³digo legacy** aplicando SOLID + DDD
+- âœ… **ImplementaÃ§Ã£o de funcionalidades complexas** com arquitetura definida
+- âœ… **CorreÃ§Ã£o de bugs crÃ­ticos** com abordagem estruturada
+- âœ… **Mentoria tÃ©cnica** atravÃ©s de cÃ³digo exemplar
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
-#### **Exemplo 1: Implementação TDD Completa**
+#### **Exemplo 1: ImplementaÃ§Ã£o TDD Completa**
 ```
 @agents/manual/expert-developer.agent.md
 
 Sprint: 03, Activity: calculo-comissao
-Contexto: "Implementar cálculo de comissão seguindo TDD. Usar plano de QA do Testing Specialist. Aplicar Clean Architecture + DDD patterns."
+Contexto: "Implementar cÃ¡lculo de comissÃ£o seguindo TDD. Usar plano de QA do Testing Specialist. Aplicar Clean Architecture + DDD patterns."
 
-Entrada obrigatória:
+Entrada obrigatÃ³ria:
 - 05-qa-plano.md (plano criado pelo Testing Specialist)
 - 03-arquitetura.md (design do Systems Architect)  
-- 00-acceptance-criteria.md (critérios de aceite)
+- 00-acceptance-criteria.md (critÃ©rios de aceite)
 
-Foco: Implementação test-first, código limpo
+Foco: ImplementaÃ§Ã£o test-first, cÃ³digo limpo
 ```
 
-#### **Exemplo 2: Refatoração Legacy**
+#### **Exemplo 2: RefatoraÃ§Ã£o Legacy**
 ```
 @agents/manual/expert-developer.agent.md
 
 Sprint: 04, Activity: refactoring-usuarios
-Contexto: "Refatorar módulo usuários (5 anos, God classes, 0% cobertura). Aplicar SOLID, extrair services, criar testes. Manter compatibilidade API."
+Contexto: "Refatorar mÃ³dulo usuÃ¡rios (5 anos, God classes, 0% cobertura). Aplicar SOLID, extrair services, criar testes. Manter compatibilidade API."
 
 Problema atual:
 - UsuarioManager com 800+ linhas
-- Lógica misturada (validação + persistência + email)
-- Dependências hardcoded
-- Impossível testar unitariamente
+- LÃ³gica misturada (validaÃ§Ã£o + persistÃªncia + email)
+- DependÃªncias hardcoded
+- ImpossÃ­vel testar unitariamente
 
 Meta: Clean Architecture + 90% cobertura
 ```
 
-#### **Exemplo 3: Feature Complexa com Integrações**  
+#### **Exemplo 3: Feature Complexa com IntegraÃ§Ãµes**  
 ```
 @agents/manual/expert-developer.agent.md
 
 Sprint: 05, Activity: dashboard-executivo
-Contexto: "Implementar dashboard executivo: KPIs real-time, gráficos interativos, export PDF, cache inteligente, permissões granulares."
+Contexto: "Implementar dashboard executivo: KPIs real-time, grÃ¡ficos interativos, export PDF, cache inteligente, permissÃµes granulares."
 
 Tecnologias:
 - Backend: .NET Framework 4.8 + SignalR
@@ -530,70 +599,70 @@ Tecnologias:
 - PDF: iTextSharp
 - Charts: Chart.js via Web API
 
-Complexidades: Performance + segurança + real-time
+Complexidades: Performance + seguranÃ§a + real-time
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/calculo-comissao/
-├── 04-desenvolvimento.md             ← Relatório da implementação  
-├── engineering/
-│   ├── src/
-│   │   ├── Core/
-│   │   │   ├── Domain/
-│   │   │   │   ├── Entities/
-│   │   │   │   ├── ValueObjects/  
-│   │   │   │   └── Services/
-│   │   │   └── Application/
-│   │   │       ├── Services/
-│   │   │       ├── DTOs/
-│   │   │       └── Validators/
-│   │   ├── Infrastructure/
-│   │   │   ├── Data/
-│   │   │   └── External/
-│   │   └── API/
-│   │       └── Controllers/
-│   └── tests/
-│       ├── Unit/ (95% cobertura atingida)
-│       ├── Integration/
-│       └── Performance/
-└── docs/
-    ├── api-documentation.md
-    └── deployment-guide.md
+â”œâ”€â”€ 04-desenvolvimento.md             â† RelatÃ³rio da implementaÃ§Ã£o  
+â”œâ”€â”€ engineering/
+â”‚   â”œâ”€â”€ src/
+â”‚   â”‚   â”œâ”€â”€ Core/
+â”‚   â”‚   â”‚   â”œâ”€â”€ Domain/
+â”‚   â”‚   â”‚   â”‚   â”œâ”€â”€ Entities/
+â”‚   â”‚   â”‚   â”‚   â”œâ”€â”€ ValueObjects/  
+â”‚   â”‚   â”‚   â”‚   â””â”€â”€ Services/
+â”‚   â”‚   â”‚   â””â”€â”€ Application/
+â”‚   â”‚   â”‚       â”œâ”€â”€ Services/
+â”‚   â”‚   â”‚       â”œâ”€â”€ DTOs/
+â”‚   â”‚   â”‚       â””â”€â”€ Validators/
+â”‚   â”‚   â”œâ”€â”€ Infrastructure/
+â”‚   â”‚   â”‚   â”œâ”€â”€ Data/
+â”‚   â”‚   â”‚   â””â”€â”€ External/
+â”‚   â”‚   â””â”€â”€ API/
+â”‚   â”‚       â””â”€â”€ Controllers/
+â”‚   â””â”€â”€ tests/
+â”‚       â”œâ”€â”€ Unit/ (95% cobertura atingida)
+â”‚       â”œâ”€â”€ Integration/
+â”‚       â””â”€â”€ Performance/
+â””â”€â”€ docs/
+    â”œâ”€â”€ api-documentation.md
+    â””â”€â”€ deployment-guide.md
 ```
 
-### **🎯 Dicas de uso:**
-- **Sempre forneça o plano de QA** do Testing Specialist como entrada
+### **ðŸŽ¯ Dicas de uso:**
+- **Sempre forneÃ§a o plano de QA** do Testing Specialist como entrada
 - **Referencie arquitetura** definida pelo Systems Architect
-- **Seja específico sobre tecnologias** e restrições (.NET Framework 4.8)
-- **Mencione compatibilidade** se for refatoração de código existente
+- **Seja especÃ­fico sobre tecnologias** e restriÃ§Ãµes (.NET Framework 4.8)
+- **Mencione compatibilidade** se for refatoraÃ§Ã£o de cÃ³digo existente
 
 ---
 
-## **8. 🔍 Testing Validator Agent**
+## **9. Testing Validator Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Validação pós-TDD** - verificar se implementação seguiu o plano
-- ✅ **Auditoria de qualidade** de testes implementados
-- ✅ **Verificação de cobertura** real vs planejada
-- ✅ **Validação de evidências** por critério de aceite
-- ✅ **Parecer técnico independente** sobre implementação
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **ValidaÃ§Ã£o pÃ³s-TDD** - verificar se implementaÃ§Ã£o seguiu o plano
+- âœ… **Auditoria de qualidade** de testes implementados
+- âœ… **VerificaÃ§Ã£o de cobertura** real vs planejada
+- âœ… **ValidaÃ§Ã£o de evidÃªncias** por critÃ©rio de aceite
+- âœ… **Parecer tÃ©cnico independente** sobre implementaÃ§Ã£o
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
-#### **Exemplo 1: Validação TDD Completa**
+#### **Exemplo 1: ValidaÃ§Ã£o TDD Completa**
 ```
 @agents/manual/testing-validator.agent.md
 
 Sprint: 03, Activity: calculo-comissao
-Contexto: "Validar se Expert Developer implementou corretamente o plano de QA. Verificar: todos cenários, cobertura 95%, evidências por critério."
+Contexto: "Validar se Expert Developer implementou corretamente o plano de QA. Verificar: todos cenÃ¡rios, cobertura 95%, evidÃªncias por critÃ©rio."
 
-Entrada necessária:
+Entrada necessÃ¡ria:
 - 05-qa-plano.md (plano original do Testing Specialist)
-- 04-desenvolvimento.md (implementação do Expert Developer)
-- Código implementado com testes
+- 04-desenvolvimento.md (implementaÃ§Ã£o do Expert Developer)
+- CÃ³digo implementado com testes
 
-Validar: Conformidade plano → implementação
+Validar: Conformidade plano â†’ implementaÃ§Ã£o
 ```
 
 #### **Exemplo 2: Auditoria de Qualidade**
@@ -601,151 +670,151 @@ Validar: Conformidade plano → implementação
 @agents/manual/testing-validator.agent.md  
 
 Sprint: 04, Activity: auditoria-modulo-pagamentos
-Contexto: "Auditoria independente do módulo pagamentos após refatoração. Verificar: testes robustos, cobertura real, cenários edge cases implementados."
+Contexto: "Auditoria independente do mÃ³dulo pagamentos apÃ³s refatoraÃ§Ã£o. Verificar: testes robustos, cobertura real, cenÃ¡rios edge cases implementados."
 
 Foco:
-- Qualidade dos testes (não apenas quantidade)
-- Cenários críticos cobertos  
-- Testes determinísticos e confiáveis
+- Qualidade dos testes (nÃ£o apenas quantidade)
+- CenÃ¡rios crÃ­ticos cobertos  
+- Testes determinÃ­sticos e confiÃ¡veis
 - Performance dos testes
 ```
 
-#### **Exemplo 3: Validação de Evidências** 
+#### **Exemplo 3: ValidaÃ§Ã£o de EvidÃªncias** 
 ```
 @agents/manual/testing-validator.agent.md
 
 Sprint: 05, Activity: validacao-criterios-dashboard  
-Contexto: "Validar evidências técnicas para cada critério de aceite do dashboard executivo. Cada critério deve ter teste automatizado + prova de funcionamento."
+Contexto: "Validar evidÃªncias tÃ©cnicas para cada critÃ©rio de aceite do dashboard executivo. Cada critÃ©rio deve ter teste automatizado + prova de funcionamento."
 
-Critérios para validar:
+CritÃ©rios para validar:
 1. KPIs atualizados em real-time (< 2s)
 2. Export PDF funcional (< 5s para 100 registros) 
 3. Cache otimizado (hit rate > 80%)
-4. Permissões granulares (por usuário/papel)
+4. PermissÃµes granulares (por usuÃ¡rio/papel)
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/calculo-comissao/
-└── 05.1-testing-validation.md        ← Relatório de validação
-    ├── Cenários: 15/15 implementados ✅
-    ├── Cobertura: 96% (meta 95%) ✅  
-    ├── Evidências: 4/4 critérios ✅
-    └── DECISÃO: VALIDAÇÃO APROVADA ✅
+â””â”€â”€ 05.1-testing-validation.md        â† RelatÃ³rio de validaÃ§Ã£o
+    â”œâ”€â”€ CenÃ¡rios: 15/15 implementados âœ…
+    â”œâ”€â”€ Cobertura: 96% (meta 95%) âœ…  
+    â”œâ”€â”€ EvidÃªncias: 4/4 critÃ©rios âœ…
+    â””â”€â”€ DECISÃƒO: VALIDAÃ‡ÃƒO APROVADA âœ…
 ```
 
-### **🎯 Dicas de uso:**
-- **Sempre forneça o plano original** (05-qa-plano.md) para comparação
-- **Inclua implementação** (04-desenvolvimento.md) e código fonte
-- **Seja específico sobre critérios** que precisam de evidência técnica
-- **Use para validação objetiva** - não opinião, mas conformidade
+### **ðŸŽ¯ Dicas de uso:**
+- **Sempre forneÃ§a o plano original** (05-qa-plano.md) para comparaÃ§Ã£o
+- **Inclua implementaÃ§Ã£o** (04-desenvolvimento.md) e cÃ³digo fonte
+- **Seja especÃ­fico sobre critÃ©rios** que precisam de evidÃªncia tÃ©cnica
+- **Use para validaÃ§Ã£o objetiva** - nÃ£o opiniÃ£o, mas conformidade
 
 ---
 
-## **9. 🛡️ Code Reviewer Agent**
+## **10. Code Reviewer Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Auditoria independente** de qualidade do código
-- ✅ **Validação de padrões** de desenvolvimento
-- ✅ **Review de segurança** e boas práticas
-- ✅ **Verificação de nomenclatura** e convenções
-- ✅ **Análise de commit messages** e documentação
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **Auditoria independente** de qualidade do cÃ³digo
+- âœ… **ValidaÃ§Ã£o de padrÃµes** de desenvolvimento
+- âœ… **Review de seguranÃ§a** e boas prÃ¡ticas
+- âœ… **VerificaÃ§Ã£o de nomenclatura** e convenÃ§Ãµes
+- âœ… **AnÃ¡lise de commit messages** e documentaÃ§Ã£o
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
 #### **Exemplo 1: Auditoria Completa de Qualidade**
 ```
 @agents/manual/code-reviewer.agent.md
 
 Sprint: 03, Activity: review-modulo-comissao
-Contexto: "Auditoria independente do módulo comissão após implementação. Validar: padrões SOLID, nomenclatura, commits, documentação, warnings."
+Contexto: "Auditoria independente do mÃ³dulo comissÃ£o apÃ³s implementaÃ§Ã£o. Validar: padrÃµes SOLID, nomenclatura, commits, documentaÃ§Ã£o, warnings."
 
 Foco completo:
-- ✅ Padrões de nomenclatura (PascalCase/camelCase)
-- ✅ Indentação e formatação consistente  
-- ✅ Commit messages com gitemoji
-- ✅ Estrutura Clean Architecture
-- ✅ Documentação XML adequada
-- ✅ Zero warnings de compilação
+- âœ… PadrÃµes de nomenclatura (PascalCase/camelCase)
+- âœ… IndentaÃ§Ã£o e formataÃ§Ã£o consistente  
+- âœ… Commit messages com gitemoji
+- âœ… Estrutura Clean Architecture
+- âœ… DocumentaÃ§Ã£o XML adequada
+- âœ… Zero warnings de compilaÃ§Ã£o
 ```
 
-#### **Exemplo 2: Review Focado em Segurança**
+#### **Exemplo 2: Review Focado em SeguranÃ§a**
 ```
 @agents/manual/code-reviewer.agent.md
 
 Sprint: 04, Activity: security-review-auth
-Contexto: "Review de segurança do módulo autenticação. Focar: validação inputs, sanitização, tokens JWT, logs auditoria, OWASP Top 10."
+Contexto: "Review de seguranÃ§a do mÃ³dulo autenticaÃ§Ã£o. Focar: validaÃ§Ã£o inputs, sanitizaÃ§Ã£o, tokens JWT, logs auditoria, OWASP Top 10."
 
-Foco específico:
+Foco especÃ­fico:
 - Input validation (SQL injection, XSS)
-- Autorização granular  
-- Logs de segurança
+- AutorizaÃ§Ã£o granular  
+- Logs de seguranÃ§a
 - Tratamento de senhas
 - Session management
 ```
 
-#### **Exemplo 3: Review de Convenções**
+#### **Exemplo 3: Review de ConvenÃ§Ãµes**
 ```
 @agents/manual/code-reviewer.agent.md
 
 Sprint: 02, Activity: padronizacao-codigo  
-Contexto: "Validar aderência às convenções do projeto em 5 classes refatoradas. Verificar: nomenclatura English/Portuguese, commits gitemoji, indentação 4 espaços."
+Contexto: "Validar aderÃªncia Ã s convenÃ§Ãµes do projeto em 5 classes refatoradas. Verificar: nomenclatura English/Portuguese, commits gitemoji, indentaÃ§Ã£o 4 espaÃ§os."
 
 Escopo limitado:
-- Apenas convenções e formatação
-- Não analisar lógica de negócio  
-- Foco em consistência com codebase
+- Apenas convenÃ§Ãµes e formataÃ§Ã£o
+- NÃ£o analisar lÃ³gica de negÃ³cio  
+- Foco em consistÃªncia com codebase
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/review-modulo-comissao/
-└── 04.1-code-review.md              ← Relatório de auditoria
-    ├── ✅ NOMENCLATURA: Aprovado
-    ├── ✅ INDENTAÇÃO: Aprovado  
-    ├── ❌ COMMITS: Necessita correção
-    ├── ✅ ARQUITETURA: Aprovado
-    ├── ✅ DOCUMENTAÇÃO: Aprovado
-    └── DECISÃO: NECESSITA CORREÇÕES (commits)
+â””â”€â”€ 04.1-code-review.md              â† RelatÃ³rio de auditoria
+    â”œâ”€â”€ âœ… NOMENCLATURA: Aprovado
+    â”œâ”€â”€ âœ… INDENTAÃ‡ÃƒO: Aprovado  
+    â”œâ”€â”€ âŒ COMMITS: Necessita correÃ§Ã£o
+    â”œâ”€â”€ âœ… ARQUITETURA: Aprovado
+    â”œâ”€â”€ âœ… DOCUMENTAÃ‡ÃƒO: Aprovado
+    â””â”€â”€ DECISÃƒO: NECESSITA CORREÃ‡Ã•ES (commits)
 ```
 
-### **🎯 Dicas de uso:**
-- **Defina escopo** claramente (completo vs específico)
-- **Use após implementação** para validação independente
-- **Ideal para projetos críticos** que precisam de qualidade extra
-- **Complemente com Testing Validator** para validação técnica completa
+### **ðŸŽ¯ Dicas de uso:**
+- **Defina escopo** claramente (completo vs especÃ­fico)
+- **Use apÃ³s implementaÃ§Ã£o** para validaÃ§Ã£o independente
+- **Ideal para projetos crÃ­ticos** que precisam de qualidade extra
+- **Complemente com Testing Validator** para validaÃ§Ã£o tÃ©cnica completa
 
 ---
 
-## **10. ✅ Product Owner Final Agent**
+## **11. Product Owner Final Agent**
 
-### **📝 Quando usar individualmente:**
-- ✅ **Validação final** de critérios de aceite
-- ✅ **Checklist de entrega** antes do go-live
-- ✅ **Auditoria de compliance** com requisitos de negócio
-- ✅ **Aprovação/rejeição** de entregas
-- ✅ **Documentação de pendências** e próximos passos
+### **ðŸ“ Quando usar individualmente:**
+- âœ… **ValidaÃ§Ã£o final** de critÃ©rios de aceite
+- âœ… **Checklist de entrega** antes do go-live
+- âœ… **Auditoria de compliance** com requisitos de negÃ³cio
+- âœ… **AprovaÃ§Ã£o/rejeiÃ§Ã£o** de entregas
+- âœ… **DocumentaÃ§Ã£o de pendÃªncias** e prÃ³ximos passos
 
-### **💻 Como executar:**
+### **ðŸ’» Como executar:**
 
-#### **Exemplo 1: Validação Final Completa**
+#### **Exemplo 1: ValidaÃ§Ã£o Final Completa**
 ```
 @agents/manual/product-owner-final.agent.md
 
 Sprint: 03, Activity: entrega-sistema-comissao
-Contexto: "Validação final do sistema de comissão. Verificar CADA critério de aceite contra evidências técnicas. Decidir: ENTREGA APROVADA ou PENDÊNCIAS."
+Contexto: "ValidaÃ§Ã£o final do sistema de comissÃ£o. Verificar CADA critÃ©rio de aceite contra evidÃªncias tÃ©cnicas. Decidir: ENTREGA APROVADA ou PENDÃŠNCIAS."
 
-Critérios para validar:
-1. Cálculo correto conforme RN-0030 a RN-0035
+CritÃ©rios para validar:
+1. CÃ¡lculo correto conforme RN-0030 a RN-0035
 2. Performance < 100ms para 1000 vendedores
-3. Interface responsiva e acessível  
+3. Interface responsiva e acessÃ­vel  
 4. Auditoria completa implementada
 5. Testes automatizados com 95% cobertura
 
-Evidências disponíveis:
-- Código implementado + testes
-- Relatórios de performance  
-- Documentação técnica
+EvidÃªncias disponÃ­veis:
+- CÃ³digo implementado + testes
+- RelatÃ³rios de performance  
+- DocumentaÃ§Ã£o tÃ©cnica
 ```
 
 #### **Exemplo 2: Checklist de Go-Live**
@@ -753,15 +822,15 @@ Evidências disponíveis:
 @agents/manual/product-owner-final.agent.md
 
 Sprint: 04, Activity: checklist-dashboard-executivo
-Contexto: "Checklist final para go-live do dashboard executivo. Validar: funcionalidades, performance, segurança, documentação usuário, plano rollback."
+Contexto: "Checklist final para go-live do dashboard executivo. Validar: funcionalidades, performance, seguranÃ§a, documentaÃ§Ã£o usuÃ¡rio, plano rollback."
 
-Verificações críticas:
-- ✅ KPIs real-time funcionais
-- ✅ Export PDF em produção
-- ✅ Permissões granulares testadas
-- ✅ Manual usuário criado
-- ✅ Plano de rollback documentado
-- ✅ Monitoramento configurado
+VerificaÃ§Ãµes crÃ­ticas:
+- âœ… KPIs real-time funcionais
+- âœ… Export PDF em produÃ§Ã£o
+- âœ… PermissÃµes granulares testadas
+- âœ… Manual usuÃ¡rio criado
+- âœ… Plano de rollback documentado
+- âœ… Monitoramento configurado
 ```
 
 #### **Exemplo 3: Auditoria de Compliance**
@@ -769,123 +838,124 @@ Verificações críticas:
 @agents/manual/product-owner-final.agent.md
 
 Sprint: 05, Activity: compliance-audit-pagamentos  
-Contexto: "Auditoria de compliance do módulo pagamentos para certificação SOC 2. Validar: logs auditoria, retenção dados, controles acesso, documentação."
+Contexto: "Auditoria de compliance do mÃ³dulo pagamentos para certificaÃ§Ã£o SOC 2. Validar: logs auditoria, retenÃ§Ã£o dados, controles acesso, documentaÃ§Ã£o."
 
 Requisitos compliance:
-- Logs estruturados (12 meses retenção)
+- Logs estruturados (12 meses retenÃ§Ã£o)
 - Controle de acesso granular
-- Auditoria de todas transações  
-- Documentação de processos
-- Testes de recuperação de desastre
+- Auditoria de todas transaÃ§Ãµes  
+- DocumentaÃ§Ã£o de processos
+- Testes de recuperaÃ§Ã£o de desastre
 ```
 
-### **📁 Saídas esperadas:**
+### **ðŸ“ SaÃ­das esperadas:**
 ```
 data/out/sprint03/entrega-sistema-comissao/
-└── 99-checklist-final.md             ← Checklist de validação
-    ├── Critério 1: ✅ ATENDIDO + evidência
-    ├── Critério 2: ✅ ATENDIDO + evidência
-    ├── Critério 3: ❌ PENDENTE + ação
-    ├── Critério 4: ✅ ATENDIDO + evidência
-    ├── DECISÃO: ❌ NECESSITA CORREÇÕES
-    └── Próximos passos: Lista de pendências
+â””â”€â”€ 99-checklist-final.md             â† Checklist de validaÃ§Ã£o
+    â”œâ”€â”€ CritÃ©rio 1: âœ… ATENDIDO + evidÃªncia
+    â”œâ”€â”€ CritÃ©rio 2: âœ… ATENDIDO + evidÃªncia
+    â”œâ”€â”€ CritÃ©rio 3: âŒ PENDENTE + aÃ§Ã£o
+    â”œâ”€â”€ CritÃ©rio 4: âœ… ATENDIDO + evidÃªncia
+    â”œâ”€â”€ DECISÃƒO: âŒ NECESSITA CORREÃ‡Ã•ES
+    â””â”€â”€ PrÃ³ximos passos: Lista de pendÃªncias
 ```
 
-### **🎯 Dicas de uso:**
-- **Liste todos os critérios** de aceite explicitamente
-- **Referencie evidências** técnicas disponíveis
-- **Seja objetivo** - cada critério é binário (atendido/não atendido)  
-- **Use para decisão final** de entrega/go-live
+### **ðŸŽ¯ Dicas de uso:**
+- **Liste todos os critÃ©rios** de aceite explicitamente
+- **Referencie evidÃªncias** tÃ©cnicas disponÃ­veis
+- **Seja objetivo** - cada critÃ©rio Ã© binÃ¡rio (atendido/nÃ£o atendido)  
+- **Use para decisÃ£o final** de entrega/go-live
 
 ---
 
-## **🎯 Templates Padronizados de Entrada**
+## **ðŸŽ¯ Templates Padronizados de Entrada**
 
-### **Template Básico:**
+### **Template BÃ¡sico:**
 ```
 @agents/manual/[NOME-AGENTE].agent.md
 
 Sprint: [XX], Activity: [nome-atividade]
-Contexto: "[Descrição clara do que precisa ser feito e por quê]"
+Contexto: "[DescriÃ§Ã£o clara do que precisa ser feito e por quÃª]"
 
-[Informações específicas conforme o agente]
+[InformaÃ§Ãµes especÃ­ficas conforme o agente]
 ```
 
-### **Template Avançado:**
+### **Template AvanÃ§ado:**
 ```
 @agents/manual/[NOME-AGENTE].agent.md  
 
 Sprint: [XX], Activity: [nome-atividade]
-Contexto: "[Descrição detalhada do problema/necessidade]"
+Contexto: "[DescriÃ§Ã£o detalhada do problema/necessidade]"
 
-Entrada disponível:
-- [Arquivo 1]: [Descrição]
-- [Arquivo 2]: [Descrição]  
+Entrada disponÃ­vel:
+- [Arquivo 1]: [DescriÃ§Ã£o]
+- [Arquivo 2]: [DescriÃ§Ã£o]  
 
-Restrições:
-- [Restrição técnica 1]
-- [Restrição de prazo/orçamento]
+RestriÃ§Ãµes:
+- [RestriÃ§Ã£o tÃ©cnica 1]
+- [RestriÃ§Ã£o de prazo/orÃ§amento]
 
-Foco específico:
+Foco especÃ­fico:
 - [Aspecto 1 para focar]
 - [Aspecto 2 para focar]
 
-Critérios de sucesso:
+CritÃ©rios de sucesso:
 - [Como medir o sucesso]
-- [Métricas específicas]
+- [MÃ©tricas especÃ­ficas]
 ```
 
 ---
 
-## **🚨 Troubleshooting Comum**
+## **ðŸš¨ Troubleshooting Comum**
 
-### **❌ Problema: Agente não entende o contexto**
-**✅ Solução:** 
-- Seja mais específico na descrição
-- Inclua informações de domínio (financeiro, tributário, etc.)
+### **âŒ Problema: Agente nÃ£o entende o contexto**
+**âœ… SoluÃ§Ã£o:** 
+- Seja mais especÃ­fico na descriÃ§Ã£o
+- Inclua informaÃ§Ãµes de domÃ­nio (financeiro, tributÃ¡rio, etc.)
 - Referencie documentos/regras existentes (RN-00xx)
 
-### **❌ Problema: Saída muito genérica**  
-**✅ Solução:**
-- Defina restrições técnicas (.NET Framework 4.8, PostgreSQL)
-- Especifique métricas (performance < 100ms, cobertura 95%)
-- Inclua exemplos do que você espera
+### **âŒ Problema: SaÃ­da muito genÃ©rica**  
+**âœ… SoluÃ§Ã£o:**
+- Defina restriÃ§Ãµes tÃ©cnicas (.NET Framework 4.8, PostgreSQL)
+- Especifique mÃ©tricas (performance < 100ms, cobertura 95%)
+- Inclua exemplos do que vocÃª espera
 
-### **❌ Problema: Agente não encontra arquivos**
-**✅ Solução:**
+### **âŒ Problema: Agente nÃ£o encontra arquivos**
+**âœ… SoluÃ§Ã£o:**
 - Verifique estrutura de pastas `data/in/sprint{X}/{activity}/`
-- Confirme que anexos estão em `/attachments/`
-- Use caminhos absolutos se necessário
+- Confirme que anexos estÃ£o em `/attachments/`
+- Use caminhos absolutos se necessÃ¡rio
 
-### **❌ Problema: Resultado não atende expectativa**
-**✅ Solução:**  
-- Re-execute com contexto mais específico
-- Use Mesa Redonda para decisões complexas
-- Combine múltiplos agentes em sequência
+### **âŒ Problema: Resultado nÃ£o atende expectativa**
+**âœ… SoluÃ§Ã£o:**  
+- Re-execute com contexto mais especÃ­fico
+- Use Mesa Redonda para decisÃµes complexas
+- Combine mÃºltiplos agentes em sequÃªncia
 
 ---
 
-## **💡 Dicas Gerais de Otimização**
+## **ðŸ’¡ Dicas Gerais de OtimizaÃ§Ã£o**
 
-### **🎯 Para melhores resultados:**
-1. **Seja específico** - contexto claro gera saídas precisas
+### **ðŸŽ¯ Para melhores resultados:**
+1. **Seja especÃ­fico** - contexto claro gera saÃ­das precisas
 2. **Prepare entradas** - organize arquivos/documentos antes
-3. **Defina métricas** - números concretos vs "boa performance"  
-4. **Use sequencialmente** - cada agente consome saída do anterior
-5. **Valide incrementalmente** - não espere o final para revisar
+3. **Defina mÃ©tricas** - nÃºmeros concretos vs "boa performance"  
+4. **Use sequencialmente** - cada agente consome saÃ­da do anterior
+5. **Valide incrementalmente** - nÃ£o espere o final para revisar
 
-### **⚡ Para eficiência:**
-1. **Agente individual** para tarefas específicas
-2. **Mesa Redonda** para decisões/debates  
-3. **Fluxo completo** para implementações end-to-end
-4. **Combine conforme necessidade** - não existe "jeito certo único"
+### **âš¡ Para eficiÃªncia:**
+1. **Agente individual** para tarefas especÃ­ficas
+2. **Mesa Redonda** para decisÃµes/debates  
+3. **Fluxo completo** para implementaÃ§Ãµes end-to-end
+4. **Combine conforme necessidade** - nÃ£o existe "jeito certo Ãºnico"
 
-### **🎨 Para flexibilidade:**
+### **ðŸŽ¨ Para flexibilidade:**
 1. **Ajuste o contexto** conforme seu projeto
-2. **Modifique templates** para seu domínio específico  
-3. **Combine agentes** em ordens diferentes se necessário
-4. **Reutilize saídas** entre diferentes atividades
+2. **Modifique templates** para seu domÃ­nio especÃ­fico  
+3. **Combine agentes** em ordens diferentes se necessÃ¡rio
+4. **Reutilize saÃ­das** entre diferentes atividades
 
 ---
 
-**Este guia garante que você possa usar qualquer agente individualmente com máxima eficácia! 🚀**
+**Este guia garante que vocÃª possa usar qualquer agente individualmente com mÃ¡xima eficÃ¡cia! ðŸš€**
+

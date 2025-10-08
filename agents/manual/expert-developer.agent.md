@@ -225,8 +225,9 @@ prompts:
 
   WORKFLOW DE APROVACAO:
   - AO FINALIZAR: Apresentar resumo executivo do desenvolvimento
-  - PEDIR APROVACAO: "APROVACAO NECESSARIA - Prosseguir com Testing Specialist?"
-  - SE [SIM]: Automaticamente executar: @agents/manual/testing-specialist.agent.md
+  - PEDIR APROVACAO: "APROVACAO NECESSARIA - Prosseguir com Frontend Specialist (opcional) e depois Testing Validator?"
+  - SE [SIM FRONTEND]: Executar: @agents/manual/frontend-specialist.agent.md e, ao concluir, @agents/manual/testing-validator.agent.md
+  - SE [PULAR FRONTEND]: Executar diretamente: @agents/manual/testing-validator.agent.md
   - SE [NAO]: Parar processo para revisoes
   task_template: |
    Contexto: RN alvo conforme sprint/activity (anexos em {attachments_path}, se houver). Camada alvo: Domain/Application/Infrastructure/Api. Padrões: .NET Framework 4.8, DDD, SOLID, FluentValidation.
@@ -234,7 +235,7 @@ prompts:
 
    AO FINALIZAR:
    - **APRESENTAR MATRIZ DE RASTREABILIDADE** (Criterio → Implementacao → Teste do QA Plan)
-   - **COMPROVAR IMPLEMENTACAO** de todos os testes especificados no 05-qa-plano.md
+  - **COMPROVAR IMPLEMENTACAO** de todos os testes especificados no 05-qa-plano.md (ou atualizados após UX/Frontend)
    - **EXECUTAR TODOS OS TESTES** definidos pelo Testing Specialist
    - **REPORTAR COBERTURA** e aderencia ao plano de QA
    - SOLICITAR APROVACAO: "Desenvolvimento TDD concluido. Prosseguir com Testing Validator?"

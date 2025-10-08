@@ -1,58 +1,40 @@
 %% Mermaid diagram: Fluxo completo com Frontend Specialist
-%% Fluxo de agentes incluindo especialista frontend
+%% TDD: Testing Specialist antes do Expert Developer; UX/UI e Frontend opcionais antes do Testing Validator
 graph TD
-    A[Product Owner] --> B[Mesa Redonda]
-    B --> C[Requirements Analyst]
-    C --> D[Systems Architect]
-    D --> E[Expert Developer]
-    D --> F[Frontend Specialist]
-    E --> G[Testing Specialist]
-    G --> F
-    
-    subgraph "TDD - Testing First"
-        H[05-qa-plano.md - Testing Specialist]
-        I[Plano de Testes Completo]
-    end
+    PO[Product Owner] --> RT[Mesa Redonda]
+    RT --> RA[Requirements Analyst]
+    RA --> SA[Systems Architect]
 
-    subgraph "Artefatos Backend"
-        J[04-desenvolvimento.md]
-        K[Entidades e Servicos]
-        L[APIs e Controllers]
-    end
-    
-    subgraph "Artefatos Frontend"
-        M[04-frontend-implementation.md]
-        N[04-components/]
-        O[04-ui-guidelines.md]
-        P[Componentes React/Angular]
-        Q[Temas e Estilos]
-    end
-    
-    subgraph "Validacao"
-        R[Testing Validator]
-        S[05.1-testing-validation.md]
-    end
-    
-    E --> H
-    E --> I  
-    F --> J
-    F --> K
-    F --> L
-    G --> M
-    G --> N
-    G --> O
-    G --> P
-    G --> Q
+    %% TDD - Testing First
+    SA --> TS[Testing Specialist\nPlano de QA]
+    TS --> ED[Expert Developer\nImplementa seguindo plano]
 
-    H --> F
-    I --> F
-    H --> G
-    
-    D --> P
-    E --> Q
-    F --> Q
-    C --> R
-    E --> R
-    F --> R
-    G --> R
-    R --> S
+    %% Mermaid diagram: Fluxo completo com Frontend Specialist
+    %% TDD: Testing Specialist antes do Expert Developer; UX e Frontend opcionais antes do Testing Validator
+    graph TD
+      PO[Product Owner]
+      RT[Mesa Redonda]
+      RA[Requirements Analyst]
+      SA[Systems Architect]
+      TS[Testing Specialist - Plano QA]
+      ED[Expert Developer - Implementa Plano]
+      UX[UXUI Specialist opcional]
+      FE[Frontend Specialist opcional]
+      TV[Testing Validator]
+      QA[05-qa-plano.md]
+      DEV[04-desenvolvimento.md]
+      VAL[05.1-testing-validation.md]
+
+      PO --> RT
+      RT --> RA
+      RA --> SA
+      SA --> TS
+      TS --> ED
+      SA -.-> UX
+      UX -.-> FE
+      ED --> TV
+      FE --> TV
+      TS --> QA
+      ED --> DEV
+      TV --> VAL
+        PO[Product Owner] --> RT[Mesa Redonda]

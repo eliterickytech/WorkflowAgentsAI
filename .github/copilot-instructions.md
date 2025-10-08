@@ -1,405 +1,259 @@
-# RickytechAgileAgent - AI Coding Assistant Instructions
+# RickytechAgileAgent - Copilot Instructions
 
-This is an **AI Agent Development Framework** for building .NET applications using **automated workflows** with **Scrum practices**, **BDD**, **DDD**, and **Clean Architecture**.
+This document extends the default framework guidance. Read it fully before executing any agent or automation. Every section is written in ASCII to prevent encoding issues.
 
-## ⚠️ CRITICAL: File Encoding and Formatting Standards
+---
 
-### 🎯 MANDATORY ENCODING RULES - ALWAYS FOLLOW
+## 1. Business Analysis and Operating Model
+- Mission: deliver high quality .NET solutions by orchestrating AI agents aligned with Scrum, BDD, DDD, and Clean Architecture.
+- Business value:
+  - Consistent demand intake via `business_request/`.
+  - Traceable outputs under `data/out/sprintXX/activityXX/` for audits and stakeholder review.
+  - Built-in TDD flow that reduces rework and raises product confidence.
+- Stakeholders served:
+  - Product leadership receives structured context and acceptance criteria (`00-*`).
+  - Engineering teams gain sequential artifacts (requirements, architecture, QA plan, code notes).
+  - Compliance and QA teams obtain evidence (ADRs, diagrams, QA plans, validation reports).
+- Key metrics:
+  - Time to clarify demand reduced by reusable templates.
+  - Defect escape rate lowered by QA-first execution.
+  - Audit readiness ensured through standardized documentation and logs.
 
-**BEFORE creating, editing, or saving ANY file in this project, you MUST:**
+### 1.1 End to End Process Flowcharts
 
-1. **Use UTF-8 encoding WITHOUT BOM** for all files except C#
-2. **NEVER use UTF-8 WITH BOM** for Markdown, PowerShell, YAML, JSON, or Gherkin files
-3. **Check encoding in VS Code** (bottom-right corner) before saving
-4. **Validate line endings** match the file type requirements
-
-### 📋 Official Encoding Standards by File Type
-
-| File Type | Encoding | BOM | Line Ending | Indent |
-|-----------|----------|-----|-------------|--------|
-| **Markdown** (.md) | UTF-8 | ❌ NO BOM | CRLF | 2 spaces |
-| **PowerShell** (.ps1, .psm1) | UTF-8 | ❌ NO BOM | CRLF | 4 spaces |
-| **YAML** (.yaml, .yml) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **JSON** (.json) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **Gherkin** (.feature) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **C#** (.cs) | UTF-8 | ✅ WITH BOM | CRLF | 4 spaces |
-| **TypeScript/JS** (.ts, .js) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-| **HTML** (.html) | UTF-8 | ❌ NO BOM | LF | 2 spaces |
-
-### 🚨 CRITICAL VALIDATION CHECKLIST
-
-**Before every file creation/edit operation:**
-- [ ] Verify encoding is UTF-8 (without BOM for most files)
-- [ ] Confirm line endings match file type (CRLF vs LF)
-- [ ] Check indentation (2 or 4 spaces, NO TABS)
-- [ ] Ensure final newline is present
-- [ ] Trim trailing whitespace (except Markdown)
-
-### 🛠️ How to Verify Encoding in VS Code
-
-1. Look at **bottom-right corner** of VS Code window
-2. Should display: `UTF-8` (NOT "UTF-8 with BOM")
-3. If incorrect:
-   - Click on encoding indicator
-   - Select "Save with Encoding"
-   - Choose `UTF-8` (without BOM)
-
-### ✅ Configuration Files (Already Set Up)
-
-- **`.editorconfig`** (root) - Universal encoding rules for all editors
-- **`.vscode/settings.json`** - VS Code specific encoding configuration
-- **`docs/PADRAO-ENCODING-FORMATACAO.md`** - Complete encoding documentation (400+ lines)
-
-### 🔍 Portuguese Characters Must Display Correctly
-
-These characters MUST appear correctly in all files:
-- `ç` (cedilha) - NOT `Ã§` or `ÃÂ§`
-- `ã` (a-til) - NOT `Ã£` or `ÃÂ£`
-- `é` (e-agudo) - NOT `Ã©` or `ÃÂ©`
-- `á` (a-agudo) - NOT `Ã¡` or `ÃÂ¡`
-- `ó` (o-agudo) - NOT `Ã³` or `ÃÂ³`
-
-### 🚫 NEVER Create Files With:
-- ❌ Double UTF-8 encoding (Ã§ instead of ç)
-- ❌ Triple UTF-8 encoding (ÃÂ§ instead of ç)
-- ❌ Mixed line endings (CRLF + LF in same file)
-- ❌ Tabs instead of spaces
-- ❌ UTF-8 BOM on Markdown/PowerShell/YAML files
-- ❌ Missing BOM on C# files
-
-### 📖 Full Documentation Reference
-
-For complete encoding standards, troubleshooting, and examples:
-- Read: `docs/PADRAO-ENCODING-FORMATACAO.md`
-- Includes: UTF-8 byte sequences, character tables, validation scripts
-- Status: Project is 100% compliant (87/87 files correct)
-
-## Architecture Overview
-
-### Multi-Modal Agent System
-- **Manual agents** (`agents/manual/`): GitHub Copilot Chat compatible agents with YAML frontmatter configuration
-- **Automated orchestration** (`orchestrators/`): CrewAI and AutoGen scripts for agent coordination (preview)
-- **Structured workflows** (`powershell/`): PowerShell scripts for setup and execution automation
-- **Input/Output model**: `in/sprint{X}/{activity}/` -> `out/sprint{X}/{activity}/` with standardized artifacts
-
-### Agent Workflow Pattern (TDD - Test-Driven Development)
+#### Automatic pipeline
 ```mermaid
-graph TD
-    PO[Product Owner] --> RT[Roundtable]
-    RT --> RA[Requirements Analyst]
-    RA --> SA[Systems Architect]
-    SA --> TS[Testing Specialist - Cria Plano QA]
-    TS --> ED[Expert Developer - Implementa]
-    ED --> TV[Testing Validator]
-    TV --> POF[Product Owner Final]
+flowchart TD
+    A[Run setup-workflow.ps1] --> B[Choose sprint and activity]
+    B --> C{Enrichment requested?}
+    C -->|Yes| D[Inject *.instructions files]
+    C -->|No| E[Skip enrichment]
+    D --> F
+    E --> F[Generate folders, templates, project analysis]
+    F --> G[Create project-analysis.md and reports]
+    G --> H[Trigger start-manual.ps1 automatically]
+    H --> I[Execute agents in TDD sequence]
+    I --> J[Produce 00-* to 05.x artifacts]
+    J --> K[Review outputs and approve continuation]
 ```
 
-**FLUXO TDD (Test-First):**
-1. **Systems Architect** define a arquitetura (03-arquitetura.md)
-2. **Testing Specialist** cria plano de QA ANTES do código (05-qa-plano.md)
-3. **Expert Developer** implementa seguindo os testes já definidos (04-desenvolvimento.md)
-4. **Testing Validator** valida se implementação atende aos testes planejados
-
-Each agent **requests approval [SIM/NÃO]** before auto-executing the next agent in sequence.
-
-## 📝 File Creation and Editing Guidelines
-
-### 🎯 MANDATORY PROCESS FOR ALL FILE OPERATIONS
-
-**When creating or editing ANY file:**
-
-1. **BEFORE Creating:**
-   - Check file type and determine correct encoding from table above
-   - Verify if BOM is required (only C# files need BOM)
-   - Confirm correct line ending (CRLF for Windows files, LF for Unix files)
-   - Set correct indentation (2 spaces or 4 spaces, NEVER tabs)
-
-2. **DURING Creation:**
-   - Use UTF-8 encoding without BOM (except C#)
-   - Apply correct line endings per file type
-   - Use spaces for indentation (NO TABS)
-   - Ensure proper formatting according to `.editorconfig`
-
-3. **AFTER Saving:**
-   - Verify encoding in VS Code (bottom-right corner)
-   - Check that Portuguese characters display correctly (ç, ã, é, á, ó)
-   - Confirm no BOM markers for non-C# files
-   - Validate final newline is present
-
-### 🚨 CRITICAL: Portuguese Language Support
-
-**All Portuguese text MUST be readable:**
-- ✅ `configuração` - NOT `configuraÃ§Ã£o`
-- ✅ `validação` - NOT `validaÃ§Ã£o`
-- ✅ `implementação` - NOT `implementaÃ§Ã£o`
-- ✅ `documentação` - NOT `documentaÃ§Ã£o`
-
-**If you see corrupted characters:**
-1. STOP immediately
-2. Reopen file with correct encoding (UTF-8)
-3. Fix characters manually if needed
-4. Save with UTF-8 without BOM
-
-### 📋 File Type Specific Rules
-
-**Markdown Files (.md):**
-- Encoding: UTF-8 without BOM
-- Line endings: CRLF (Windows)
-- Indentation: 2 spaces
-- Allow trailing whitespace for line breaks
-- Must include final newline
-
-**PowerShell Files (.ps1, .psm1):**
-- Encoding: UTF-8 without BOM
-- Line endings: CRLF (Windows)
-- Indentation: 4 spaces
-- Trim trailing whitespace
-- Must include final newline
-
-**YAML Files (.yaml, .yml):**
-- Encoding: UTF-8 without BOM
-- Line endings: LF (Unix)
-- Indentation: 2 spaces (CRITICAL for YAML syntax)
-- Trim trailing whitespace
-- Must include final newline
-
-**JSON Files (.json):**
-- Encoding: UTF-8 without BOM
-- Line endings: LF (Unix)
-- Indentation: 2 spaces
-- Trim trailing whitespace
-- Must include final newline
-
-**Gherkin Files (.feature):**
-- Encoding: UTF-8 without BOM
-- Line endings: LF (Unix)
-- Indentation: 2 spaces
-- Trim trailing whitespace
-- Must include final newline
-- Portuguese keywords: `Funcionalidade:`, `Cenário:`, `Dado`, `Quando`, `Então`
-
-**C# Files (.cs):**
-- Encoding: UTF-8 **WITH BOM** (ONLY exception)
-- Line endings: CRLF (Windows)
-- Indentation: 4 spaces
-- Trim trailing whitespace
-- Must include final newline
-
-### 🔧 VS Code Configuration
-
-**Check these settings in VS Code:**
-```json
-{
-  "files.encoding": "utf8",
-  "files.autoGuessEncoding": false,
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
-  "[markdown]": {
-    "files.encoding": "utf8",
-    "files.eol": "\r\n"
-  },
-  "[powershell]": {
-    "files.encoding": "utf8",
-    "files.eol": "\r\n"
-  },
-  "[yaml]": {
-    "files.encoding": "utf8",
-    "files.eol": "\n"
-  }
-}
+#### Manual pipeline
+```mermaid
+flowchart TD
+    A[Prepare business_request and attachments] --> B[Run Product Owner]
+    B --> C{Need roundtable?}
+    C -->|Yes| D[Execute roundtable facilitator]
+    C -->|No| E[Go to next agent]
+    D --> F
+    E --> F[Run Requirements Analyst]
+    F --> G[Run Systems Architect]
+    G --> H[Run Testing Specialist]
+    H --> I[Run Expert Developer]
+    I --> J[Run Testing Validator]
+    J --> K[Run Product Owner Final]
+    K --> L[Consolidate evidence and close activity]
 ```
 
-### ⚠️ Common Mistakes to Avoid
-
-1. **NEVER save with wrong encoding:**
-   - ❌ Using Latin-1/ISO-8859-1 instead of UTF-8
-   - ❌ Adding BOM to Markdown/PowerShell/YAML files
-   - ❌ Forgetting BOM on C# files
-
-2. **NEVER mix line endings:**
-   - ❌ CRLF in YAML files (must be LF)
-   - ❌ LF in PowerShell files (must be CRLF)
-
-3. **NEVER use tabs:**
-   - ❌ Tabs in any file type
-   - ✅ Always use spaces (2 or 4 depending on file type)
-
-4. **NEVER skip validation:**
-   - ❌ Assuming encoding is correct
-   - ✅ Always check VS Code encoding indicator after saving
-
-### 📖 Reference Documentation
-
-For complete details, consult:
-- `docs/PADRAO-ENCODING-FORMATACAO.md` - Complete encoding guide (400+ lines)
-- `.editorconfig` - Project-wide formatting rules
-- `.vscode/settings.json` - VS Code specific settings
-
-## Essential Development Patterns
-
-### Agent Definition Structure
-All agents use YAML frontmatter with:
-```yaml
 ---
-id: agent_name
-model_preferences:
-  - provider: openai
-    model: gpt-4o
-inputs: {business_request: "data/in/sprint{sprint}/{activity}/business_request/"}
-outputs: {artifact_name: "data/out/sprint{sprint}/{activity}/00-artifact.md"}
-parameters: [sprint, activity]
+
+## 2. Framework Overview
+- Manual agents: stored in `agents/manual/`, each with YAML frontmatter and detailed prompts.
+- Automation scripts: PowerShell helpers in `scripts/powershell/` plus installer in `Install/setup-workflow.ps1`.
+- Input/output model:
+  - Input: `in/sprintXX/activityYY/business_request/` and `attachments/`.
+  - Output: `data/out/sprintXX/activityYY/` with numbered markdown files, diagrams, features, ADRs.
+- Optional orchestrators: CrewAI and AutoGen prototypes under `Install/orchestrators/`.
+
+### 2.1 Agent TDD Sequence
+1. Product Owner -> `00-requirements-brief.md`, `00-business-context.md`, `00-acceptance-criteria.md`.
+2. Roundtable facilitator (conditional) -> organizes technical alignment.
+3. Requirements Analyst -> `02-requisitos-bdd.md`, feature files.
+4. Systems Architect -> `03-arquitetura.md`, `adrs/`, `diagrams/`.
+5. Testing Specialist -> `05-qa-plano.md`.
+6. Expert Developer -> `04-desenvolvimento.md`, implementation notes or code diffs.
+7. Testing Validator -> `05.1-testing-validation.md`.
+8. Product Owner Final -> approval checklist (`99-checklist-final.md` when applicable).
+
+Each agent relies on previous outputs and must log up to three assumptions instead of asking open questions.
+
 ---
-```
 
-### Standardized Artifacts (TDD Flow)
-- `00-business-context.md` + `00-requirements-brief.md` (Product Owner)
-- `01-ata-mesa-redonda.md` (Roundtable facilitation)
-- `02-requisitos-bdd.md` + `features/*.feature` (BDD scenarios)
-- `03-arquitetura.md` + `adrs/` + `diagrams/` (Architecture + ADRs)
-- `05-qa-plano.md` + `engineering/reports/` (QA strategy - **BEFORE implementation**)
-- `04-desenvolvimento.md` + `engineering/src/` + `engineering/tests/` (Implementation - **AFTER QA plan**)
-- `05.1-testing-validation.md` (Testing Validator - validates implementation against QA plan)
-- `99-checklist-final.md` (Final validation)
+## 3. Encoding and Formatting Standards
 
-## Critical Development Commands
+### 3.1 Official Table
+| File type | Encoding | BOM | Line ending | Indent |
+|-----------|----------|-----|-------------|--------|
+| Markdown `.md` | UTF-8 | none | CRLF | 2 spaces |
+| PowerShell `.ps1`, `.psm1` | UTF-8 | none | CRLF | 4 spaces |
+| YAML `.yml`, `.yaml` | UTF-8 | none | LF | 2 spaces |
+| JSON `.json` | UTF-8 | none | LF | 2 spaces |
+| Gherkin `.feature` | UTF-8 | none | LF | 2 spaces |
+| HTML `.html` | UTF-8 | none | LF | 2 spaces |
+| JS/TS `.js`, `.ts` | UTF-8 | none | LF | 2 spaces |
+| C# `.cs` | UTF-8 | with BOM | CRLF | 4 spaces |
 
-### Project Setup
-```powershell
-# One-command installation with project analysis
-powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
+### 3.2 Validation Checklist
+- [ ] Confirm VS Code shows `UTF-8` (or `UTF-8 with BOM` only for `.cs`).
+- [ ] Align line endings with the table (CRLF vs LF).
+- [ ] Use spaces, never tabs.
+- [ ] Remove trailing whitespace unless Markdown requires double space.
+- [ ] Ensure file ends with newline.
+- [ ] Confirm sample words display correctly: `cao`, `acao`, `configuracao`.
 
-# Manual structure creation
-.\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+### 3.3 Red Flags
+- Double encoding sequences like `A~c` or `A~a` showing instead of the expected letters.
+- Mixed CRLF and LF in the same file.
+- Markdown saved with BOM.
+- Missing BOM in `.cs` files.
+- Tabs mixed with spaces.
+- If any red flag appears, reopen with correct encoding and re-save.
 
-# Diagram rendering (requires Node.js + mermaid-cli)
-.\powershell\render-diagrams.ps1
-```
+Full reference: `docs/PADRAO-ENCODING-FORMATACAO.md`.
 
-### Environment Configuration
-- Copy `.env.example` to `.env` and configure `LLM_PROVIDER`, `LLM_MODEL`, API keys
-- Supports OpenAI, Azure OpenAI, and OpenAI-compatible providers (Ollama/LM Studio)
-- Python environment in `.venv-1` with `requirements.txt` (CrewAI, AutoGen, OpenAI)
+---
 
-## Project-Specific Conventions
+## 4. File Creation Process
 
-### .NET Development Standards (from `agents.index.json`)
-- **Framework**: .NET Framework 4.8
-- **Architecture**: Clean Architecture (Domain/Application/Infrastructure/API layers)
-- **Patterns**: DDD, SOLID, Result envelope pattern
-- **Validation**: FluentValidation required for all input validation
-- **Logging**: Serilog with structured logging
-- **Testing**: xUnit + FluentAssertions + Bogus (90%+ coverage required)
-- **Naming**: English code, Portuguese user messages
+### 4.1 Before editing
+- Identify file type and consult the encoding table.
+- Verify indentation standard (2 vs 4 spaces).
+- Plan filenames using kebab-case for markdown (example: `00-business-context.md`).
 
-### File Organization Patterns
-- **Business rules**: `RN-00xx.md` format in `references-data/business-rules/`
-- **Architecture decisions**: Nygard ADR template in `adrs/`
-- **Diagrams**: Mermaid format (`.mmd`) in `diagrams/`
-- **Features**: Gherkin BDD scenarios in `features/`
-- **Source code**: Clean Architecture structure in `engineering/src/`
+### 4.2 During editing
+- Keep sections organized with level two or three headings.
+- For markdown lists, use hyphen or ordered lists consistently.
+- For diagrams, use Mermaid syntax and store as `.mmd` when exporting images.
 
-### Agent Execution Patterns
-- **No questions policy**: Agents make up to 3 reasonable assumptions instead of asking
-- **Auto-execution**: Each agent ends with next agent invocation after approval
-- **Context propagation**: Previous artifacts are inputs for subsequent agents
-- **Project analysis integration**: Auto-reads `project-analysis.md` when working on existing projects
+### 4.3 After saving
+- Reopen file to confirm readability.
+- Run linters or formatters when available.
+- Ensure diagrams compile using `scripts/powershell/render-diagrams.ps1` if necessary.
 
-### Git Commit Standards
-Follow the market standard commit pattern with gitemoji:
-```
-[gitemoji] [tipo do commit] - [Descrição da atividade]
-```
+---
 
-**Examples:**
-- `�o� feat - Add user authentication system`
-- `�Y�> fix - Resolve null reference in payment validation`
-- `�Y"� docs - Update API documentation for notification service`
-- `�T�️ refactor - Restructure domain entities using DDD patterns`
-- `�o. test - Add unit tests for calculation engine`
-- `�Y"� chore - Update NuGet packages to latest versions`
+## 5. Agent Responsibilities
 
-**Common Gitemojis:**
-- `✨` - New feature
-- `🐛` - Bug fix
-- `📝` - Documentation
-- `♻️` - Refactoring
-- `✅` - Tests
-- `🔧` - Configuration/tooling
-- `🚀` - Performance improvements
-- `🔒` - Security fixes
+### 5.1 Product Owner
+- Inputs: `business_request/`, attachments, existing outputs.
+- Outputs: `00-requirements-brief.md`, `00-business-context.md`, `00-acceptance-criteria.md`.
+- Must document any assumption (max three).
+- Sets approval prompt `[SIM]/[NAO]` to run roundtable.
 
-## Integration Points
+### 5.2 Roundtable Facilitator
+- Consumes PO outputs to coordinate specialists (Requirements Analyst, Systems Architect, Expert Developer, Testing Specialist).
+- Generates meeting notes when executed.
 
-### VS Code Copilot Chat Usage
-Execute agents via: `@agents/manual/agent-name.agent.md` with context like:
-```
-"Analyze demand RN-0015 - Notification System:
-- Context: Desktop notification system
-- Stakeholders: End users, admins
-- Priority: High"
-```
+### 5.3 Requirements Analyst
+- Produces `02-requisitos-bdd.md` and feature files under `data/out/.../features/`.
+- Aligns scenarios with acceptance criteria.
 
-### Orchestration Systems
-- **CrewAI** (`Install/orchestrators/crewai_runner.py`): Multi-agent coordination (preview)
-- **AutoGen** (`Install/orchestrators/autogen_dev_team.py`): Conversational agents (preview)
-- **Manual workflow** (`powershell/start-manual.ps1`): Production-ready process
+### 5.4 Systems Architect
+- Outputs `03-arquitetura.md`, ADRs, and diagrams.
+- Chooses technologies, integration contracts, non-functional requirements.
 
-### External Dependencies
-- **Mermaid CLI**: For diagram rendering to PNG/SVG
-- **PostgreSQL**: Primary database for .NET applications
-- **GitHub Copilot**: Primary IDE integration point
-- **Various LLM providers**: OpenAI, Azure, Ollama support
+### 5.5 Testing Specialist
+- Delivers `05-qa-plano.md`.
+- Defines unit, integration, and end to end strategies plus data sets and coverage goals.
 
-## Working with Existing Projects
+### 5.6 Expert Developer
+- Implements code guided by QA plan and architecture.
+- Documents approach in `04-desenvolvimento.md`.
+- Adds evidence of executed tests.
 
-The framework includes automatic project analysis:
-1. Detects project type (.NET/Node/Angular/React)
-2. Analyzes architecture, technologies, patterns
-3. Generates `project-analysis.md` with context
-4. Integrates existing `.github/copilot-instructions.md` if found
-5. Contextualizes all agents with existing project knowledge
+### 5.7 Testing Validator
+- Reviews implementation against QA plan and acceptance criteria.
+- Produces `05.1-testing-validation.md` with findings and approval status.
 
-When working on existing codebases, **always reference `project-analysis.md` first** to maintain consistency with established patterns and technologies.
+### 5.8 Product Owner Final
+- Confirms definition of done and collects evidence.
+- May produce `99-checklist-final.md`.
 
-## 🎯 Quick Reference: File Creation Checklist
+Optional agents (Frontend Specialist, UX/UI Specialist, Code Reviewer) follow similar patterns using their respective prompts in `agents/manual/`.
 
-**Every time you create or edit a file, follow this checklist:**
+---
 
-### ✅ Pre-Creation
-- [ ] Identify file type (.md, .ps1, .yaml, .json, .feature, .cs, .ts, .html)
-- [ ] Check encoding table: UTF-8 with or without BOM?
-- [ ] Check line ending: CRLF (Windows) or LF (Unix)?
-- [ ] Check indentation: 2 spaces or 4 spaces?
+## 6. Business Request Preparation
+- Use templates from `docs/examples/business-request-examples.md`.
+- Minimum sections per request:
+  - Summary: objective, current problem, business value.
+  - Context: affected systems, user groups, restrictions.
+  - Stakeholders: sponsor, technical contact, supporting teams.
+  - Scope: in scope items, out of scope items, deadline.
+  - Success metrics: measurable indicators and evidence.
+  - Attachments list with short descriptions.
+- Keep request narrative in `business_request/` and supportive files in `attachments/`.
+- If enrichment is needed, create `*.instructions.md` files and provide folder path during installer execution.
 
-### ✅ During Creation
-- [ ] Use correct encoding (UTF-8 without BOM for most files)
-- [ ] Apply correct line endings
-- [ ] Use spaces for indentation (NEVER tabs)
-- [ ] Follow language-specific conventions
+---
 
-### ✅ Post-Save Validation
-- [ ] VS Code encoding indicator shows "UTF-8" (not "UTF-8 with BOM" unless C#)
-- [ ] Portuguese characters display correctly: ç ã é á ó
-- [ ] No encoding corruption visible: NOT Ã§, ÃÂ§, configuraÃ§Ã£o
-- [ ] Final newline is present
-- [ ] No trailing whitespace (except Markdown)
+## 7. Development Guardrails
+- Architecture: enforce Clean Architecture with Domain, Application, Infrastructure, and Presentation layers.
+- Patterns: CQRS with MediatR, Result pattern, Repository pattern, domain events, value objects.
+- Validation: FluentValidation for input checks, custom error codes where needed.
+- Logging: Serilog structured logging (no raw console writes).
+- Configuration: strongly typed options, use `IOptions<T>` or `IOptionsSnapshot<T>`.
+- Data: migrations for schema changes, repository interfaces to abstract persistence.
+- Testing goals: >= 90 percent coverage on critical modules, deterministic tests, clear arrangement-act-assert standard.
+- Continuous integration: ensure scripts or pipelines execute tests and linting before merge.
 
-### 🚨 Red Flags - STOP if you see:
-- ❌ `Ã§` instead of `ç`
-- ❌ `ÃÂ§` instead of `ç`
-- ❌ `configuraÃ§Ã£o` instead of `configuração`
-- ❌ VS Code shows "UTF-8 with BOM" for .md, .ps1, .yaml files
-- ❌ Mixed tabs and spaces
-- ❌ Mixed line endings (CRLF + LF in same file)
+---
 
-**If you see any red flag:** Reopen file with correct encoding, fix, and save with UTF-8 (without BOM).
+## 8. Git and Delivery Standards
+- Commit pattern: `[emoji-code] type - short description`.
+  - Use emoji codes such as `:sparkles:` (feature), `:bug:` (fix), `:memo:` (docs), `:white_check_mark:` (tests), `:recycle:` (refactor), `:wrench:` (chore).
+- Pull request checklist:
+  - Link to sprint and activity.
+  - Summarize changes and risks.
+  - Attach test evidence or coverage reports.
+  - Mention updated documentation (requirements, ADRs, diagrams).
+- Keep branches clean and rebase onto latest main branch before merging.
 
-## 📊 Project Status
+---
 
-- **Total files:** 87
-- **Encoding compliance:** 100% ✅
-- **Files with correct UTF-8:** 87/87
-- **Files needing correction:** 0
-- **Configuration files:** `.editorconfig` ✅ | `.vscode/settings.json` ✅
+## 9. Automation and Script Support
+- `scripts/powershell/new-activity.ps1`: creates `business_request/`, `attachments/`, and output folders plus template request.
+- `scripts/powershell/start-manual.ps1`: guides manual execution of agents in order.
+- `Install/setup-workflow.ps1`: full installer with options for enrichment, project analysis, and auto start.
+- `Install/orchestrators/`: experimental runners for CrewAI and AutoGen.
+- `scripts/powershell/render-diagrams.ps1`: exports Mermaid diagrams to PNG/SVG.
+- Always run scripts from repository root with PowerShell (`powershell -NoProfile -ExecutionPolicy Bypass -File ...`).
 
-**All encoding standards are documented in:** `docs/PADRAO-ENCODING-FORMATACAO.md`
+---
+
+## 10. Working With Existing Projects
+- Installer can analyze existing code base:
+  - Detects project type (ASP.NET API, MVC, Worker, Angular, React, etc.).
+  - Generates `project-analysis.md` summarizing structure, dependencies, patterns.
+  - Highlights existing `.github/copilot-instructions.md` for merging guidelines.
+- When integrating with client repositories:
+  - Respect existing conventions and adapt agent prompts accordingly.
+  - Update business context to reflect real modules and services.
+  - Sync environment variables and connection strings through secure configuration files.
+
+---
+
+## 11. Manual vs Automatic Execution Reference
+- Manual:
+  - Use Copilot Chat commands `@agents/manual/{agent}.agent.md`.
+  - Provide sprint, activity, list of inputs, and relevant links.
+  - Attach files manually when using hosted LLMs.
+- Automatic:
+  - Use installer options to enrich agents and run start script.
+  - Review generated artifacts after each agent to ensure accuracy.
+  - Stop the pipeline if outputs are inconsistent and fix upstream context first.
+
+---
+
+## 12. Submission Checklist
+- [ ] Demand documented in `business_request/` with supporting attachments.
+- [ ] Product Owner outputs (`00-*`) validated and approved.
+- [ ] Roundtable executed when necessary and notes saved.
+- [ ] Requirements, architecture, QA plan, development notes, and validation artifacts generated.
+- [ ] Tests executed with proof of success or documented issues.
+- [ ] Encoding verified with no corrupted characters.
+- [ ] Commit history follows convention and references sprint activity.
+- [ ] Final approval captured (Product Owner Final or equivalent).
+
+---
+
+Adhering to this extended instruction set keeps the RickytechAgileAgent workflow predictable, auditable, and aligned with both business goals and engineering excellence. Always begin new sessions by revisiting this document to ensure compliance.

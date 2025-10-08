@@ -43,3 +43,16 @@
 - [ ] Entradas (se houver) em `data/in/sprint<sprint>/<activity>/attachments/`
 - [ ] Executado `Install/orchestrators/crewai_runner.py <sprint>` (no repositório) ou `orchestrators/crewai_runner.py` (no projeto cliente)
 - [ ] Conferido `outcomes/crewai_report.md` (se CrewAI)
+
+## Super‑prompt (opcional)
+- Arquivo: `prompts-manual/prompts/super-prompt.md`
+- O instalador oferece gerar um super‑prompt enriquecido com contexto do projeto (Sprint, Activity, estrutura de pastas e cadeia de agentes). Se o arquivo não existir, segue sem erro.
+- Recomenda-se ajustar o super‑prompt logo após a instalação e antes de executar o primeiro agente dependente (Testing Specialist no fluxo TDD).
+
+## Enrich‑Agents (instruções personalizadas)
+- Durante a instalação, quando perguntado por uma pasta de instruções, forneça um diretório contendo arquivos no padrão `<role>.instructions.md|txt`.
+- Padrões suportados: `product-owner`, `requirements-analyst`, `systems-architect`, `testing-specialist`, `expert-developer`, `roundtable-facilitator`.
+- O instalador injeta um bloco "### Custom Instructions (instalador)" dentro de `agents/manual/<role>.agent.md`:
+  - Idempotente: se o bloco já existir, ele é substituído.
+  - Não afeta o restante do conteúdo do agente.
+- Templates prontos: `docs/prompts/agent-instructions-templates/` (copie e edite conforme seu contexto).

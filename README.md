@@ -1,22 +1,19 @@
 # RickytechAgileAgent - Agentes de Desenvolvimento Ágil
-# RickytechAgileAgent - Agentes de Desenvolvimento Ágil
 
 **Versão:** 2.2.0 - **Parallel Execution Edition**
 **Autor:** Ricardo Macedo Perdigão
 **Data:** 30 de Setembro de 2025
 
 ## 🎯 **O que é o RickytechAgileAgent?**
-## 🎯 **O que é o RickytechAgileAgent?**
 
-O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
+
 O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
 
 **Para Desenvolvedores:** Imagine ter uma equipe de especialistas (Product Owner, Arquiteto, Desenvolvedor Sênior, etc.) que trabalha automaticamente para você, gerando toda a documentação e código necessário para implementar uma funcionalidade.
 
 ## 🚀 **Como Funciona o Sistema?**
 
-O sistema possui **10 agentes especializados** que trabalham em sequência:
-O sistema possui **10 agentes especializados** que trabalham em sequência:
+O sistema possui **11 agentes especializados** que trabalham em sequência:
 
 ```
 1️⃣ Product Owner       → Analisa o negócio
@@ -25,10 +22,11 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 4️⃣ Arquiteto           → Define a solução
 5️⃣ Testing Specialist  → Cria plano de QA (TDD) ⭐ ANTES do código
 6️⃣ Desenvolvedor       → Implementa seguindo TDD ⭐ DEPOIS do plano
-7️⃣ Testing Validator   → Valida implementação
-8️⃣ UX/UI Specialist    → Cria wireframes e design system (opcional)
-9️⃣ Code Reviewer       → Auditoria qualidade (opcional)
-🔟 PO Final            → Valida critérios aceite
+7️⃣ UX/UI Specialist    → Cria wireframes e design system (opcional)
+8️⃣ Frontend Specialist → Implementa frontend (opcional)
+9️⃣ Testing Validator   → Valida implementação (pós-frontend)
+🔟 Code Reviewer       → Auditoria qualidade (opcional)
+1️⃣ PO Final           → Valida critérios aceite
 ```
 
 **🆕 FLUXO TDD (Test-Driven Development):**
@@ -46,19 +44,12 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[🎯 docs/guia-agentes-individuais.md](./docs/guia-agentes-individuais.md)** - **NOVO: Como usar cada agente individualmente**
 - **[🧪 docs/exemplo-fluxo-tdd-completo.md](./docs/exemplo-fluxo-tdd-completo.md)** - **NOVO: Exemplo prático TDD completo**
 - **[📖 docs/README.md](./docs/README.md)** - Índice completo da documentação técnica
-- **[📖 docs/fluxo-completo.md](./docs/fluxo-completo.md)** - **GUIA PRINCIPAL: Do zero à mesa redonda**
-- **[🚀 docs/guia-paralelizacao.md](./docs/guia-paralelizacao.md)** - **NOVO: Execução paralela de múltiplas atividades**
-- **[🎯 docs/guia-agentes-individuais.md](./docs/guia-agentes-individuais.md)** - **NOVO: Como usar cada agente individualmente**
-- **[🧪 docs/exemplo-fluxo-tdd-completo.md](./docs/exemplo-fluxo-tdd-completo.md)** - **NOVO: Exemplo prático TDD completo**
-- **[📖 docs/README.md](./docs/README.md)** - Índice completo da documentação técnica
 - **[📋 docs/resumo-melhorias-setup.md](./docs/resumo-melhorias-setup.md)** - Últimas melhorias implementadas no instalador
 
 ### 🛠️ **Prompts e Agentes**
 - **[📝 prompts-manual/prompts/README.md](./prompts-manual/prompts/README.md)** - Guia principal dos prompts e agentes
 - **[📚 prompts-manual/prompts/reference/README.md](./prompts-manual/prompts/reference/README.md)** - Exemplos de referência para uso individual
-- **[📁 prompts-manual/prompts/deprecated/README.md](./prompts-manual/prompts/deprecated/README.md)** - Prompts descontinuados (arquivo histórico)
 
-### 📦 **Resultados**
 ### 📦 **Resultados**
 - **[📊 out/README.md](./out/README.md)** - Estrutura e organização dos artefatos gerados
 
@@ -67,6 +58,13 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[👤 docs/exemplo-product-owner.instructions.md](./docs/exemplo-product-owner.instructions.md)** - Exemplo prático de instruções para Product Owner
 - **[🔍 docs/analise-projeto-existente.md](./docs/analise-projeto-existente.md)** - Análise automática de projetos existentes
 - **[🤖 docs/integracao-github-copilot.md](./docs/integracao-github-copilot.md)** - **NOVO:** Integração automática com GitHub Copilot
+
+### ⚙️ Super‑prompt e Enrich‑Agents (uso rápido)
+- Super‑prompt (opcional): crie/edite `prompts-manual/prompts/super-prompt.md`. O instalador pode gerar um modelo enriquecido com contexto (Sprint/Activity/Mapeamento de saídas) e não falha se o arquivo não existir.
+- Enrich‑Agents: prepare uma pasta com arquivos `<role>.instructions.md|txt` e informe o caminho quando solicitado no instalador. Padrões aceitos:
+  - `product-owner.instructions.*`, `requirements-analyst.instructions.*`, `systems-architect.instructions.*`, `testing-specialist.instructions.*`, `expert-developer.instructions.*`, `roundtable-facilitator.instructions.*`
+  - O instalador injeta um bloco "### Custom Instructions (instalador)" nos arquivos correspondentes em `agents/manual/*.agent.md` de forma idempotente (substitui o bloco anterior se já existir).
+  - Templates prontos em: `docs/prompts/agent-instructions-templates/`.
 
 ## **Padrão de Encoding e Formatação**
 
@@ -187,38 +185,64 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 ### 📝 **O que acontece durante a instalação:**
 
 ```
-1️⃣ Sistema pergunta: "Onde quer que gere os Agentes?"
-   → Digite: C:\Projetos\MeuWorkspace\IA
+1️⃣ Onde gerar os agentes?
+  → Ex.: C:\Projetos\MeuWorkspace\IA
 
-2️⃣ Sistema instala pré-requisitos automaticamente
-   → Python, Node.js, Git, .NET SDK
+2️⃣ Checagem/instalação de pré‑requisitos (automático)
+  → Python 3, Node.js LTS, Git, .NET SDK 8, Mermaid CLI (npm)
 
-3️⃣ Sistema pergunta: "Selecione o modo:"
-   → Digite: 1 (Manual - RECOMENDADO para iniciantes)
+3️⃣ Seleção de modo
+  → 1 = Manual (recomendado) | 2 = Automático (CrewAI)
 
-4️⃣ Sistema pergunta informações do projeto:
-   → Sprint: 01
-   → Activity: rn0001
-   → Activity: rn0001
-   → Nome do projeto: MeuSistema
+4️⃣ Informações do projeto
+  → Sprint (ex.: 01) | Activity (ex.: rn0001) | Nome do projeto (ex.: MeuSistema)
 
-5️⃣ Sistema pergunta: "Tipo de trabalho:"
-   → Digite: 1 (Projeto novo) OU 2 (Projeto existente)
+5️⃣ Tipo de trabalho
+  → 1 = Projeto novo | 2 = Implementação em projeto existente
 
-6️⃣ Se projeto novo: "Onde CRIAR o novo projeto?"
-   → Digite: C:\Projetos\MeuSistema
+6️⃣ Caminhos do projeto
+  → Se novo: "Onde CRIAR o novo projeto?" (ex.: C:\Projetos\MeuSistema)
+  → Se existente: "Onde ESTÁ o projeto?" (ex.: C:\Projetos\SistemaAtual)
 
-7️⃣ Se projeto existente: "Onde ESTÁ o projeto existente?"
-   → Digite: C:\Projetos\SistemaAtual
+7️⃣ Cópia do workflow para o destino
+  → Copia: agents/, orchestrators/, scripts/powershell/, requirements.txt, .env.example
+  → Preserva sempre a .github do projeto destino (não copia a deste repositório)
+  → O instalador pode perguntar para copiar opcionais: prompts-manual/ e docs/
 
-8️⃣ Sistema copia agentes e configura tudo automaticamente
+8️⃣ Criação do arquivo .env (a partir de .env.example)
+  → Ajusta USE_CREWAI, SPRINT, OUTPUT_ACTIVITY, PROJECT_NAME
+
+9️⃣ Super‑prompt (opcional)
+  → Se existir prompts-manual/prompts/super-prompt.md: enriquece com contexto (pastas in/out)
+  → Se não existir: oferece copiar um template (opcional)
+
+🔟 Projeto novo (opcional)
+  → Oferece criar estrutura básica (.NET/Node.js/Angular/React/Genérico)
+
+1️⃣1 Análise de projeto existente (se informado)
+  → Gera project-analysis.md; detecta multi‑projeto e integra Copilot quando houver
+
+1️⃣2 Ambiente Python (opcional)
+  → "Criar .venv-1 e instalar requirements agora?" (instala requirements.txt)
+
+1️⃣3 Enriquecer agentes (opcional)
+  → Injeta arquivos <role>.instructions.* em agents/manual/*.agent.md (idempotente)
+
+1️⃣4 Execução automática (opcional)
+  → Se modo manual: "Executar o fluxo manual agora?" (scripts/powershell/start-manual.ps1)
 ```
+
+Notas:
+- A pasta .github do projeto destino é sempre preservada e nunca sobrescrita.
+- O super‑prompt é totalmente opcional; a instalação não falha se ele não existir.
+- O instalador pode perguntar se você deseja copiar prompts-manual/ e docs/ (opcionais).
+- O arquivo .env é gerado automaticamente para facilitar execuções futuras.
 
 ### ✅ **Resultado da Instalação:**
 
 ```
 📁 C:\Projetos\MeuWorkspace\IA\     ← AGENTES (onde ficam os workflows)
-├── agents/manual/                      ← 10 agentes especializados
+├── agents/manual/                      ← 11 agentes especializados
 ├── data/in/sprint01/rn0001/            ← ENTRADA (você coloca documentos aqui)
 │   ├── business_request/               ← Solicitações do cliente
 │   └── attachments/                    ← Documentos técnicos
@@ -387,19 +411,13 @@ Você responde: SIM
 | **2️⃣ Mesa Redonda** | Alinha tecnicamente | Ata da reunião | Posso analisar requisitos? |
 | **3️⃣ Requirements** | Cria cenários BDD | Features de teste | Posso fazer arquitetura? |
 | **4️⃣ Systems Architect** | Define solução | ADRs + Diagramas | Posso criar wireframes? |
-| **5️⃣ UX/UI Specialist** | Cria wireframes | Design System + Protótipos | Posso criar plano TDD? |
+| **5️⃣ UX/UI Specialist (opcional)** | Cria wireframes | Design System + Protótipos | Prosseguir com Frontend? |
 | **6️⃣ Testing Specialist** | Plano TDD | Estratégia de testes | Posso implementar código? |
-| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Posso validar implementação? |
-| **8️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
-| **9️⃣ Code Reviewer** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
-| **🔟 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
-| **4️⃣ Systems Architect** | Define solução | ADRs + Diagramas | Posso criar wireframes? |
-| **5️⃣ UX/UI Specialist** | Cria wireframes | Design System + Protótipos | Posso criar plano TDD? |
-| **6️⃣ Testing Specialist** | Plano TDD | Estratégia de testes | Posso implementar código? |
-| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Posso validar implementação? |
-| **8️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
-| **9️⃣ Code Reviewer** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
-| **🔟 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
+| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Prosseguir com Frontend (opcional) e depois validar? |
+| **8️⃣ Frontend Specialist (opcional)** | Implementa frontend | 04-frontend-implementation + components + UI guidelines | Prosseguir para validação? |
+| **9️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
+| **🔟 Code Reviewer (opcional)** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
+| **1️⃣1 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
 
 ### **🎮 2.5: Controlando o Fluxo**
 
@@ -1273,20 +1291,148 @@ out/sprint02/sistema-login/
 Product Owner → Mesa Redonda → Requirements → Architect → Developer → Testing → PO Final
 ```
 
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (stack)
+
+POLÍTICA DE FLUXO:
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Se [REVISAR], listar os arquivos gerados e aguardar
+- Se [NAO], encerrar e aguardar novas instruções
+
+ORDEM:
+1) Product Owner (gera 00-*)
+  APROVACAO NECESSARIA → Prosseguir com Mesa Redonda? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda (gera 01-*)
+  APROVACAO NECESSARIA → Prosseguir com Requirements Analyst? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst (gera 02-* e features/)
+  APROVACAO NECESSARIA → Prosseguir com Systems Architect? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/systems-architect.agent.md
+4) Systems Architect (gera 03-*, adrs/, diagrams/)
+  APROVACAO NECESSARIA → Prosseguir com Expert Developer? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/expert-developer.agent.md
+5) Expert Developer (gera 04-*, engineering/src e tests)
+  APROVACAO NECESSARIA → Prosseguir com Testing Specialist? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/testing-specialist.agent.md
+6) Testing Specialist (gera 05-qa-plano.md e reports)
+  APROVACAO NECESSARIA → Prosseguir com Product Owner Final? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/product-owner-final.agent.md
+7) Product Owner Final (gera 99-checklist-final.md)
+```
+
 #### **🧪 Fluxo TDD (Test-Driven Development) - RECOMENDADO:**
 ```powershell
 Product Owner → Mesa Redonda → Requirements → Architect → Testing Specialist → Expert Developer → Testing Validator → PO Final
 ```
 **✨ Novo fluxo otimizado:** Testing Specialist cria o plano ANTES do desenvolvimento, Expert Developer implementa seguindo TDD, Testing Validator valida se tudo foi implementado conforme o plano.
 
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (stack)
+
+POLÍTICA DE FLUXO (TDD):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Manter ordem TDD: QA ANTES do código, Validador após implementação
+
+ORDEM TDD:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/testing-specialist.agent.md
+5) Testing Specialist (plano TDD) → SE [SIM] → @agents/manual/expert-developer.agent.md
+6) Expert Developer (implementa conforme plano) → SE [SIM] → @agents/manual/testing-validator.agent.md
+7) Testing Validator (valida implementação x plano) → SE [SIM] → @agents/manual/product-owner-final.agent.md
+8) Product Owner Final
+```
+
 #### **🛡️ Fluxo com Validação Rigorosa (Projetos Críticos):**
 ```powershell
 Product Owner → Mesa Redonda → Requirements → Architect → Developer → Code Reviewer → Testing → PO Final
 ```
 
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (stack)
+
+POLÍTICA DE FLUXO (Validação Rigorosa):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Incluir auditoria independente antes de Testing
+
+ORDEM:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/expert-developer.agent.md
+5) Expert Developer → SE [SIM] → @agents/manual/code-reviewer.agent.md
+6) Code Reviewer (auditoria) → SE [SIM] → @agents/manual/testing-specialist.agent.md
+7) Testing Specialist → SE [SIM] → @agents/manual/product-owner-final.agent.md
+8) Product Owner Final
+```
+
 #### **🎨 Fluxo Full-Stack (Backend + Frontend):**
 ```powershell
 Product Owner → Mesa Redonda → Requirements → Architect → Developer → Frontend → Testing → PO Final
+```
+
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (Backend + Frontend)
+
+POLÍTICA DE FLUXO (Full-Stack):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Executar Frontend após Backend e antes de Testing
+
+ORDEM:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/expert-developer.agent.md
+5) Expert Developer (backend) → SE [SIM] → @agents/manual/frontend-specialist.agent.md
+6) Frontend Specialist → SE [SIM] → @agents/manual/testing-specialist.agent.md
+7) Testing Specialist → SE [SIM] → @agents/manual/product-owner-final.agent.md
+8) Product Owner Final
+```
+
+#### **🧪 Fluxo TDD + FULL STACK (Test-Driven Development):**
+```powershell
+Product Owner → Mesa Redonda → Requirements → Architect → Testing Specialist → Expert Developer → Frontend Specialist → Testing Validator → PO Final
+```
+
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (Backend + Frontend)
+
+POLÍTICA DE FLUXO (TDD + Full-Stack):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- TDD: QA ANTES do código; validar após backend+frontend
+
+ORDEM:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/testing-specialist.agent.md
+5) Testing Specialist (plano TDD) → SE [SIM] → @agents/manual/expert-developer.agent.md
+6) Expert Developer (backend) → SE [SIM] → @agents/manual/frontend-specialist.agent.md
+7) Frontend Specialist → SE [SIM] → @agents/manual/testing-validator.agent.md
+8) Testing Validator → SE [SIM] → @agents/manual/product-owner-final.agent.md
+9) Product Owner Final
 ```
 
 ### **⚡ Fluxos Parciais Especializados:**

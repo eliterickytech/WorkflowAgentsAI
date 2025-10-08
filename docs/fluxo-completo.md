@@ -4,10 +4,10 @@
 
 ```mermaid
 graph TD
-    A[1. Instalação] --> B[2. Adicionar Documentos]
-    B --> C[3. Executar Product Owner]
-    C --> D[4. Mesa Redonda GPT-5]
-    D --> E[5. Fluxo dos Demais Agentes - TDD]
+    A[1\. Instalação] --> B[2\. Adicionar Documentos]
+    B --> C[3\. Executar Product Owner]
+    C --> D[4\. Mesa Redonda GPT-5]
+    D --> E[5\. Fluxo dos Demais Agentes - TDD]
 ```
 
 ## 🎯📦🛠️ **PASSO 1: Instalação**
@@ -119,21 +119,26 @@ C:\Projetos\MeuSistema\ia\
 - **Output:** `04-desenvolvimento.md` + código implementado
 - **Papel:** Implementa seguindo os testes já definidos
 
-### 5.5 Testing Validator (GPT-4o) 🎯✓
-- **Input:** Plano TDD + implementação + critérios aceite
-- **Output:** `05.1-testing-validation.md` (Validação independente)
-- **Papel:** Valida se implementação atende ao plano original
-
-### 5.6 UX/UI Specialist (GPT-4o) 🎯✓ - OPCIONAL
+### 5.5 UX/UI Specialist (GPT-4o) 🎯✓ - OPCIONAL
 - **Input:** Arquitetura + requisitos + mockups existentes
 - **Output:** `05-ux-wireframes.md` + estrutura de wireframes
 - **Ferramentas:** `setup-design-tools.ps1` + `view-wireframes.ps1`
 
-### 5.7 Code Reviewer (Claude 4) - OPCIONAL
+### 5.6 Frontend Specialist (GPT-4o) 🎯✓ - OPCIONAL
+- **Input:** Arquitetura + requisitos + especificações de UX/UI
+- **Output:** `04-frontend-implementation.md` + `04-components/` + `04-ui-guidelines.md`
+- **Papel:** Implementa interface seguindo o design system e os wireframes
+
+### 5.7 Testing Validator (GPT-4o) 🎯✓
+- **Input:** Plano TDD + implementação + critérios aceite
+- **Output:** `05.1-testing-validation.md` (Validação independente)
+- **Papel:** Valida se implementação atende ao plano original
+
+### 5.8 Code Reviewer (Claude 4) - OPCIONAL
 - **Input:** Código implementado + padrões projeto
 - **Output:** `04.1-code-review.md` (Auditoria qualidade)
 
-### 5.8 Product Owner Final (GPT-5)
+### 5.9 Product Owner Final (GPT-5)
 - **Input:** Todos artefatos + critérios aceite originais
 - **Output:** `99-checklist-final.md` (Aprovação/rejeição entrega)
 
