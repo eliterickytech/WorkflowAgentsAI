@@ -1,10 +1,11 @@
 # RickytechAgileAgent - Agentes de Desenvolvimento Ágil
 
-**Versão:** 2.2.0 - **Parallel Execution Edition**  
-**Autor:** Ricardo Macedo Perdigão  
+**Versão:** 2.2.0 - **Parallel Execution Edition**
+**Autor:** Ricardo Macedo Perdigão
 **Data:** 30 de Setembro de 2025
 
 ## 🎯 **O que é o RickytechAgileAgent?**
+
 
 O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
 
@@ -12,22 +13,27 @@ O RickytechAgileAgent é um **sistema de agentes inteligentes** que automatiza o
 
 ## 🚀 **Como Funciona o Sistema?**
 
-O sistema possui **10 agentes especializados** que trabalham em sequência:
+O sistema possui **11 agentes especializados** que trabalham em sequência:
 
 ```
 1️⃣ Product Owner       → Analisa o negócio
-2️⃣ Mesa Redonda        → Alinha tecnicamente  
+2️⃣ Mesa Redonda        → Alinha tecnicamente
 3️⃣ Requirements        → Cria cenários BDD
 4️⃣ Arquiteto           → Define a solução
-5️⃣ UX/UI Specialist    → Cria wireframes e design system
-6️⃣ Testing Specialist  → Cria plano de QA (TDD)
-7️⃣ Desenvolvedor       → Implementa seguindo TDD
-8️⃣ Testing Validator   → Valida implementação  
-9️⃣ Code Reviewer       → Auditoria qualidade (opcional)
-🔟 PO Final            → Valida critérios aceite
+5️⃣ Testing Specialist  → Cria plano de QA (TDD) ⭐ ANTES do código
+6️⃣ Desenvolvedor       → Implementa seguindo TDD ⭐ DEPOIS do plano
+7️⃣ UX/UI Specialist    → Cria wireframes e design system (opcional)
+8️⃣ Frontend Specialist → Implementa frontend (opcional)
+9️⃣ Testing Validator   → Valida implementação (pós-frontend)
+🔟 Code Reviewer       → Auditoria qualidade (opcional)
+1️⃣ PO Final           → Valida critérios aceite
 ```
 
-**🆕 NOVO: Fluxo TDD integrado** com Testing Specialist criando o plano ANTES do desenvolvimento!  
+**🆕 FLUXO TDD (Test-Driven Development):**
+- ⭐ **Testing Specialist** cria o plano de QA **ANTES** da implementação
+- ⭐ **Expert Developer** implementa seguindo os testes já definidos
+- ⭐ **Testing Validator** valida se a implementação atende ao plano original
+
 **Cada agente pede sua aprovação antes de continuar para o próximo!**
 
 ## 📚 Índice Geral de Documentação
@@ -43,7 +49,6 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 ### 🛠️ **Prompts e Agentes**
 - **[📝 prompts-manual/prompts/README.md](./prompts-manual/prompts/README.md)** - Guia principal dos prompts e agentes
 - **[📚 prompts-manual/prompts/reference/README.md](./prompts-manual/prompts/reference/README.md)** - Exemplos de referência para uso individual
-- **[📁 prompts-manual/prompts/deprecated/README.md](./prompts-manual/prompts/deprecated/README.md)** - Prompts descontinuados (arquivo histórico)
 
 ### 📦 **Resultados**
 - **[📊 out/README.md](./out/README.md)** - Estrutura e organização dos artefatos gerados
@@ -54,7 +59,14 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 - **[🔍 docs/analise-projeto-existente.md](./docs/analise-projeto-existente.md)** - Análise automática de projetos existentes
 - **[🤖 docs/integracao-github-copilot.md](./docs/integracao-github-copilot.md)** - **NOVO:** Integração automática com GitHub Copilot
 
-## � **Padrão de Encoding e Formatação**
+### ⚙️ Super‑prompt e Enrich‑Agents (uso rápido)
+- Super‑prompt (opcional): crie/edite `prompts-manual/prompts/super-prompt.md`. O instalador pode gerar um modelo enriquecido com contexto (Sprint/Activity/Mapeamento de saídas) e não falha se o arquivo não existir.
+- Enrich‑Agents: prepare uma pasta com arquivos `<role>.instructions.md|txt` e informe o caminho quando solicitado no instalador. Padrões aceitos:
+  - `product-owner.instructions.*`, `requirements-analyst.instructions.*`, `systems-architect.instructions.*`, `testing-specialist.instructions.*`, `expert-developer.instructions.*`, `roundtable-facilitator.instructions.*`
+  - O instalador injeta um bloco "### Custom Instructions (instalador)" nos arquivos correspondentes em `agents/manual/*.agent.md` de forma idempotente (substitui o bloco anterior se já existir).
+  - Templates prontos em: `docs/prompts/agent-instructions-templates/`.
+
+## **Padrão de Encoding e Formatação**
 
 ### ⚠️ **CRÍTICO: Leia Antes de Criar/Editar Arquivos**
 
@@ -77,7 +89,7 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 
 ---
 
-## �📋 **Pré-requisitos (O que você precisa ter instalado)**
+## 📋 **Pré-requisitos (O que você precisa ter instalado)**
 
 - **Windows 10/11** com PowerShell
 - **Git** (para controle de versão)
@@ -90,11 +102,11 @@ O sistema possui **10 agentes especializados** que trabalham em sequência:
 
 **📖 [Acesse o Guia Completo](./docs/guia-agentes-individuais.md)**
 
-Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora você pode! 
+Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora você pode!
 
 **Exemplos rápidos:**
 - 🎯 **Product Owner** apenas: Analisar viabilidade de uma ideia
-- 🤝 **Mesa Redonda** apenas: Debater decisão arquitetural complexa  
+- 🤝 **Mesa Redonda** apenas: Debater decisão arquitetural complexa
 - 🧪 **Testing Specialist** apenas: Criar plano de testes TDD
 - 💻 **Expert Developer** apenas: Implementar funcionalidade específica
 - ✅ **Product Owner Final** apenas: Validar critérios de aceite
@@ -113,27 +125,27 @@ Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora voc
 
 **📖 [Acesse o Guia Completo](./docs/guia-paralelizacao.md)**
 
-Agora você pode trabalhar com **múltiplas atividades simultaneamente**! 
+Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 
 ### **⚡ Quick Start Paralelo:**
 ```powershell
 # Interface simplificada - escolha entre 6 modos
-.\powershell\quick-start.ps1 -Sprint 02
+.\scripts\powershell\quick-start.ps1 -Sprint 02
 ```
 
 ### **🚀 Execução Direta (Avançado):**
 ```powershell
 # Múltiplas atividades com pipeline completo
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("sistema-login", "modulo-relatorios", "integracao-sap") -ParallelSetup -CreatePipeline
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("sistema-login", "modulo-relatorios", "integracao-sap") -ParallelSetup -CreatePipeline
 ```
 
 ### **📊 Monitoramento em Tempo Real:**
 ```powershell
 # Dashboard de status das atividades
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
-# Próximas execuções recomendadas  
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
+# Próximas execuções recomendadas
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
 ```
 
 ### **🎯 Benefícios da Paralelização:**
@@ -145,7 +157,7 @@ Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 
 ### **📋 Guias Automáticos Gerados:**
 - `parallel-execution-guide.md` - Instruções de execução paralela
-- `pipeline-schedule.md` - Cronograma otimizado por semanas  
+- `pipeline-schedule.md` - Cronograma otimizado por semanas
 - `dependency-matrix.md` - Análise de dependências entre atividades
 
 **Perfeito para:** projetos grandes, múltiplos squads, otimização de throughput, pipelines complexos.
@@ -163,8 +175,8 @@ Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
 **Abra o PowerShell como Administrador e execute:**
 
 ```powershell
-# Navegue até a pasta do Rickytech.System.AI.OnPremisse.AI
-cd "C:\Projetos\Rickytech.System.AI.OnPremisse.AI"
+# Navegue até a pasta do WorkflowAgentsAI
+cd "C:\Projetos\WorkflowAgentsAI"
 
 # Execute o instalador
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
@@ -173,42 +185,69 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 ### 📝 **O que acontece durante a instalação:**
 
 ```
-1️⃣ Sistema pergunta: "Onde quer que gere os Agentes?"
-   → Digite: C:\Projetos\MeuWorkspace\IA
+1️⃣ Onde gerar os agentes?
+  → Ex.: C:\Projetos\MeuWorkspace\IA
 
-2️⃣ Sistema instala pré-requisitos automaticamente
-   → Python, Node.js, Git, .NET SDK
+2️⃣ Checagem/instalação de pré‑requisitos (automático)
+  → Python 3, Node.js LTS, Git, .NET SDK 8, Mermaid CLI (npm)
 
-3️⃣ Sistema pergunta: "Selecione o modo:"
-   → Digite: 1 (Manual - RECOMENDADO para iniciantes)
+3️⃣ Seleção de modo
+  → 1 = Manual (recomendado) | 2 = Automático (CrewAI)
 
-4️⃣ Sistema pergunta informações do projeto:
-   → Sprint: 01
-   → Activity: rn0001
-   → Nome do projeto: MeuSistema
+4️⃣ Informações do projeto
+  → Sprint (ex.: 01) | Activity (ex.: rn0001) | Nome do projeto (ex.: MeuSistema)
 
-5️⃣ Sistema pergunta: "Tipo de trabalho:"
-   → Digite: 1 (Projeto novo) OU 2 (Projeto existente)
+5️⃣ Tipo de trabalho
+  → 1 = Projeto novo | 2 = Implementação em projeto existente
 
-6️⃣ Se projeto novo: "Onde CRIAR o novo projeto?"
-   → Digite: C:\Projetos\MeuSistema
+6️⃣ Caminhos do projeto
+  → Se novo: "Onde CRIAR o novo projeto?" (ex.: C:\Projetos\MeuSistema)
+  → Se existente: "Onde ESTÁ o projeto?" (ex.: C:\Projetos\SistemaAtual)
 
-7️⃣ Se projeto existente: "Onde ESTÁ o projeto existente?"
-   → Digite: C:\Projetos\SistemaAtual
+7️⃣ Cópia do workflow para o destino
+  → Copia: agents/, orchestrators/, scripts/powershell/, requirements.txt, .env.example
+  → Preserva sempre a .github do projeto destino (não copia a deste repositório)
+  → O instalador pode perguntar para copiar opcionais: prompts-manual/ e docs/
 
-8️⃣ Sistema copia agentes e configura tudo automaticamente
+8️⃣ Criação do arquivo .env (a partir de .env.example)
+  → Ajusta USE_CREWAI, SPRINT, OUTPUT_ACTIVITY, PROJECT_NAME
+
+9️⃣ Super‑prompt (opcional)
+  → Se existir prompts-manual/prompts/super-prompt.md: enriquece com contexto (pastas in/out)
+  → Se não existir: oferece copiar um template (opcional)
+
+🔟 Projeto novo (opcional)
+  → Oferece criar estrutura básica (.NET/Node.js/Angular/React/Genérico)
+
+1️⃣1 Análise de projeto existente (se informado)
+  → Gera project-analysis.md; detecta multi‑projeto e integra Copilot quando houver
+
+1️⃣2 Ambiente Python (opcional)
+  → "Criar .venv-1 e instalar requirements agora?" (instala requirements.txt)
+
+1️⃣3 Enriquecer agentes (opcional)
+  → Injeta arquivos <role>.instructions.* em agents/manual/*.agent.md (idempotente)
+
+1️⃣4 Execução automática (opcional)
+  → Se modo manual: "Executar o fluxo manual agora?" (scripts/powershell/start-manual.ps1)
 ```
+
+Notas:
+- A pasta .github do projeto destino é sempre preservada e nunca sobrescrita.
+- O super‑prompt é totalmente opcional; a instalação não falha se ele não existir.
+- O instalador pode perguntar se você deseja copiar prompts-manual/ e docs/ (opcionais).
+- O arquivo .env é gerado automaticamente para facilitar execuções futuras.
 
 ### ✅ **Resultado da Instalação:**
 
 ```
 📁 C:\Projetos\MeuWorkspace\IA\     ← AGENTES (onde ficam os workflows)
-├── agents/manual/                  ← 10 agentes especializados
-├── in/sprint01/rn0001/            ← ENTRADA (você coloca documentos aqui)
-│   ├── business_request/          ← Solicitações do cliente
-│   └── attachments/               ← Documentos técnicos
-├── out/sprint01/rn0001/           ← SAÍDA (agentes geram aqui)
-└── powershell/                    ← Scripts de automação
+├── agents/manual/                      ← 11 agentes especializados
+├── data/in/sprint01/rn0001/            ← ENTRADA (você coloca documentos aqui)
+│   ├── business_request/               ← Solicitações do cliente
+│   └── attachments/                    ← Documentos técnicos
+├── data/out/sprint01/rn0001/           ← SAÍDA (agentes geram aqui)
+└── scripts/powershell/                 ← Scripts de automação
 
 📁 C:\Projetos\MeuSistema\          ← PROJETO (seu código fica aqui)
 ├── src/                           ← Código-fonte
@@ -222,10 +261,10 @@ O AgileDevAgent agora inclui **ferramentas visuais integradas** para criar wiref
 
 ```powershell
 # 🎨 Configurar ferramentas de design para uma atividade
-.\powershell\setup-design-tools.ps1 -Sprint 01 -Activity rn0001 -InstallDesignTools -GenerateWireframes
+.\scripts\powershell\setup-design-tools.ps1 -Sprint 01 -Activity rn0001 -InstallDesignTools -GenerateWireframes
 
 # 👁️ Visualizar wireframes no navegador
-.\powershell\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -OpenBrowser -ExportImages
+.\scripts\powershell\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -OpenBrowser -ExportImages
 ```
 
 #### **🛠️ Funcionalidades Incluídas:**
@@ -253,7 +292,7 @@ O AgileDevAgent agora inclui **ferramentas visuais integradas** para criar wiref
 #### **📊 Estrutura Gerada:**
 
 ```
-out/sprint01/rn0001/
+data/out/sprint01/rn0001/
 ├── 04-wireframes/
 │   ├── ascii/              ← Wireframes em texto
 │   ├── mermaid/            ← Diagramas de fluxo
@@ -278,7 +317,7 @@ mmdc -i wireframes/mermaid/user-flow.md -o user-flow.png
 # Abrir workspace de design
 code out/sprint01/rn0001/04-wireframes/
 
-# Gerar Storybook para componentes  
+# Gerar Storybook para componentes
 .\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -GenerateStorybook
 ```
 
@@ -320,7 +359,7 @@ Os usuários querem acessar o sistema usando sua conta Google
 
 ### **📱 2.2: Iniciar o Processo Manual**
 
-**QUEM INICIA:** Sempre o **Product Owner** (PO)  
+**QUEM INICIA:** Sempre o **Product Owner** (PO)
 **COMO INICIAR:** GitHub Copilot Chat no VS Code
 
 ```powershell
@@ -357,7 +396,7 @@ Analise a solicitação e prepare a mesa redonda.
 Resumo: RN-0001, Média complexidade, OAuth Google, Frontend+Backend
 Posso prosseguir? [SIM/NAO/REVISAR]"
 
-� Você responde: SIM
+Você responde: SIM
 
 🤖 Sistema executa automaticamente o próximo agente...
 ```
@@ -372,12 +411,13 @@ Posso prosseguir? [SIM/NAO/REVISAR]"
 | **2️⃣ Mesa Redonda** | Alinha tecnicamente | Ata da reunião | Posso analisar requisitos? |
 | **3️⃣ Requirements** | Cria cenários BDD | Features de teste | Posso fazer arquitetura? |
 | **4️⃣ Systems Architect** | Define solução | ADRs + Diagramas | Posso criar wireframes? |
-| **5️⃣ UX/UI Specialist** | Cria wireframes | Design System + Protótipos | Posso criar plano TDD? |
+| **5️⃣ UX/UI Specialist (opcional)** | Cria wireframes | Design System + Protótipos | Prosseguir com Frontend? |
 | **6️⃣ Testing Specialist** | Plano TDD | Estratégia de testes | Posso implementar código? |
-| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Posso validar implementação? |
-| **8️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
-| **9️⃣ Code Reviewer** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
-| **🔟 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
+| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Prosseguir com Frontend (opcional) e depois validar? |
+| **8️⃣ Frontend Specialist (opcional)** | Implementa frontend | 04-frontend-implementation + components + UI guidelines | Prosseguir para validação? |
+| **9️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
+| **🔟 Code Reviewer (opcional)** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
+| **1️⃣1 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
 
 ### **🎮 2.5: Controlando o Fluxo**
 
@@ -412,7 +452,7 @@ Contexto: "E-commerce B2B com integração ERP - preciso debater arquitetura"
 - DADO pedido válido QUANDO sincronizar ERP ENTÃO atualizar estoque
 - Validação de crédito automática via API financeira"
 
-### Systems Architect (SA):  
+### Systems Architect (SA):
 "Concordo com RA. Proponho Clean Architecture:
 - Domain: Pedido, Cliente, Produto (DDD)
 - Application: CQRS para consultas vs comandos
@@ -450,7 +490,7 @@ SA: "REST resolve. GraphQL adiciona complexidade desnecessária."
 
 ## ✅ CONVERGÊNCIA E DECISÕES FINAIS
 - Backend: .NET + Clean Architecture + CQRS
-- Frontend: Angular + PO-UI  
+- Frontend: Angular + PO-UI
 - Banco: PostgreSQL + Redis
 - Testes: 90% cobertura + Cypress E2E
 ```
@@ -474,7 +514,7 @@ SA: "REST resolve. GraphQL adiciona complexidade desnecessária."
 "FOCO ESPECÍFICO: Debater apenas arquitetura de dados.
 Participantes devem decidir entre:
 - Microserviços + Event Sourcing
-- Monólito Modular + CQRS  
+- Monólito Modular + CQRS
 - Serverless + DynamoDB
 
 Cada especialista deve defender UMA opção com prós/contras detalhados."
@@ -486,7 +526,7 @@ Cada especialista deve defender UMA opção com prós/contras detalhados."
 
 "CENÁRIO DE CONFLITO: Cliente quer delivery em 2 meses vs qualidade enterprise.
 - SA deve defender arquitetura robusta (6 meses)
-- Dev deve defender solução rápida (MVP em 2 meses)  
+- Dev deve defender solução rápida (MVP em 2 meses)
 - QA deve apresentar riscos de cada abordagem
 - Frontend deve mostrar impacto na UX
 Facilitador deve levar ao consenso prático."
@@ -497,15 +537,15 @@ Facilitador deve levar ao consenso prático."
 # Rodada 1: Arquitetura Geral
 @agents/manual/roundtable-facilitator.agent.md
 "Debater visão geral da solução"
-# → Você aprova: [SIM] 
+# → Você aprova: [SIM]
 
-# Rodada 2: Detalhamento Frontend  
+# Rodada 2: Detalhamento Frontend
 @agents/manual/roundtable-facilitator.agent.md
 "FOCO: Apenas decisões de UI/UX, componentes e integração com backend"
 # → Você aprova: [SIM]
 
 # Rodada 3: Estratégia de Testes
-@agents/manual/roundtable-facilitator.agent.md  
+@agents/manual/roundtable-facilitator.agent.md
 "FOCO: Apenas cobertura, performance e automação de testes"
 # → Você aprova: [SIM] → Continua fluxo normal
 ```
@@ -522,7 +562,7 @@ Facilitador deve levar ao consenso prático."
 
 # 2️⃣ Se aprovado, continua automaticamente:
 # → Requirements Analyst (BDD detalhado)
-# → Systems Architect (ADRs + diagramas)  
+# → Systems Architect (ADRs + diagramas)
 # → Expert Developer (código + testes)
 # → Testing Specialist (QA + validação)
 # → Product Owner Final (checklist)
@@ -535,7 +575,7 @@ Facilitador deve levar ao consenso prático."
 @agents/manual/roundtable-facilitator.agent.md
 "Sistema de gestão escolar - debater se usar microserviços ou monólito modular"
 
-# Exemplo 2: Refatoração  
+# Exemplo 2: Refatoração
 @agents/manual/roundtable-facilitator.agent.md
 "Sistema legado em .NET Framework - migrar para .NET 8 + Clean Architecture"
 
@@ -557,12 +597,12 @@ Facilitador deve levar ao consenso prático."
 @agents/manual/roundtable-facilitator.agent.md
 "Visão geral - arquitetura, tecnologias, cronograma"
 
-# Mesa Técnica: Aprofundamento  
+# Mesa Técnica: Aprofundamento
 @agents/manual/roundtable-facilitator.agent.md
 "Redebater apenas aspectos de performance, escalabilidade e otimização"
 
 # Mesa de Segurança: Compliance
-@agents/manual/roundtable-facilitator.agent.md  
+@agents/manual/roundtable-facilitator.agent.md
 "Redebater apenas segurança, LGPD, auditoria e compliance"
 
 # Mesa de UX: Experiência
@@ -601,7 +641,7 @@ Facilitador deve levar ao consenso prático."
 👤 Se você digitar: REVISAR
 🤖 Sistema mostra: "Arquivos gerados: 02-requisitos-bdd.md, features/login.feature"
 
-👤 Se você digitar: SIM  
+👤 Se você digitar: SIM
 🤖 Sistema executa: Systems Architect automaticamente
 
 👤 Se você digitar: NAO
@@ -850,15 +890,15 @@ public class User : BaseEntity
     {
         var validator = new UserValidator();
         var validationResult = validator.Validate(new { username, displayName });
-        
+
         if (!validationResult.IsValid)
             return Result<User>.Failure(validationResult.Errors);
 
-        return Result<User>.Success(new User 
-        { 
+        return Result<User>.Success(new User
+        {
             Username = username,
             DisplayName = displayName,
-            Role = UserRole.Standard 
+            Role = UserRole.Standard
         });
     }
 
@@ -920,7 +960,7 @@ out/sprint02/sistema-login/
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -935,12 +975,12 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.invalid) return;
-    
+
     this.isLoading = true;
-    
+
     try {
       const result = await this.authService.authenticate(this.loginForm.value);
-      
+
       if (result.success) {
         this.notificationService.success(`Bem-vindo, ${result.user.displayName}`);
         this.router.navigate(['/dashboard']);
@@ -1004,16 +1044,16 @@ out/sprint02/sistema-login/
 describe('Sistema de Autenticação', () => {
   it('deve realizar login com credenciais válidas', () => {
     cy.visit('/login');
-    
+
     cy.get('[data-testid="username-input"]')
       .type('joao.silva');
-    
+
     cy.get('[data-testid="password-input"]')
       .type('senha123');
-    
+
     cy.get('[data-testid="login-button"]')
       .click();
-    
+
     cy.url().should('include', '/dashboard');
     cy.get('[data-testid="welcome-message"]')
       .should('contain', 'Bem-vindo, João Silva');
@@ -1021,14 +1061,14 @@ describe('Sistema de Autenticação', () => {
 
   it('deve funcionar offline com cache local', () => {
     cy.mockOfflineMode();
-    
+
     cy.get('[data-testid="username-input"]').type('usuario.cached');
     cy.get('[data-testid="password-input"]').type('senha123');
     cy.get('[data-testid="login-button"]').click();
-    
+
     cy.get('[data-testid="offline-indicator"]')
       .should('be.visible');
-    
+
     cy.url().should('include', '/dashboard');
   });
 });
@@ -1065,7 +1105,7 @@ Contexto: "Auditoria independente da implementação - todos os critérios foram
 out/sprint02/sistema-login/
 └── 04.1-code-review.md          ← Parecer técnico independente
     ├── Critério 1: ✅ APROVADO
-    ├── Critério 2: ❌ NECESSITA CORREÇÕES  
+    ├── Critério 2: ❌ NECESSITA CORREÇÕES
     ├── Critério 3: ✅ APROVADO
     └── DECISÃO: NECESSITA CORREÇÕES
 ```
@@ -1074,9 +1114,9 @@ out/sprint02/sistema-login/
 ```markdown
 ## Code Review Report - Sistema Login
 
-## ✅ PADRÕES DE DESENVOLVIMENTO  
+## ✅ PADRÕES DE DESENVOLVIMENTO
 - **NOMENCLATURA**: ✅ PascalCase classes, camelCase variáveis, nomes descritivos
-- **INDENTAÇÃO**: ✅ Consistente, 4 espaços, sem tabs mistos  
+- **INDENTAÇÃO**: ✅ Consistente, 4 espaços, sem tabs mistos
 - **COMMITS**: ❌ INCORRETO - "fix login" → Deveria ser "🐛 fix - Resolve AD timeout issue"
 - **ESTRUTURA**: ✅ Clean Architecture respeitada (Core/Application/Infrastructure/API)
 - **DOCUMENTAÇÃO**: ✅ XML docs presentes, README atualizado
@@ -1088,11 +1128,11 @@ out/sprint02/sistema-login/
 - **IMPLEMENTAÇÃO**: AuthenticationService.cs - Bem estruturada
 - **QUALIDADE**: Clean Architecture respeitada, SOLID aplicado
 - **PADRÕES**: Nomenclatura e indentação corretas
-- **TESTES**: AuthenticationTests.cs - Cobertura adequada  
+- **TESTES**: AuthenticationTests.cs - Cobertura adequada
 - **EVIDÊNCIA**: Comando "dotnet test" validado - funcional
 - **OBSERVAÇÕES**: Excelente tratamento de exceções
 
-### Critério 2: Interface Responsiva  
+### Critério 2: Interface Responsiva
 - **STATUS**: ✅ APROVADO
 - **IMPLEMENTAÇÃO**: LoginComponent.ts - Estrutura correta
 - **QUALIDADE**: Código limpo e bem organizado
@@ -1102,7 +1142,7 @@ out/sprint02/sistema-login/
 - **OBSERVAÇÕES**: Implementação exemplar
 
 ### DECISÃO FINAL: ❌ NECESSITA CORREÇÕES
-**Pendências**: 
+**Pendências**:
 - Corrigir mensagens de commit para seguir padrão gitemoji
 - Exemplo: "🐛 fix - Resolve AD timeout in authentication service"
 ```
@@ -1130,7 +1170,7 @@ out/sprint02/sistema-login/
 ```
 @agents/manual/testing-validator.agent.md
 
-Sprint: 02, Activity: sistema-login  
+Sprint: 02, Activity: sistema-login
 Contexto: "Validar se implementação seguiu o plano de QA definido - todos os testes foram implementados corretamente?"
 ```
 
@@ -1146,7 +1186,7 @@ out/sprint02/sistema-login/
 
 ### Cenários Implementados vs. Planejados:
 - ✅ Cenário 01: Login válido → Implementado e PASSA
-- ✅ Cenário 02: Senha inválida → Implementado e PASSA  
+- ✅ Cenário 02: Senha inválida → Implementado e PASSA
 - ❌ Cenário 03: Usuário bloqueado → NÃO IMPLEMENTADO
 - ✅ Cenário 04: Timeout AD → Implementado e PASSA
 
@@ -1217,7 +1257,7 @@ out/sprint02/sistema-login/
 - ✅ **ATENDIDO** - Evidência: Código em AuthenticationService.cs + testes em ADIntegrationTests.cs
 - ✅ **ATENDIDO** - Tempo resposta: 1.2s (meta < 2s) - Evidência: Relatório performance
 
-### Critério 2: Interface Responsiva  
+### Critério 2: Interface Responsiva
 - ✅ **ATENDIDO** - Evidência: CSS responsivo + testes E2E em múltiplas resoluções
 - ✅ **ATENDIDO** - Acessibilidade WCAG 2.1 - Evidência: Auditoria automática passando
 
@@ -1251,20 +1291,148 @@ out/sprint02/sistema-login/
 Product Owner → Mesa Redonda → Requirements → Architect → Developer → Testing → PO Final
 ```
 
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (stack)
+
+POLÍTICA DE FLUXO:
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Se [REVISAR], listar os arquivos gerados e aguardar
+- Se [NAO], encerrar e aguardar novas instruções
+
+ORDEM:
+1) Product Owner (gera 00-*)
+  APROVACAO NECESSARIA → Prosseguir com Mesa Redonda? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda (gera 01-*)
+  APROVACAO NECESSARIA → Prosseguir com Requirements Analyst? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst (gera 02-* e features/)
+  APROVACAO NECESSARIA → Prosseguir com Systems Architect? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/systems-architect.agent.md
+4) Systems Architect (gera 03-*, adrs/, diagrams/)
+  APROVACAO NECESSARIA → Prosseguir com Expert Developer? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/expert-developer.agent.md
+5) Expert Developer (gera 04-*, engineering/src e tests)
+  APROVACAO NECESSARIA → Prosseguir com Testing Specialist? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/testing-specialist.agent.md
+6) Testing Specialist (gera 05-qa-plano.md e reports)
+  APROVACAO NECESSARIA → Prosseguir com Product Owner Final? [SIM/NAO/REVISAR]
+  SE [SIM] → executar: @agents/manual/product-owner-final.agent.md
+7) Product Owner Final (gera 99-checklist-final.md)
+```
+
 #### **🧪 Fluxo TDD (Test-Driven Development) - RECOMENDADO:**
 ```powershell
 Product Owner → Mesa Redonda → Requirements → Architect → Testing Specialist → Expert Developer → Testing Validator → PO Final
 ```
 **✨ Novo fluxo otimizado:** Testing Specialist cria o plano ANTES do desenvolvimento, Expert Developer implementa seguindo TDD, Testing Validator valida se tudo foi implementado conforme o plano.
 
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (stack)
+
+POLÍTICA DE FLUXO (TDD):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Manter ordem TDD: QA ANTES do código, Validador após implementação
+
+ORDEM TDD:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/testing-specialist.agent.md
+5) Testing Specialist (plano TDD) → SE [SIM] → @agents/manual/expert-developer.agent.md
+6) Expert Developer (implementa conforme plano) → SE [SIM] → @agents/manual/testing-validator.agent.md
+7) Testing Validator (valida implementação x plano) → SE [SIM] → @agents/manual/product-owner-final.agent.md
+8) Product Owner Final
+```
+
 #### **🛡️ Fluxo com Validação Rigorosa (Projetos Críticos):**
 ```powershell
 Product Owner → Mesa Redonda → Requirements → Architect → Developer → Code Reviewer → Testing → PO Final
 ```
 
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (stack)
+
+POLÍTICA DE FLUXO (Validação Rigorosa):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Incluir auditoria independente antes de Testing
+
+ORDEM:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/expert-developer.agent.md
+5) Expert Developer → SE [SIM] → @agents/manual/code-reviewer.agent.md
+6) Code Reviewer (auditoria) → SE [SIM] → @agents/manual/testing-specialist.agent.md
+7) Testing Specialist → SE [SIM] → @agents/manual/product-owner-final.agent.md
+8) Product Owner Final
+```
+
 #### **🎨 Fluxo Full-Stack (Backend + Frontend):**
 ```powershell
 Product Owner → Mesa Redonda → Requirements → Architect → Developer → Frontend → Testing → PO Final
+```
+
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (Backend + Frontend)
+
+POLÍTICA DE FLUXO (Full-Stack):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- Executar Frontend após Backend e antes de Testing
+
+ORDEM:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/expert-developer.agent.md
+5) Expert Developer (backend) → SE [SIM] → @agents/manual/frontend-specialist.agent.md
+6) Frontend Specialist → SE [SIM] → @agents/manual/testing-specialist.agent.md
+7) Testing Specialist → SE [SIM] → @agents/manual/product-owner-final.agent.md
+8) Product Owner Final
+```
+
+#### **🧪 Fluxo TDD + FULL STACK (Test-Driven Development):**
+```powershell
+Product Owner → Mesa Redonda → Requirements → Architect → Testing Specialist → Expert Developer → Frontend Specialist → Testing Validator → PO Final
+```
+
+Prompt pronto (copiar e colar no Copilot Chat):
+```
+@agents/manual/product-owner.agent.md
+Sprint: 01, Activity: rn0001
+Sistema: Nome do Sistema (Backend + Frontend)
+
+POLÍTICA DE FLUXO (TDD + Full-Stack):
+- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
+- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
+- TDD: QA ANTES do código; validar após backend+frontend
+
+ORDEM:
+1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
+2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
+3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
+4) Systems Architect → SE [SIM] → @agents/manual/testing-specialist.agent.md
+5) Testing Specialist (plano TDD) → SE [SIM] → @agents/manual/expert-developer.agent.md
+6) Expert Developer (backend) → SE [SIM] → @agents/manual/frontend-specialist.agent.md
+7) Frontend Specialist → SE [SIM] → @agents/manual/testing-validator.agent.md
+8) Testing Validator → SE [SIM] → @agents/manual/product-owner-final.agent.md
+9) Product Owner Final
 ```
 
 ### **⚡ Fluxos Parciais Especializados:**
@@ -1383,7 +1551,7 @@ graph TD
 
 ### Expert Developer (Auto-Validação):
 - ✅ Implementado em: AuthenticationService.cs
-- ✅ Teste unitário: AuthenticationTests.cs  
+- ✅ Teste unitário: AuthenticationTests.cs
 - ✅ Evidência: "dotnet test --filter AuthenticationAD"
 
 ### Code Reviewer (Auditoria):
@@ -1393,7 +1561,7 @@ graph TD
 
 ### Testing Specialist (Validação):
 - ✅ APROVADO - Teste executado com sucesso
-- ✅ APROVADO - Performance 1.2s (meta < 2s)  
+- ✅ APROVADO - Performance 1.2s (meta < 2s)
 - ✅ APROVADO - Cenários de falha cobertos
 
 ### Product Owner Final:
@@ -1407,7 +1575,7 @@ graph TD
 @agents/manual/expert-developer.agent.md
 # → Auto-validação + matriz de rastreabilidade
 
-@agents/manual/testing-specialist.agent.md  
+@agents/manual/testing-specialist.agent.md
 # → Validação rigorosa das evidências
 
 @agents/manual/product-owner-final.agent.md
@@ -1443,7 +1611,7 @@ graph TD
 ```csharp
 // Classes: PascalCase
 public class AuthenticationService
-public class UserRepository  
+public class UserRepository
 
 // Métodos: PascalCase
 public async Task<Result> AuthenticateAsync()
@@ -1491,7 +1659,7 @@ private string UserName;            // deveria ser camelCase
 ```bash
 # ❌ Sem padrão, não descritivos
 "fix bug"
-"update code" 
+"update code"
 "added feature"
 "changes"
 "wip"
@@ -1504,28 +1672,28 @@ private string UserName;            // deveria ser camelCase
 public class AuthenticationService
 {
     private readonly IUserRepository _userRepository;
-    
+
     public AuthenticationService(IUserRepository userRepository)
     {
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
     }
-    
+
     public async Task<Result<User>> AuthenticateAsync(string username, string password)
     {
         if (string.IsNullOrWhiteSpace(username))
         {
             return Result<User>.Failure("Username is required");
         }
-        
+
         try
         {
             var user = await _userRepository.GetByUsernameAsync(username);
-            
+
             if (user == null)
             {
                 return Result<User>.Failure("Invalid credentials");
             }
-            
+
             return Result<User>.Success(user);
         }
         catch (Exception ex)
@@ -1587,7 +1755,7 @@ public async Task<Result<User>> AuthenticateAsync(string username, string passwo
 
 ### Nomenclatura:
 - [ ] Classes em PascalCase e descritivas
-- [ ] Métodos em PascalCase e verbos claros  
+- [ ] Métodos em PascalCase e verbos claros
 - [ ] Variáveis em camelCase e descritivas
 - [ ] Sem abreviações ou nomes ambíguos
 
@@ -1622,17 +1790,17 @@ public async Task<Result<User>> AuthenticateAsync(string username, string passwo
 graph TD
     A[Product Owner] --> B[00-acceptance-criteria.md]
     B --> C[Requirements Analyst]
-    B --> D[Systems Architect] 
+    B --> D[Systems Architect]
     B --> E[Expert Developer]
     B --> F[Testing Specialist]
     B --> G[Product Owner Final]
-    
+
     C --> H[Regras que cobrem TODOS os critérios]
     D --> I[Arquitetura que atende os critérios]
     E --> J[Código que implementa os critérios]
     F --> K[Testes que validam os critérios]
     G --> L[ATIVIDADE ENTREGUE ✅]
-    
+
     G --> M{Todos os critérios atendidos?}
     M -->|SIM| L
     M -->|NÃO| N[NECESSITA AJUSTES ❌]
@@ -1687,7 +1855,7 @@ graph TD
 
 # 1. Product Owner cria critérios específicos:
 # - Critério 1: Autenticação AD em < 2s
-# - Critério 2: Interface responsiva (desktop + mobile)  
+# - Critério 2: Interface responsiva (desktop + mobile)
 # - Critério 3: Auditoria completa de acessos
 
 # 2. Toda a equipe trabalha para atender esses 3 critérios
@@ -1713,7 +1881,7 @@ graph TD
 @agents/manual/systems-architect.agent.md
 
 Sprint: 04, Activity: refactoring-usuarios
-Contexto: "Refatorar módulo usuários (5 anos, God classes, 0% cobertura). 
+Contexto: "Refatorar módulo usuários (5 anos, God classes, 0% cobertura).
 Aplicar SOLID + Clean Architecture mantendo compatibilidade API."
 
 Problema atual:
@@ -1729,8 +1897,8 @@ Meta: Clean Architecture + 90% cobertura
 ```
 @agents/manual/ux-ui-specialist.agent.md
 
-Sprint: 02, Activity: dashboard-executivo  
-Contexto: "Dashboard para C-Level com KPIs real-time, gráficos interativos, 
+Sprint: 02, Activity: dashboard-executivo
+Contexto: "Dashboard para C-Level com KPIs real-time, gráficos interativos,
 filtros avançados. Prioridade: informação crítica 'above the fold'."
 
 Usuários: CEO, CFO, diretores (baixa literacy digital)
@@ -1743,12 +1911,12 @@ Restrições: Identidade visual corporativa + acessibilidade WCAG 2.1 AA
 @agents/manual/testing-specialist.agent.md
 
 Sprint: 03, Activity: calculo-comissao
-Contexto: "Criar plano TDD ANTES da implementação. Regras complexas: 
+Contexto: "Criar plano TDD ANTES da implementação. Regras complexas:
 base + performance + metas + bônus trimestral."
 
 Critérios de aceite:
 1. Cálculo correto conforme RN-0030 a RN-0035
-2. Performance < 100ms para 1000 vendedores  
+2. Performance < 100ms para 1000 vendedores
 3. Tratamento de cenários extremos (vendas negativas)
 4. Auditoria completa de cálculos
 
@@ -1760,12 +1928,12 @@ Meta: 95% cobertura + evidências automatizadas
 @agents/manual/testing-validator.agent.md
 
 Sprint: 03, Activity: validacao-modulo-pagamentos
-Contexto: "Validar se Expert Developer implementou corretamente o plano 
+Contexto: "Validar se Expert Developer implementou corretamente o plano
 TDD. Verificar todos cenários, cobertura real vs planejada."
 
 Entrada necessária:
 - 05-qa-plano.md (plano original do Testing Specialist)
-- 04-desenvolvimento.md (implementação do Expert Developer)  
+- 04-desenvolvimento.md (implementação do Expert Developer)
 - Código fonte + testes implementados
 
 Validar: Conformidade plano → implementação
@@ -1775,7 +1943,7 @@ Validar: Conformidade plano → implementação
 ```
 @agents/manual/roundtable-facilitator.agent.md
 
-Contexto: "Decisão: Microserviços vs Monolito Modular para novo módulo 
+Contexto: "Decisão: Microserviços vs Monolito Modular para novo módulo
 de relatórios. Avaliar: escalabilidade, complexidade, skills do time, prazo 6 meses."
 
 Restrições conhecidas:
@@ -1792,7 +1960,7 @@ Foco: arquitetura, manutenibilidade, time skills
 @agents/manual/expert-developer.agent.md
 
 Sprint: 03, Activity: implementar-notificacoes
-Contexto: "Implementar sistema de notificações seguindo TDD rigoroso. 
+Contexto: "Implementar sistema de notificações seguindo TDD rigoroso.
 Usar plano do Testing Specialist + arquitetura do Systems Architect."
 
 Entrada obrigatória:
@@ -1809,12 +1977,12 @@ Padrões: Clean Architecture + CQRS + Domain Events
 @agents/manual/requirements-analyst.agent.md
 
 Sprint: 02, Activity: integracao-sap
-Contexto: "Analisar integração bi-direcional com SAP ERP. Documentos: 
+Contexto: "Analisar integração bi-direcional com SAP ERP. Documentos:
 120 páginas de specs + planilhas de mapeamento + casos de teste."
 
 Arquivos de entrada:
 - SAP_Integration_Specs_v2.1.docx (120 páginas)
-- Entity_Mapping_Tables.xlsx (15 planilhas)  
+- Entity_Mapping_Tables.xlsx (15 planilhas)
 - Test_Cases_SAP_Integration.xlsx (200+ cenários)
 
 Foco: extrair regras RN-0050 a RN-0070, criar cenários BDD
@@ -1826,7 +1994,7 @@ Complexidade: sincronização real-time + tratamento conflitos
 @agents/manual/product-owner-final.agent.md
 
 Sprint: 04, Activity: go-live-sistema-vendas
-Contexto: "Validação final antes do go-live. Verificar CADA critério de 
+Contexto: "Validação final antes do go-live. Verificar CADA critério de
 aceite contra evidências técnicas. Decisão: APROVAR ou PENDÊNCIAS."
 
 Critérios para validar:
@@ -1858,16 +2026,16 @@ Entrada: Todos artefatos + código + documentação técnica
 @agents/manual/roundtable-facilitator.agent.md
 "Debater arquitetura do módulo X"
 
-# 2. Use UX/UI Specialist para wireframes rápidos  
+# 2. Use UX/UI Specialist para wireframes rápidos
 @agents/manual/ux-ui-specialist.agent.md
 "Criar protótipo da interface Y"
 
 # 3. Use Testing Specialist para plano TDD
-@agents/manual/testing-specialist.agent.md  
+@agents/manual/testing-specialist.agent.md
 "Planejar testes da funcionalidade Z"
 
 # 4. Execute fluxo completo para implementação final
-.\powershell\start-manual.ps1 -Sprint 02 -Activity implementacao-completa
+.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity implementacao-completa
 # (Product Owner → Requirements → Systems Architect → Expert Developer → etc.)
 ```
 
@@ -1960,8 +2128,9 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 
 ### **📊 Resultado Final:**
 ```
-📁 out/sprint01/rn0001/
+📁 data/out/sprint01/rn0001/
 ├── 00-business-context.md          ← Por que mudar a cor
+├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 01-ata-mesa-redonda.md         ← Decisões técnicas
 ├── 02-requisitos-bdd.md           ← Cenários de teste
@@ -1979,6 +2148,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 ## 🛠️ **Scripts PowerShell Disponíveis**
 
 **Para Desenvolvedores:** Além do GitHub Copilot, você pode usar scripts PowerShell para automação avançada e gerenciamento de atividades.
+**Para Desenvolvedores:** Além do GitHub Copilot, você pode usar scripts PowerShell para automação avançada e gerenciamento de atividades.
 
 ### **📜 Scripts Disponíveis:**
 
@@ -1990,11 +2160,11 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 #### **⚙️ Scripts do Cliente (copiados na instalação):**
 | **Script** | **Objetivo** | **Quando Usar** | **Localização** |
 |------------|--------------|----------------|-----------------|
-| `new-activity.ps1` | **🆕 Criar novas atividades** | Sempre que precisar de nova funcionalidade | `.\powershell\new-activity.ps1` |
-| `start-manual.ps1` | **Executar workflow completo** | Para automação do processo manual | `.\powershell\start-manual.ps1` |
-| `render-diagrams.ps1` | **Gerar imagens dos diagramas** | Após criar diagramas Mermaid | `.\powershell\render-diagrams.ps1` |
-| `use-venv.ps1` | **Ativar ambiente Python** | Para trabalhar com CrewAI/AutoGen | `.\powershell\use-venv.ps1` |
-| `start-orchestration.ps1` | **Executar CrewAI/AutoGen** | Para processo automatizado com IA | `.\powershell\start-orchestration.ps1` |
+| `new-activity.ps1` | **🆕 Criar novas atividades** | Sempre que precisar de nova funcionalidade | `.\scripts\powershell\new-activity.ps1` |
+| `start-manual.ps1` | **Executar workflow completo** | Para automação do processo manual | `.\scripts\powershell\start-manual.ps1` |
+| `render-diagrams.ps1` | **Gerar imagens dos diagramas** | Após criar diagramas Mermaid | `.\scripts\powershell\render-diagrams.ps1` |
+| `use-venv.ps1` | **Ativar ambiente Python** | Para trabalhar com CrewAI/AutoGen | `.\scripts\powershell\use-venv.ps1` |
+| `start-orchestration.ps1` | **Executar CrewAI/AutoGen** | Para processo automatizado com IA | `.\scripts\powershell\start-orchestration.ps1` |
 
 ---
 
@@ -2027,14 +2197,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 ```
 ProjetoCliente/
 ├── agents/          ← Todos os 7 agentes copiados
-├── powershell/      ← 5 scripts funcionais (sem setup-workflow.ps1)
+├── scripts/powershell/      ← 5 scripts funcionais (sem setup-workflow.ps1)
 │   ├── new-activity.ps1
 │   ├── start-manual.ps1
 │   ├── render-diagrams.ps1
 │   ├── use-venv.ps1
 │   └── start-orchestration.ps1
 ├── orchestrators/   ← CrewAI e AutoGen
-├── in/sprint01/rn0001/  ← Primeira atividade criada
+├── data/in/sprint01/rn0001/  ← Primeira atividade criada
 └── .env             ← Configurações do projeto
 ```
 
@@ -2052,29 +2222,29 @@ ProjetoCliente/
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\new-activity.ps1 -Sprint <número> -Activity <código>
+.\scripts\powershell\new-activity.ps1 -Sprint <número> -Activity <código>
 ```
 
 **🎯 Exemplos práticos:**
 ```powershell
 # Nova funcionalidade no sprint atual
-.\powershell\new-activity.ps1 -Sprint 01 -Activity rn0025
+.\scripts\powershell\new-activity.ps1 -Sprint 01 -Activity rn0025
 
 # Feature para próximo sprint
-.\powershell\new-activity.ps1 -Sprint 02 -Activity feature001
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity feature001
 
 # Correção de bug
-.\powershell\new-activity.ps1 -Sprint 01 -Activity bug-fix-auth
+.\scripts\powershell\new-activity.ps1 -Sprint 01 -Activity bug-fix-auth
 ```
 
 **📁 Estrutura criada automaticamente:**
 ```
-in/sprint02/rn0025/
+data/in/sprint02/rn0025/
 ├── business_request/
 │   └── solicitacao.md      ← Template editável
 └── attachments/            ← Para docs técnicos
 
-out/sprint02/rn0025/        ← Criada quando agentes executam
+data/out/sprint02/rn0025/        ← Criada quando agentes executam
 ├── 00-requirements-brief.md
 ├── 01-ata-mesa-redonda.md
 ├── 02-requisitos-bdd.md
@@ -2083,7 +2253,7 @@ out/sprint02/rn0025/        ← Criada quando agentes executam
 
 **✅ Workflow após criação:**
 1. Editar `business_request/solicitacao.md` com sua demanda
-2. Adicionar documentos em `attachments/` (se necessário)  
+2. Adicionar documentos em `attachments/` (se necessário)
 3. Executar: `@agents/manual/product-owner.agent.md`
 
 ---
@@ -2098,24 +2268,24 @@ out/sprint02/rn0025/        ← Criada quando agentes executam
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\start-manual.ps1 -Sprint <número> -Activity <código>
+.\scripts\powershell\start-manual.ps1 -Sprint <número> -Activity <código>
 ```
 
 **🎯 Exemplos práticos:**
 ```powershell
 # Executar atividade específica
-.\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+.\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
 
 # Processamento completo de nova feature
-.\powershell\start-manual.ps1 -Sprint 02 -Activity checkout-system
+.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity checkout-system
 
 # Desenvolvimento de correção
-.\powershell\start-manual.ps1 -Sprint 01 -Activity fix-payment-bug
+.\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity fix-payment-bug
 ```
 
 **🔄 Processo executado:**
 ```
-Product Owner → Mesa Redonda → Requirements → Architect → 
+Product Owner → Mesa Redonda → Requirements → Architect →
 Developer → Frontend → Testing → PO Final
 ```
 
@@ -2136,15 +2306,15 @@ Developer → Frontend → Testing → PO Final
 **💻 Como executar:**
 ```powershell
 # Renderizar diagramas da atividade atual
-.\powershell\render-diagrams.ps1
+.\scripts\powershell\render-diagrams.ps1
 
 # Especificar atividade específica
-.\powershell\render-diagrams.ps1 -Sprint 01 -Activity rn0001
+.\scripts\powershell\render-diagrams.ps1 -Sprint 01 -Activity rn0001
 ```
 
 **📁 Entrada esperada:**
 ```
-out/sprint01/rn0001/diagrams/
+data/out/sprint01/rn0001/diagrams/
 ├── architecture.mmd
 ├── sequence-flow.mmd
 └── entity-relationship.mmd
@@ -2152,7 +2322,7 @@ out/sprint01/rn0001/diagrams/
 
 **📁 Saída gerada:**
 ```
-out/sprint01/rn0001/diagrams/images/
+data/out/sprint01/rn0001/diagrams/images/
 ├── architecture.png
 ├── sequence-flow.png
 └── entity-relationship.png
@@ -2174,7 +2344,7 @@ out/sprint01/rn0001/diagrams/images/
 **💻 Como usar:**
 ```powershell
 # Ativar ambiente Python
-.\powershell\use-venv.ps1
+.\scripts\powershell\use-venv.ps1
 
 # Verificar se está ativo
 python --version  # Deve mostrar Python do .venv-1
@@ -2200,13 +2370,13 @@ python .\orchestrators\autogen_dev_team.py
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\start-orchestration.ps1 -Sprint <número>
+.\scripts\powershell\start-orchestration.ps1 -Sprint <número>
 ```
 
 **🎯 Exemplo:**
 ```powershell
 # Processar sprint 01 com IA
-.\powershell\start-orchestration.ps1 -Sprint 01
+.\scripts\powershell\start-orchestration.ps1 -Sprint 01
 ```
 
 **🔄 Diferenças dos processos:**
@@ -2232,12 +2402,12 @@ python .\orchestrators\autogen_dev_team.py
 **💻 Como usar:**
 ```powershell
 # Interface guiada completa
-.\powershell\quick-start.ps1 -Sprint 02
+.\scripts\powershell\quick-start.ps1 -Sprint 02
 
 # Escolher entre:
 # 1. 📝 Atividade única (tradicional)
 # 2. ⚡ Múltiplas atividades paralelas
-# 3. 📊 Gerenciar atividades existentes  
+# 3. 📊 Gerenciar atividades existentes
 # 4. 🔄 Pipeline escalonado avançado
 # 5. 🎯 Mesa Redonda específica
 # 6. ❓ Ajuda e documentação
@@ -2255,16 +2425,16 @@ python .\orchestrators\autogen_dev_team.py
 
 **💻 Sintaxe:**
 ```powershell
-.\powershell\start-multi-activities.ps1 -Sprint <número> -Activities @("atividade1", "atividade2") [opções]
+.\scripts\powershell\start-multi-activities.ps1 -Sprint <número> -Activities @("atividade1", "atividade2") [opções]
 ```
 
 **🎯 Exemplos:**
 ```powershell
-# Básico - criar 3 atividades  
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap")
+# Básico - criar 3 atividades
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap")
 
 # Avançado - com pipeline completo
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap") -SharedContext "Sistema ERP integrado" -ParallelSetup -CreatePipeline
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios", "sap") -SharedContext "Sistema ERP integrado" -ParallelSetup -CreatePipeline
 ```
 
 **📊 Arquivos gerados:**
@@ -2285,19 +2455,19 @@ python .\orchestrators\autogen_dev_team.py
 **💻 Ações disponíveis:**
 ```powershell
 # Status geral das atividades
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
 # Próximas execuções recomendadas
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
 
 # Análise de conflitos
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action conflicts
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action conflicts
 
 # Sincronizar status dos guias
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action sync
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action sync
 
 # Reset de atividade específica
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action reset -Activity login
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action reset -Activity login
 ```
 
 **📈 Saída exemplo:**
@@ -2305,11 +2475,11 @@ python .\orchestrators\autogen_dev_team.py
 📊 SPRINT 02 - Status das Atividades
 
 sistema-login        [████████░░] 80% - Testing Specialist
-modulo-relatorios    [██████░░░░] 60% - Systems Architect  
+modulo-relatorios    [██████░░░░] 60% - Systems Architect
 
 📈 RESUMO GERAL:
   Progresso médio: 70%
-  Atividades completas: 0/2  
+  Atividades completas: 0/2
   Atividades ativas: 2
 ```
 
@@ -2324,25 +2494,25 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 cd "C:\Projetos\MeuWorkspace\IA"
 
 # 🚀 INTERFACE UNIFICADA (RECOMENDADO)
-.\powershell\quick-start.ps1 -Sprint 02
+.\scripts\powershell\quick-start.ps1 -Sprint 02
 
 # ⚡ MÚLTIPLAS ATIVIDADES DIRETO
-.\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "api", "dashboard") -ParallelSetup
+.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "api", "dashboard") -ParallelSetup
 
-# 📊 DASHBOARD DE STATUS  
-.\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+# 📊 DASHBOARD DE STATUS
+.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
 
 # 🆕 ATIVIDADE ÚNICA (TRADICIONAL)
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
 
 # ⚡ EXECUÇÃO MANUAL TRADICIONAL
-.\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030
+.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030
 
-# 🎨 GERAR DIAGRAMAS  
-.\powershell\render-diagrams.ps1
+# 🎨 GERAR DIAGRAMAS
+.\scripts\powershell\render-diagrams.ps1
 
 # 🤖 EXECUÇÃO AUTOMATIZADA
-.\powershell\start-orchestration.ps1 -Sprint 02
+.\scripts\powershell\start-orchestration.ps1 -Sprint 02
 ```
 
 ---
@@ -2358,19 +2528,19 @@ cd "C:\Projetos\MeuWorkspace\IA"
 **1️⃣ Criar estrutura da nova atividade:**
 ```powershell
 cd "C:\Projetos\MeuWorkspace\IA"
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
 ```
 
 **2️⃣ O script cria automaticamente:**
 ```
-📁 in/sprint02/rn0025/
+📁 data/in/sprint02/rn0025/
 ├── 📁 business_request/
 │   └── 📄 solicitacao.md        ← Template pronto para editar
 └── 📁 attachments/              ← Para documentos técnicos
 
-📁 out/sprint02/rn0025/          ← Onde os agentes vão gerar resultados
+📁 data/out/sprint02/rn0025/          ← Onde os agentes vão gerar resultados
 ├── 📁 features/
-├── 📁 adrs/  
+├── 📁 adrs/
 └── 📁 diagrams/
 ```
 
@@ -2392,20 +2562,20 @@ Sprint: 02, Activity: rn0025
 
 ```powershell
 # Sistema de login
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
 
-# Relatório de vendas  
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
+# Relatório de vendas
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
 
 # Integração com API externa
-.\powershell\new-activity.ps1 -Sprint 03 -Activity rn0030
+.\scripts\powershell\new-activity.ps1 -Sprint 03 -Activity rn0030
 ```
 
 ### **📊 Organização por Sprint:**
 
 **Sprint 01:**
 - `rn0001` - Primeira funcionalidade
-- `rn0002` - Segunda funcionalidade  
+- `rn0002` - Segunda funcionalidade
 
 **Sprint 02:**
 - `rn0020` - Sistema de login
@@ -2436,11 +2606,12 @@ São prompts especializados que simulam pessoas de uma equipe:
 - **Automático**: IA executa tudo sozinha (EM TESTES)
 
 ### **🤔 "Onde fico vendo os resultados?"**
-Tudo é salvo na pasta `out/sprint01/rn0001/` do seu workspace
+Tudo é salvo na pasta `data/out/sprint01/rn0001/` do seu workspace
 
 ### **🤔 "Posso usar para qualquer tipo de projeto?"**
 Sim! O sistema detecta automaticamente:
 - .NET (C#, ASP.NET Core)
+- Node.js (JavaScript, TypeScript)
 - Node.js (JavaScript, TypeScript)
 - Angular
 - React
@@ -2453,6 +2624,7 @@ Sem problema! Você pode:
 - Executar novamente com parâmetros diferentes
 
 ### **🤔 "Preciso saber programar?"**
+### **🤔 "Preciso saber programar?"**
 Para **usar** o sistema: NÃO
 Para **entender** os resultados: Ajuda, mas não é obrigatório
 O sistema gera documentação explicativa para cada parte.
@@ -2460,7 +2632,7 @@ O sistema gera documentação explicativa para cada parte.
 ### **🤔 "Como criar uma nova atividade depois da instalação?"**
 Use o script específico para isso:
 ```powershell
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
 ```
 Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 
@@ -2469,10 +2641,10 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 | **Situação** | **Script para usar** | **Comando** | **Local** |
 |--------------|---------------------|-------------|-----------|
 | **Primeira vez (instalação)** | `setup-workflow.ps1` | `.\Install\setup-workflow.ps1` | 📁 *Repositório AgileDevAgent* |
-| **Nova funcionalidade** | `new-activity.ps1` | `.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
-| **Execução automática** | `start-manual.ps1` | `.\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
-| **Gerar imagens** | `render-diagrams.ps1` | `.\powershell\render-diagrams.ps1` | 📁 *Projeto do cliente* |
-| **Usar IA avançada** | `start-orchestration.ps1` | `.\powershell\start-orchestration.ps1 -Sprint 02` | 📁 *Projeto do cliente* |
+| **Nova funcionalidade** | `new-activity.ps1` | `.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
+| **Execução automática** | `start-manual.ps1` | `.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
+| **Gerar imagens** | `render-diagrams.ps1` | `.\scripts\powershell\render-diagrams.ps1` | 📁 *Projeto do cliente* |
+| **Usar IA avançada** | `start-orchestration.ps1` | `.\scripts\powershell\start-orchestration.ps1 -Sprint 02` | 📁 *Projeto do cliente* |
 
 ### **🤔 "Os scripts PowerShell ficam no projeto do cliente?"**
 **SIM!** Após a instalação, os scripts **operacionais** ficam funcionais no projeto do cliente:
@@ -2488,7 +2660,7 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 | **GitHub Copilot** | **PowerShell** |
 |--------------------|----------------|
 | ✅ Controle total de cada etapa | ✅ Execução totalmente automática |
-| ✅ Pode fazer ajustes manuais | ✅ Mais rápido para prototipagem |  
+| ✅ Pode fazer ajustes manuais | ✅ Mais rápido para prototipagem |
 | ✅ Melhor para desenvolvimento crítico | ✅ Ideal para análise exploratória |
 | ✅ **RECOMENDADO** para produção | ✅ Bom para testes e experimentação |
 
@@ -2508,12 +2680,14 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 ```
 
 ### **❌ "Erro: Python não encontrado"**
+### **❌ "Erro: Python não encontrado"**
 **Solução:** O instalador deveria instalar automaticamente. Se não funcionou:
 ```powershell
 winget install Python.Python.3.12
 ```
 
 ### **❌ "Agente não responde ou dá erro"**
+**Solução:**
 **Solução:**
 1. Verifique sua conexão com internet
 2. Verifique se GitHub Copilot está ativo
@@ -2524,7 +2698,7 @@ winget install Python.Python.3.12
 **Possíveis soluções:**
 ```powershell
 # 1. Executar sempre com parâmetros completos:
-powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
 
 # 2. Verificar se está na pasta correta do projeto
 cd "C:\Projetos\MeuWorkspace\IA"
@@ -2533,7 +2707,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 ls .\in\sprint01\rn0001\business_request\
 ```
 
-### **❌ "Erro: 'Cannot find path' no PowerShell"**  
+### **❌ "Erro: 'Cannot find path' no PowerShell"**
 **Causa:** Você não está na pasta certa do projeto
 **Solução:**
 ```powershell
@@ -2541,20 +2715,20 @@ ls .\in\sprint01\rn0001\business_request\
 cd "C:\Projetos\MeuWorkspace\IA"
 
 # Verificar se pasta powershell existe
-ls .\powershell\
+ls .\scripts\powershell\
 ```
 
 ### **❌ "new-activity.ps1 não cria as pastas"**
 **Verifique os parâmetros:**
 ```powershell
-# ✅ Correto: 
-.\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
+# ✅ Correto:
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030
 
 # ❌ Incorreto (faltam parâmetros):
-.\powershell\new-activity.ps1
+.\scripts\powershell\new-activity.ps1
 
 # ❌ Incorreto (sintaxe errada):
-.\powershell\new-activity.ps1 02 rn0030
+.\scripts\powershell\new-activity.ps1 02 rn0030
 ```
 
 ### **❌ "render-diagrams.ps1 não gera imagens"**
@@ -2574,8 +2748,14 @@ mmdc --version
 **Exemplos simples:**
 - "Criar tela de login"
 - "Adicionar botão salvar"
+- "Adicionar botão salvar"
 - "Mudar cor do menu"
 - "Criar relatório de vendas"
+
+**Exemplos avançados:**
+- "Sistema de autenticação com JWT para API .NET"
+- "Dashboard responsivo com gráficos em Angular"
+- "Integração com API do Correios para cálculo de frete"
 
 **Exemplos avançados:**
 - "Sistema de autenticação com JWT para API .NET"
@@ -2602,7 +2782,7 @@ mmdc --version
 
 **Referência:** Aqui está o que cada arquivo faz:
 
-### **📁 Pasta `out/sprint01/rn0001/`:**
+### **📁 Pasta `data/out/sprint01/rn0001/`:**
 
 | **Arquivo** | **O que contém** | **Quem usa** |
 |-------------|------------------|--------------|
@@ -2625,7 +2805,7 @@ mmdc --version
 
 ---
 
-## �🔧 Quick Start Manual (Alternativo)
+## 🔧 Quick Start Manual (Alternativo)
 
 Se preferir executar passos manualmente:
 
@@ -2639,7 +2819,7 @@ Copy-Item .\.env.example .\.env
 2) Escolher modo e executar:
 - Manual:
   ```powershell
-  powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
+  powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\start-manual.ps1 -Sprint 01 -Activity rn0001
   ```
 - CrewAI: ⚠️ **PREVIEW - NÃO TESTADO**
   ```powershell
@@ -2647,12 +2827,12 @@ Copy-Item .\.env.example .\.env
   python .\orchestrators\crewai_runner.py 1
   ```
 
-3) Colocar insumos em `in/sprint01/rn0001/attachments/` (PDF, imagens, planilhas, etc.).
+3) Colocar insumos em `data/in/sprint01/rn0001/attachments/` (PDF, imagens, planilhas, etc.).
 
-4) Ver artefatos em `out/sprint01/rn0001/` (01..05, features, adrs, diagrams, outcomes/engineering). Opcional: renderizar diagramas:
+4) Ver artefatos em `data/out/sprint01/rn0001/` (01..05, features, adrs, diagrams, outcomes/engineering). Opcional: renderizar diagramas:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\render-diagrams.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\render-diagrams.ps1
 ```
 
 ## 🚀 Comece por aqui
@@ -2660,10 +2840,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\render-diagrams
 ### **📥 Primeira instalação:**
 1. **[📖 Fluxo Completo: Do Zero à Mesa Redonda](./docs/fluxo-completo.md)** ← **COMECE AQUI**
 2. **[⚡ Instalador PowerShell](./Install/setup-workflow.ps1)** - Configuração automática
+### **📥 Primeira instalação:**
+1. **[📖 Fluxo Completo: Do Zero à Mesa Redonda](./docs/fluxo-completo.md)** ← **COMECE AQUI**
+2. **[⚡ Instalador PowerShell](./Install/setup-workflow.ps1)** - Configuração automática
 3. **[🆕 Novo projeto .NET](./docs/new-dotnet-project-setup.md)** - Guia técnico detalhado
 
 ### **🔄 Trabalhando com novas atividades:**
-1. **[🚀 Quick Start Paralelo](./powershell/quick-start.ps1)** ← ⭐ **NOVO: Interface unificada para múltiplas atividades**
+1. **[🚀 Quick Start Paralelo](./scripts/powershell/quick-start.ps1)** ← ⭐ **NOVO: Interface unificada para múltiplas atividades**
 2. **[🚀 Guia de Paralelização](./docs/guia-paralelizacao.md)** ← ⭐ **NOVO: Execução simultânea de atividades**
 3. **[🎯 Guia Agentes Individuais](./docs/guia-agentes-individuais.md)** ← ⭐ **Como usar cada agente separadamente**
 4. **[🔥 Mesa Redonda: "CrewAI Manual"](#-mesa-redonda-o-crewai-manual-perfeito)** ← ⭐ **RECURSO DESTAQUE - Debate entre especialistas**
@@ -2697,6 +2880,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\powershell\render-diagrams
   - **🆕 Product Owner**: [`agents/manual/product-owner.agent.md`](./agents/manual/product-owner.agent.md) - **Início automático**
   - **🆕 Product Owner Final**: [`agents/manual/product-owner-final.agent.md`](./agents/manual/product-owner-final.agent.md) - **Checklist final**
   - **🔥 Mesa Redonda**: [`agents/manual/roundtable-facilitator.agent.md`](./agents/manual/roundtable-facilitator.agent.md) - ⭐ **DESTAQUE: Simula debate entre 5 especialistas**
+  - **🔥 Mesa Redonda**: [`agents/manual/roundtable-facilitator.agent.md`](./agents/manual/roundtable-facilitator.agent.md) - ⭐ **DESTAQUE: Simula debate entre 5 especialistas**
   - Requirements Analyst: [`agents/manual/requirements-analyst.agent.md`](./agents/manual/requirements-analyst.agent.md)
   - Systems Architect: [`agents/manual/systems-architect.agent.md`](./agents/manual/systems-architect.agent.md)
   - Expert Developer: [`agents/manual/expert-developer.agent.md`](./agents/manual/expert-developer.agent.md)
@@ -2707,13 +2891,13 @@ Todos os agentes agora **pedem aprovação [SIM/NÃO]** e **executam o próximo 
 
 Observações:
 - Defina modelos por agente em `model_preferences` (front matter YAML) nos arquivos acima.
-- Entradas padrão: `in/sprint<sprint>/<activity>/attachments/`. Saídas: `out/sprint<sprint>/<activity>/`.
+- Entradas padrão: `data/in/sprint<sprint>/<activity>/attachments/`. Saídas: `data/out/sprint<sprint>/<activity>/`.
 
 ## Orquestração (scripts)
 
 - **⚠️ CrewAI (PREVIEW):** [`orchestrators/crewai_runner.py`](./orchestrators/crewai_runner.py) - **NÃO TESTADO**
 - **⚠️ AutoGen (PREVIEW):** [`orchestrators/autogen_dev_team.py`](./orchestrators/autogen_dev_team.py) - **NÃO TESTADO**
-- **✅ Scripts manuais (RECOMENDADO):** [`powershell/`](./powershell/) - **TESTADO E FUNCIONAL**
+- **✅ Scripts manuais (RECOMENDADO):** [`scripts/powershell/`](./scripts/powershell/) - **TESTADO E FUNCIONAL**
 
 Detalhes de execução e variáveis de ambiente estão nos guias da seção “Documentação principal”.
 
@@ -2754,11 +2938,11 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 
 ## 👤 **Autor e Informações**
 
-**👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão  
-**‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte  
-**‍🏫 Desenvolvedor 2:** Marcos Araujo  
-**�📅 Versão:** 2.0.1 - Documentação do sistema  
-**📅 Última atualização:** 30 de Setembro de 2025  
+**👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão
+**‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte
+**‍🏫 Desenvolvedor 2:** Marcos Araujo
+**📅 Versão:** 2.0.1 - Documentação do sistema
+**📅 Última atualização:** 30 de Setembro de 2025
 **✅ Status:** Produção (processo manual) | ⚠️ Preview (processos automáticos)
 
 ### **🆘 Suporte:**
@@ -2779,6 +2963,7 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 
 ```powershell
 # Comando para começar AGORA:
+cd "C:\Projetos\Rickytech.System.AI"
 cd "C:\Projetos\Rickytech.System.AI"
 .\Install\setup-workflow.ps1
 ```

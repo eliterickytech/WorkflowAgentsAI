@@ -8,12 +8,12 @@ model_preferences:
     model: gemini-2.5-pro
     purpose: default
 inputs:
-  business_request: in/sprint{sprint}/{activity}/business_request/
+  business_request: data/in/sprint{sprint}/{activity}/business_request/
   accepted_types: [docx, xlsx, txt, html, pdf, md]
 outputs:
-  requirements_brief: out/sprint{sprint}/{activity}/00-requirements-brief.md
-  business_context: out/sprint{sprint}/{activity}/00-business-context.md
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  requirements_brief: data/out/sprint{sprint}/{activity}/00-requirements-brief.md
+  business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
 responsibilities:
   - Entender solicitacoes do cliente e requisitos de negocio
   - Definir visao do produto e objetivos estrategicos
@@ -96,16 +96,16 @@ prompts:
     2. CRIAR OUTPUTS: Gere 00-business-context.md e 00-requirements-brief.md
     3. RESUMO EXECUTIVO: Apresente resumo da analise de negocio
     4. SOLICITAR APROVACAO: "APROVACAO NECESSARIA - Prosseguir com Mesa Redonda?"
-       
+
        **OPCOES DE RESPOSTA:**
-       - [SIM] - Executar mesa redonda automaticamente  
+       - [SIM] - Executar mesa redonda automaticamente
        - [NAO] - Parar processo e aguardar ajustes
-       
+
     5. SE [SIM]: Executar automaticamente:
        @agents/manual/roundtable-facilitator.agent.md
-       
-       "Com base em 00-business-context.md e 00-requirements-brief.md, 
-       conduza mesa redonda com Requirements Analyst, Systems Architect, 
+
+       "Com base em 00-business-context.md e 00-requirements-brief.md,
+       conduza mesa redonda com Requirements Analyst, Systems Architect,
        Expert Developer e Testing Specialist para alinhar implementacao tecnica."
 
     REGRAS DE PREENCHIMENTO:
@@ -123,21 +123,21 @@ prompts:
     - https://www.scrum.org/resources/blog/top-5-pitfalls-new-product-owners-and-how-avoid-them
     - https://www.scrum.org/resources/blog/18-characteristics-great-product-owner
   task_template: |
-    Contexto: solicitacao do cliente em {business_request}. 
+    Contexto: solicitacao do cliente em {business_request}.
     Meta: transformar demanda em requisitos claros COM CRITERIOS DE ACEITE DETALHADOS.
-    
+
     Produza:
-    - {requirements_brief}: Resumo executivo 
+    - {requirements_brief}: Resumo executivo
     - {business_context}: Contexto de negocio
     - {acceptance_criteria}: CRITERIOS DE ACEITE ESPECIFICOS E MENSURAVEIS
-    
+
     IMPORTANTE: O arquivo acceptance_criteria sera a BASE para toda a equipe.
     Prepare briefing para mesa redonda.
 artifacts:
-  business_request: in/sprint{sprint}/{activity}/business_request/
-  requirements_brief: out/sprint{sprint}/{activity}/00-requirements-brief.md
-  business_context: out/sprint{sprint}/{activity}/00-business-context.md
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  business_request: data/in/sprint{sprint}/{activity}/business_request/
+  requirements_brief: data/out/sprint{sprint}/{activity}/00-requirements-brief.md
+  business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
 ---
 
 # Guia — Product Owner (Manual)

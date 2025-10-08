@@ -89,7 +89,7 @@ param(
 
 **Resultado:**
 ```
-out/sprint03/
+data/out/sprint03/
 ├── login/           ← Estrutura completa
 ├── relatorios/      ← Estrutura completa  
 └── sap/             ← Estrutura completa
@@ -102,7 +102,7 @@ out/sprint03/
 
 **Resultado adicional:**
 ```
-out/sprint03/
+data/out/sprint03/
 ├── parallel-execution-guide.md    ← Guia de execução paralela
 ├── pipeline-schedule.md           ← Cronograma otimizado
 ├── dependency-matrix.md           ← Análise de dependências
@@ -238,11 +238,11 @@ Systems Architect (SEQUENCIAL - dependências):
 └── 4º: dashboard-exec (usa todos)
 ```
 
-#### **Semana 4+: Implementação**  
+#### **Semana 4+: Implementação TDD**
 ```
-Testing Specialist + Expert Developer (PARALELO):
-├── Squad A: sistema-login (TDD completo)
-├── Squad B: integracao-sap (independente)
+Multiple Squads (PARALELO) - cada squad segue TDD (Testing → Developer):
+├── Squad A: sistema-login (Testing Specialist → Expert Developer)
+├── Squad B: integracao-sap (Testing Specialist → Expert Developer)
 └── Squad C: modulo-relatorios (usa login pronto)
 ```
 
@@ -508,7 +508,7 @@ Sprint: 02, Activity: analise-viabilidade-blockchain
 #### **🆕 Recriar estrutura completa:**
 ```powershell
 # Se tudo der errado, recriar do zero
-Remove-Item "out/sprint02" -Recurse -Force
+Remove-Item "data/out/sprint02" -Recurse -Force
 .\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("login", "relatorios") -ParallelSetup
 ```
 
@@ -517,7 +517,7 @@ Remove-Item "out/sprint02" -Recurse -Force
 #### **Verificar status detalhado:**
 ```powershell
 # Status com informações de debug
-Get-ChildItem "out/sprint02" -Recurse | Where-Object {$_.Extension -eq ".md"} | Sort-Object LastWriteTime | Select-Object Name, LastWriteTime, Length
+Get-ChildItem "data/out/sprint02" -Recurse | Where-Object {$_.Extension -eq ".md"} | Sort-Object LastWriteTime | Select-Object Name, LastWriteTime, Length
 ```
 
 #### **Analisar logs de execução:**
@@ -586,7 +586,7 @@ $customTemplate = @"
 ```powershell
 # Calcular throughput do sprint
 $startDate = Get-Date "2025-09-01"
-$activities = Get-ChildItem "out/sprint02" -Directory
+$activities = Get-ChildItem "data/out/sprint02" -Directory
 $completedActivities = $activities | Where-Object {Test-Path "$($_.FullName)/99-checklist-final.md"}
 $throughput = $completedActivities.Count / ((Get-Date) - $startDate).Days
 
@@ -596,7 +596,7 @@ Write-Host "Throughput: $throughput atividades/dia"
 #### **🎯 Análise de gargalos:**
 ```powershell
 # Identificar agentes mais demorados
-$files = Get-ChildItem "out/sprint02" -Recurse -Filter "*.md" | Sort-Object LastWriteTime
+$files = Get-ChildItem "data/out/sprint02" -Recurse -Filter "*.md" | Sort-Object LastWriteTime
 $agentTimes = $files | Group-Object {$_.Name.Split('-')[0]} | Select-Object Name, Count, @{N="AvgDays";E={($_.Group | Measure-Object {((Get-Date) - $_.LastWriteTime).Days} -Average).Average}}
 ```
 

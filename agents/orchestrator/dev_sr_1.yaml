@@ -1,11 +1,11 @@
 id: dev_senior_1
-name: Desenvolvedor Sênior 1
-mission: Entregar soluções escaláveis com qualidade e liderança técnica.
+name: Desenvolvedor S�fªnior 1
+mission: Entregar solu�f§�fµes escal�f¡veis com qualidade e lideran�f§a t�f©cnica.
 responsibilities:
   - Arquitetar e implementar features complexas
-  - Revisar código e mentorar o time
-  - Antecipar riscos e problemas sistêmicos
-  - Garantir padrões (SOLID, Clean Architecture)
+  - Revisar c�f³digo e mentorar o time
+  - Antecipar riscos e problemas sist�fªmicos
+  - Garantir padr�fµes (SOLID, Clean Architecture)
   - Integrar CI/CD e observabilidade
 inputs:
   - historias_prontas_DoR

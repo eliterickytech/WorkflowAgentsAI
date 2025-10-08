@@ -50,11 +50,11 @@ Cada arquivo contém **6-8 exemplos reais** com prompts completos, contextos esp
 **📄 [03-requirements-analyst-examples.md](./03-requirements-analyst-examples.md)**
 
 **Cenários de análise:**
-- � Análise Documentos Tributários (Receita Federal + SPED)
+- 🧾 Análise Documentos Tributários (Receita Federal + SPED)
 - 🏥 Sistema Prontuário Eletrônico (CFM + LGPD + HL7 FHIR)
 - 🏦 Regulamentação Open Banking (Banco Central + APIs)
 - 🏭 Sistema Controle Ambiental (ISO 14001 + IBAMA + CONAMA)
-- � Sistema Gestão Escolar (MEC + SINAES + e-MEC + Censo)
+- 🏫 Sistema Gestão Escolar (MEC + SINAES + e-MEC + Censo)
 
 **Foco:** Extração de regras, BDD Gherkin, compliance regulatório, mapeamento dependências.
 

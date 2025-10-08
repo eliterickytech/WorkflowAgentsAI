@@ -11,33 +11,48 @@
 
 ## Entrada
 - Sprint e Activity via variáveis de ambiente: SPRINT, OUTPUT_ACTIVITY
-- Insumos (documentos de origem) em: `in/sprint<sprint>/<activity>/attachments/`
-  - Ex.: `in/sprint01/RN0002/attachments/`
+- Insumos (documentos de origem) em: `data/in/sprint<sprint>/<activity>/attachments/`
+  - Ex.: `data/in/sprint01/RN0002/attachments/`
   - Tipos comuns: .docx, .xlsx, .txt, .md, .html, .jpg, .png
 
 ## Passo a passo
 1. Defina as variáveis de ambiente: SPRINT, OUTPUT_ACTIVITY (opcional), USE_CREWAI=1
-2. Execute: `python .\orchestrators\crewai_runner.py <sprint>`
+2. Execute: `python .\Install\orchestrators\crewai_runner.py <sprint>`
 3. O runner:
    - Carrega `agents/manual/*.agent.md`
    - Instancia LLM por agente conforme `model_preferences`
    - Monta tarefas com base em `prompts.task_template`
-   - Gera `out/sprint<sprint>[/<activity>]/backlog.md` e `ceremonies.md`
+  - Gera `data/out/sprint<sprint>[/<activity>]/backlog.md` e `ceremonies.md`
    - Se CrewAI habilitado, executa e grava `outcomes/crewai_report.md`
-4. (Opcional) Execute `python .\orchestrators\autogen_dev_team.py <sprint>` para preparar `engineering/`
-5. Confira as saídas em `out/sprint<sprint>[/<activity>]/...` e avalie `outcomes/crewai_report.md` (se CrewAI habilitado)
+4. (Opcional) Execute `python .\Install\orchestrators\autogen_dev_team.py <sprint>` para preparar `engineering/`
+5. Confira as saídas em `data/out/sprint<sprint>[/<activity>]/...` e avalie `outcomes/crewai_report.md` (se CrewAI habilitado)
+
+> Importante: o instalador NUNCA copia/overwrite a pasta `.github` deste repositório para o projeto destino. A `.github` do projeto cliente é sempre preservada como fonte da verdade (inclusive `copilot-instructions.md`).
 
 ## Saídas
-- out/sprint<sprint>[/<activity>]/backlog.md
-- out/sprint<sprint>[/<activity>]/ceremonies.md
-- out/sprint<sprint>[/<activity>]/outcomes/crewai_report.md (se CrewAI)
-- out/sprint<sprint>[/<activity>]/engineering/* (se AutoGen)
+- data/out/sprint<sprint>[/<activity>]/backlog.md
+- data/out/sprint<sprint>[/<activity>]/ceremonies.md
+- data/out/sprint<sprint>[/<activity>]/outcomes/crewai_report.md (se CrewAI)
+- data/out/sprint<sprint>[/<activity>]/engineering/* (se AutoGen)
 
 ## Diagrama
 - Veja `docs/diagram/flow-automatic-crewai.mmd`
 
 ## Checklist rápido
 - [ ] SPRINT, OUTPUT_ACTIVITY e USE_CREWAI=1 definidos
-- [ ] Entradas (se houver) em `in/sprint<sprint>/<activity>/attachments/`
-- [ ] Executado `orchestrators/crewai_runner.py <sprint>`
+- [ ] Entradas (se houver) em `data/in/sprint<sprint>/<activity>/attachments/`
+- [ ] Executado `Install/orchestrators/crewai_runner.py <sprint>` (no repositório) ou `orchestrators/crewai_runner.py` (no projeto cliente)
 - [ ] Conferido `outcomes/crewai_report.md` (se CrewAI)
+
+## Super‑prompt (opcional)
+- Arquivo: `prompts-manual/prompts/super-prompt.md`
+- O instalador oferece gerar um super‑prompt enriquecido com contexto do projeto (Sprint, Activity, estrutura de pastas e cadeia de agentes). Se o arquivo não existir, segue sem erro.
+- Recomenda-se ajustar o super‑prompt logo após a instalação e antes de executar o primeiro agente dependente (Testing Specialist no fluxo TDD).
+
+## Enrich‑Agents (instruções personalizadas)
+- Durante a instalação, quando perguntado por uma pasta de instruções, forneça um diretório contendo arquivos no padrão `<role>.instructions.md|txt`.
+- Padrões suportados: `product-owner`, `requirements-analyst`, `systems-architect`, `testing-specialist`, `expert-developer`, `roundtable-facilitator`.
+- O instalador injeta um bloco "### Custom Instructions (instalador)" dentro de `agents/manual/<role>.agent.md`:
+  - Idempotente: se o bloco já existir, ele é substituído.
+  - Não afeta o restante do conteúdo do agente.
+- Templates prontos: `docs/prompts/agent-instructions-templates/` (copie e edite conforme seu contexto).

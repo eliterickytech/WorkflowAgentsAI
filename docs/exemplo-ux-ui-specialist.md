@@ -21,7 +21,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 ### **PASSO 2: Executar Product Owner e Requirements**
 
 ```markdown
-# in/sprint01/dashboard-vendas/business_request/solicitacao.md
+# data/in/sprint01/dashboard-vendas/business_request/solicitacao.md
 
 # Dashboard de Vendas - Sistema CRM
 
@@ -57,7 +57,7 @@ Nossa equipe de vendas precisa acompanhar métricas em tempo real para tomar dec
 @agents/manual/ux-ui-specialist.agent.md
 
 Contexto: Dashboard de Vendas para CRM
-- Baseado na arquitetura em out/sprint01/dashboard-vendas/03-arquitetura.md
+- Baseado na arquitetura em data/out/sprint01/dashboard-vendas/03-arquitetura.md
 - Usuários: Gerentes, Vendedores, Diretoria
 - Dispositivos: Desktop (principal), Mobile (consulta)
 - Prioridade: Performance e usabilidade
@@ -320,9 +320,9 @@ code out\sprint01\dashboard-vendas\
 @agents/manual/expert-developer.agent.md
 
 Implementar Dashboard de Vendas baseado em:
-- Arquitetura: out/sprint01/dashboard-vendas/03-arquitetura.md  
-- UX Design: out/sprint01/dashboard-vendas/05-ux-wireframes.md
-- Design System: out/sprint01/dashboard-vendas/04-design-system.md
+- Arquitetura: data/out/sprint01/dashboard-vendas/03-arquitetura.md
+- UX Design: data/out/sprint01/dashboard-vendas/05-ux-wireframes.md
+- Design System: data/out/sprint01/dashboard-vendas/04-design-system.md
 
 Tecnologias: .NET 8, SignalR (real-time), Chart.js, Bootstrap 5
 Priorizar: Performance, responsividade, acessibilidade
@@ -339,7 +339,7 @@ Após implementação, validar:
 ## 📊 Estrutura Final Gerada
 
 ```
-out/sprint01/dashboard-vendas/
+data/out/sprint01/dashboard-vendas/
 ├── 00-business-context.md
 ├── 02-requisitos-bdd.md  
 ├── 03-arquitetura.md

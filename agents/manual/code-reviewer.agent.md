@@ -8,11 +8,11 @@ model_preferences:
     model: claude-4
     purpose: default
 inputs:
-  attachments_path: in/sprint{sprint}/{activity}/attachments/
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
-  development_notes: out/sprint{sprint}/{activity}/04-desenvolvimento.md
+  attachments_path: data/in/sprint{sprint}/{activity}/attachments/
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
 outputs:
-  code_review_report: out/sprint{sprint}/{activity}/04.1-code-review.md
+  code_review_report: data/out/sprint{sprint}/{activity}/04.1-code-review.md
 responsibilities:
   - **AUDITORIA INDEPENDENTE** da implementacao do Expert Developer
   - **VALIDACAO DE CRITERIOS DE ACEITE** contra codigo implementado
@@ -121,9 +121,9 @@ prompts:
     - SE REJEITADA: Devolver para Expert Developer corrigir
     
 artifacts:
-  acceptance_criteria: out/sprint{sprint}/{activity}/00-acceptance-criteria.md
-  development_notes: out/sprint{sprint}/{activity}/04-desenvolvimento.md
-  code_review_report: out/sprint{sprint}/{activity}/04.1-code-review.md
+  acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
+  code_review_report: data/out/sprint{sprint}/{activity}/04.1-code-review.md
 ---
 
 # Guia — Code Reviewer (Manual)

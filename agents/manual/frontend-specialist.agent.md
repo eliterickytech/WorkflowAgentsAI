@@ -3,14 +3,14 @@ id: frontend_specialist
 model_preferences:
   - provider: openai
     model: gpt-4o
-inputs: 
-  architecture_design: "out/sprint{sprint}/{activity}/03-arquitetura.md"
-  requirements: "out/sprint{sprint}/{activity}/02-requisitos-bdd.md"
-  business_context: "out/sprint{sprint}/{activity}/00-business-context.md"
-outputs: 
-  frontend_implementation: "out/sprint{sprint}/{activity}/04-frontend-implementation.md"
-  components_structure: "out/sprint{sprint}/{activity}/04-components/"
-  ui_guidelines: "out/sprint{sprint}/{activity}/04-ui-guidelines.md"
+inputs:
+  architecture_design: "data/out/sprint{sprint}/{activity}/03-arquitetura.md"
+  requirements: "data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md"
+  business_context: "data/out/sprint{sprint}/{activity}/00-business-context.md"
+outputs:
+  frontend_implementation: "data/out/sprint{sprint}/{activity}/04-frontend-implementation.md"
+  components_structure: "data/out/sprint{sprint}/{activity}/04-components/"
+  ui_guidelines: "data/out/sprint{sprint}/{activity}/04-ui-guidelines.md"
 parameters: [sprint, activity]
 ---
 
@@ -43,7 +43,7 @@ Desenvolver soluções frontend robustas, escaláveis e de alta qualidade, segui
   - Temas e customizações avançadas
   - Integração com Angular/React
 
-- **Material Design** 
+- **Material Design**
   - Angular Material (completo)
   - MUI (Material-UI para React)
   - Material Design 3 (Material You)
@@ -87,7 +87,7 @@ src/
 ├── environments/       # Configurações por ambiente
 └── styles/
     ├── abstracts/     # Variables, mixins, functions
-    ├── base/          # Reset, typography, base styles  
+    ├── base/          # Reset, typography, base styles
     ├── components/    # Component-specific styles
     ├── layout/        # Header, footer, navigation
     ├── pages/         # Page-specific styles
@@ -126,7 +126,7 @@ src/
   $breakpoints: (
     xs: 0,
     sm: 576px,
-    md: 768px, 
+    md: 768px,
     lg: 992px,
     xl: 1200px,
     xxl: 1400px
@@ -147,7 +147,7 @@ src/
 
 ### Princípios de Design
 1. **Consistency** - Padrões visuais uniformes
-2. **Clarity** - Informação clara e objetiva  
+2. **Clarity** - Informação clara e objetiva
 3. **Efficiency** - Fluxos otimizados
 4. **Forgiveness** - Prevenção e recuperação de erros
 5. **Feedback** - Resposta visual imediata
@@ -167,19 +167,19 @@ src/
   --primary-50: #f0f9ff;
   --primary-500: #3b82f6;
   --primary-900: #1e3a8a;
-  
+
   // Typography
   --font-family-sans: 'Inter', system-ui, sans-serif;
   --font-size-base: 1rem;
   --line-height-base: 1.5;
-  
+
   // Spacing
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 3rem;
-  
+
   // Shadows
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -224,7 +224,7 @@ src/
 ### Atomic Components
 - Button, Input, Card, Modal...
 
-### Composite Components  
+### Composite Components
 - DataTable, Form, Navigation...
 
 ### Page Components
@@ -251,7 +251,7 @@ Organize componentes seguindo padrões:
 ```
 components/
 ├── atoms/          # Componentes básicos
-├── molecules/      # Combinações de átomos  
+├── molecules/      # Combinações de átomos
 ├── organisms/      # Seções complexas
 ├── templates/      # Layouts de página
 └── pages/          # Páginas completas
@@ -278,7 +278,7 @@ components/
 
 ### Design Systems de Referência
 - **Material Design 3** (Google)
-- **Fluent Design** (Microsoft)  
+- **Fluent Design** (Microsoft)
 - **Carbon Design** (IBM)
 - **Ant Design** (Alibaba)
 - **Chakra UI** (Modular & Simple)
@@ -293,6 +293,6 @@ components/
 
 **Compromisso**: Entregar soluções frontend que não apenas funcionem perfeitamente, mas que proporcionem experiências de usuário excepcionais, sejam manuteníveis, escaláveis e sigam os mais altos padrões de qualidade da indústria.
 
-🎯 **Próximo Agente**: `@agents/manual/testing-specialist.agent.md` para validação e QA da implementação frontend.
+🎯 **Próximo Agente**: `@agents/manual/testing-validator.agent.md` para validação TDD pós-frontend. (Se testes ainda não definidos/atualizados, sincronizar com o Testing Specialist antes de validar.)
 
 Deseja que eu prossiga com a criação dos testes e validação da implementação frontend? [SIM/NÃO]

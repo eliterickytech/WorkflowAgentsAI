@@ -5,6 +5,7 @@
     {
       "id": "product-owner",
       "name": "Product Owner Agent",
+      "name": "Product Owner Agent",
       "description": "Entende solicitacoes do cliente, define visao do produto e prioriza funcionalidades por valor de negocio",
       "playbook": "agents/manual/product-owner.agent.md",
       "specialties": [
@@ -48,7 +49,9 @@
     {
       "id": "requirements-analyst",
       "name": "Requirements Analyst Agent",
+      "name": "Requirements Analyst Agent",
       "description": "Transforma documentos de especificacao (.docx, .xlsx) em regras de negocio estruturadas seguindo padrao RN-00xx.md",
+      "playbook": "agents/manual/requirements-analyst.agent.md",
       "playbook": "agents/manual/requirements-analyst.agent.md",
       "specialties": [
         "Analise de documentos docx/xlsx",
@@ -59,11 +62,13 @@
       ],
       "inputs": [
         "Documentos .docx em references-data/datas/business-rules-files/",
+        "Documentos .docx em references-data/datas/business-rules-files/",
         "Planilhas .xlsx de validacao",
         "Contexto do dominio (anexos, bases, formulas)",
         "Numero da regra (RN-00xx) alvo"
       ],
       "outputs": [
+        "Arquivo references-data/business-rules/RN-00xx.md estruturado",
         "Arquivo references-data/business-rules/RN-00xx.md estruturado",
         "Casos de teste derivados em formato tabular",
         "Mapeamento de dependencias e impactos",
@@ -74,10 +79,15 @@
         "references-data/business-rules/RN-0001.md",
         "references-data/datas/business-rules-files/",
         "references-data/datas/tables/validation-business-rules-files/"
+        "references-data/pgdas-anexo-*.md",
+        "references-data/business-rules/RN-0001.md",
+        "references-data/datas/business-rules-files/",
+        "references-data/datas/tables/validation-business-rules-files/"
       ],
       "triggers": [
         "analise de requisitos",
         "documento docx",
+        "planilha xlsx",
         "planilha xlsx",
         "regra RN-",
         "extracao de regras",
@@ -87,7 +97,10 @@
     {
       "id": "systems-architect",
       "name": "Systems Architect Agent",
+      "id": "systems-architect",
+      "name": "Systems Architect Agent",
       "description": "Projeta e estrutura arquitetura do sistema seguindo principios DDD, SOLID e Clean Architecture",
+      "playbook": "agents/manual/systems-architect.agent.md",
       "playbook": "agents/manual/systems-architect.agent.md",
       "specialties": [
         "Design orientado a dominio (DDD)",
@@ -99,6 +112,7 @@
       ],
       "inputs": [
         "Especificacoes de regras de negocio (RN-00xx.md)",
+        "Requisitos funcionais e nao-funcionais",
         "Requisitos funcionais e nao-funcionais",
         "Restricoes tecnicas (.NET 4.8, PostgreSQL)",
         "Padroes arquiteturais existentes",
@@ -115,6 +129,8 @@
       "keyReferences": [
         "src/ (estrutura atual)",
         "Domain-Driven Design principles",
+        "src/ (estrutura atual)",
+        "Domain-Driven Design principles",
         "SOLID principles",
         "Clean Architecture patterns",
         ".NET Framework 4.8 constraints"
@@ -127,6 +143,7 @@
         "entidades",
         "agregados",
         "adr"
+        "adr"
       ]
     },
     {
@@ -134,7 +151,16 @@
       "name": "Expert Developer Agent",
       "description": "Coordena implementacoes complexas no backend seguindo Clean Architecture e praticas de engenharia",
       "playbook": "agents/manual/expert-developer.agent.md",
+      "name": "Expert Developer Agent",
+      "description": "Coordena implementacoes complexas no backend seguindo Clean Architecture e praticas de engenharia",
+      "playbook": "agents/manual/expert-developer.agent.md",
       "specialties": [
+        "Aplicacao de padroes SOLID",
+        "Integracao com sistemas legado",
+        "Otimizacao de performance",
+        "Mentoria de time",
+        "Revisao de codigo",
+        "Padroes e convencoes do projeto"
         "Aplicacao de padroes SOLID",
         "Integracao com sistemas legado",
         "Otimizacao de performance",
@@ -146,10 +172,14 @@
         "Regras de negocio validadas",
         "Arquitetura proposta",
         "Planos de entrega",
+        "Regras de negocio validadas",
+        "Arquitetura proposta",
+        "Planos de entrega",
         "Padroes e convencoes do projeto"
       ],
       "outputs": [
         "Classes implementadas com documentacao XML",
+        "Validadores FluentValidation configurados",
         "Validadores FluentValidation configurados",
         "Mapeamentos entre DTOs e entidades",
         "Configuracao de DI atualizada",
@@ -176,7 +206,9 @@
     {
       "id": "testing-specialist",
       "name": "Testing Specialist Agent",
+      "name": "Testing Specialist Agent",
       "description": "Cria cenarios de teste abrangentes garantindo 90%+ cobertura e validacao de regras de negocio",
+      "playbook": "agents/manual/testing-specialist.agent.md",
       "playbook": "agents/manual/testing-specialist.agent.md",
       "specialties": [
         "Testes unitarios xUnit",
@@ -197,6 +229,7 @@
       "outputs": [
         "Testes unitarios organizados por camada",
         "Testes de integracao funcionais",
+        "Testes de integracao funcionais",
         "Fixtures e builders para geracao de dados",
         "Relatorio de cobertura de codigo",
         "Documentacao de cenarios criticos",
@@ -204,10 +237,12 @@
       ],
       "keyReferences": [
         "tests/ (testes existentes)",
+        "tests/ (testes existentes)",
         "xUnit framework",
         "Bogus library",
         "FluentAssertions",
         "Moq framework",
+        "references-data/business-rules/"
         "references-data/business-rules/"
       ],
       "triggers": [
@@ -215,10 +250,52 @@
         "test coverage",
         "unit tests",
         "integration tests",
+        "integration tests",
         "xunit",
         "bogus",
         "cobertura",
         "edge cases"
+      ]
+    },
+    {
+      "id": "testing-validator",
+      "name": "Testing Validator Agent",
+      "description": "Valida pos-implementacao se todos os testes planejados foram implementados corretamente no fluxo TDD",
+      "playbook": "agents/manual/testing-validator.agent.md",
+      "specialties": [
+        "Validacao de implementacao TDD",
+        "Comparacao plano vs execucao",
+        "Verificacao de cobertura de testes",
+        "Validacao de evidencias por criterio",
+        "Execucao e verificacao de testes",
+        "Parecer de conformidade com QA Plan"
+      ],
+      "inputs": [
+        "Plano de QA (05-qa-plano.md)",
+        "Notas de desenvolvimento (04-desenvolvimento.md)",
+        "Criterios de aceite definidos",
+        "Codigo implementado com testes"
+      ],
+      "outputs": [
+        "Relatorio de validacao (05.1-testing-validation.md)",
+        "Comparativo planejado vs implementado",
+        "Verificacao de cobertura real vs meta",
+        "Evidencias por criterio de aceite",
+        "Parecer final: APROVADO ou NECESSITA CORRECOES"
+      ],
+      "keyReferences": [
+        "Test-Driven Development practices",
+        "Quality assurance validation",
+        "Coverage analysis tools",
+        "Evidence-based validation"
+      ],
+      "triggers": [
+        "validacao tdd",
+        "verificacao testes",
+        "cobertura",
+        "evidencias",
+        "conformidade qa",
+        "validacao pos-implementacao"
       ]
     },
     {
@@ -280,6 +357,7 @@
   "integrationPoints": {
     "copilot": {
       "instructionsFile": ".github/copilot-instructions.md",
+      "instructionsFile": ".github/copilot-instructions.md",
       "syncRequired": true
     },
     "mcp": {
@@ -290,7 +368,7 @@
   "workflowPatterns": {
     "newFeatureTDD": [
       "product-owner",
-      "requirements-analyst", 
+      "requirements-analyst",
       "systems-architect",
       "testing-specialist",
       "expert-developer",
@@ -301,13 +379,8 @@
       "product-owner",
       "requirements-analyst",
       "systems-architect",
+      "systems-architect",
       "expert-developer",
-      "frontend-specialist",
-      "testing-specialist"
-    ],
-    "frontendFeature": [
-      "product-owner",
-      "requirements-analyst",
       "frontend-specialist",
       "testing-specialist"
     ],
@@ -319,7 +392,7 @@
     ],
     "bugfixTDD": [
       "testing-specialist",
-      "expert-developer", 
+      "expert-developer",
       "testing-validator"
     ],
     "bugfix": [
@@ -329,6 +402,11 @@
     "refactoring": [
       "systems-architect",
       "expert-developer",
+      "expert-developer",
+      "testing-specialist"
+    ],
+    "uiRefactoring": [
+      "frontend-specialist",
       "testing-specialist"
     ],
     "uiRefactoring": [
@@ -355,6 +433,7 @@
     "architecturalConstraints": {
       "layerSeparation": "Clean Architecture",
       "persistence": "PostgreSQL primary",
+      "messaging": "Asynchronous when applicable",
       "messaging": "Asynchronous when applicable",
       "validation": "FluentValidation required"
     }

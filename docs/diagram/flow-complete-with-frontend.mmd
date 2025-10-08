@@ -1,49 +1,40 @@
 %% Mermaid diagram: Fluxo completo com Frontend Specialist
-%% Fluxo de agentes incluindo especialista frontend
+%% TDD: Testing Specialist antes do Expert Developer; UX/UI e Frontend opcionais antes do Testing Validator
 graph TD
-    A[Product Owner] --> B[Mesa Redonda]
-    B --> C[Requirements Analyst]
-    C --> D[Systems Architect]
-    D --> E[Expert Developer]
-    D --> F[Frontend Specialist]
-    E --> G[Testing Specialist]
-    F --> G
-    
-    subgraph "Artefatos Backend"
-        H[04-desenvolvimento.md]
-        I[Entidades e Servicos]
-        J[APIs e Controllers]
-    end
-    
-    subgraph "Artefatos Frontend"
-        K[04-frontend-implementation.md]
-        L[04-components/]
-        M[04-ui-guidelines.md]
-        N[Componentes React/Angular]
-        O[Temas e Estilos]
-    end
-    
-    subgraph "Integracao"
-        P[Contratos API]
-        Q[Mapeamentos DTO]
-        R[Validacoes Frontend/Backend]
-    end
-    
-    E --> H
-    E --> I  
-    E --> J
-    F --> K
-    F --> L
-    F --> M
-    F --> N
-    F --> O
-    
-    D --> P
-    E --> Q
-    F --> Q
-    C --> R
-    E --> R
-    F --> R
-    
-    G --> S[05-qa-plano.md]
-    G --> T[Testes Backend + Frontend]
+    PO[Product Owner] --> RT[Mesa Redonda]
+    RT --> RA[Requirements Analyst]
+    RA --> SA[Systems Architect]
+
+    %% TDD - Testing First
+    SA --> TS[Testing Specialist\nPlano de QA]
+    TS --> ED[Expert Developer\nImplementa seguindo plano]
+
+    %% Mermaid diagram: Fluxo completo com Frontend Specialist
+    %% TDD: Testing Specialist antes do Expert Developer; UX e Frontend opcionais antes do Testing Validator
+    graph TD
+      PO[Product Owner]
+      RT[Mesa Redonda]
+      RA[Requirements Analyst]
+      SA[Systems Architect]
+      TS[Testing Specialist - Plano QA]
+      ED[Expert Developer - Implementa Plano]
+      UX[UXUI Specialist opcional]
+      FE[Frontend Specialist opcional]
+      TV[Testing Validator]
+      QA[05-qa-plano.md]
+      DEV[04-desenvolvimento.md]
+      VAL[05.1-testing-validation.md]
+
+      PO --> RT
+      RT --> RA
+      RA --> SA
+      SA --> TS
+      TS --> ED
+      SA -.-> UX
+      UX -.-> FE
+      ED --> TV
+      FE --> TV
+      TS --> QA
+      ED --> DEV
+      TV --> VAL
+        PO[Product Owner] --> RT[Mesa Redonda]

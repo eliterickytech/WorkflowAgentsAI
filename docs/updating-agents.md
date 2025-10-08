@@ -17,7 +17,7 @@ O que mudar:
 - Corpo do arquivo (texto): escreva as instruções do papel com a sua realidade (tecnologias, padrões, priorização, exemplos).
 - Cabeçalho (YAML front matter):
   - `model_preferences`: escolha o modelo do LLM para este agente (ex.: openai, azure, openai-compatible)
-  - `inputs.attachments_path`: mantenha ou ajuste a pasta de anexos (ex.: `in/sprint<sprint>/<activity>/attachments/`)
+  - `inputs.attachments_path`: mantenha ou ajuste a pasta de anexos (ex.: `data/in/sprint<sprint>/<activity>/attachments/`)
   - `outputs`: ajuste os diretórios/nomes de saída se quiser (ex.: adrs, diagrams, features)
 
 Dica: Faça commit das mudanças para versionar o conhecimento do time.
@@ -49,9 +49,9 @@ O que o instalador faz:
 - Posso mudar o modelo de LLM por agente?
   - Sim, edite `model_preferences` no cabeçalho (YAML) de cada `*.agent.md`.
 - Onde coloco anexos para os agentes lerem?
-  - Em `in/sprint<sprint>/<activity>/attachments/`.
+  - Em `data/in/sprint<sprint>/<activity>/attachments/`.
 - Onde vejo os resultados?
-  - Em `out/sprint<sprint>/<activity>/` (arquivos 01..05, `adrs/`, `diagrams/`, `features/`, e `outcomes/`/`engineering/` quando usar orquestradores).
+  - Em `data/out/sprint<sprint>/<activity>/` (arquivos 01..05, `adrs/`, `diagrams/`, `features/`, e `outcomes/`/`engineering/` quando usar orquestradores).
 
 Para um guia completo do fluxo, veja:
 - Manual: `docs/manual-process.md`
