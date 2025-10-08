@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padrões de Encoding - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#padrao">Padrão Oficial</a></li>
+                        <li><a href="#config">Configuração</a></li>
+                        <li><a href="#validacao">Validação</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="padrao" class="content-section">
+                <h1 class="section-title"><i class="fas fa-file-code"></i> Padrão de Encoding e Formatação</h1>
+                <div class="info-card highlight">
+                    <h3>📋 Padrão Oficial do Projeto</h3>
+                    <p>Garantir consistência em todos os arquivos do projeto</p>
+                </div>
+                <div class="info-card">
+                    <h4>Tabela de Encoding Recomendado</h4>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 1rem;">
+                        <thead>
+                            <tr style="background: var(--primary-gradient); color: white;">
+                                <th style="padding: 0.75rem; text-align: left;">Tipo de Arquivo</th>
+                                <th style="padding: 0.75rem;">Encoding</th>
+                                <th style="padding: 0.75rem;">BOM</th>
+                                <th style="padding: 0.75rem;">Line Ending</th>
+                                <th style="padding: 0.75rem;">Indent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.75rem;"><code>*.md</code> (Markdown)</td>
+                                <td style="padding: 0.75rem;">UTF-8</td>
+                                <td style="padding: 0.75rem;">❌ Sem BOM</td>
+                                <td style="padding: 0.75rem;">CRLF</td>
+                                <td style="padding: 0.75rem;">2 espaços</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.75rem;"><code>*.ps1</code> (PowerShell)</td>
+                                <td style="padding: 0.75rem;">UTF-8</td>
+                                <td style="padding: 0.75rem;">❌ Sem BOM</td>
+                                <td style="padding: 0.75rem;">CRLF</td>
+                                <td style="padding: 0.75rem;">4 espaços</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.75rem;"><code>*.yaml, *.yml</code></td>
+                                <td style="padding: 0.75rem;">UTF-8</td>
+                                <td style="padding: 0.75rem;">❌ Sem BOM</td>
+                                <td style="padding: 0.75rem;">LF</td>
+                                <td style="padding: 0.75rem;">2 espaços</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.75rem;"><code>*.json</code></td>
+                                <td style="padding: 0.75rem;">UTF-8</td>
+                                <td style="padding: 0.75rem;">❌ Sem BOM</td>
+                                <td style="padding: 0.75rem;">LF</td>
+                                <td style="padding: 0.75rem;">2 espaços</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.75rem;"><code>*.cs</code> (C#)</td>
+                                <td style="padding: 0.75rem;">UTF-8</td>
+                                <td style="padding: 0.75rem;">✅ Com BOM</td>
+                                <td style="padding: 0.75rem;">CRLF</td>
+                                <td style="padding: 0.75rem;">4 espaços</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem;"><code>*.ts, *.js</code></td>
+                                <td style="padding: 0.75rem;">UTF-8</td>
+                                <td style="padding: 0.75rem;">❌ Sem BOM</td>
+                                <td style="padding: 0.75rem;">LF</td>
+                                <td style="padding: 0.75rem;">2 espaços</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section id="config" class="content-section">
+                <h2 class="section-title"><i class="fas fa-cog"></i> Configuração do VS Code</h2>
+                <div class="info-card">
+                    <h4>Arquivo .vscode/settings.json</h4>
+                    <pre><code>{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.autoGuessEncoding": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "[markdown]": {
+    "files.encoding": "utf8",
+    "files.eol": "\r\n"
+  },
+
+  "[powershell]": {
+    "files.encoding": "utf8",
+    "files.eol": "\r\n"
+  },
+
+  "[csharp]": {
+    "files.encoding": "utf8bom",
+    "files.eol": "\r\n"
+  }
+}</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Arquivo .editorconfig (Raiz do Projeto)</h4>
+                    <pre><code>root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.md]
+charset = utf-8
+end_of_line = crlf
+indent_size = 2
+
+[*.ps1]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+
+[*.cs]
+charset = utf-8-bom
+end_of_line = crlf
+indent_size = 4</code></pre>
+                </div>
+            </section>
+            <section id="validacao" class="content-section">
+                <h2 class="section-title"><i class="fas fa-check-circle"></i> Validação</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Checklist de Validação</h4>
+                        <ul>
+                            <li>VS Code mostra UTF-8 (ou UTF-8 with BOM para .cs)</li>
+                            <li>Line endings corretos (CRLF vs LF)</li>
+                            <li>Usar espaços, nunca tabs</li>
+                            <li>Remover trailing whitespace</li>
+                            <li>Arquivo termina com newline</li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h4>🚨 Red Flags</h4>
+                    <ul>
+                        <li>Sequências estranhas como A~c ou A~a</li>
+                        <li>CRLF e LF misturados no mesmo arquivo</li>
+                        <li>Markdown salvo com BOM</li>
+                        <li>C# sem BOM</li>
+                        <li>Tabs misturados com espaços</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

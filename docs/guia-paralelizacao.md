@@ -1,6 +1,6 @@
 # 🚀 Guia Completo: Execução Paralela de Atividades
 
-**Versão:** 2.1.0  
+**Versão:** 2.2.0 - Parallel Execution Edition  
 **Data:** 30 de Setembro de 2025
 
 Este guia detalha como executar **múltiplas atividades simultaneamente** no AgileDevAgent, maximizando a eficiência e throughput do desenvolvimento.

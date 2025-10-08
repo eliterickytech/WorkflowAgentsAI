@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integração GitHub Copilot - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#funciona">Como Funciona</a></li>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title"><i class="fas fa-code-branch"></i> Integração com GitHub Copilot</h1>
+                <div class="info-card highlight">
+                    <h3>🤖 Contexto Unificado</h3>
+                    <p>O sistema detecta e integra automaticamente com instruções GitHub Copilot existentes, criando consistência entre desenvolvimento no IDE e workflow de análise.</p>
+                </div>
+            </section>
+            <section id="funciona" class="content-section">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Como Funciona</h2>
+                <div class="info-card">
+                    <h4>Detecção Automática</h4>
+                    <p>Durante a análise de projeto existente, o sistema verifica automaticamente:</p>
+                    <pre><code>Locais verificados (em ordem de prioridade):
+1. .github/copilot-instructions.md      ← Padrão recomendado
+2. .github/copilot-instructions.txt
+3. docs/copilot-instructions.md
+4. .copilot/instructions.md</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Integração Inteligente</h4>
+                    <p>Quando detectado, o sistema:</p>
+                    <ol>
+                        <li>✅ Lê as instruções GitHub Copilot existentes</li>
+                        <li>✅ Inclui no <code>project-analysis.md</code></li>
+                        <li>✅ Todos os agentes recebem este contexto automaticamente</li>
+                        <li>✅ Garante consistência entre IDE e workflow</li>
+                    </ol>
+                </div>
+                <div class="info-card">
+                    <h4>Exemplo de Integração no project-analysis.md</h4>
+                    <pre><code>## GitHub Copilot Integration
+
+### Status: DETECTADO E INTEGRADO ✅
+- **Arquivo original:** `.github/copilot-instructions.md`
+- **Integração:** Instruções importadas automaticamente
+- **Benefício:** Contexto unificado entre Copilot (IDE) e AI Agents
+
+### ⚠️ **INTEGRAÇÃO GITHUB COPILOT DETECTADA**
+
+**CRÍTICO:** Este projeto já possui instruções GitHub Copilot.
+Os agentes devem:
+- **SEGUIR** as mesmas diretrizes estabelecidas
+- **MANTER** consistência com padrões de código
+- **COMPLEMENTAR** (não contradizer) as instruções existentes</code></pre>
+                </div>
+            </section>
+            <section id="beneficios" class="content-section">
+                <h2 class="section-title"><i class="fas fa-star"></i> Benefícios da Integração</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Para Copilot (IDE)</h3>
+                        <p>Continua funcionando normalmente, nenhuma mudança necessária</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Para AI Agents</h3>
+                        <p>Contexto enriquecido com diretrizes já estabelecidas</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Para o Projeto</h3>
+                        <p>Consistência total entre IDE e workflow, uma fonte de verdade</p>
+                    </div>
+                </div>
+                <div class="info-card highlight">
+                    <h4>📋 Exemplo de Uso</h4>
+                    <h5>Antes (sem integração):</h5>
+                    <pre><code>Projeto tem: copilot-instructions.md → "Use async/await, não Promises"
+AI Agent propõe: código com .then() e .catch()
+Resultado: 😵 Inconsistência entre IDE e workflow</code></pre>
+                    <h5>Depois (com integração):</h5>
+                    <pre><code>Projeto tem: copilot-instructions.md → "Use async/await, não Promises"
+AI Agent lê automaticamente e propõe: código com async/await
+Resultado: 🎯 Consistência perfeita!</code></pre>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Durante Instalação</h2>
+                <div class="info-card">
+                    <pre><code>.\Install\setup-workflow.ps1
+# Tipo de trabalho: (2) Implementacao em projeto existente
+# Caminho: C:\Projetos\MeuProjeto
+
+[INFO] GitHub Copilot instructions encontradas e integradas ✅
+[INFO] Contexto unificado criado em: project-analysis.md</code></pre>
+                </div>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Zero Configuração</h4><p>Detecção e integração totalmente automáticas</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Transparente</h4><p>Não modifica arquivos existentes</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Consistente</h4><p>Garante alinhamento entre todas as ferramentas</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

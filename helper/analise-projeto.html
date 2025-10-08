@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Projeto Existente - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#como-usar">Como Usar</a></li>
+                        <li><a href="#analise">O que é Analisado</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title"><i class="fas fa-search"></i> Análise Automática de Projeto Existente</h1>
+                <div class="info-card highlight">
+                    <h3>🔍 Funcionalidade Multi-Tecnologia</h3>
+                    <p>Durante a instalação, o sistema analisa projetos existentes (.NET, Node.js, Angular, React, Python, etc.) e gera contexto automático para todos os agentes.</p>
+                </div>
+            </section>
+            <section id="como-usar" class="content-section">
+                <h2 class="section-title"><i class="fas fa-terminal"></i> Como Usar</h2>
+                <div class="info-card">
+                    <h4>Durante a Instalação</h4>
+                    <pre><code>.\Install\setup-workflow.ps1</code></pre>
+                    <p><strong>Nova pergunta:</strong></p>
+                    <pre><code>Tipo de trabalho: (1) Projeto novo ou (2) Implementacao em projeto existente? 2
+Caminho do projeto existente para analise: C:\Projetos\MeuSistema</code></pre>
+                </div>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Análise automática</h4><p>Estrutura do projeto detectada</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Arquivo gerado</h4><p>project-analysis.md criado</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Contexto injetado</h4><p>Todos os agentes recebem o contexto</p></div>
+                    </div>
+                </div>
+            </section>
+            <section id="analise" class="content-section">
+                <h2 class="section-title"><i class="fas fa-microscope"></i> O que é Analisado</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-folder-tree"></i>
+                        <h3>Estrutura</h3>
+                        <p>Pastas /src, /test, /docs, padrões arquiteturais</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Tecnologias</h3>
+                        <p>ORMs, frameworks, bibliotecas, versões</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-database"></i>
+                        <h3>Banco de Dados</h3>
+                        <p>PostgreSQL, SQL Server, MongoDB, etc.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-vial"></i>
+                        <h3>Testes</h3>
+                        <p>xUnit, Jest, Moq, frameworks de teste</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h4>Detecção Automática de Tipo</h4>
+                    <ul>
+                        <li>🔷 <strong>.NET:</strong> Detecta .csproj, .sln</li>
+                        <li>🟢 <strong>Node.js:</strong> Detecta package.json</li>
+                        <li>🔴 <strong>Angular:</strong> Detecta angular.json</li>
+                        <li>⚛️ <strong>React:</strong> Detecta package.json + dependência React</li>
+                        <li>🐍 <strong>Python/Java/PHP:</strong> Por extensões de arquivo</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>📄 Arquivo Gerado: project-analysis.md</h4>
+                    <pre><code># Análise Automática do Projeto Existente
+
+**Projeto analisado:** `C:\Projetos\MeuSistema`
+
+## 🏗️ Estrutura do Projeto
+- Clean Architecture (/src)
+- Pasta de Testes Dedicada
+
+## 🎯 Padrões Arquiteturais Identificados
+- DDD (Domain folder)
+- Infrastructure Layer
+- Application Layer
+
+## 🔧 Tecnologias em Uso
+- Entity Framework Core
+- AutoMapper
+- FluentValidation
+- MediatR (CQRS)
+- Serilog (Logging)
+
+## 🗄️ Banco de Dados
+- PostgreSQL (detectado)
+
+## 📏 Convenções de Código
+- Namespaces: PascalCase
+- Métodos privados: camelCase</code></pre>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Benefícios</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Consistência garantida</h4><p>Propostas dos agentes seguem padrões existentes</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Zero configuração manual</h4><p>Detecção automática de tudo</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Multi-tecnologia</h4><p>Suporta .NET, Node, Angular, React e mais</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

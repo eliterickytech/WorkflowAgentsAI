@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Product Owner - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Sistema de Backup</a></li>
+                        <li><a href="#exemplo2">Comissões de Vendas</a></li>
+                        <li><a href="#exemplo3">Portal do Paciente</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-user-tie"></i> Exemplos Práticos - Product Owner</h1>
+                <div class="info-card highlight">
+                    <h3>💼 Exemplos Reais de Uso</h3>
+                    <p>Exemplos práticos de como usar o Product Owner Agent em diferentes cenários de negócio.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-database"></i> Exemplo 1: Sistema de Backup Automático</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Cliente precisa implementar backup automático para compliance SOX 404.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/product-owner.agent.md
+
+Sprint: 03, Activity: sistema-backup-automatico
+Contexto: "Cliente solicita backup automático diário dos dados críticos.
+Motivação: compliance SOX 404 + recuperação disaster.
+Valor esperado: reduzir risco operacional de R$ 2M."
+
+Stakeholders:
+- CTO (sponsor e budget owner)
+- DBA (responsável pela operação)
+- Compliance Officer (auditoria externa)
+
+Prioridade: Alta - regulatory compliance obrigatório
+Prazo: 60 dias (auditoria externa agendada)
+Restrições:
+- Orçamento: R$ 50.000
+- Infraestrutura on-premise
+- Janela de manutenção: 2h/dia (01:00-03:00)</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Análise de valor focada em compliance</li>
+                        <li>✅ Identificação de riscos regulatórios</li>
+                        <li>✅ Priorização por criticidade dos dados</li>
+                        <li>✅ Definição de RTO/RPO adequados</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-dollar-sign"></i> Exemplo 2: Sistema de Comissões de Vendas</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Automatizar cálculo manual de comissões que consome 40h/mês do financeiro.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/product-owner.agent.md
+
+Sprint: 02, Activity: automatizacao-comissoes
+Contexto: "Automatizar cálculo de comissões de vendedores.
+Processo atual: 40h manuais/mês + erros frequentes.
+ROI esperado: economia R$ 8.000/mês."
+
+Problema atual:
+- Planilhas Excel com 15+ fórmulas complexas
+- Erros humanos em 12% dos cálculos
+- Vendedores questionam valores (falta transparência)
+
+Valor de negócio:
+- Economia: R$ 8.000/mês
+- Redução erros: de 12% para < 1%
+- Satisfação vendedores: transparência total
+
+Stakeholders:
+- Gerente Financeiro (sponsor)
+- Equipe de Vendas (25 vendedores)
+- Controller (auditoria interna)</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Análise de ROI quantificada</li>
+                        <li>✅ Mapeamento de dor dos stakeholders</li>
+                        <li>✅ Identificação de regras complexas</li>
+                        <li>✅ Definição de transparência necessária</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo3" class="content-section">
+                <h2 class="section-title"><i class="fas fa-hospital"></i> Exemplo 3: Portal do Paciente (Healthcare)</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Portal digital para pacientes acessarem exames, agendamento e prontuário.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/product-owner.agent.md
+
+Sprint: 01, Activity: portal-paciente-digital
+Contexto: "Criar portal digital para 50.000 pacientes.
+Motivação: reduzir calls center + experiência moderna + compliance LGPD."
+
+Funcionalidades desejadas:
+- Visualizar resultados de exames
+- Agendar consultas online
+- Prontuário eletrônico
+- Telemedicina básica
+
+Compliance critical:
+- LGPD (dados sensíveis de saúde)
+- Resolução CFM (prontuário eletrônico)
+- Acessibilidade WCAG 2.1 AA
+
+Stakeholders:
+- Diretor Médico
+- Gerente TI
+- DPO (Data Protection Officer)
+- Representante pacientes</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Análise de compliance LGPD + CFM</li>
+                        <li>✅ Priorização por impacto paciente</li>
+                        <li>✅ Requisitos de acessibilidade</li>
+                        <li>✅ Estratégia de segurança da informação</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Dicas de Uso</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Seja específico</h4><p>Inclua números, valores, métricas concretas</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Mencione stakeholders</h4><p>Identifique pessoas e suas necessidades</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Defina valor</h4><p>ROI, economia, impacto mensurável</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Inclua restrições</h4><p>Orçamento, prazo, compliance</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

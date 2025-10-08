@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxo Completo - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>ProsoftAgileAgent</h1>
+            </div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar...">
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#passo1">Passo 1: Instalação</a></li>
+                        <li><a href="#passo2">Passo 2: Documentos</a></li>
+                        <li><a href="#passo3">Passo 3: Product Owner</a></li>
+                        <li><a href="#passo4">Passo 4: Mesa Redonda</a></li>
+                        <li><a href="#passo5">Passo 5: Demais Agentes</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-book"></i> Documentação</h3>
+                    <ul>
+                        <li><a href="guia-agentes-individuais.html">Guia dos Agentes</a></li>
+                        <li><a href="guia-paralelizacao.html">Execução Paralela</a></li>
+                        <li><a href="diagrams.html">Diagramas</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Fluxo Completo: Do Zero à Mesa Redonda
+                </h1>
+
+                <div class="info-card highlight">
+                    <h3>🎯 Processo Completo em 5 Passos</h3>
+                    <div class="mermaid">
+graph TD
+    A[1. Instalação] --> B[2. Adicionar Documentos]
+    B --> C[3. Executar Product Owner]
+    C --> D[4. Mesa Redonda GPT-5]
+    D --> E[5. Fluxo dos Demais Agentes - TDD]
+                    </div>
+                </div>
+            </section>
+
+            <section id="passo1" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-download"></i>
+                    PASSO 1: Instalação
+                </h2>
+
+                <div class="info-card">
+                    <h4>Executar o Instalador</h4>
+                    <pre><code>powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1</code></pre>
+                </div>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Estrutura de pastas criada</h4>
+                            <p>Diretórios data/in/ e data/out/ automaticamente configurados</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Ambiente configurado</h4>
+                            <p>Templates e scripts prontos para uso</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Análise automática de projeto</h4>
+                            <p>Se selecionado, detecta tecnologias e padrões existentes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h4>⚠️ Nova Pergunta Durante Instalação</h4>
+                    <pre><code>Tipo de trabalho: (1) Projeto novo ou (2) Implementacao em projeto existente? 2
+Caminho do projeto .NET existente para analise: C:\Projetos\MeuSistema</code></pre>
+                    <p><strong>Se opção 2:</strong> Sistema analisa automaticamente estrutura, tecnologias e padrões do projeto existente, gerando <code>project-analysis.md</code>.</p>
+                </div>
+            </section>
+
+            <section id="passo2" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-folder-open"></i>
+                    PASSO 2: Adicionar Seus Documentos
+                </h2>
+
+                <div class="info-card">
+                    <h4>Estrutura Final (APÓS instalação)</h4>
+                    <pre><code>C:\Projetos\MeuSistema\ia\
+├── data/
+│   ├── in/
+│   │   └── sprint01/
+│   │       └── 01/
+│   │           ├── attachments/                  ⬅️ VOCÊ ADICIONA AQUI
+│   │           │   ├── pedido-cliente.docx       ⬅️ Documento do cliente
+│   │           │   ├── tela-mockup-1.html
+│   │           │   ├── tela-mockup-2.html
+│   │           │   └── tela-mockup-3.html
+│   │           └── business_request/             ⬅️ VOCÊ CRIA AQUI
+│   │               └── analise-tecnica.md        ⬅️ Sua análise técnica
+│   └── out/
+│       └── sprint01/
+│           └── 01/                               ⬅️ Saídas geradas aqui</code></pre>
+                </div>
+
+                <div class="info-card highlight">
+                    <h4>Exemplo: business_request/analise-tecnica.md</h4>
+                    <pre><code># Análise Técnica - Sistema de Notificação
+
+## Contexto do Cliente
+- **Objetivo:** Sistema de notificação desktop
+- **Insumos:** 1 Word + 3 mockups HTML
+
+## Decisões Técnicas Preliminares
+- **Framework:** WPF (Windows Presentation Foundation)
+- **Stack:** .NET 8, Material Design, SQLite
+- **Deploy:** MSI installer
+- **Justificativa:** Cliente quer "interface bonita estilo web"</code></pre>
+                </div>
+            </section>
+
+            <section id="passo3" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-tie"></i>
+                    PASSO 3: Executar Product Owner
+                </h2>
+
+                <div class="quick-start-grid">
+                    <div class="quick-start-card">
+                        <h3>Opção A: Manual (Recomendado)</h3>
+                        <ol>
+                            <li>Abrir ChatGPT/Claude</li>
+                            <li>Copiar prompt de: <code>agents/manual/product-owner.agent.md</code></li>
+                            <li>Informar contexto:
+                                <pre><code>Sprint: 01
+Activity: 01
+Documentos em: business_request/ e attachments/</code></pre>
+                            </li>
+                            <li>Anexar todos os arquivos (Word, HTMLs, analise-tecnica.md)</li>
+                        </ol>
+                    </div>
+
+                    <div class="quick-start-card">
+                        <h3>O que o Product Owner produz</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> <code>00-requirements-brief.md</code></li>
+                            <li><i class="fas fa-check"></i> <code>00-business-context.md</code></li>
+                            <li><i class="fas fa-check"></i> <code>mesa-redonda-01-preparada.md</code> ⭐ TEMPLATE PREENCHIDO</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="passo4" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-users"></i>
+                    PASSO 4: Mesa Redonda GPT-5
+                </h2>
+
+                <div class="workflow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Abrir GPT-5</h4>
+                            <p>Usar modelo avançado para facilitar discussão técnica</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Copiar e colar</h4>
+                            <p>Conteúdo completo de <code>mesa-redonda-01-preparada.md</code></p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Executar discussão</h4>
+                            <p>GPT-5 facilitará discussão entre especialistas</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Salvar resultado</h4>
+                            <p>Como <code>01-ata-mesa-redonda.md</code></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="passo5" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tasks"></i>
+                    PASSO 5: Demais Agentes (TDD Sequencial)
+                </h2>
+
+                <div class="info-card highlight">
+                    <h3>🆕 FLUXO TDD (Test-Driven Development)</h3>
+                    <p>⭐ <strong>Testing Specialist</strong> cria o plano de QA <strong>ANTES</strong> da implementação</p>
+                    <p>⭐ <strong>Expert Developer</strong> implementa seguindo os testes já definidos</p>
+                    <p>⭐ <strong>Testing Validator</strong> valida se a implementação atende ao plano original</p>
+                </div>
+
+                <div class="workflow-steps">
+                    <div class="step">
+                        <div class="step-number">5.1</div>
+                        <div class="step-content">
+                            <h3>Requirements Analyst</h3>
+                            <p><strong>Input:</strong> Ata da mesa redonda + documentos originais</p>
+                            <p><strong>Output:</strong> <code>02-requisitos-bdd.md</code> + <code>features/*.feature</code></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5.2</div>
+                        <div class="step-content">
+                            <h3>Systems Architect</h3>
+                            <p><strong>Input:</strong> Requisitos + contexto técnico</p>
+                            <p><strong>Output:</strong> <code>03-arquitetura.md</code> + <code>adrs/</code> + <code>diagrams/</code></p>
+                        </div>
+                    </div>
+
+                    <div class="step highlight-step">
+                        <div class="step-number">5.3</div>
+                        <div class="step-content">
+                            <h3>Testing Specialist ⭐ TDD - ANTES</h3>
+                            <p><strong>Input:</strong> Arquitetura + requisitos + mockups</p>
+                            <p><strong>Output:</strong> <code>05-qa-plano.md</code> (Plano TDD completo)</p>
+                            <p><strong>Papel:</strong> Define TODOS os testes antes da implementação</p>
+                        </div>
+                    </div>
+
+                    <div class="step highlight-step">
+                        <div class="step-number">5.4</div>
+                        <div class="step-content">
+                            <h3>Expert Developer ⭐ TDD - DEPOIS</h3>
+                            <p><strong>Input:</strong> Arquitetura + plano TDD + wireframes</p>
+                            <p><strong>Output:</strong> <code>04-desenvolvimento.md</code> + código implementado</p>
+                            <p><strong>Papel:</strong> Implementa seguindo os testes já definidos</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5.5</div>
+                        <div class="step-content">
+                            <h3>UX/UI Specialist (OPCIONAL)</h3>
+                            <p><strong>Output:</strong> <code>05-ux-wireframes.md</code> + estrutura de wireframes</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5.6</div>
+                        <div class="step-content">
+                            <h3>Frontend Specialist (OPCIONAL)</h3>
+                            <p><strong>Output:</strong> <code>04-frontend-implementation.md</code> + componentes</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5.7</div>
+                        <div class="step-content">
+                            <h3>Testing Validator</h3>
+                            <p><strong>Input:</strong> Plano TDD + implementação + critérios aceite</p>
+                            <p><strong>Output:</strong> <code>05.1-testing-validation.md</code></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5.8</div>
+                        <div class="step-content">
+                            <h3>Code Reviewer (OPCIONAL)</h3>
+                            <p><strong>Output:</strong> <code>04.1-code-review.md</code></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5.9</div>
+                        <div class="step-content">
+                            <h3>Product Owner Final</h3>
+                            <p><strong>Output:</strong> <code>99-checklist-final.md</code></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-folder-tree"></i>
+                    Resultado Final
+                </h2>
+
+                <div class="info-card">
+                    <h4>Estrutura de Saída Completa</h4>
+                    <pre><code>data/out/sprint01/01/
+├── 00-requirements-brief.md      ⬅️ Product Owner
+├── 00-business-context.md        ⬅️ Product Owner
+├── 01-ata-mesa-redonda.md        ⬅️ Mesa Redonda GPT-5
+├── 02-requisitos-bdd.md          ⬅️ Requirements Analyst
+├── 03-arquitetura.md             ⬅️ Systems Architect
+├── 05-qa-plano.md                ⬅️ Testing Specialist (TDD - ANTES)
+├── 04-desenvolvimento.md         ⬅️ Expert Developer (TDD - DEPOIS)
+├── 05.1-testing-validation.md    ⬅️ Testing Validator
+├── 04-frontend-implementation.md ⬅️ Frontend Specialist (opcional)
+├── 04-components/                ⬅️ Estrutura de componentes frontend
+├── 04-ui-guidelines.md           ⬅️ Guidelines de UI/UX
+├── features/                     ⬅️ Arquivos .feature (BDD)
+├── adrs/                         ⬅️ Architecture Decision Records
+└── diagrams/                     ⬅️ Diagramas Mermaid</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Pontos Críticos
+                </h2>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <h4>Confusões Comuns</h4>
+                            <ul>
+                                <li><strong>Instalação ≠ Execução:</strong> Instalador só prepara ambiente</li>
+                                <li><strong>Documentos:</strong> Devem ser adicionados APÓS instalação</li>
+                                <li><strong>Product Owner:</strong> Não executa automaticamente durante instalação</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card highlight">
+                    <h4>✅ Sequência Correta</h4>
+                    <ol>
+                        <li><strong>Instalar</strong> (preparar ambiente)</li>
+                        <li><strong>Documentar</strong> (adicionar arquivos do cliente + análise)</li>
+                        <li><strong>Executar PO</strong> (preencher mesa redonda)</li>
+                        <li><strong>Mesa redonda</strong> (facilitar discussão)</li>
+                        <li><strong>Demais agentes TDD</strong> (Testing Specialist → Developer → Validator)</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i>
+                    Documentação de Apoio
+                </h2>
+
+                <div class="doc-categories">
+                    <div class="doc-category">
+                        <h3>Guias Relacionados</h3>
+                        <ul>
+                            <li><a href="guia-agentes-individuais.html">Guia dos Agentes Individuais</a></li>
+                            <li><a href="guia-paralelizacao.html">Execução Paralela de Atividades</a></li>
+                            <li><a href="examples/product-owner.html">Exemplos Product Owner</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ProsoftAgileAgent</h4>
+                <p>Sistema de Agentes Inteligentes para Desenvolvimento Ágil</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="guia-agentes-individuais.html">Guia dos Agentes</a></li>
+                    <li><a href="diagrams.html">Diagramas</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#5a67d8',
+                lineColor: '#667eea',
+                secondaryColor: '#48bb78',
+                tertiaryColor: '#f6ad55'
+            }
+        });
+    </script>
+</body>
+</html>

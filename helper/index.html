@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProsoftAgileAgent - Documentação Completa</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>ProsoftAgileAgent</h1>
+            </div>
+            <div class="version">v2.2.0 - Parallel Execution Edition</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar na documentação...">
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Início</h3>
+                    <ul>
+                        <li><a href="#overview" class="active">Visão Geral</a></li>
+                        <li><a href="#workflow">Como Funciona</a></li>
+                        <li><a href="#quick-start">Quick Start</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-book"></i> Documentação</h3>
+                    <ul>
+                        <li><a href="fluxo-completo.html">Fluxo Completo</a></li>
+                        <li><a href="guia-agentes-individuais.html">Guia dos Agentes</a></li>
+                        <li><a href="guia-paralelizacao.html">Execução Paralela</a></li>
+                        <li><a href="exemplo-tdd.html">Exemplo TDD</a></li>
+                        <li><a href="analise-projeto.html">Análise de Projeto</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-sitemap"></i> Diagramas</h3>
+                    <ul>
+                        <li><a href="diagrams.html#flow-manual">Fluxo Manual</a></li>
+                        <li><a href="diagrams.html#flow-automatic">Fluxo Automático</a></li>
+                        <li><a href="diagrams.html#flow-tdd">Fluxo TDD</a></li>
+                        <li><a href="diagrams.html#flow-complete">Fluxo Completo</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-code"></i> Exemplos</h3>
+                    <ul>
+                        <li><a href="examples/product-owner.html">Product Owner</a></li>
+                        <li><a href="examples/requirements.html">Requirements</a></li>
+                        <li><a href="examples/architecture.html">Arquitetura</a></li>
+                        <li><a href="examples/mesa-redonda.html">Mesa Redonda</a></li>
+                        <li><a href="examples/ux-ui.html">UX/UI Specialist</a></li>
+                        <li><a href="examples/testing.html">Testing Specialist</a></li>
+                        <li><a href="examples/testing-validator.html">Testing Validator</a></li>
+                        <li><a href="examples/business-request.html">Business Request</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-cog"></i> Configuração</h3>
+                    <ul>
+                        <li><a href="encoding.html">Padrões de Encoding</a></li>
+                        <li><a href="copilot-integration.html">Integração Copilot</a></li>
+                        <li><a href="dotnet-setup.html">Setup .NET</a></li>
+                        <li><a href="workspace-multi.html">Workspace Multi-Projeto</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section">
+                <h1 class="section-title">
+                    <i class="fas fa-robot"></i>
+                    ProsoftAgileAgent - Sistema de Agentes Inteligentes
+                </h1>
+
+                <div class="info-card highlight">
+                    <h3>🎯 O que é?</h3>
+                    <p>O ProsoftAgileAgent é um <strong>sistema de agentes inteligentes</strong> que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis.</p>
+                    <p>Transformamos uma simples solicitação de negócio em <strong>documentação completa</strong>, <strong>código implementado</strong> e <strong>planos de teste</strong>.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>11 Agentes Especializados</h3>
+                        <p>Product Owner, Arquiteto, Developer, QA e mais</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Execução TDD</h3>
+                        <p>Testing Specialist cria plano ANTES do código</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>Execução Paralela</h3>
+                        <p>Múltiplas atividades simultaneamente</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>GitHub Copilot</h3>
+                        <p>Integração automática com IA</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workflow Section -->
+            <section id="workflow" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Como Funciona o Sistema
+                </h2>
+
+                <div class="workflow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Product Owner</h3>
+                            <p>Analisa o negócio e define requisitos</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Mesa Redonda</h3>
+                            <p>Alinha tecnicamente com especialistas</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Requirements Analyst</h3>
+                            <p>Cria cenários BDD e casos de teste</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Systems Architect</h3>
+                            <p>Define arquitetura e ADRs</p>
+                        </div>
+                    </div>
+
+                    <div class="step highlight-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Testing Specialist ⭐</h3>
+                            <p><strong>TDD:</strong> Cria plano de QA ANTES do código</p>
+                        </div>
+                    </div>
+
+                    <div class="step highlight-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h3>Expert Developer ⭐</h3>
+                            <p><strong>TDD:</strong> Implementa seguindo os testes</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <h3>UX/UI Specialist</h3>
+                            <p>Wireframes e design system (opcional)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">8</div>
+                        <div class="step-content">
+                            <h3>Frontend Specialist</h3>
+                            <p>Implementa frontend (opcional)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">9</div>
+                        <div class="step-content">
+                            <h3>Testing Validator</h3>
+                            <p>Valida implementação contra testes</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">10</div>
+                        <div class="step-content">
+                            <h3>Code Reviewer</h3>
+                            <p>Auditoria de qualidade (opcional)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">11</div>
+                        <div class="step-content">
+                            <h3>PO Final</h3>
+                            <p>Valida critérios de aceitação</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h4>💡 Importante</h4>
+                    <p><strong>Cada agente pede sua aprovação antes de continuar para o próximo!</strong></p>
+                    <p>Você tem controle total sobre o processo e pode revisar/ajustar cada etapa.</p>
+                </div>
+            </section>
+
+            <!-- Quick Start Section -->
+            <section id="quick-start" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-rocket"></i>
+                    Quick Start
+                </h2>
+
+                <div class="quick-start-grid">
+                    <div class="quick-start-card">
+                        <h3>1️⃣ Instalação</h3>
+                        <pre><code>powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1</code></pre>
+                        <p>Execute o instalador e siga as instruções</p>
+                    </div>
+
+                    <div class="quick-start-card">
+                        <h3>2️⃣ Adicionar Documentos</h3>
+                        <p>Coloque seus documentos em:</p>
+                        <pre><code>data/in/sprint01/activity01/
+├── business_request/
+└── attachments/</code></pre>
+                    </div>
+
+                    <div class="quick-start-card">
+                        <h3>3️⃣ Executar Product Owner</h3>
+                        <p>Use o prompt do agente:</p>
+                        <pre><code>agents/manual/product-owner.agent.md</code></pre>
+                        <p>No ChatGPT ou Claude</p>
+                    </div>
+
+                    <div class="quick-start-card">
+                        <h3>4️⃣ Seguir o Fluxo</h3>
+                        <p>Continue com os próximos agentes em sequência</p>
+                        <a href="fluxo-completo.html" class="btn-link">Ver Fluxo Completo →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Principais Recursos
+                </h2>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Análise Automática de Projetos</h4>
+                            <p>Detecta automaticamente tecnologias, padrões e convenções do projeto existente</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Integração GitHub Copilot</h4>
+                            <p>Importa e respeita instruções existentes do Copilot automaticamente</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Execução Paralela</h4>
+                            <p>Execute múltiplas atividades simultaneamente para maior produtividade</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>TDD Nativo</h4>
+                            <p>Testing Specialist define testes ANTES da implementação</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Workspace Multi-Projeto</h4>
+                            <p>Suporte para workspaces com múltiplos projetos diferentes</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Enriquecimento de Agentes</h4>
+                            <p>Personalize agentes com instruções específicas da sua empresa</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Documentation Index -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i>
+                    Índice da Documentação
+                </h2>
+
+                <div class="doc-categories">
+                    <div class="doc-category">
+                        <h3><i class="fas fa-graduation-cap"></i> Guias de Uso</h3>
+                        <ul>
+                            <li><a href="fluxo-completo.html">Fluxo Completo: Do Zero à Mesa Redonda</a></li>
+                            <li><a href="guia-agentes-individuais.html">Guia dos Agentes Individuais</a></li>
+                            <li><a href="guia-paralelizacao.html">Guia de Execução Paralela</a></li>
+                            <li><a href="exemplo-tdd.html">Exemplo Prático TDD Completo</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-category">
+                        <h3><i class="fas fa-tools"></i> Configuração</h3>
+                        <ul>
+                            <li><a href="analise-projeto.html">Análise de Projeto Existente</a></li>
+                            <li><a href="copilot-integration.html">Integração GitHub Copilot</a></li>
+                            <li><a href="encoding.html">Padrão de Encoding e Formatação</a></li>
+                            <li><a href="workspace-multi.html">Workspace Multi-Projeto</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-category">
+                        <h3><i class="fas fa-code-branch"></i> Desenvolvimento</h3>
+                        <ul>
+                            <li><a href="dotnet-setup.html">Setup de Novo Projeto .NET</a></li>
+                            <li><a href="dotnet-integration.html">Integração .NET Avançada</a></li>
+                            <li><a href="updating-agents.html">Atualizando Agentes</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-category">
+                        <h3><i class="fas fa-lightbulb"></i> Exemplos</h3>
+                        <ul>
+                            <li><a href="examples/product-owner.html">Exemplos Product Owner</a></li>
+                            <li><a href="examples/mesa-redonda.html">Exemplos Mesa Redonda</a></li>
+                            <li><a href="examples/requirements.html">Exemplos Requirements Analyst</a></li>
+                            <li><a href="examples/ux-ui.html">Exemplos UX/UI Specialist</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ProsoftAgileAgent</h4>
+                <p>Sistema de Agentes Inteligentes para Desenvolvimento Ágil</p>
+                <p class="version-info">Versão 2.2.0 - Parallel Execution Edition</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="fluxo-completo.html">Fluxo Completo</a></li>
+                    <li><a href="guia-agentes-individuais.html">Guia dos Agentes</a></li>
+                    <li><a href="diagrams.html">Diagramas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Autor</h4>
+                <p>Ricardo Macedo Perdigão</p>
+                <p>30 de Setembro de 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Inicializar Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#5a67d8',
+                lineColor: '#667eea',
+                secondaryColor: '#48bb78',
+                tertiaryColor: '#f6ad55'
+            }
+        });
+    </script>
+</body>
+</html>

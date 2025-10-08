@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Mesa Redonda - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Microserviços vs Monolito</a></li>
+                        <li><a href="#exemplo2">Estratégia de Cache</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-users"></i> Exemplos Práticos - Mesa Redonda</h1>
+                <div class="info-card highlight">
+                    <h3>🎯 Debates Técnicos e Decisões Arquiteturais</h3>
+                    <p>Exemplos práticos de como facilitar debates técnicos entre especialistas usando o Mesa Redonda Agent.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> Exemplo 1: Microserviços vs Monolito Modular</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Decisão arquitetural para sistema de relatórios com 1000+ usuários simultâneos.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/roundtable-facilitator.agent.md
+
+Contexto: "Decisão arquitetural para módulo de relatórios com 1000+ usuários simultâneos.
+Avaliar: Microserviços vs Monolito Modular vs Arquitetura Híbrida."
+
+Conflito/Problema:
+- Necessidade de escalabilidade vs complexidade operacional
+- Time inexperiente com microserviços
+- Infraestrutura on-premise limitada
+- Prazo apertado (4 meses para go-live)
+
+Opções consideradas:
+1. Microserviços puros: Máxima escalabilidade, alta complexidade deployment
+2. Monolito Modular: Média escalabilidade, baixa complexidade deployment
+3. Híbrido: Core monolito + serviços específicos (relatórios, notificações)
+
+Restrições técnicas:
+- .NET Framework 4.8 (não pode migrar ainda)
+- SQL Server 2019 on-premise
+- 2 servidores IIS disponíveis
+- Time: 4 desenvolvedores (.NET sênior, 2 plenos, 1 júnior)
+- Load balancer F5 existente
+
+Critérios de decisão:
+- Manutenibilidade (peso 40%): facilidade manutenção pelo time atual
+- Performance (peso 30%): atender 1000+ usuários simultâneos
+- Time skills (peso 30%): curva aprendizado e produtividade</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Debate entre especialistas simulando diferentes perspectivas</li>
+                        <li>✅ Análise de trade-offs técnicos vs operacionais</li>
+                        <li>✅ Consenso baseado nas restrições reais</li>
+                        <li>✅ Decisão justificada com próximos passos</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Exemplo 2: Cache Strategy para Performance</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>API com lentidão (5-8s response time) precisa de estratégia de cache otimizada.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/roundtable-facilitator.agent.md
+
+Contexto: "API REST com performance degradada (5s+ response time).
+Debater estratégias: Redis vs In-Memory vs CDN vs Database optimization."
+
+Situação crítica:
+- API atual: 5-8s response time (meta: <500ms)
+- 800 requests/minuto no pico
+- Dados semi-estáticos (atualizam 2x/dia)
+- Múltiplas queries complexas
+- Usuários reclamando de lentidão
+
+Opções de otimização:
+1. Redis Cache: Cache distribuído, requer infraestrutura nova
+2. In-Memory Cache: Mais simples, mas perda na reinicialização
+3. CDN: Para assets estáticos, não resolve queries
+4. Database tuning: Índices, query optimization, materialize views
+5. Abordagem híbrida: Combinação das anteriores
+
+Restrições técnicas:
+- Budget limitado: R$ 15.000 para infraestrutura
+- Não pode parar API (zero-downtime deployment)
+- .NET Framework 4.8 + SQL Server 2019
+- 2 desenvolvedores sênior disponíveis
+- Prazo: 3 semanas (pressão dos usuários)
+
+Dados de uso:
+- 70% das queries são idênticas (candidatas a cache)
+- Dados críticos: catálogo produtos, preços, estoque
+- Atualização: produtos (1x/dia), preços (2x/dia), estoque (real-time)
+
+Critérios de sucesso:
+- Performance: <500ms 95th percentile
+- Disponibilidade: 99.9% (atual 99.5%)
+- Simplicidade: time consegue manter
+- Custo: <R$ 15K setup + <R$ 2K/mês operação</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Análise técnica de cada opção de cache</li>
+                        <li>✅ Debate sobre complexidade vs benefício</li>
+                        <li>✅ Consideração de dados real-time vs cache</li>
+                        <li>✅ Plano de implementação faseado</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Quando Usar a Mesa Redonda</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Decisões arquiteturais</h4><p>Múltiplas opções técnicas com trade-offs</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Conflitos técnicos</h4><p>Divergências entre especialistas</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Tecnologias novas</h4><p>Avaliar adoção vs riscos</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Restrições complexas</h4><p>Budget, prazo, skills combinados</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
