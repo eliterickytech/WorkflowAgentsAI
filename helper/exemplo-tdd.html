@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Fluxo TDD Completo - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Início</a></li>
+                        <li><a href="fluxo-completo.html">← Fluxo Completo</a></li>
+                        <li><a href="#visao-geral">Visão Geral TDD</a></li>
+                        <li><a href="#exemplo-pratico">Exemplo Prático</a></li>
+                        <li><a href="#ciclo-tdd">Ciclo TDD</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-vial"></i> Exemplo de Fluxo TDD Completo</h1>
+                <div class="info-card highlight">
+                    <h3>🧪 Test-Driven Development no ProsoftAgileAgent</h3>
+                    <p>Exemplo prático completo de como implementar funcionalidades seguindo TDD rigoroso: testes primeiro, código depois.</p>
+                </div>
+            </section>
+            <section id="visao-geral" class="content-section">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Princípios TDD</h2>
+                <div class="info-card">
+                    <h4>O Que é TDD?</h4>
+                    <p><strong>Test-Driven Development (TDD)</strong> é uma metodologia onde os testes são escritos <strong>ANTES</strong> da implementação do código. No ProsoftAgileAgent, seguimos rigorosamente:</p>
+                    <ol>
+                        <li>🔴 <strong>Red:</strong> Escrever teste que falha (funcionalidade não existe ainda)</li>
+                        <li>🟢 <strong>Green:</strong> Implementar código mínimo para passar no teste</li>
+                        <li>🔵 <strong>Refactor:</strong> Melhorar código mantendo testes passando</li>
+                    </ol>
+                </div>
+                <div class="info-card">
+                    <h4>Sequência de Agentes TDD:</h4>
+                    <pre><code>1. Testing Specialist (TDD)    → Cria PLANO DE TESTES completo
+   └─ Saída: 05-qa-plano.md
+
+2. Expert Developer (TDD)      → Implementa seguindo plano TDD
+   └─ Saída: 04-desenvolvimento.md + código
+
+3. Testing Validator (TDD)     → Valida implementação vs plano
+   └─ Saída: 05.1-testing-validation.md</code></pre>
+                </div>
+            </section>
+            <section id="exemplo-pratico" class="content-section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Exemplo Prático: Sistema de Comissões</h2>
+                <div class="info-card">
+                    <h4>Funcionalidade: Cálculo de Comissão Base</h4>
+                    <p><strong>Regra RN-0030:</strong> Comissão base = vendas_mes * percentual_fixo (2.5%)</p>
+                </div>
+                <div class="info-card">
+                    <h4>Passo 1: Testing Specialist cria plano TDD</h4>
+                    <pre><code>## Cenário: Cálculo comissão base vendedor
+**Given** um vendedor com ID 123
+**And** percentual fixo de comissão de 2.5%
+**And** vendas do mês de R$ 100.000,00
+**When** calcular comissão base
+**Then** comissão base deve ser R$ 2.500,00
+
+## Estrutura de Teste Esperada:
+```csharp
+public class ComissaoBaseCalculatorTests
+{
+    [Fact]
+    public void DeveCalcularComissaoBase_QuandoVendasValidas()
+    {
+        // Arrange
+        var vendas = 100000m;
+        var percentual = 0.025m;
+        var calculator = new ComissaoBaseCalculator();
+
+        // Act
+        var resultado = calculator.Calcular(vendas, percentual);
+
+        // Assert
+        Assert.Equal(2500m, resultado);
+    }
+
+    [Fact]
+    public void DeveLancarExcecao_QuandoVendasNegativas()
+    {
+        // Arrange
+        var vendas = -1000m;
+        var percentual = 0.025m;
+        var calculator = new ComissaoBaseCalculator();
+
+        // Act & Assert
+        Assert.Throws<ArgumentException>(
+            () => calculator.Calcular(vendas, percentual)
+        );
+    }
+}
+```</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Passo 2: Expert Developer implementa (Ciclo Red-Green-Refactor)</h4>
+                    <pre><code>## 🔴 RED: Executar testes (falham - classe não existe)
+```bash
+dotnet test
+# Resultado: 0 passed, 2 failed
+```
+
+## 🟢 GREEN: Implementar código mínimo
+```csharp
+public class ComissaoBaseCalculator
+{
+    public decimal Calcular(decimal vendas, decimal percentual)
+    {
+        if (vendas < 0)
+            throw new ArgumentException("Vendas não podem ser negativas", nameof(vendas));
+
+        return vendas * percentual;
+    }
+}
+```
+
+```bash
+dotnet test
+# Resultado: 2 passed, 0 failed ✅
+```
+
+## 🔵 REFACTOR: Melhorar código (manter testes verdes)
+```csharp
+public class ComissaoBaseCalculator
+{
+    private const decimal PERCENTUAL_MINIMO = 0m;
+    private const decimal PERCENTUAL_MAXIMO = 1m;
+
+    public decimal Calcular(decimal vendas, decimal percentual)
+    {
+        ValidarVendas(vendas);
+        ValidarPercentual(percentual);
+
+        return Math.Round(vendas * percentual, 2);
+    }
+
+    private void ValidarVendas(decimal vendas)
+    {
+        if (vendas < 0)
+            throw new ArgumentException(
+                "Vendas não podem ser negativas",
+                nameof(vendas));
+    }
+
+    private void ValidarPercentual(decimal percentual)
+    {
+        if (percentual < PERCENTUAL_MINIMO || percentual > PERCENTUAL_MAXIMO)
+            throw new ArgumentException(
+                $"Percentual deve estar entre {PERCENTUAL_MINIMO:P0} e {PERCENTUAL_MAXIMO:P0}",
+                nameof(percentual));
+    }
+}
+```
+
+```bash
+dotnet test
+# Resultado: 2 passed, 0 failed ✅ (ainda verde após refactor)
+```</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Passo 3: Testing Validator valida implementação</h4>
+                    <pre><code>## Validação Checklist:
+✅ Todos testes do plano executados (2/2 GREEN)
+✅ Cobertura de código: 100% (linha e branch)
+✅ Performance: <1ms (target <100ms para lote)
+✅ Validações implementadas conforme RN-0030
+✅ Edge cases cobertos: vendas negativas, percentual inválido
+✅ Refatoração não quebrou testes
+
+**Status:** APROVADO ✅</code></pre>
+                </div>
+            </section>
+            <section id="ciclo-tdd" class="content-section">
+                <h2 class="section-title"><i class="fas fa-sync-alt"></i> Ciclo TDD no Workflow</h2>
+                <div class="info-card">
+                    <h4>Fluxo Visual:</h4>
+                    <pre><code>┌─────────────────────────────────────────────────────────┐
+│ Testing Specialist (TDD)                                │
+│ - Cria plano completo ANTES do código                   │
+│ - Define cenários BDD (Gherkin)                         │
+│ - Especifica estrutura de testes esperada               │
+│ - Meta de cobertura (95%+)                              │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ Expert Developer (TDD)                                  │
+│ 🔴 RED:    Escreve teste → Executa → FALHA             │
+│ 🟢 GREEN:  Implementa código mínimo → Teste PASSA      │
+│ 🔵 REFACTOR: Melhora código → Testes continuam VERDES  │
+│ Repete ciclo para cada cenário do plano                │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ Testing Validator (TDD)                                 │
+│ ✅ Verifica todos cenários executados                   │
+│ ✅ Valida cobertura >= meta (95%)                       │
+│ ✅ Confirma edge cases cobertos                         │
+│ ✅ Evidências: reports, coverage, benchmarks            │
+│ ✅ Status: APROVADO / REPROVADO                         │
+└─────────────────────────────────────────────────────────┘</code></pre>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-medal"></i> Benefícios do TDD</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Design melhor</h4><p>Pensar em testes primeiro força interfaces limpas e desacopladas</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Documentação viva</h4><p>Testes documentam comportamento esperado da funcionalidade</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Confiança para refatorar</h4><p>Testes garantem que mudanças não quebraram funcionalidades</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Menos bugs produção</h4><p>Cobertura 95%+ reduz drasticamente defeitos em produção</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Feedback rápido</h4><p>Testes executam em segundos, detectam problemas imediatamente</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Rastreabilidade</h4><p>Requisito → Teste → Código → Validação (evidências completas)</p></div>
+                    </div>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-book"></i> Recursos Relacionados</h2>
+                <div class="info-card">
+                    <ul>
+                        <li><a href="fluxo-completo.html">Fluxo Completo: Do Zero à Mesa Redonda</a></li>
+                        <li><a href="guia-agentes-individuais.html">Guia dos Agentes Individuais</a></li>
+                        <li><a href="examples/testing.html">Exemplos Testing Specialist (TDD)</a></li>
+                        <li><a href="examples/testing-validator.html">Exemplos Testing Validator (TDD)</a></li>
+                        <li><a href="examples/architecture.html">Exemplos Arquitetura Clean Architecture</a></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li><li><a href="fluxo-completo.html">Fluxo Completo</a></li><li><a href="guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Requirements Analyst - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Documentos Tributários</a></li>
+                        <li><a href="#exemplo2">Prontuário Eletrônico</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-clipboard-list"></i> Exemplos Práticos - Requirements Analyst</h1>
+                <div class="info-card highlight">
+                    <h3>📋 Extração de Regras e Cenários BDD</h3>
+                    <p>Exemplos práticos de análise de documentos complexos, extração de regras de negócio e criação de cenários BDD.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-file-invoice-dollar"></i> Exemplo 1: Análise de Documentos Tributários</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Extrair regras de cálculo de impostos de documentos da Receita Federal para sistema de e-commerce multi-estado.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/requirements-analyst.agent.md
+
+Sprint: 02, Activity: analise-regras-tributarias
+Contexto: "Extrair regras de cálculo tributário de documentos oficiais da Receita Federal.
+Transformar em regras estruturadas RN-0030 a RN-0045 + cenários BDD
+para sistema de e-commerce multi-estado."
+
+Entrada disponível:
+- Portaria_RF_2024_Tributacao.pdf: 85 páginas de regulamentação fiscal
+- Tabela_Aliquotas_Estados.xlsx: 27 planilhas com alíquotas por UF
+- Casos_Teste_Homologacao.docx: 150 cenários de validação do SPED
+- Manual_ICMS_Substituicao.pdf: 45 páginas ST + MVA por NCM
+
+Domínio específico:
+- E-commerce B2C multi-estado (26 UFs + DF)
+- Produtos: Eletrônicos, roupas, livros, medicamentos
+- Regimes: Simples Nacional, Lucro Presumido, Lucro Real
+- Operações: Vendas internas, interestaduais, exportação
+
+Foco da análise:
+- Regras ICMS por UF de origem/destino
+- Substituição Tributária (ST) por NCM
+- Cálculo PIS/COFINS por regime tributário
+- Casos especiais: Zona Franca, benefícios fiscais
+- Validações obrigatórias para SPED Fiscal
+
+Saída esperada:
+- RN-0030: Cálculo base ICMS normal
+- RN-0031: ICMS interestadual (diferencial alíquota)
+- RN-0032: Substituição Tributária + MVA
+- RN-0033: PIS/COFINS por regime
+- RN-0034: Benefícios fiscais por UF
+- RN-0035 a RN-0045: Casos especiais + validações SPED
+- Features BDD: 50+ cenários Gherkin automatizáveis</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Regras estruturadas RN-00xx com exemplos práticos</li>
+                        <li>✅ Cenários BDD Gherkin para automação de testes</li>
+                        <li>✅ Mapeamento de dependências entre regras tributárias</li>
+                        <li>✅ Validação de consistência terminológica fiscal</li>
+                        <li>✅ Documentação para auditoria fiscal</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-hospital"></i> Exemplo 2: Sistema de Prontuário Eletrônico</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Analisar regulamentações médicas para implementar prontuário digital em conformidade com CFM, LGPD e HL7 FHIR.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/requirements-analyst.agent.md
+
+Sprint: 03, Activity: requisitos-prontuario-eletronico
+Contexto: "Extrair requisitos de prontuário eletrônico baseado nas resoluções CFM,
+LGPD saúde e padrões HL7 FHIR. Criar regras RN-0050 a RN-0070 para sistema hospitalar."
+
+Documentos de entrada:
+- Resolucao_CFM_1821_Prontuario_Digital.pdf: Regulamentação médica obrigatória
+- LGPD_Dados_Saude_Ministerio.pdf: Tratamento dados sensíveis saúde
+- HL7_FHIR_R4_Implementation_Guide.pdf: Padrão internacional interoperabilidade
+- Manual_Certificacao_Digital_ICP_Brasil.pdf: Assinatura digital médica
+- Auditoria_ANS_Prontuarios.xlsx: Checklist conformidade operadoras
+
+Contexto regulatório:
+- CFM: Conselho Federal de Medicina (obrigatório)
+- ANS: Agência Nacional de Saúde Suplementar
+- LGPD: Proteção dados pessoais sensíveis
+- ICP-Brasil: Infraestrutura chaves públicas
+- HL7 FHIR: Interoperabilidade internacional
+
+Funcionalidades a normatizar:
+1. Criação prontuário: Identificação unívoca paciente + dados mínimos obrigatórios
+2. Registro consultas: Anamnese + exame físico + diagnóstico + prescrição
+3. Assinatura digital: Certificado ICP-Brasil + timestamp + integridade
+4. Compartilhamento: Consentimento paciente + auditoria acessos + finalidade
+5. Retenção dados: Prazos legais + arquivamento + descarte seguro
+6. Auditoria: Logs imutáveis + rastreabilidade + relatórios ANS
+
+Casos especiais médicos:
+- Menores de idade: Consentimento responsáveis + sigilo médico
+- Dados genéticos: Proteção extra + consentimento específico
+- Telemedicina: Validação identidade + gravação consulta + prescrição digital
+- Emergência: Acesso sem consentimento + justificativa + auditoria posterior</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Regras compliance CFM + ANS + LGPD</li>
+                        <li>✅ Mapeamento HL7 FHIR para interoperabilidade</li>
+                        <li>✅ Cenários BDD para auditoria médica</li>
+                        <li>✅ Fluxos de consentimento e autorização</li>
+                        <li>✅ Validação certificação digital ICP-Brasil</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Capacidades do Agent</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Extração de regras</h4><p>Documentos complexos → Regras estruturadas RN-00xx</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Cenários BDD</h4><p>Gherkin automatizável com examples concretos</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Compliance</h4><p>Mapeamento de regulamentações obrigatórias</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Dependências</h4><p>Identificação de regras interdependentes</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

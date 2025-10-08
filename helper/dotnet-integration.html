@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integração .NET Avançada - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#padroes">Padrões .NET</a></li>
+                        <li><a href="#guardrails">Guardrails</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title"><i class="fab fa-microsoft"></i> Integração .NET Avançada</h1>
+                <div class="info-card highlight">
+                    <h3>🏗️ Desenvolvimento .NET de Qualidade</h3>
+                    <p>Guardrails e padrões para desenvolvimento .NET profissional com Clean Architecture, DDD, CQRS e TDD.</p>
+                </div>
+            </section>
+            <section id="padroes" class="content-section">
+                <h2 class="section-title"><i class="fas fa-book"></i> Padrões Arquiteturais</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Clean Architecture</h3>
+                        <p>Domain, Application, Infrastructure, Presentation</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cubes"></i>
+                        <h3>DDD</h3>
+                        <p>Entities, Value Objects, Aggregates, Domain Events</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>CQRS</h3>
+                        <p>Separação Command/Query com MediatR</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Patterns</h3>
+                        <p>Repository, Result, Specification, Unit of Work</p>
+                    </div>
+                </div>
+            </section>
+            <section id="guardrails" class="content-section">
+                <h2 class="section-title"><i class="fas fa-shield-alt"></i> Development Guardrails</h2>
+                <div class="info-card">
+                    <h4>🏗️ Arquitetura</h4>
+                    <ul>
+                        <li><strong>Clean Architecture:</strong> Domain, Application, Infrastructure, Presentation</li>
+                        <li><strong>DDD Patterns:</strong> Entities, Value Objects, Aggregates, Domain Services</li>
+                        <li><strong>CQRS:</strong> Commands e Queries separados com MediatR</li>
+                        <li><strong>Result Pattern:</strong> Retorno tipado com sucesso/erro</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>✅ Validação</h4>
+                    <ul>
+                        <li><strong>FluentValidation:</strong> Para validação de inputs</li>
+                        <li><strong>Custom Error Codes:</strong> Códigos de erro específicos</li>
+                        <li><strong>Domain Validation:</strong> Validação no domínio</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>📊 Logging</h4>
+                    <ul>
+                        <li><strong>Serilog:</strong> Structured logging obrigatório</li>
+                        <li><strong>Context Enrichment:</strong> Adicionar contexto às logs</li>
+                        <li><strong>Sem Console.WriteLine:</strong> Usar logger estruturado</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>⚙️ Configuração</h4>
+                    <ul>
+                        <li><strong>Strongly Typed Options:</strong> IOptions&lt;T&gt;</li>
+                        <li><strong>Validation on Startup:</strong> Validar configurações</li>
+                        <li><strong>Environment-Specific:</strong> appsettings por ambiente</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>🗄️ Data Access</h4>
+                    <ul>
+                        <li><strong>Repository Pattern:</strong> Abstrair persistência</li>
+                        <li><strong>Entity Framework Core:</strong> ORM recomendado</li>
+                        <li><strong>Migrations:</strong> Para mudanças de schema</li>
+                        <li><strong>Unit of Work:</strong> Para transações</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>🧪 Testing</h4>
+                    <ul>
+                        <li><strong>Cobertura:</strong> >= 90% em módulos críticos</li>
+                        <li><strong>Testes Determinísticos:</strong> Sem aleatoriedade</li>
+                        <li><strong>Arrange-Act-Assert:</strong> Padrão AAA</li>
+                        <li><strong>xUnit:</strong> Framework recomendado</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-tools"></i> Tecnologias Recomendadas</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-database"></i>
+                        <h3>ORM</h3>
+                        <p>Entity Framework Core</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>CQRS</h3>
+                        <p>MediatR</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-double"></i>
+                        <h3>Validação</h3>
+                        <p>FluentValidation</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-map"></i>
+                        <h3>Mapeamento</h3>
+                        <p>AutoMapper</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Logging</h3>
+                        <p>Serilog</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-vial"></i>
+                        <h3>Testes</h3>
+                        <p>xUnit, FluentAssertions, Moq, Bogus</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

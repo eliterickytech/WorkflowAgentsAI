@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos UX/UI Specialist - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Dashboard Executivo</a></li>
+                        <li><a href="#exemplo2">App Mobile Vendas</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-paint-brush"></i> Exemplos Práticos - UX/UI Specialist</h1>
+                <div class="info-card highlight">
+                    <h3>🎨 Design de Interfaces e Experiência do Usuário</h3>
+                    <p>Exemplos práticos de design de wireframes, protótipos e especificações UX para diferentes tipos de aplicações.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> Exemplo 1: Dashboard Executivo de Vendas</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Dashboard para diretoria acompanhar KPIs de vendas, metas e performance em tempo real.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Personas Identificadas:</h4>
+                    <ul>
+                        <li><strong>Diretor Comercial (55 anos):</strong> Visão macro, decisões estratégicas, pouco tempo</li>
+                        <li><strong>Gerente Regional (38 anos):</strong> Acompanhamento equipe, análise tendências</li>
+                        <li><strong>Analista BI (28 anos):</strong> Relatórios detalhados, exportação dados</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Principais Componentes UI:</h4>
+                    <pre><code>Layout Responsivo (Desktop First):
+┌────────────────────────────────────────────────────────────┐
+│  Header: Logo | Período: [▼ Último Mês] | User: [Avatar▼] │
+├────────────────────────────────────────────────────────────┤
+│  KPI Cards (Principais Métricas)                           │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐         │
+│  │ Vendas  │ │  Meta   │ │ Ticket  │ │  Conv.  │         │
+│  │ R$ 2.8M │ │  85%    │ │ R$ 450  │ │  12.5%  │         │
+│  │ ↑ +15%  │ │ 🟡      │ │ ↓ -3%   │ │ ↑ +2%   │         │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘         │
+├────────────────────────────────────────────────────────────┤
+│  Performance por Região (Gráfico de Barras Interativo)     │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ Sul     ████████████ 120%                           │  │
+│  │ Sudeste ██████████ 95%                              │  │
+│  │ Nordeste ███████ 78%                                │  │
+│  │ Norte   █████ 65%                                   │  │
+│  └─────────────────────────────────────────────────────┘  │
+├────────────────────────────────────────────────────────────┤
+│  Top 10 Vendedores | Produtos Mais Vendidos              │
+│  (Tabela Sortável)  | (Gráfico Pizza Interativo)         │
+└────────────────────────────────────────────────────────────┘
+
+Interações:
+- Hover nos KPIs: Tooltip com detalhamento
+- Click gráficos: Drill-down para detalhes
+- Filtros: Período, Região, Produto (sidebar colapsável)
+- Export: PDF, Excel, CSV (botão flutuante)</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Requisitos UX:</h4>
+                    <ul>
+                        <li>✅ <strong>Acessibilidade:</strong> WCAG 2.1 AA (contraste, keyboard navigation)</li>
+                        <li>✅ <strong>Performance:</strong> Load < 2s, interações < 100ms</li>
+                        <li>✅ <strong>Responsivo:</strong> Desktop (1920x1080), Tablet (iPad), Mobile (iPhone)</li>
+                        <li>✅ <strong>Cores:</strong> Verde (positivo), Vermelho (negativo), Amarelo (atenção)</li>
+                        <li>✅ <strong>Tipografia:</strong> Roboto (títulos), Open Sans (corpo)</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-mobile-alt"></i> Exemplo 2: App Mobile para Força de Vendas</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Aplicativo mobile para vendedores externos registrarem vendas, consultarem catálogo e acompanharem metas.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Jornada do Usuário:</h4>
+                    <pre><code>Fluxo Principal (Registrar Venda):
+1. Login Biométrico → 2. Home (Metas do dia) → 3. Nova Venda
+                              ↓
+4. Buscar Cliente → 5. Selecionar Produtos → 6. Aplicar Desconto
+                              ↓
+7. Resumo Pedido → 8. Confirmar → 9. Assinatura Digital Cliente
+                              ↓
+10. Sucesso (Comissão Calculada) → Compartilhar PDF
+
+Telas Secundárias:
+- Catálogo: Busca por nome, categoria, código
+- Metas: Gráfico circular (atingimento), lista produtos pendentes
+- Comissões: Histórico mensal, projeção, detalhamento
+- Clientes: Busca, histórico compras, localização mapa
+- Offline Mode: Sincronização automática quando online</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Componentes Mobile Nativos:</h4>
+                    <ul>
+                        <li>✅ <strong>Bottom Navigation:</strong> Home | Catálogo | Vendas | Metas | Perfil</li>
+                        <li>✅ <strong>FAB (Floating Action Button):</strong> Nova Venda (ação primária)</li>
+                        <li>✅ <strong>Pull-to-Refresh:</strong> Atualizar dados em tempo real</li>
+                        <li>✅ <strong>Swipe Actions:</strong> Editar/Excluir vendas (lista)</li>
+                        <li>✅ <strong>Bottom Sheet:</strong> Filtros avançados</li>
+                        <li>✅ <strong>Snackbar:</strong> Feedback de ações (sucesso/erro)</li>
+                    </ul>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Design System:</h4>
+                    <ul>
+                        <li>✅ <strong>Plataforma:</strong> Material Design 3 (Android) + Human Interface (iOS)</li>
+                        <li>✅ <strong>Cores Primárias:</strong> #1976D2 (azul), #4CAF50 (verde sucesso)</li>
+                        <li>✅ <strong>Spacing:</strong> 4px grid system (8px, 16px, 24px, 32px)</li>
+                        <li>✅ <strong>Elevations:</strong> Cards (2dp), Modals (8dp), FAB (6dp)</li>
+                        <li>✅ <strong>Animações:</strong> 300ms ease-in-out (transições padrão)</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-tools"></i> Ferramentas e Entregáveis</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-pencil-ruler"></i>
+                        <h4>Wireframes</h4>
+                        <p>Figma, Sketch, Adobe XD - Baixa/Alta fidelidade</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <h4>Protótipos</h4>
+                        <p>Interativos, clicáveis, navegáveis para testes</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-palette"></i>
+                        <h4>Design System</h4>
+                        <p>Componentes reutilizáveis, tokens, guidelines</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user-check"></i>
+                        <h4>Testes Usabilidade</h4>
+                        <p>Cenários, tarefas, métricas SUS, heatmaps</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

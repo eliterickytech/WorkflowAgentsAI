@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Testing Specialist - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Cálculo de Comissões</a></li>
+                        <li><a href="#exemplo2">Agendamento Médico</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-vial"></i> Exemplos Práticos - Testing Specialist (TDD)</h1>
+                <div class="info-card highlight">
+                    <h3>🧪 Planos TDD ANTES da Implementação</h3>
+                    <p>Exemplos práticos de planejamento completo de testes ANTES de escrever código, seguindo metodologia TDD rigorosa.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-dollar-sign"></i> Exemplo 1: Sistema de Cálculo de Comissões</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Planejar testes para sistema complexo de comissões com 15 regras interdependentes ANTES da implementação.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/testing-specialist.agent.md
+
+Sprint: 03, Activity: plano-tdd-calculo-comissoes
+Contexto: "Criar plano TDD COMPLETO para cálculo de comissão de vendedores.
+Regras complexas: base + performance + metas + bônus trimestral + casos especiais.
+CRITICAL: testes antes do código."
+
+Critérios de aceite (definidos pelo PO):
+1. Cálculo correto conforme RN-0030 (base) a RN-0035 (bônus especiais)
+2. Performance < 100ms para lote de 1000 vendedores
+3. Tratamento cenários extremos: vendas negativas, metas retroativas, inativos
+4. Auditoria completa: log de cada cálculo com justificativa matemática
+5. Relatório gerencial: breakdown por componente da comissão
+6. Integração: ERP (vendas) + CRM (metas) + RH (dados funcionários)
+
+Regras de negócio identificadas:
+- RN-0030: Base = vendas * percentual_fixo (2.5%)
+- RN-0031: Performance = base * multiplicador_meta (0.8 a 1.5x)
+- RN-0032: Bônus trimestral = se meta_trimestre > 110% então +R$ 2.000
+- RN-0033: Teto máximo = R$ 15.000/mês (compliance)
+- RN-0034: Desconto inadimplência = se cliente não pagou, -50% comissão
+- RN-0035: Casos especiais = férias, licença, demissão (pro-rata)
+
+Complexidade técnica:
+- 15 regras interdependentes + 3 integrações externas
+- Dados históricos: 24 meses para cálculo performance
+- Volume: 120 vendedores * 12 meses * recálculos retroativos
+- Criticidade: Erro = processo trabalhista + desmotivação equipe
+
+Meta de cobertura: 95% (financeiro crítico, auditoria SOX)
+Tipos de teste: Unit (70%) + Integration (20%) + E2E (10%) + Performance
+
+Entrada técnica disponível:
+- 03-arquitetura.md: Clean Architecture + Domain Services + CQRS
+- 02-requisitos-bdd.md: 47 cenários Gherkin já mapeados
+- RN-0030.md a RN-0035.md: Regras detalhadas com exemplos</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Plano TDD com 95+ cenários de teste específicos</li>
+                        <li>✅ Estrutura de testes organizada por domínio</li>
+                        <li>✅ Casos extremos e edge cases mapeados</li>
+                        <li>✅ Performance tests com benchmarks</li>
+                        <li>✅ Evidências automatizadas para auditoria</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-calendar-check"></i> Exemplo 2: Sistema de Agendamento Médico</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Testes para sistema crítico de agendamento hospitalar com disponibilidade 99.99% (4min downtime/mês máximo).</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/testing-specialist.agent.md
+
+Sprint: 02, Activity: tdd-agendamento-medico
+Contexto: "Plano TDD para sistema de agendamento médico.
+CRÍTICO: zero erros (vidas humanas).
+Cenários: consultas, exames, cirurgias, emergências, cancelamentos."
+
+Critérios de aceite críticos:
+1. Disponibilidade 99.99% (4min downtime/mês máximo)
+2. Concorrência: 500 agendamentos simultâneos sem conflito
+3. Compliance: CFM + ANS + LGPD + auditoria hospitalar
+4. Integração: Sistema médico + laboratório + centro cirúrgico
+5. Notificações: SMS + email + push para médicos/pacientes
+6. Emergência: Prioridade absoluta + override agendas
+
+Cenários críticos identificados:
+**Agendamento normal:**
+- Consulta disponível → agendar → confirmar → notificar
+- Exame com preparo → agendar → enviar instruções → lembrar
+- Cirurgia → agendar sala + equipe + materiais + pré-operatório
+
+**Cenários de conflito:**
+- Duplo agendamento mesmo horário (race condition)
+- Médico cancela última hora (reagendar pacientes)
+- Emergência → cancelar/remarcar agenda inteira
+- Sistema indisponível → fallback manual
+
+**Cenários compliance:**
+- Paciente menor idade → responsável deve aprovar
+- Exame com contraste → histórico alergia obrigatório
+- Cirurgia → termo consentimento + jejum + exames pré
+- LGPD → consentimento dados + direito esquecimento
+
+Integrações críticas:
+1. HIS (Hospital Information System): Prontuários + histórico
+2. Laboratory System: Exames + resultados + preparo
+3. Surgery Center: Salas + equipe + materiais
+4. Notification Service: SMS + email + push</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Resultado Esperado:</h4>
+                    <ul>
+                        <li>✅ Testes de concorrência (race conditions)</li>
+                        <li>✅ Cenários de emergência e failover</li>
+                        <li>✅ Validação compliance CFM + ANS + LGPD</li>
+                        <li>✅ Testes de integração com sistemas externos</li>
+                        <li>✅ Testes de disponibilidade 99.99%</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Princípios TDD do Agent</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Tests First</h4><p>Planejamento completo ANTES do código</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Red-Green-Refactor</h4><p>Ciclo TDD rigoroso com evidências</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>95% Coverage</h4><p>Meta alta para módulos críticos</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Automação CI/CD</h4><p>Testes executados a cada commit</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia dos Agentes Individuais - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>ProsoftAgileAgent</h1>
+            </div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar agente...">
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-users"></i> Agentes (11)</h3>
+                    <ul>
+                        <li><a href="#product-owner">1. Product Owner</a></li>
+                        <li><a href="#mesa-redonda">2. Mesa Redonda</a></li>
+                        <li><a href="#requirements">3. Requirements Analyst</a></li>
+                        <li><a href="#architect">4. Systems Architect</a></li>
+                        <li><a href="#uxui">5. UX/UI Specialist</a></li>
+                        <li><a href="#frontend">6. Frontend Specialist</a></li>
+                        <li><a href="#testing">7. Testing Specialist</a></li>
+                        <li><a href="#developer">8. Expert Developer</a></li>
+                        <li><a href="#validator">9. Testing Validator</a></li>
+                        <li><a href="#reviewer">10. Code Reviewer</a></li>
+                        <li><a href="#po-final">11. Product Owner Final</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-book"></i> Recursos</h3>
+                    <ul>
+                        <li><a href="#templates">Templates de Entrada</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting</a></li>
+                        <li><a href="examples/product-owner.html">Exemplos Práticos</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title">
+                    <i class="fas fa-users-cog"></i>
+                    Guia Completo: Executando Agentes Individuais
+                </h1>
+
+                <div class="info-card highlight">
+                    <h3>📋 11 Agentes Especializados</h3>
+                    <p>Este guia detalha como usar <strong>cada um dos 11 agentes de forma independente</strong>, com exemplos práticos, contextos específicos e casos de uso reais.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Product Owner</h3>
+                        <p>Análise de valor e requisitos</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-comments"></i>
+                        <h3>Mesa Redonda</h3>
+                        <p>Decisões técnicas colaborativas</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Requirements</h3>
+                        <p>BDD e extração de regras</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-drafting-compass"></i>
+                        <h3>Architect</h3>
+                        <p>Design e ADRs</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>UX/UI</h3>
+                        <p>Wireframes e design system</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Frontend</h3>
+                        <p>Implementação de interface</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-vial"></i>
+                        <h3>Testing</h3>
+                        <p>Plano TDD completo</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Developer</h3>
+                        <p>Implementação e código</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-check-double"></i>
+                        <h3>Validator</h3>
+                        <p>Validação de testes</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Reviewer</h3>
+                        <p>Auditoria de qualidade</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-flag-checkered"></i>
+                        <h3>PO Final</h3>
+                        <p>Aprovação e entrega</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Owner Agent -->
+            <section id="product-owner" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-tie"></i>
+                    1. Product Owner Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Refinamento de backlog</strong> - transformar ideias vagas em requirements</li>
+                        <li>✅ <strong>Análise de viabilidade</strong> - entender impacto e prioridade</li>
+                        <li>✅ <strong>Comunicação com stakeholders</strong> - traduzir técnico para negócio</li>
+                        <li>✅ <strong>Validação de escopo</strong> - confirmar entendimento antes do desenvolvimento</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo 1: Análise de Nova Funcionalidade</h4>
+                    <pre><code>@agents/manual/product-owner.agent.md
+
+Sprint: 03, Activity: sistema-backup
+Contexto: "Cliente solicita backup automático dos dados.
+Preciso entender: requisitos, prioridade, impacto nos
+usuários e viabilidade técnica."</code></pre>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo 2: Refinamento de User Story Vaga</h4>
+                    <pre><code>@agents/manual/product-owner.agent.md
+
+Sprint: 02, Activity: melhorias-performance
+Contexto: "Stakeholder reclama que 'sistema está lento'.
+Preciso transformar isso em requirements específicos
+com critérios mensuráveis."</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/sistema-backup/
+├── 00-business-context.md      ← Análise do contexto
+└── 00-requirements-brief.md    ← Requirements estruturados</code></pre>
+                </div>
+
+                <div class="info-card highlight">
+                    <h4>💡 Dicas de uso:</h4>
+                    <ul>
+                        <li><strong>Seja específico no contexto</strong> - quanto mais informações, melhor a análise</li>
+                        <li><strong>Inclua anexos</strong> se tiver documentos existentes</li>
+                        <li><strong>Mencione stakeholders</strong> e suas necessidades específicas</li>
+                        <li><strong>Defina prazo/urgência</strong> se relevante</li>
+                    </ul>
+                </div>
+
+                <div class="doc-category">
+                    <h4>📚 Recursos adicionais:</h4>
+                    <ul>
+                        <li><a href="examples/product-owner.html">Exemplos Completos do Product Owner</a></li>
+                        <li><a href="fluxo-completo.html#passo3">Como Executar no Fluxo Completo</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Mesa Redonda Agent -->
+            <section id="mesa-redonda" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-comments"></i>
+                    2. Mesa Redonda Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Decisões arquiteturais complexas</strong> - precisa de múltiplas perspectivas</li>
+                        <li>✅ <strong>Resolução de conflitos técnicos</strong> - diferentes abordagens possíveis</li>
+                        <li>✅ <strong>Brainstorming de soluções</strong> - explorar alternativas antes de decidir</li>
+                        <li>✅ <strong>Validação de estratégias</strong> - confirmar direção técnica</li>
+                        <li>✅ <strong>Análise de trade-offs</strong> - avaliar prós/contras de decisões</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Decisão Arquitetural</h4>
+                    <pre><code>@agents/manual/roundtable-facilitator.agent.md
+
+Contexto: "Decisão: Microserviços vs Monolito Modular
+para novo módulo de relatórios. Avaliar: escalabilidade,
+complexidade, time skills, prazo 6 meses."
+
+Foco: arquitetura, escalabilidade, manutenibilidade</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/decisao-arquitetura/
+└── 01-ata-mesa-redonda.md     ← Debate registrado com consenso</code></pre>
+                </div>
+
+                <div class="info-card highlight">
+                    <h4>💡 Dicas de uso:</h4>
+                    <ul>
+                        <li><strong>Defina o foco</strong> claramente (ex: "apenas performance")</li>
+                        <li><strong>Inclua restrições</strong> conhecidas (orçamento, prazo, skills)</li>
+                        <li><strong>Mencione contexto</strong> do projeto (tamanho, criticidade)</li>
+                        <li><strong>Use para decisões importantes</strong> - não para implementações simples</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Requirements Analyst Agent -->
+            <section id="requirements" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-file-alt"></i>
+                    3. Requirements Analyst Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Análise de documentos</strong> .docx/.xlsx para extrair regras</li>
+                        <li>✅ <strong>Criação de arquivos RN-00xx.md</strong> padronizados</li>
+                        <li>✅ <strong>Mapeamento de dependências</strong> entre regras de negócio</li>
+                        <li>✅ <strong>Transformação BDD</strong> de requisitos em cenários Gherkin</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Extração de Regras de Documento</h4>
+                    <pre><code>@agents/manual/requirements-analyst.agent.md
+
+Sprint: 02, Activity: calculo-impostos
+Contexto: "Transformar documento 'Regras_Tributacao_2024.docx'
+em regras estruturadas RN-0045 a RN-0052.
+Focar em: alíquotas, isenções, casos especiais."</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint02/calculo-impostos/
+├── 02-requisitos-bdd.md               ← Análise estruturada
+├── features/
+│   ├── calculo-aliquota.feature       ← Cenários Gherkin
+│   └── casos-especiais.feature
+└── references-data/business-rules/
+    ├── RN-0045.md                     ← Regras extraídas
+    └── RN-0046.md</code></pre>
+                </div>
+            </section>
+
+            <!-- Systems Architect Agent -->
+            <section id="architect" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-drafting-compass"></i>
+                    4. Systems Architect Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Design de arquitetura</strong> para novas funcionalidades</li>
+                        <li>✅ <strong>Refatoração arquitetural</strong> de módulos existentes</li>
+                        <li>✅ <strong>Definição de bounded contexts</strong> e agregados (DDD)</li>
+                        <li>✅ <strong>Estratégias de integração</strong> com sistemas externos</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Arquitetura Nova Funcionalidade</h4>
+                    <pre><code>@agents/manual/systems-architect.agent.md
+
+Sprint: 03, Activity: modulo-relatorios
+Contexto: "Projetar arquitetura para módulo de relatórios
+customizáveis. Requisitos: 500+ usuários simultâneos,
+exportação PDF/Excel, agendamento, cache inteligente."
+
+Restrições:
+- .NET Framework 4.8
+- PostgreSQL existente
+- Infraestrutura on-premise</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/modulo-relatorios/
+├── 03-arquitetura.md                  ← Documento arquitetural
+├── diagrams/
+│   ├── contexto-relatorios.mmd
+│   └── componentes-sistema.mmd
+└── adrs/
+    └── ADR-001-escolha-cache.md</code></pre>
+                </div>
+            </section>
+
+            <!-- UX/UI Specialist Agent -->
+            <section id="uxui" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-paint-brush"></i>
+                    5. UX/UI Specialist Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Criação de wireframes</strong> ASCII versionáveis no Git</li>
+                        <li>✅ <strong>Design de user flows</strong> e arquitetura de informação</li>
+                        <li>✅ <strong>Definição de design system</strong> com tokens e componentes</li>
+                        <li>✅ <strong>Prototipação rápida</strong> com HTML interativo</li>
+                        <li>✅ <strong>Guidelines de acessibilidade</strong> WCAG 2.1 AA</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Dashboard Executivo</h4>
+                    <pre><code>@agents/manual/ux-ui-specialist.agent.md
+
+Sprint: 03, Activity: dashboard-executivo
+Contexto: "Criar interface para dashboard executivo
+com KPIs real-time, gráficos interativos e filtros avançados.
+Usuários: C-Level, gerentes, analistas."
+
+Requisitos UX:
+- Informação crítica "above the fold"
+- Máximo 3 cliques para qualquer ação
+- Responsivo (mobile executives)
+- Acessível para deficientes visuais</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/dashboard-executivo/
+├── 05-ux-analysis.md
+├── 05-ux-wireframes.md
+├── 04-wireframes/
+│   ├── ascii/
+│   ├── mermaid/
+│   └── html-preview/
+├── 04-design-system.md
+└── 04-accessibility-guide.md</code></pre>
+                </div>
+            </section>
+
+            <!-- Frontend Specialist Agent -->
+            <section id="frontend" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-laptop-code"></i>
+                    6. Frontend Specialist Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ Desenvolver novas interfaces ou fluxos SPA alinhados ao design system</li>
+                        <li>✅ Criar provas de conceito frontend para validar requisitos</li>
+                        <li>✅ Estruturar bibliotecas de componentes reutilizáveis</li>
+                        <li>✅ Liderar ajustes técnicos de acessibilidade e performance</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Dashboard Modular em React</h4>
+                    <pre><code>@agents/manual/frontend-specialist.agent.md
+
+Sprint: 07, Activity: analytics-dashboard
+Contexto: "Dashboard modular em React com suporte
+a filtros dinâmicos, gráficos responsivos e
+integração com WebSocket."</code></pre>
+                </div>
+            </section>
+
+            <!-- Testing Specialist Agent -->
+            <section id="testing" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-vial"></i>
+                    7. Testing Specialist Agent ⭐ TDD
+                </h2>
+
+                <div class="info-card highlight">
+                    <h4>⭐ Agente TDD - Executa ANTES da Implementação</h4>
+                    <p>Este agente cria o plano de testes <strong>ANTES</strong> do código ser escrito, garantindo qualidade desde o início.</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Planejamento TDD</strong> - criar plano de testes ANTES da implementação</li>
+                        <li>✅ <strong>Estratégia de testes</strong> para funcionalidades complexas</li>
+                        <li>✅ <strong>Análise de cobertura</strong> e identificação de gaps</li>
+                        <li>✅ <strong>Testes de edge cases</strong> e cenários extremos</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Planejamento TDD Completo</h4>
+                    <pre><code>@agents/manual/testing-specialist.agent.md
+
+Sprint: 03, Activity: calculo-comissao
+Contexto: "Criar plano TDD para cálculo de comissão por vendedor.
+Regras complexas: base + performance + metas + bônus trimestral.
+Meta: 95% cobertura."
+
+Critérios de aceite:
+1. Cálculo correto conforme RN-0030 a RN-0035
+2. Performance < 100ms para 1000 vendedores
+3. Tratamento de cenários extremos
+4. Auditoria completa de cálculos</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/calculo-comissao/
+├── 05-qa-plano.md                    ← Plano de QA detalhado
+└── engineering/tests/
+    ├── Unit/
+    ├── Integration/
+    └── Performance/</code></pre>
+                </div>
+            </section>
+
+            <!-- Expert Developer Agent -->
+            <section id="developer" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    8. Expert Developer Agent ⭐ TDD
+                </h2>
+
+                <div class="info-card highlight">
+                    <h4>⭐ Agente TDD - Executa DEPOIS do Plano de Testes</h4>
+                    <p>Este agente implementa seguindo o plano criado pelo Testing Specialist, garantindo conformidade.</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Implementação guiada por TDD</strong> seguindo plano de testes</li>
+                        <li>✅ <strong>Refatoração de código legacy</strong> aplicando SOLID + DDD</li>
+                        <li>✅ <strong>Implementação de funcionalidades complexas</strong> com arquitetura definida</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Implementação TDD Completa</h4>
+                    <pre><code>@agents/manual/expert-developer.agent.md
+
+Sprint: 03, Activity: calculo-comissao
+Contexto: "Implementar cálculo de comissão seguindo TDD.
+Usar plano de QA do Testing Specialist.
+Aplicar Clean Architecture + DDD patterns."
+
+Entrada obrigatória:
+- 05-qa-plano.md (plano criado pelo Testing Specialist)
+- 03-arquitetura.md (design do Systems Architect)
+- 00-acceptance-criteria.md (critérios de aceite)</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/calculo-comissao/
+├── 04-desenvolvimento.md              ← Relatório da implementação
+└── engineering/
+    ├── src/
+    │   ├── Core/Domain/
+    │   ├── Core/Application/
+    │   └── Infrastructure/
+    └── tests/
+        └── Unit/ (95% cobertura atingida)</code></pre>
+                </div>
+            </section>
+
+            <!-- Testing Validator Agent -->
+            <section id="validator" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-check-double"></i>
+                    9. Testing Validator Agent ⭐ TDD
+                </h2>
+
+                <div class="info-card highlight">
+                    <h4>⭐ Validação TDD - Verifica Conformidade</h4>
+                    <p>Valida se a implementação atende ao plano de testes original.</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Validação pós-TDD</strong> - verificar se implementação seguiu o plano</li>
+                        <li>✅ <strong>Auditoria de qualidade</strong> de testes implementados</li>
+                        <li>✅ <strong>Verificação de cobertura</strong> real vs planejada</li>
+                        <li>✅ <strong>Parecer técnico independente</strong> sobre implementação</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Validação TDD Completa</h4>
+                    <pre><code>@agents/manual/testing-validator.agent.md
+
+Sprint: 03, Activity: calculo-comissao
+Contexto: "Validar se Expert Developer implementou
+corretamente o plano de QA. Verificar: todos cenários,
+cobertura 95%, evidências por critério."
+
+Entrada necessária:
+- 05-qa-plano.md (plano original)
+- 04-desenvolvimento.md (implementação)
+- Código implementado com testes</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/calculo-comissao/
+└── 05.1-testing-validation.md         ← Relatório de validação
+    ├── Cenários: 15/15 implementados ✅
+    ├── Cobertura: 96% (meta 95%) ✅
+    └── DECISÃO: VALIDAÇÃO APROVADA ✅</code></pre>
+                </div>
+            </section>
+
+            <!-- Code Reviewer Agent -->
+            <section id="reviewer" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-search"></i>
+                    10. Code Reviewer Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Auditoria independente</strong> de qualidade do código</li>
+                        <li>✅ <strong>Validação de padrões</strong> de desenvolvimento</li>
+                        <li>✅ <strong>Review de segurança</strong> e boas práticas</li>
+                        <li>✅ <strong>Verificação de nomenclatura</strong> e convenções</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Auditoria de Qualidade</h4>
+                    <pre><code>@agents/manual/code-reviewer.agent.md
+
+Sprint: 03, Activity: review-modulo-comissao
+Contexto: "Auditoria independente do módulo comissão.
+Validar: padrões SOLID, nomenclatura, commits,
+documentação, warnings."</code></pre>
+                </div>
+            </section>
+
+            <!-- Product Owner Final Agent -->
+            <section id="po-final" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-flag-checkered"></i>
+                    11. Product Owner Final Agent
+                </h2>
+
+                <div class="info-card">
+                    <h4>📋 Quando usar individualmente:</h4>
+                    <ul>
+                        <li>✅ <strong>Validação final</strong> de critérios de aceite</li>
+                        <li>✅ <strong>Checklist de entrega</strong> antes do go-live</li>
+                        <li>✅ <strong>Auditoria de compliance</strong> com requisitos</li>
+                        <li>✅ <strong>Aprovação/rejeição</strong> de entregas</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start-card">
+                    <h4>💻 Exemplo: Validação Final Completa</h4>
+                    <pre><code>@agents/manual/product-owner-final.agent.md
+
+Sprint: 03, Activity: entrega-sistema-comissao
+Contexto: "Validação final do sistema de comissão.
+Verificar CADA critério de aceite contra evidências técnicas.
+Decidir: ENTREGA APROVADA ou PENDÊNCIAS."</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>📁 Saídas esperadas:</h4>
+                    <pre><code>data/out/sprint03/entrega-sistema-comissao/
+└── 99-checklist-final.md              ← Checklist de validação
+    ├── Critério 1: ✅ ATENDIDO
+    ├── Critério 2: ✅ ATENDIDO
+    └── DECISÃO: ✅ APROVADO</code></pre>
+                </div>
+            </section>
+
+            <!-- Templates -->
+            <section id="templates" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-file-code"></i>
+                    Templates Padronizados de Entrada
+                </h2>
+
+                <div class="info-card">
+                    <h4>Template Básico:</h4>
+                    <pre><code>@agents/manual/[NOME-AGENTE].agent.md
+
+Sprint: [XX], Activity: [nome-atividade]
+Contexto: "[Descrição clara do que precisa ser feito e por quê]"
+
+[Informações específicas conforme o agente]</code></pre>
+                </div>
+
+                <div class="info-card">
+                    <h4>Template Avançado:</h4>
+                    <pre><code>@agents/manual/[NOME-AGENTE].agent.md
+
+Sprint: [XX], Activity: [nome-atividade]
+Contexto: "[Descrição detalhada do problema/necessidade]"
+
+Entrada disponível:
+- [Arquivo 1]: [Descrição]
+- [Arquivo 2]: [Descrição]
+
+Restrições:
+- [Restrição técnica 1]
+- [Restrição de prazo/orçamento]
+
+Foco específico:
+- [Aspecto 1 para focar]
+- [Aspecto 2 para focar]
+
+Critérios de sucesso:
+- [Como medir o sucesso]
+- [Métricas específicas]</code></pre>
+                </div>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tools"></i>
+                    Troubleshooting Comum
+                </h2>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <h4>Problema: Agente não entende o contexto</h4>
+                            <p><strong>Solução:</strong></p>
+                            <ul>
+                                <li>Seja mais específico na descrição</li>
+                                <li>Inclua informações de domínio (financeiro, tributário, etc.)</li>
+                                <li>Referencie documentos/regras existentes (RN-00xx)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <h4>Problema: Saída muito genérica</h4>
+                            <p><strong>Solução:</strong></p>
+                            <ul>
+                                <li>Defina restrições técnicas (.NET Framework 4.8, PostgreSQL)</li>
+                                <li>Especifique métricas (performance < 100ms, cobertura 95%)</li>
+                                <li>Inclua exemplos do que você espera</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <h4>Problema: Resultado não atende expectativa</h4>
+                            <p><strong>Solução:</strong></p>
+                            <ul>
+                                <li>Re-execute com contexto mais específico</li>
+                                <li>Use Mesa Redonda para decisões complexas</li>
+                                <li>Combine múltiplos agentes em sequência</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Dicas Gerais de Otimização
+                </h2>
+
+                <div class="quick-start-grid">
+                    <div class="quick-start-card">
+                        <h3>🎯 Para melhores resultados</h3>
+                        <ul>
+                            <li><strong>Seja específico</strong> - contexto claro gera saídas precisas</li>
+                            <li><strong>Prepare entradas</strong> - organize arquivos/documentos antes</li>
+                            <li><strong>Defina métricas</strong> - números concretos vs "boa performance"</li>
+                            <li><strong>Use sequencialmente</strong> - cada agente consome saída do anterior</li>
+                        </ul>
+                    </div>
+
+                    <div class="quick-start-card">
+                        <h3>⚡ Para eficiência</h3>
+                        <ul>
+                            <li><strong>Agente individual</strong> para tarefas específicas</li>
+                            <li><strong>Mesa Redonda</strong> para decisões/debates</li>
+                            <li><strong>Fluxo completo</strong> para implementações end-to-end</li>
+                            <li><strong>Combine conforme necessidade</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ProsoftAgileAgent</h4>
+                <p>11 Agentes Especializados para Desenvolvimento Ágil</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="fluxo-completo.html">Fluxo Completo</a></li>
+                    <li><a href="guia-paralelizacao.html">Execução Paralela</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
