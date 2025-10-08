@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Novo Projeto .NET - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#instalacao">Instalação Automática</a></li>
+                        <li><a href="#requisitos">Pré-requisitos</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title"><i class="fas fa-plus-circle"></i> Setup de Novo Projeto .NET</h1>
+                <div class="info-card highlight">
+                    <h3>🚀 Do Zero ao Workflow Completo</h3>
+                    <p>Guia para adotar o workflow em um projeto .NET novo. Ideal para quem tem apenas especificação e quer produzir artefatos de engenharia completos.</p>
+                </div>
+            </section>
+            <section id="instalacao" class="content-section">
+                <h2 class="section-title"><i class="fas fa-terminal"></i> Instalação Automática</h2>
+                <div class="info-card">
+                    <h4>Caminho Automático (Recomendado)</h4>
+                    <pre><code>powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1</code></pre>
+                    <p><strong>O instalador faz tudo sozinho:</strong></p>
+                    <ul>
+                        <li>✅ Checa/instala pré-requisitos</li>
+                        <li>✅ Copia pastas necessárias</li>
+                        <li>✅ Cria ambiente virtual Python (`.venv-1`)</li>
+                        <li>✅ Instala dependências do `requirements.txt`</li>
+                        <li>✅ Pode enriquecer agentes automaticamente</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="requisitos" class="content-section">
+                <h2 class="section-title"><i class="fas fa-list-check"></i> Pré-requisitos (Windows + VS Code)</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h3>VS Code</h3>
+                        <p>Extensões: Python, Pylance, PowerShell</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-microsoft"></i>
+                        <h3>.NET SDK</h3>
+                        <p>Recomendado .NET 8</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-python"></i>
+                        <h3>Python</h3>
+                        <p>3.10 ou superior</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-node-js"></i>
+                        <h3>Node.js</h3>
+                        <p>LTS (para renderizar diagramas)</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h4>Instalação rápida com winget</h4>
+                    <pre><code># Instalar pré-requisitos
+winget install Microsoft.VisualStudioCode
+winget install Microsoft.DotNet.SDK.8
+winget install Python.Python.3.12
+winget install OpenJS.NodeJS.LTS</code></pre>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-folder-tree"></i> O que será copiado</h2>
+                <div class="info-card">
+                    <pre><code>SeuNovoProjetoNET/
+├── agents/                  ← Agentes especializados
+├── orchestrators/           ← Scripts Python (CrewAI/AutoGen)
+├── scripts/powershell/      ← Scripts úteis
+├── src/workflow_agents/     ← Assets e prompts
+├── docs/                    ← Guias e exemplos
+├── requirements.txt         ← Dependências Python
+└── .env.example             ← Modelo de variáveis</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>⚠️ Importante</h4>
+                    <p><strong>NÃO copie</strong> a pasta `.venv-1` (ambiente virtual Python). Será criada automaticamente no seu projeto.</p>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-rocket"></i> Próximos Passos</h2>
+                <div class="workflow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Executar Instalador</h4>
+                            <p>Rodar setup-workflow.ps1 para configurar tudo</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Adicionar Documentos</h4>
+                            <p>Colocar especificações em data/in/sprint01/01/</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Executar Product Owner</h4>
+                            <p>Iniciar o fluxo com o primeiro agente</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Seguir Fluxo TDD</h4>
+                            <p>Continuar com os demais agentes</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li><li><a href="fluxo-completo.html">Fluxo Completo</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

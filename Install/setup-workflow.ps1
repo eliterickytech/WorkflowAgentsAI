@@ -1,6 +1,6 @@
 <#$
 .SYNOPSIS
-  Instala e configura os Agentes RickytechAgileAgent em um diretório especificado.
+  Instala e configura os Agentes ProsoftAgileAgent em um diretório especificado.
 .DESCRIPTION
   - Checa e instala pre-requisitos (Python, Node.js, Git, .NET SDK)
   - Pergunta modo (Manual ou CrewAI), Sprint e Activity
@@ -148,9 +148,9 @@ function Copy-Workflow($target) {
     return
   }
 
-  # Observacao: no repo atual a pasta de scripts esta em 'powershell/'.
-  # Copiaremos a partir de 'powershell' para o destino padronizado 'scripts/powershell'
-  $mandatory = @('agents','Install/orchestrators','powershell','requirements.txt','.env.example')
+  # Observacao: no repo atual a pasta de scripts esta em 'scripts/powershell'.
+  # Copiaremos a partir de 'scripts/powershell' para o destino padronizado 'scripts/powershell'
+  $mandatory = @('agents','Install/orchestrators','scripts/powershell','requirements.txt','.env.example')
   $optional  = @('prompts-manual','docs')
   $exclude   = @('prompts-manual/prompts/deprecated')
 
@@ -163,10 +163,7 @@ function Copy-Workflow($target) {
       if ($m -eq 'Install/orchestrators') {
         $dst = Join-Path $target 'orchestrators'
       }
-      # Se for a pasta de scripts do repo ('powershell'), padronizar destino em 'scripts/powershell'
-      if ($m -eq 'powershell') {
-        $dst = Join-Path $target 'scripts/powershell'
-      }
+      # A pasta scripts/powershell já tem o caminho correto, copiar diretamente
       # Defesa extra: nunca copiar subpastas ".github" por engano
       if (Test-Path $src) {
         Copy-Item -Path $src -Destination $dst -Recurse -Force
@@ -513,19 +510,19 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += "PARAMETROS DE EXECUCAO:`n"
   $enrichedSuperPrompt += "- Sprint: $sprint`n"
   $enrichedSuperPrompt += "- Activity: $activity`n"
-  $enrichedSuperPrompt += "- Convencao de saida: out/sprint$sprint/$activity/`n`n"
+  $enrichedSuperPrompt += "- Convencao de saida: data/out/sprint$sprint/$activity/`n`n"
 
   $enrichedSuperPrompt += "POLITICA DE EXECUCAO:`n"
   $enrichedSuperPrompt += "- Nao faca perguntas. Se faltar informacao, adote ate 3 suposicoes razoaveis, liste-as no inicio e prossiga.`n"
   $enrichedSuperPrompt += "- Salve cada etapa exatamente nos caminhos abaixo.`n`n"
 
   $enrichedSuperPrompt += "MAPEAMENTO DE SAIDAS:`n"
-  $enrichedSuperPrompt += "- 00-requirements-brief.md -> out/sprint$sprint/$activity/00-requirements-brief.md`n"
-  $enrichedSuperPrompt += "- 01-ata-mesa-redonda.md -> out/sprint$sprint/$activity/01-ata-mesa-redonda.md`n"
-  $enrichedSuperPrompt += "- 02-requisitos-bdd.md (+ arquivos .feature) -> out/sprint$sprint/$activity/02-requisitos-bdd.md e out/sprint$sprint/$activity/features/`n"
-  $enrichedSuperPrompt += "- 03-arquitetura.md (+ ADRs e diagramas) -> out/sprint$sprint/$activity/03-arquitetura.md; ADRs em out/sprint$sprint/$activity/adrs/; diagramas em out/sprint$sprint/$activity/diagrams/`n"
-  $enrichedSuperPrompt += "- 04-desenvolvimento.md -> out/sprint$sprint/$activity/04-desenvolvimento.md`n"
-  $enrichedSuperPrompt += "- 05-qa-plano.md -> out/sprint$sprint/$activity/05-qa-plano.md`n`n"
+  $enrichedSuperPrompt += "- 00-requirements-brief.md -> data/out/sprint$sprint/$activity/00-requirements-brief.md`n"
+  $enrichedSuperPrompt += "- 01-ata-mesa-redonda.md -> data/out/sprint$sprint/$activity/01-ata-mesa-redonda.md`n"
+  $enrichedSuperPrompt += "- 02-requisitos-bdd.md (+ arquivos .feature) -> data/out/sprint$sprint/$activity/02-requisitos-bdd.md e data/out/sprint$sprint/$activity/features/`n"
+  $enrichedSuperPrompt += "- 03-arquitetura.md (+ ADRs e diagramas) -> data/out/sprint$sprint/$activity/03-arquitetura.md; ADRs em data/out/sprint$sprint/$activity/adrs/; diagramas em data/out/sprint$sprint/$activity/diagrams/`n"
+  $enrichedSuperPrompt += "- 04-desenvolvimento.md -> data/out/sprint$sprint/$activity/04-desenvolvimento.md`n"
+  $enrichedSuperPrompt += "- 05-qa-plano.md -> data/out/sprint$sprint/$activity/05-qa-plano.md`n`n"
 
   $enrichedSuperPrompt += "CADEIA DE EXECUCAO:`n`n"
   $enrichedSuperPrompt += "=" * 80 + "`n"
@@ -533,8 +530,8 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += $productOwnerPrompt + "`n`n"
   $enrichedSuperPrompt += "TAREFA ESPECIFICA:`n"
   $enrichedSuperPrompt += "1. Analise solicitacao do cliente em: data/in/sprint$sprint/$activity/business_request/`n"
-  $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/00-requirements-brief.md`n"
-  $enrichedSuperPrompt += "3. Defina contexto de negocio em: out/sprint$sprint/$activity/00-business-context.md`n"
+  $enrichedSuperPrompt += "2. Produza: data/out/sprint$sprint/$activity/00-requirements-brief.md`n"
+  $enrichedSuperPrompt += "3. Defina contexto de negocio em: data/out/sprint$sprint/$activity/00-business-context.md`n"
   $enrichedSuperPrompt += "4. Preencha template-mesa-redonda-gpt5.md substituindo TODOS os placeholders [PO_FILL_*]`n"
   $enrichedSuperPrompt += "5. Solicite aprovacao para execucao da mesa redonda: [SIM/NAO/REVISAR]`n`n"
   $enrichedSuperPrompt += "AO FINALIZAR: Aguarde aprovacao antes de prosseguir para proxima etapa.`n`n"
@@ -544,8 +541,8 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += $requirementsPrompt + "`n`n"
   $enrichedSuperPrompt += "TAREFA ESPECIFICA:`n"
   $enrichedSuperPrompt += "1. Analise documentos em: data/in/sprint$sprint/$activity/attachments/`n"
-  $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/02-requisitos-bdd.md`n"
-  $enrichedSuperPrompt += "3. Crie features em: out/sprint$sprint/$activity/features/`n`n"
+  $enrichedSuperPrompt += "2. Produza: data/out/sprint$sprint/$activity/02-requisitos-bdd.md`n"
+  $enrichedSuperPrompt += "3. Crie features em: data/out/sprint$sprint/$activity/features/`n`n"
   $enrichedSuperPrompt += "AO FINALIZAR: Passe os resultados para o Systems Architect Agent.`n`n"
 
   $enrichedSuperPrompt += "=" * 80 + "`n"
@@ -553,9 +550,9 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += $architectPrompt + "`n`n"
   $enrichedSuperPrompt += "TAREFA ESPECIFICA:`n"
   $enrichedSuperPrompt += "1. Use resultados da analise anterior`n"
-  $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/03-arquitetura.md`n"
-  $enrichedSuperPrompt += "3. Crie ADRs em: out/sprint$sprint/$activity/adrs/`n"
-  $enrichedSuperPrompt += "4. Gere diagramas em: out/sprint$sprint/$activity/diagrams/`n`n"
+  $enrichedSuperPrompt += "2. Produza: data/out/sprint$sprint/$activity/03-arquitetura.md`n"
+  $enrichedSuperPrompt += "3. Crie ADRs em: data/out/sprint$sprint/$activity/adrs/`n"
+  $enrichedSuperPrompt += "4. Gere diagramas em: data/out/sprint$sprint/$activity/diagrams/`n`n"
   $enrichedSuperPrompt += "AO FINALIZAR: Passe as especificacoes para o Expert Developer Agent.`n`n"
 
   $enrichedSuperPrompt += "=" * 80 + "`n"
@@ -563,7 +560,7 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += $developerPrompt + "`n`n"
   $enrichedSuperPrompt += "TAREFA ESPECIFICA:`n"
   $enrichedSuperPrompt += "1. Use especificacao arquitetural anterior`n"
-  $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/04-desenvolvimento.md`n"
+  $enrichedSuperPrompt += "2. Produza: data/out/sprint$sprint/$activity/04-desenvolvimento.md`n"
   $enrichedSuperPrompt += "3. Implemente codigo seguindo padroes do projeto $projectName`n`n"
   $enrichedSuperPrompt += "AO FINALIZAR: Opcionalmente acione UX/UI e Frontend para alinhamento/implementacao visual. Em seguida, passe para o Testing Validator Agent.`n`n"
 
@@ -572,7 +569,7 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += $testingPrompt + "`n`n"
   $enrichedSuperPrompt += "TAREFA ESPECIFICA:`n"
   $enrichedSuperPrompt += "1. Defina plano de QA e cenarios ANTES da implementacao`n"
-  $enrichedSuperPrompt += "2. Produza: out/sprint$sprint/$activity/05-qa-plano.md`n`n"
+  $enrichedSuperPrompt += "2. Produza: data/out/sprint$sprint/$activity/05-qa-plano.md`n`n"
 
   $enrichedSuperPrompt += "=" * 80 + "`n"
   $enrichedSuperPrompt += "ENTREGAVEIS FINAIS:`n"
@@ -588,7 +585,7 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += "## Estrutura de Pastas Criada:`n"
   $enrichedSuperPrompt += "- data/in/sprint$sprint/$activity/business_request/ (solicitacoes do cliente)`n"
   $enrichedSuperPrompt += "- data/in/sprint$sprint/$activity/attachments/ (documentos fonte tecnicos)`n"
-  $enrichedSuperPrompt += "- out/sprint$sprint/$activity/ (saidas principais)`n"
+  $enrichedSuperPrompt += "- data/out/sprint$sprint/$activity/ (saidas principais)`n"
   $enrichedSuperPrompt += "  - features/ (arquivos .feature BDD)`n"
   $enrichedSuperPrompt += "  - adrs/ (Architecture Decision Records)`n"
   $enrichedSuperPrompt += "  - diagrams/ (diagramas Mermaid)`n`n"
@@ -597,7 +594,7 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   $enrichedSuperPrompt += "1. Coloque solicitacao do cliente em: data/in/sprint$sprint/$activity/business_request/`n"
   $enrichedSuperPrompt += "2. Coloque documentos tecnicos em: data/in/sprint$sprint/$activity/attachments/`n"
   $enrichedSuperPrompt += "3. Execute este prompt no seu LLM`n"
-  $enrichedSuperPrompt += "4. Colete os artefatos em: out/sprint$sprint/$activity/`n"
+  $enrichedSuperPrompt += "4. Colete os artefatos em: data/out/sprint$sprint/$activity/`n"
 
   # Criar pastas de entrada
   $inputPath = Join-Path $target "data/in/sprint$sprint/$activity/attachments"
@@ -606,7 +603,7 @@ function Configure-SuperPrompt($target, $sprint, $activity, $projectName) {
   Ensure-Dir $businessRequestPath
 
   # Criar pastas de saída
-  $outputPath = Join-Path $target "out/sprint$sprint/$activity"
+  $outputPath = Join-Path $target "data/out/sprint$sprint/$activity"
   Ensure-Dir $outputPath
   Ensure-Dir (Join-Path $outputPath "features")
   Ensure-Dir (Join-Path $outputPath "adrs")
@@ -657,12 +654,17 @@ function Enrich-Agents($target, $instructionsPath) {
 
   Write-Info "Enriquecendo agentes com instrucoes em: $instructionsPath"
   $map = @{
-    'product-owner'        = 'product-owner.agent.md'
-    'expert-developer'     = 'expert-developer.agent.md'
-    'systems-architect'    = 'systems-architect.agent.md'
-    'requirements-analyst' = 'requirements-analyst.agent.md'
-    'testing-specialist'   = 'testing-specialist.agent.md'
+    'product-owner'          = 'product-owner.agent.md'
     'roundtable-facilitator' = 'roundtable-facilitator.agent.md'
+    'requirements-analyst'   = 'requirements-analyst.agent.md'
+    'systems-architect'      = 'systems-architect.agent.md'
+    'testing-specialist'     = 'testing-specialist.agent.md'
+    'expert-developer'       = 'expert-developer.agent.md'
+    'ux-ui-specialist'       = 'ux-ui-specialist.agent.md'
+    'frontend-specialist'    = 'frontend-specialist.agent.md'
+    'code-reviewer'          = 'code-reviewer.agent.md'
+    'testing-validator'      = 'testing-validator.agent.md'
+    'product-owner-final'    = 'product-owner-final.agent.md'
   }
 
   foreach ($role in $map.Keys) {
@@ -731,12 +733,26 @@ function Analyze-ExistingProject($projectPath, $target) {
     $analysis.OtherProjects = $projectSelection.OtherProjects
 
     # Analisar projeto principal em detalhes
-    $projectType = $projectSelection.MainProject.Type
+    $projectType = if ($projectSelection.MainProject.PSObject.Properties['Type']) {
+      $projectSelection.MainProject.Type
+    } else {
+      'generic'
+    }
     $analysis.ProjectType = $projectType
-    $analysis.ProjectPath = $projectSelection.MainProject.Path
+    $analysis.ProjectPath = if ($projectSelection.MainProject.PSObject.Properties['Path']) {
+      $projectSelection.MainProject.Path
+    } else {
+      $projectPath
+    }
+
+    $mainName = if ($projectSelection.MainProject.PSObject.Properties['Name']) {
+      $projectSelection.MainProject.Name
+    } else {
+      'Desconhecido'
+    }
 
     Write-Info "Workspace multi-projeto detectado!"
-    Write-Info "Projeto principal: $($projectSelection.MainProject.Name) (tipo: $projectType)"
+    Write-Info "Projeto principal: $mainName (tipo: $projectType)"
     $otherProjectsCount = if ($projectSelection.OtherProjects -is [array]) { $projectSelection.OtherProjects.Count } else { if ($projectSelection.OtherProjects) { 1 } else { 0 } }
     Write-Info "Projetos adicionais: $otherProjectsCount"
   } else {
@@ -815,7 +831,8 @@ function Generate-ProjectContext($analysis, $target) {
 
 ## Resumo Executivo
 $( if ($analysis.IsMultiProject) {
-    "Este e um **workspace multi-projeto** com foco no projeto **$($analysis.MainProject.Name)** (tipo: $($analysis.ProjectType))."
+    $mainProjName = if ($analysis.MainProject.PSObject.Properties['Name']) { $analysis.MainProject.Name } else { 'Desconhecido' }
+    "Este e um **workspace multi-projeto** com foco no projeto **$mainProjName** (tipo: $($analysis.ProjectType))."
   } else {
     "Este e um projeto **$($analysis.ProjectType)**"
   } ) com as seguintes caracteristicas principais:
@@ -886,18 +903,26 @@ $( if ((Get-SafeCount $analysis.Conventions) -gt 0) {
   } )
 
 $( if ($analysis.IsMultiProject) {
+    $mainProjName = if ($analysis.MainProject.PSObject.Properties['Name']) { $analysis.MainProject.Name } else { 'Desconhecido' }
+    $mainProjType = if ($analysis.MainProject.PSObject.Properties['Type']) { $analysis.MainProject.Type } else { 'generic' }
+    $mainProjPath = if ($analysis.MainProject.PSObject.Properties['Path']) { $analysis.MainProject.Path } else { 'N/A' }
+    $mainProjCopilot = if ($analysis.MainProject.PSObject.Properties['HasCopilot']) { $analysis.MainProject.HasCopilot } else { $false }
+
     "## Workspace Multi-Projeto`n`n" +
     "### Projeto Principal (Analise Detalhada)`n" +
-    "- **Nome:** $($analysis.MainProject.Name)`n" +
-    "- **Tipo:** $($analysis.MainProject.Type)`n" +
-    "- **Caminho:** ``$($analysis.MainProject.Path)```n" +
-    "- **Copilot:** $(if ($analysis.MainProject.HasCopilot) { 'Configurado' } else { 'Nao configurado' })`n`n" +
+    "- **Nome:** $mainProjName`n" +
+    "- **Tipo:** $mainProjType`n" +
+    "- **Caminho:** ``$mainProjPath```n" +
+    "- **Copilot:** $(if ($mainProjCopilot) { 'Configurado' } else { 'Nao configurado' })`n`n" +
     "### Outros Projetos (Contexto)`n" +
     ($analysis.OtherProjects | ForEach-Object {
-      "- **$($_.Name)** ($($_.Type)) - Copilot: $(if ($_.HasCopilot) { 'sim' } else { 'nao' })"
+      $projName = if ($_.PSObject.Properties['Name']) { $_.Name } else { 'Desconhecido' }
+      $projType = if ($_.PSObject.Properties['Type']) { $_.Type } else { 'generic' }
+      $projCopilot = if ($_.PSObject.Properties['HasCopilot']) { $_.HasCopilot } else { $false }
+      "- **$projName** ($projType) - Copilot: $(if ($projCopilot) { 'sim' } else { 'nao' })"
     }) -join "`n" + "`n`n" +
     "### Estrategia de Integracao`n" +
-    "- **Foco:** Implementacao no projeto principal ($($analysis.MainProject.Name))`n" +
+    "- **Foco:** Implementacao no projeto principal ($mainProjName)`n" +
     "- **Contexto:** Outros projetos informados para decisoes de integracao`n" +
     "- **Copilot:** Instrucoes de todos os projetos consideradas`n`n"
   } else {
@@ -908,7 +933,12 @@ $( if ($analysis.HasCopilotInstructions -or (Get-SafeCount $analysis.MultiProjec
     "## GitHub Copilot Integration`n`n" +
     "### Status: DETECTADO E INTEGRADO $(if ($analysis.IsMultiProject) { '(MULTI-PROJETO)' } else { '' })`n`n" +
     $(if ($analysis.HasCopilotInstructions) {
-      "### Projeto Principal ($($analysis.MainProject.Name))`n" +
+      $mainProjName = if ($analysis.MainProject -and $analysis.MainProject.PSObject.Properties['Name']) {
+        $analysis.MainProject.Name
+      } else {
+        'Projeto Principal'
+      }
+      "### Projeto Principal ($mainProjName)`n" +
       "- **Arquivo:** ``.github/copilot-instructions.md```n" +
       "- **Status:** Instrucoes principais integradas`n`n" +
       "#### Instrucoes Copilot do Projeto Principal:`n" +
@@ -943,16 +973,26 @@ $( if ($analysis.HasCopilotInstructions -or (Get-SafeCount $analysis.MultiProjec
 **Todos os agentes devem INTEGRAR suas propostas com o projeto existente, mantendo consistencia total com a stack e padroes ja estabelecidos.**
 
 $(if ($analysis.HasCopilotInstructions -or (Get-SafeCount $analysis.MultiProjectCopilot) -gt 0) {
+    $mainProjName = if ($analysis.MainProject -and $analysis.MainProject.PSObject.Properties['Name']) {
+      $analysis.MainProject.Name
+    } else {
+      'Projeto Principal'
+    }
+
     "### **INTEGRACAO GITHUB COPILOT DETECTADA" + $(if ($analysis.IsMultiProject) { " (MULTI-PROJETO)" } else { "" }) + "**`n`n" +
     "**CRITICO:** " + $(if ($analysis.IsMultiProject) { "Este workspace possui multiplos projetos com instrucoes Copilot." } else { "Este projeto possui instrucoes GitHub Copilot configuradas." }) + " Os agentes devem:`n" +
-    "- **SEGUIR** as diretrizes do projeto principal ($($analysis.MainProject.Name))`n" +
+    "- **SEGUIR** as diretrizes do projeto principal ($mainProjName)`n" +
     "- **CONSIDERAR** padroes dos outros projetos para integracao`n" +
     "- **MANTER** consistencia cross-project quando aplicavel`n" +
     "- **COMPLEMENTAR** (nao contradizer) instrucoes existentes`n`n" +
     $(if ($analysis.IsMultiProject) {
+      $otherProjNames = @()
+      foreach ($proj in $analysis.OtherProjects) {
+        if ($proj.PSObject.Properties['Name']) { $otherProjNames += $proj.Name }
+      }
       "**Contexto Multi-Projeto:**`n" +
-      "- **Projeto Principal:** Foco da implementacao ($($analysis.MainProject.Name))`n" +
-      "- **Projetos Relacionados:** " + ($analysis.OtherProjects.Name -join ", ") + "`n" +
+      "- **Projeto Principal:** Foco da implementacao ($mainProjName)`n" +
+      "- **Projetos Relacionados:** " + ($otherProjNames -join ", ") + "`n" +
       "- **Integracao:** Considere APIs, contratos e dependencias entre projetos`n`n"
     } else { "" }) +
     "**Todas as instrucoes Copilot estao incluidas acima e devem ser respeitadas integralmente.**`n"
@@ -1114,7 +1154,9 @@ function Choose-ProjectsForAnalysis($projects) {
     # Verificar se a propriedade HasCopilot existe
     $hasCopilot = if ($project.PSObject.Properties['HasCopilot']) { $project.HasCopilot } else { $false }
     $copilotInfo = if ($hasCopilot) { " [Copilot: sim]" } else { " [Copilot: nao]" }
-    Write-Host "  $($i + 1)) $($project.Name) ($($project.Type))$copilotInfo" -ForegroundColor Cyan
+    $projectName = if ($project.PSObject.Properties['Name']) { $project.Name } else { 'Projeto' }
+    $projectType = if ($project.PSObject.Properties['Type']) { $project.Type } else { 'generic' }
+    Write-Host "  $($i + 1)) $projectName ($projectType)$copilotInfo" -ForegroundColor Cyan
   }
 
   $mainChoice = Ask "Selecione projeto PRINCIPAL para analise detalhada (1-$($projects.Count))" "1"
@@ -1133,11 +1175,24 @@ function Choose-ProjectsForAnalysis($projects) {
   }
 
   if ($includeOthers -match '^[sSyY]') {
-    $result.OtherProjects = $projects | Where-Object { $_.Name -ne $result.MainProject.Name }
-    Write-Info "Projeto principal: $($result.MainProject.Name)"
-    Write-Info "Projetos contextuais: $($result.OtherProjects.Name -join ', ')"
+    $result.OtherProjects = $projects | Where-Object {
+      $currentName = if ($_.PSObject.Properties['Name']) { $_.Name } else { '' }
+      $mainName = if ($result.MainProject.PSObject.Properties['Name']) { $result.MainProject.Name } else { '' }
+      $currentName -ne $mainName
+    }
+    $mainProjectName = if ($result.MainProject.PSObject.Properties['Name']) { $result.MainProject.Name } else { 'Desconhecido' }
+    Write-Info "Projeto principal: $mainProjectName"
+
+    $otherNames = @()
+    foreach ($proj in $result.OtherProjects) {
+      if ($proj.PSObject.Properties['Name']) { $otherNames += $proj.Name }
+    }
+    if ($otherNames.Count -gt 0) {
+      Write-Info "Projetos contextuais: $($otherNames -join ', ')"
+    }
   } else {
-    Write-Info "Analise focada apenas no projeto: $($result.MainProject.Name)"
+    $mainProjectName = if ($result.MainProject.PSObject.Properties['Name']) { $result.MainProject.Name } else { 'Desconhecido' }
+    Write-Info "Analise focada apenas no projeto: $mainProjectName"
   }
 
   return $result
@@ -1449,15 +1504,34 @@ function Analyze-MultiProjectCopilot($analysis) {
   Write-Info "Analisando instrucoes Copilot multi-projeto..."
 
   # Analisar Copilot do projeto principal
-  $mainHasCopilot = if ($analysis.MainProject.PSObject.Properties['HasCopilot']) { $analysis.MainProject.HasCopilot } else { $false }
+  $mainHasCopilot = if ($analysis.MainProject -and $analysis.MainProject.PSObject.Properties['HasCopilot']) {
+    $analysis.MainProject.HasCopilot
+  } else {
+    $false
+  }
+
   if ($mainHasCopilot) {
     try {
-      $mainCopilotContent = Get-Content $analysis.MainProject.CopilotPath -Raw -ErrorAction SilentlyContinue
-      if (-not [string]::IsNullOrWhiteSpace($mainCopilotContent)) {
-        $analysis.HasCopilotInstructions = $true
-        $analysis.CopilotInstructions = $mainCopilotContent.Trim()
-        $analysis.Technologies += "GitHub Copilot (projeto principal)"
-        Write-Info "Copilot instructions do projeto principal ($($analysis.MainProject.Name)) integradas"
+      $mainCopilotPath = if ($analysis.MainProject.PSObject.Properties['CopilotPath']) {
+        $analysis.MainProject.CopilotPath
+      } else {
+        ""
+      }
+
+      if (-not [string]::IsNullOrWhiteSpace($mainCopilotPath) -and (Test-Path $mainCopilotPath)) {
+        $mainCopilotContent = Get-Content $mainCopilotPath -Raw -ErrorAction SilentlyContinue
+        if (-not [string]::IsNullOrWhiteSpace($mainCopilotContent)) {
+          $analysis.HasCopilotInstructions = $true
+          $analysis.CopilotInstructions = $mainCopilotContent.Trim()
+          $analysis.Technologies += "GitHub Copilot (projeto principal)"
+
+          $mainName = if ($analysis.MainProject.PSObject.Properties['Name']) {
+            $analysis.MainProject.Name
+          } else {
+            "Projeto Principal"
+          }
+          Write-Info "Copilot instructions do projeto principal ($mainName) integradas"
+        }
       }
     } catch {
       Write-Warn "Erro ao ler copilot-instructions.md do projeto principal: $_"
@@ -1465,24 +1539,44 @@ function Analyze-MultiProjectCopilot($analysis) {
   }
 
   # Analisar Copilot dos outros projetos
-  foreach ($project in $analysis.OtherProjects) {
-    $projectHasCopilot = if ($project.PSObject.Properties['HasCopilot']) { $project.HasCopilot } else { $false }
-    if ($projectHasCopilot) {
-      try {
-        $projectCopilotContent = Get-Content $project.CopilotPath -Raw -ErrorAction SilentlyContinue
-        if (-not [string]::IsNullOrWhiteSpace($projectCopilotContent)) {
-          $copilotInfo = @{
-            ProjectName = $project.Name
-            ProjectType = $project.Type
-            ProjectPath = $project.Path
-            Instructions = $projectCopilotContent.Trim()
+  if ($analysis.OtherProjects) {
+    foreach ($project in $analysis.OtherProjects) {
+      $projectHasCopilot = if ($project.PSObject.Properties['HasCopilot']) {
+        $project.HasCopilot
+      } else {
+        $false
+      }
+
+      if ($projectHasCopilot) {
+        try {
+          $projectCopilotPath = if ($project.PSObject.Properties['CopilotPath']) {
+            $project.CopilotPath
+          } else {
+            ""
           }
-          $analysis.MultiProjectCopilot += $copilotInfo
-          $analysis.Technologies += "GitHub Copilot ($($project.Name) - $($project.Type))"
-          Write-Info "Copilot instructions do projeto $($project.Name) incluidas no contexto"
+
+          if (-not [string]::IsNullOrWhiteSpace($projectCopilotPath) -and (Test-Path $projectCopilotPath)) {
+            $projectCopilotContent = Get-Content $projectCopilotPath -Raw -ErrorAction SilentlyContinue
+            if (-not [string]::IsNullOrWhiteSpace($projectCopilotContent)) {
+              $projectName = if ($project.PSObject.Properties['Name']) { $project.Name } else { "Projeto" }
+              $projectType = if ($project.PSObject.Properties['Type']) { $project.Type } else { "generic" }
+              $projectPath = if ($project.PSObject.Properties['Path']) { $project.Path } else { "" }
+
+              $copilotInfo = @{
+                ProjectName = $projectName
+                ProjectType = $projectType
+                ProjectPath = $projectPath
+                Instructions = $projectCopilotContent.Trim()
+              }
+              $analysis.MultiProjectCopilot += $copilotInfo
+              $analysis.Technologies += "GitHub Copilot ($projectName - $projectType)"
+              Write-Info "Copilot instructions do projeto $projectName incluidas no contexto"
+            }
+          }
+        } catch {
+          $projectName = if ($project.PSObject.Properties['Name']) { $project.Name } else { "desconhecido" }
+          Write-Warn "Erro ao ler copilot-instructions.md do projeto $projectName : $_"
         }
-      } catch {
-        Write-Warn "Erro ao ler copilot-instructions.md do projeto $($project.Name): $_"
       }
     }
   }
@@ -1551,7 +1645,7 @@ function Create-GenericProject($projectPath, $projectName) {
     Ensure-Dir $projectPath
     New-Item -ItemType Directory -Path "$projectPath/src" -Force | Out-Null
     New-Item -ItemType Directory -Path "$projectPath/docs" -Force | Out-Null
-    "# $projectName`n`nProjeto criado via RickytechAgileAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
+    "# $projectName`n`nProjeto criado via ProsoftAgileAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
     Write-Info "Projeto generico '$projectName' criado com sucesso!"
   } catch {
     Write-Warn "Erro ao criar projeto generico: $_"
