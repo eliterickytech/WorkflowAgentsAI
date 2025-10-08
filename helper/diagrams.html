@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        .diagram-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .diagram-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .diagram-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        .mermaid {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .diagram-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .diagram-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .diagram-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>ProsoftAgileAgent</h1>
+            </div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar...">
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">Página Inicial</a></li>
+                        <li><a href="diagrams.html" class="active">Diagramas</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fas fa-sitemap"></i> Diagramas</h3>
+                    <ul>
+                        <li><a href="#flow-manual">Fluxo Manual</a></li>
+                        <li><a href="#flow-automatic">Fluxo Automático</a></li>
+                        <li><a href="#flow-tdd">Fluxo TDD Completo</a></li>
+                        <li><a href="#flow-complete">Fluxo Completo com Frontend</a></li>
+                        <li><a href="#process-detailed">Processo Detalhado</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="section-title">
+                <i class="fas fa-project-diagram"></i>
+                Diagramas do Sistema
+            </h1>
+
+            <div class="info-card">
+                <h3>📊 Sobre os Diagramas</h3>
+                <p>Esta página contém todos os diagramas de fluxo do ProsoftAgileAgent. Use-os para entender visualmente como o sistema funciona e como os agentes interagem entre si.</p>
+            </div>
+
+            <!-- Fluxo Manual -->
+            <div id="flow-manual" class="diagram-container">
+                <h2 class="diagram-title">
+                    <i class="fas fa-hand-paper"></i>
+                    Fluxo Manual
+                </h2>
+                <p class="diagram-description">
+                    Processo manual de execução dos agentes, ideal para começar e entender o sistema. Você executa cada agente individualmente usando os prompts.
+                </p>
+                <div class="mermaid">
+flowchart TD
+    A[Start - SPRINT e ACTIVITY] --> B[Criar estrutura com script start manual]
+    B --> C[Insumos em pasta in/sprint/activity/attachments]
+    C --> D[Usar prompts e agentes manuais]
+    D --> E[Gerar arquivos base e pastas features/adrs/diagrams em data/out]
+    E --> F[Revisar artefatos e ajustar]
+    F --> G[Finish]
+
+    style A fill:#667eea,stroke:#5a67d8,color:#fff
+    style G fill:#48bb78,stroke:#38a169,color:#fff
+    style D fill:#f6ad55,stroke:#ed8936,color:#000
+                </div>
+                <div class="diagram-actions">
+                    <button class="diagram-btn" onclick="exportDiagram('flow-manual')">
+                        <i class="fas fa-download"></i> Exportar PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fluxo Automático -->
+            <div id="flow-automatic" class="diagram-container">
+                <h2 class="diagram-title">
+                    <i class="fas fa-robot"></i>
+                    Fluxo Automático (CrewAI)
+                </h2>
+                <p class="diagram-description">
+                    Execução automatizada usando CrewAI. Os agentes trabalham em sequência automaticamente, com aprovações configuráveis.
+                </p>
+                <div class="mermaid">
+flowchart TD
+    A[Start - Configurar Sprint/Activity] --> B[Executar crewai_runner.py]
+    B --> C[CrewAI orquestra agentes]
+    C --> D[Product Owner Agent]
+    D --> E[Requirements Analyst Agent]
+    E --> F[Systems Architect Agent]
+    F --> G[Testing Specialist Agent]
+    G --> H[Expert Developer Agent]
+    H --> I[Testing Validator Agent]
+    I --> J[Product Owner Final Agent]
+    J --> K[Artefatos em data/out]
+    K --> L[Finish]
+
+    style A fill:#667eea,stroke:#5a67d8,color:#fff
+    style L fill:#48bb78,stroke:#38a169,color:#fff
+    style C fill:#f6ad55,stroke:#ed8936,color:#000
+                </div>
+                <div class="diagram-actions">
+                    <button class="diagram-btn" onclick="exportDiagram('flow-automatic')">
+                        <i class="fas fa-download"></i> Exportar PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fluxo TDD Completo -->
+            <div id="flow-tdd" class="diagram-container">
+                <h2 class="diagram-title">
+                    <i class="fas fa-vial"></i>
+                    Fluxo TDD Completo
+                </h2>
+                <p class="diagram-description">
+                    <strong>⭐ DESTAQUE:</strong> Test-Driven Development - Testing Specialist cria o plano de QA <strong>ANTES</strong> do Expert Developer implementar o código.
+                </p>
+                <div class="mermaid">
+graph TB
+    PO[1. Product Owner<br/>Análise de Negócio] --> RT[2. Mesa Redonda<br/>Alinhamento Técnico]
+    RT --> RA[3. Requirements Analyst<br/>Cenários BDD]
+    RA --> SA[4. Systems Architect<br/>Arquitetura + ADRs]
+
+    SA --> TS[5. Testing Specialist<br/>⭐ CRIA PLANO QA - TDD]
+    TS --> ED[6. Expert Developer<br/>⭐ IMPLEMENTA SEGUINDO PLANO]
+
+    SA -.-> UX[UX/UI Specialist<br/>Wireframes - Opcional]
+    UX -.-> TS
+    UX -.-> ED
+
+    ED --> TV[7. Testing Validator<br/>Valida Implementação vs Plano]
+    TV --> POF[8. Product Owner Final<br/>Aprovação/Rejeição]
+
+    TS --> QA[05-qa-plano.md<br/>Estratégia de Testes]
+    ED --> DEV[04-desenvolvimento.md<br/>Código + Testes]
+    TV --> VAL[05.1-testing-validation.md<br/>Validação Independente]
+
+    style TS fill:#90EE90,stroke:#006400,stroke-width:3px
+    style ED fill:#87CEEB,stroke:#00008B,stroke-width:3px
+    style TV fill:#FFD700,stroke:#FF8C00,stroke-width:2px
+    style QA fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DEV fill:#87CEEB,stroke:#00008B,stroke-width:2px
+                </div>
+                <div class="diagram-actions">
+                    <button class="diagram-btn" onclick="exportDiagram('flow-tdd')">
+                        <i class="fas fa-download"></i> Exportar PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fluxo Completo com Frontend -->
+            <div id="flow-complete" class="diagram-container">
+                <h2 class="diagram-title">
+                    <i class="fas fa-desktop"></i>
+                    Fluxo Completo com Frontend
+                </h2>
+                <p class="diagram-description">
+                    Fluxo completo incluindo todos os agentes opcionais: UX/UI Specialist, Frontend Specialist e Code Reviewer.
+                </p>
+                <div class="mermaid">
+graph TB
+    Start[Início: Business Request] --> PO[1. Product Owner]
+    PO --> MR[2. Mesa Redonda]
+    MR --> RA[3. Requirements Analyst]
+    RA --> SA[4. Systems Architect]
+
+    SA --> UX[5. UX/UI Specialist]
+    UX --> TS[6. Testing Specialist]
+    TS --> ED[7. Expert Developer Backend]
+
+    ED --> FE[8. Frontend Specialist]
+    FE --> TV[9. Testing Validator]
+    TV --> CR[10. Code Reviewer]
+    CR --> POF[11. Product Owner Final]
+
+    POF --> End[Entrega Completa]
+
+    PO --> DOC1[00-requirements-brief.md]
+    MR --> DOC2[01-ata-mesa-redonda.md]
+    RA --> DOC3[02-requisitos-bdd.md]
+    SA --> DOC4[03-arquitetura.md]
+    UX --> DOC5[03.1-ux-ui-design.md]
+    TS --> DOC6[05-qa-plano.md]
+    ED --> DOC7[04-desenvolvimento.md]
+    FE --> DOC8[04.1-frontend.md]
+    TV --> DOC9[05.1-testing-validation.md]
+    CR --> DOC10[06-code-review.md]
+
+    style Start fill:#667eea,stroke:#5a67d8,color:#fff
+    style End fill:#48bb78,stroke:#38a169,color:#fff
+    style TS fill:#90EE90,stroke:#006400
+    style ED fill:#87CEEB,stroke:#00008B
+    style TV fill:#FFD700,stroke:#FF8C00
+                </div>
+                <div class="diagram-actions">
+                    <button class="diagram-btn" onclick="exportDiagram('flow-complete')">
+                        <i class="fas fa-download"></i> Exportar PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Processo Detalhado -->
+            <div id="process-detailed" class="diagram-container">
+                <h2 class="diagram-title">
+                    <i class="fas fa-list-ol"></i>
+                    Processo Detalhado
+                </h2>
+                <p class="diagram-description">
+                    Visão detalhada do processo completo, mostrando todas as etapas, decisões e artefatos gerados.
+                </p>
+                <div class="mermaid">
+flowchart TD
+    A[Setup: Instalação] --> B{Tipo de Projeto?}
+    B -->|Novo| C[Criar estrutura .NET/Node/etc]
+    B -->|Existente| D[Analisar projeto existente]
+
+    C --> E[Configurar workspace]
+    D --> E
+
+    E --> F[Adicionar documentos em data/in]
+    F --> G[Executar Product Owner]
+
+    G --> H{Aprovado?}
+    H -->|Não| I[Ajustar documentos]
+    I --> G
+    H -->|Sim| J{Mesa Redonda?}
+
+    J -->|Sim| K[Executar Roundtable]
+    J -->|Não| L[Pular para Requirements]
+    K --> L
+
+    L --> M[Requirements Analyst]
+    M --> N[Systems Architect]
+    N --> O{Tem UI?}
+
+    O -->|Sim| P[UX/UI Specialist]
+    O -->|Não| Q[Testing Specialist TDD]
+    P --> Q
+
+    Q --> R[Expert Developer]
+    R --> S{Tem Frontend?}
+
+    S -->|Sim| T[Frontend Specialist]
+    S -->|Não| U[Testing Validator]
+    T --> U
+
+    U --> V{Passou?}
+    V -->|Não| W[Ajustes]
+    W --> R
+    V -->|Sim| X[Code Reviewer Opcional]
+
+    X --> Y[Product Owner Final]
+    Y --> Z{Aprovado?}
+
+    Z -->|Não| AA[Revisar e ajustar]
+    AA --> R
+    Z -->|Sim| AB[Entrega em data/out]
+
+    AB --> AC[Finish]
+
+    style A fill:#667eea,stroke:#5a67d8,color:#fff
+    style AC fill:#48bb78,stroke:#38a169,color:#fff
+    style Q fill:#90EE90,stroke:#006400
+    style R fill:#87CEEB,stroke:#00008B
+                </div>
+                <div class="diagram-actions">
+                    <button class="diagram-btn" onclick="exportDiagram('process-detailed')">
+                        <i class="fas fa-download"></i> Exportar PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Legenda -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    Legenda dos Diagramas
+                </h2>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div style="width: 30px; height: 30px; background: #90EE90; border: 2px solid #006400; border-radius: 4px;"></div>
+                        <div>
+                            <h4>Testing Specialist (Verde)</h4>
+                            <p>Cria o plano de QA ANTES da implementação - TDD</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div style="width: 30px; height: 30px; background: #87CEEB; border: 2px solid #00008B; border-radius: 4px;"></div>
+                        <div>
+                            <h4>Expert Developer (Azul)</h4>
+                            <p>Implementa SEGUINDO o plano de testes - TDD</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div style="width: 30px; height: 30px; background: #FFD700; border: 2px solid #FF8C00; border-radius: 4px;"></div>
+                        <div>
+                            <h4>Testing Validator (Amarelo)</h4>
+                            <p>Valida a implementação contra o plano original</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div style="width: 30px; height: 30px; background: #f6ad55; border: 2px solid #ed8936; border-radius: 4px;"></div>
+                        <div>
+                            <h4>Processos Manuais (Laranja)</h4>
+                            <p>Etapas que requerem intervenção humana</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-minus" style="color: #999; font-size: 2rem;"></i>
+                        <div>
+                            <h4>Linhas Tracejadas</h4>
+                            <p>Agentes opcionais ou fluxos alternativos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ProsoftAgileAgent</h4>
+                <p>Sistema de Agentes Inteligentes</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="fluxo-completo.html">Fluxo Completo</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#5a67d8',
+                lineColor: '#667eea',
+                secondaryColor: '#48bb78',
+                tertiaryColor: '#f6ad55'
+            }
+        });
+
+        function exportDiagram(id) {
+            alert('Função de exportação será implementada em breve!');
+            // Aqui você pode adicionar lógica para exportar o diagrama como PNG
+        }
+    </script>
+</body>
+</html>

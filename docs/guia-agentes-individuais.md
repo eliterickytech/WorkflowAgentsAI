@@ -1,6 +1,6 @@
 ﻿# ðŸŽ¯ Guia Completo: Executando Agentes Individuais
 
-**VersÃ£o:** 2.1.0  
+**VersÃ£o:** 2.2.0  
 **Data:** 30 de Setembro de 2025
 
 Este guia detalha como usar **cada um dos 11 agentes de forma independente**, com exemplos prÃ¡ticos, contextos especÃ­ficos e casos de uso reais.

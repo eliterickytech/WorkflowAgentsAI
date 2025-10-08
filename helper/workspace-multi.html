@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Multi-Projeto - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#deteccao">Detecção</a></li>
+                        <li><a href="#exemplo">Exemplo</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title"><i class="fas fa-th-large"></i> Workspace Multi-Projeto</h1>
+                <div class="info-card highlight">
+                    <h3>🏢 Suporte a Múltiplos Projetos</h3>
+                    <p>O sistema detecta e analisa automaticamente workspaces com múltiplos projetos, integrando instruções GitHub Copilot de cada um.</p>
+                </div>
+            </section>
+            <section id="deteccao" class="content-section">
+                <h2 class="section-title"><i class="fas fa-search"></i> Detecção Automática</h2>
+                <div class="info-card">
+                    <h4>Estrutura Suportada</h4>
+                    <pre><code>C:\MeuWorkspace\
+├── api-backend\              (.NET Core + EF Core)
+│   └── .github\copilot-instructions.md
+├── frontend-web\             (React + TypeScript)
+│   └── .github\copilot-instructions.md
+├── admin-panel\              (Angular + Material)
+│   └── .github\copilot-instructions.md
+├── mobile-app\               (Xamarin/MAUI)
+│   └── .github\copilot-instructions.md
+└── legacy-system\            (WebForms)
+    └── .github\copilot-instructions.md</code></pre>
+                </div>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Identifica automaticamente</h4><p>Cada tipo de projeto detectado</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Detecta Copilot</h4><p>Instruções em cada projeto</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Oferece seleção</h4><p>Escolha do projeto principal</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><h4>Contexto unificado</h4><p>Inclui contexto dos outros projetos</p></div>
+                    </div>
+                </div>
+            </section>
+            <section id="exemplo" class="content-section">
+                <h2 class="section-title"><i class="fas fa-terminal"></i> Fluxo Completo</h2>
+                <div class="info-card">
+                    <h4>Instalação e Detecção</h4>
+                    <pre><code>.\Install\setup-workflow.ps1
+
+Caminho do projeto: C:\MeuWorkspace\ia
+Tipo de trabalho: (2) Implementacao em projeto existente
+Caminho do projeto existente: C:\MeuWorkspace
+
+# 🔍 DETECÇÃO AUTOMÁTICA
+[INFO] Verificando workspace multi-projeto
+[INFO] Projeto detectado: api-backend (dotnet, copilot: sim)
+[INFO] Projeto detectado: frontend-web (react, copilot: sim)
+[INFO] Projeto detectado: admin-panel (angular, copilot: sim)
+[INFO] Projeto detectado: mobile-app (dotnet, copilot: nao)
+[INFO] Projeto detectado: legacy-system (dotnet, copilot: sim)
+
+# 🎯 SELEÇÃO INTERATIVA
+Workspace multi-projeto detectado!
+Projetos encontrados:
+  1) api-backend (dotnet) [Copilot: sim]
+  2) frontend-web (react) [Copilot: sim]
+  3) admin-panel (angular) [Copilot: sim]
+  4) mobile-app (dotnet) [Copilot: nao]
+  5) legacy-system (dotnet) [Copilot: sim]
+
+Qual projeto analisar como principal? (1-5): 1
+
+[INFO] Projeto principal selecionado: api-backend
+[INFO] Gerando análise unificada...</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Análise Gerada</h4>
+                    <p>O sistema gera um <code>project-analysis.md</code> completo com:</p>
+                    <ul>
+                        <li>✅ Análise detalhada do projeto principal</li>
+                        <li>✅ Instruções Copilot do projeto principal</li>
+                        <li>✅ Contexto dos outros projetos relacionados</li>
+                        <li>✅ Instruções Copilot de todos os projetos</li>
+                        <li>✅ Dependências entre projetos mapeadas</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-star"></i> Benefícios</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-sync"></i>
+                        <h3>Consistência</h3>
+                        <p>Entre todos os projetos do workspace</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Contexto Completo</h3>
+                        <p>Agentes conhecem toda a estrutura</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-link"></i>
+                        <h3>Dependências</h3>
+                        <p>Mapeamento automático entre projetos</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Zero Config</h3>
+                        <p>Tudo detectado automaticamente</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

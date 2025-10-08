@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Business Request - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../fluxo-completo.html">← Fluxo Completo</a></li>
+                        <li><a href="#estrutura">Estrutura</a></li>
+                        <li><a href="#exemplo1">Exemplo Completo</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-file-alt"></i> Exemplos de Business Request</h1>
+                <div class="info-card highlight">
+                    <h3>📝 Como Documentar Demandas de Negócio</h3>
+                    <p>Exemplos práticos de como estruturar documentos de requisição de negócio para o workflow de agentes.</p>
+                </div>
+            </section>
+            <section id="estrutura" class="content-section">
+                <h2 class="section-title"><i class="fas fa-sitemap"></i> Estrutura Recomendada</h2>
+                <div class="info-card">
+                    <h4>Seções Obrigatórias:</h4>
+                    <ol>
+                        <li><strong>Sumário</strong>: Objetivo, problema atual, valor de negócio</li>
+                        <li><strong>Contexto</strong>: Sistemas afetados, usuários, restrições</li>
+                        <li><strong>Stakeholders</strong>: Sponsor, contato técnico, times de apoio</li>
+                        <li><strong>Escopo</strong>: Itens incluídos, excluídos, prazo</li>
+                        <li><strong>Métricas de Sucesso</strong>: Indicadores mensuráveis e evidências</li>
+                        <li><strong>Anexos</strong>: Lista de arquivos com descrições breves</li>
+                    </ol>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-file-invoice"></i> Exemplo Completo: Sistema de Comissões</h2>
+                <div class="info-card">
+                    <pre><code># Solicitação: Automatização do Cálculo de Comissões de Vendas
+
+## 1. Sumário Executivo
+
+**Objetivo:**
+Automatizar o processo manual de cálculo de comissões de vendedores,
+eliminando planilhas Excel complexas e reduzindo erros operacionais.
+
+**Problema Atual:**
+- Processo manual consome 40h/mês do financeiro
+- Taxa de erro de 12% nos cálculos
+- Falta de transparência gera questionamentos dos vendedores
+- Recálculos retroativos são inviáveis (custo operacional)
+
+**Valor de Negócio:**
+- Economia: R$ 8.000/mês (redução de horas manuais)
+- Redução de erros: de 12% para <1%
+- Satisfação vendedores: transparência total nos cálculos
+- Compliance: auditoria SOX (rastreabilidade completa)
+
+---
+
+## 2. Contexto do Negócio
+
+**Sistemas Envolvidos:**
+- ERP Totvs Protheus: origem dos dados de vendas
+- CRM Salesforce: metas e performance dos vendedores
+- Sistema RH (folha pagamento): dados cadastrais
+
+**Grupos de Usuários:**
+- Financeiro (5 pessoas): operação e conferência
+- Vendedores (120 pessoas): consulta de comissões
+- Gerência Comercial (3 pessoas): relatórios analíticos
+- Auditoria Interna (2 pessoas): conferências SOX
+
+**Restrições Conhecidas:**
+- Orçamento: R$ 80.000 (desenvolvimento + infraestrutura)
+- Prazo: 4 meses (início fechamento fiscal Q1/2025)
+- Compliance: Auditoria SOX 404 semestral
+- Integração: APIs Totvs + Salesforce já existem
+
+---
+
+## 3. Stakeholders
+
+| Papel | Nome | Responsabilidade |
+|-------|------|------------------|
+| Sponsor | Maria Santos | CFO - Budget owner e decisões estratégicas |
+| Product Owner | João Silva | Gerente Financeiro - Priorização e aceite |
+| Líder Técnico | Carlos Mendes | Arquiteto de Soluções - Decisões técnicas |
+| Usuário Chave | Ana Costa | Analista Financeiro Sênior - Regras de negócio |
+| Compliance | Roberto Lima | Auditor Interno - Validação SOX |
+
+---
+
+## 4. Escopo do Projeto
+
+**Incluído (In Scope):**
+- Integração ERP Totvs (vendas reais)
+- Integração CRM Salesforce (metas)
+- Cálculo automático conforme 6 regras de comissão
+- Portal self-service para vendedores consultarem
+- Relatórios gerenciais (breakdown por vendedor)
+- Logs de auditoria (compliance SOX)
+- Recálculo retroativo (até 3 meses)
+
+**Excluído (Out of Scope):**
+- Modificação das regras de comissão (mantém regras atuais)
+- Integração com folha de pagamento (apenas relatório CSV)
+- Mobile app (apenas portal web responsivo)
+- Análise preditiva ou BI avançado
+
+**Prazo Crítico:**
+- Go-live: 01/Janeiro/2025 (início fechamento fiscal)
+- Homologação: Dezembro/2024
+- Desenvolvimento: Setembro-Novembro/2024
+
+---
+
+## 5. Métricas de Sucesso
+
+**Indicadores Quantitativos:**
+- Redução tempo processamento: de 40h para <2h/mês
+- Taxa de erro: <1% (target zero)
+- Satisfação vendedores: NPS >8 (atual 5)
+- Performance: cálculo lote 120 vendedores <5min
+
+**Evidências de Sucesso:**
+- Relatório de auditoria SOX aprovado (zero findings)
+- Feedback positivo de 90%+ dos vendedores
+- Zero retrabalho de recálculos no primeiro trimestre
+- ROI positivo em 10 meses
+
+---
+
+## 6. Anexos e Documentação Complementar
+
+**Documentos Anexados:**
+1. `Regras_Calculo_Comissoes_v2024.xlsx` - 6 regras atuais + exemplos
+2. `Planilha_Excel_Atual.xlsx` - Template usado hoje (complexidade)
+3. `API_Totvs_Vendas.pdf` - Documentação integração ERP
+4. `API_Salesforce_Metas.pdf` - Documentação integração CRM
+5. `Checklist_Auditoria_SOX.docx` - Requisitos compliance
+6. `Dados_Teste_Homologacao.csv` - 500 cenários reais para validação
+
+**Diagramas:**
+- Fluxo atual (manual) vs proposto (automatizado)
+- Arquitetura de integração ERP-CRM-Portal
+
+---
+
+## 7. Próximos Passos
+
+1. **Aprovação Sponsor:** Maria Santos (CFO)
+2. **Kickoff:** Reunião com todos stakeholders
+3. **Execução Workflow Agentes:** Product Owner → Requirements → Architect → QA → Dev
+4. **Homologação:** Dezembro/2024 com 50 vendedores piloto
+5. **Go-live:** Janeiro/2025 (produção completa)</code></pre>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Dicas para Business Requests Eficazes</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Seja específico</h4><p>Números concretos (R$, horas, %), não generalizações</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Identifique dor</h4><p>Problema atual com impacto mensurável</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Defina sucesso</h4><p>Métricas objetivas e evidências claras</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Anexe evidências</h4><p>Documentos, planilhas, APIs, diagramas</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../fluxo-completo.html">Fluxo Completo</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

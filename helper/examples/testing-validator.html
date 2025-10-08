@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Testing Validator - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Validação Comissões</a></li>
+                        <li><a href="#exemplo2">Validação Agendamento</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-check-double"></i> Exemplos Práticos - Testing Validator</h1>
+                <div class="info-card highlight">
+                    <h3>✅ Validação Pós-Implementação</h3>
+                    <p>Exemplos práticos de validação de implementação contra o plano TDD e critérios de aceite.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-calculator"></i> Exemplo 1: Validação Sistema de Comissões</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Validar implementação completa do sistema de cálculo de comissões contra plano TDD (47 cenários) e critérios de aceite.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Prompt:</h4>
+                    <pre><code>@agents/manual/testing-validator.agent.md
+
+Sprint: 03, Activity: validacao-comissoes-implementadas
+Contexto: "Validar implementação completa do sistema de comissões.
+Verificar 47 cenários BDD executados, cobertura 95%, performance <100ms,
+auditoria SOX completa."
+
+Artefatos disponíveis:
+- 05-qa-plano.md: Plano TDD original com 47 cenários esperados
+- 04-desenvolvimento.md: Notas de implementação do Expert Developer
+- test-results/: Relatórios xUnit + coverage (Coverlet)
+- logs/: Serilog structured logs da execução dos testes
+- performance/: BenchmarkDotNet results
+
+Critérios de aceite a validar:
+1. Cálculo correto conforme RN-0030 a RN-0035 (6 regras)
+2. Performance < 100ms para lote 1000 vendedores
+3. Cenários extremos: vendas negativas, metas retroativas, inativos
+4. Auditoria: log de cada cálculo com justificativa matemática
+5. Relatório gerencial: breakdown por componente comissão
+6. Integração: ERP + CRM + RH funcionando
+
+Validação esperada:
+- Todos 47 cenários BDD executados com sucesso (GREEN)
+- Cobertura >= 95% (target atingido)
+- Performance < 100ms confirmada (benchmarks)
+- Logs de auditoria estruturados e completos
+- Integrations tests passando (ERP + CRM + RH)
+- Edge cases cobertos (vendas negativas, metas retroativas, etc.)
+
+Saída esperada (05.1-testing-validation.md):
+- Matriz de rastreabilidade: Requisito → Teste → Resultado
+- Evidências: Screenshots coverage, logs, benchmarks
+- Findings: Desvios encontrados (se houver)
+- Recomendações: Melhorias identificadas
+- Status final: APROVADO / APROVADO COM RESSALVAS / REPROVADO</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Checklist de Validação:</h4>
+                    <ul>
+                        <li>✅ <strong>Cenários BDD:</strong> 47/47 executados e GREEN</li>
+                        <li>✅ <strong>Cobertura:</strong> 96.3% (target 95% atingido)</li>
+                        <li>✅ <strong>Performance:</strong> 78ms média (target <100ms OK)</li>
+                        <li>✅ <strong>Auditoria:</strong> Logs estruturados com todas propriedades SOX</li>
+                        <li>✅ <strong>Integrações:</strong> Mock + Real APIs testados</li>
+                        <li>⚠️ <strong>Finding:</strong> Edge case "vendedor demitido retroativo" não coberto</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Matriz de Rastreabilidade (Exemplo):</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requisito</th>
+                                <th>Regra</th>
+                                <th>Cenários</th>
+                                <th>Status</th>
+                                <th>Evidência</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cálculo base</td>
+                                <td>RN-0030</td>
+                                <td>8 cenários</td>
+                                <td>✅ PASS</td>
+                                <td>test-results/base-calculation.xml</td>
+                            </tr>
+                            <tr>
+                                <td>Performance</td>
+                                <td>RN-0031</td>
+                                <td>12 cenários</td>
+                                <td>✅ PASS</td>
+                                <td>test-results/performance.xml</td>
+                            </tr>
+                            <tr>
+                                <td>Bônus trimestral</td>
+                                <td>RN-0032</td>
+                                <td>6 cenários</td>
+                                <td>✅ PASS</td>
+                                <td>test-results/bonus.xml</td>
+                            </tr>
+                            <tr>
+                                <td>Teto máximo</td>
+                                <td>RN-0033</td>
+                                <td>4 cenários</td>
+                                <td>✅ PASS</td>
+                                <td>test-results/ceiling.xml</td>
+                            </tr>
+                            <tr>
+                                <td>Inadimplência</td>
+                                <td>RN-0034</td>
+                                <td>7 cenários</td>
+                                <td>✅ PASS</td>
+                                <td>test-results/chargeback.xml</td>
+                            </tr>
+                            <tr>
+                                <td>Casos especiais</td>
+                                <td>RN-0035</td>
+                                <td>10 cenários</td>
+                                <td>⚠️ PARTIAL</td>
+                                <td>Missing: demissão retroativa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-calendar-check"></i> Exemplo 2: Validação Agendamento Médico</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Validar sistema crítico de agendamento com disponibilidade 99.99% e zero race conditions.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Validações Críticas Executadas:</h4>
+                    <pre><code>Testes de Concorrência:
+✅ 500 agendamentos simultâneos: 0 conflitos (Pessimistic Lock OK)
+✅ Race condition: 1000 threads tentando mesmo horário → apenas 1 sucesso
+✅ Load test: 10.000 requests/min → 99.99% success rate
+
+Testes de Disponibilidade:
+✅ Uptime test 7 dias: 99.997% (2 min downtime planejado)
+✅ Failover: Primário → Secundário em 8s (target <10s)
+✅ Database failover: 0 transações perdidas
+
+Testes de Compliance:
+✅ LGPD: Consentimento obrigatório antes agendamento
+✅ CFM: Assinatura digital médico com ICP-Brasil
+✅ ANS: Relatórios auditoria gerados corretamente
+✅ Menor idade: Validação responsável implementada
+
+Testes de Integração:
+✅ HIS (Hospital System): Sincronização prontuários OK
+✅ Laboratory: Instruções preparo enviadas corretamente
+✅ SMS/Email: Notificações enviadas em <30s
+✅ Emergency override: Prioridade absoluta funcionando
+
+Findings Identificados:
+⚠️ Notificação SMS: Falha 0.5% (timeout gateway)
+⚠️ Emergency: Logs auditoria não salvos em alguns casos
+✅ Ambos corrigidos durante validação</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Status Final da Validação:</h4>
+                    <ul>
+                        <li>✅ <strong>Status:</strong> APROVADO (após correções)</li>
+                        <li>✅ <strong>Cobertura:</strong> 98.1% (target 95%)</li>
+                        <li>✅ <strong>Disponibilidade:</strong> 99.997% (target 99.99%)</li>
+                        <li>✅ <strong>Concorrência:</strong> 0 race conditions</li>
+                        <li>✅ <strong>Compliance:</strong> Todos requisitos atendidos</li>
+                        <li>✅ <strong>Performance:</strong> <200ms 95th percentile</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Responsabilidades do Validator</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Verificação completa</h4><p>Todos cenários TDD executados e documentados</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Evidências objetivas</h4><p>Screenshots, logs, coverage reports, benchmarks</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Rastreabilidade</h4><p>Matriz requisito → teste → resultado</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Findings claros</h4><p>Desvios identificados com severidade e recomendação</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

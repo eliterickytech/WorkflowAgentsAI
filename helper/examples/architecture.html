@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos Systems Architect - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="../index.html">← Início</a></li>
+                        <li><a href="../guia-agentes-individuais.html">← Guia dos Agentes</a></li>
+                        <li><a href="#exemplo1">Clean Architecture</a></li>
+                        <li><a href="#exemplo2">Microservices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="content-section">
+                <h1 class="section-title"><i class="fas fa-drafting-compass"></i> Exemplos Práticos - Systems Architect</h1>
+                <div class="info-card highlight">
+                    <h3>🏗️ Decisões Arquiteturais e Padrões</h3>
+                    <p>Exemplos práticos de arquitetura .NET com Clean Architecture, DDD, CQRS, Event Sourcing e padrões modernos.</p>
+                </div>
+            </section>
+            <section id="exemplo1" class="content-section">
+                <h2 class="section-title"><i class="fas fa-layer-group"></i> Exemplo 1: Clean Architecture + DDD para Sistema de Comissões</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Sistema de cálculo de comissões complexo usando Clean Architecture, DDD, CQRS e validações robustas.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Estrutura de Camadas:</h4>
+                    <pre><code>src/
+├── Domain/                          # Núcleo do negócio
+│   ├── Entities/
+│   │   ├── Vendedor.cs             # Aggregate Root
+│   │   ├── Comissao.cs             # Entity
+│   │   └── Venda.cs                # Entity
+│   ├── ValueObjects/
+│   │   ├── PercentualComissao.cs   # Value Object
+│   │   ├── PeriodoCalculo.cs       # Value Object
+│   │   └── MetaVendedor.cs         # Value Object
+│   ├── DomainEvents/
+│   │   ├── ComissaoCalculadaEvent.cs
+│   │   └── MetaBatidaEvent.cs
+│   └── Interfaces/
+│       └── IComissaoRepository.cs   # Port
+│
+├── Application/                     # Casos de uso
+│   ├── Commands/
+│   │   ├── CalcularComissaoCommand.cs
+│   │   └── CalcularComissaoHandler.cs
+│   ├── Queries/
+│   │   ├── ObterComissaoQuery.cs
+│   │   └── ObterComissaoHandler.cs
+│   ├── Validators/
+│   │   └── CalcularComissaoValidator.cs  # FluentValidation
+│   └── DTOs/
+│       └── ComissaoDTO.cs
+│
+├── Infrastructure/                  # Detalhes técnicos
+│   ├── Persistence/
+│   │   ├── ComissaoRepository.cs    # Adapter
+│   │   └── ComissaoDbContext.cs     # EF Core
+│   ├── ExternalServices/
+│   │   ├── TotvsApiClient.cs        # Integração ERP
+│   │   └── SalesforceApiClient.cs   # Integração CRM
+│   └── Logging/
+│       └── SerilogConfig.cs
+│
+└── API/                             # Interface REST
+    ├── Controllers/
+    │   └── ComissoesController.cs
+    ├── Middlewares/
+    │   ├── ExceptionMiddleware.cs
+    │   └── AuditMiddleware.cs
+    └── Program.cs</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Decisões Arquiteturais (ADRs):</h4>
+                    <ul>
+                        <li>✅ <strong>ADR-001:</strong> Clean Architecture para desacoplar regras de negócio</li>
+                        <li>✅ <strong>ADR-002:</strong> CQRS com MediatR para separar leituras/escritas</li>
+                        <li>✅ <strong>ADR-003:</strong> DDD com Value Objects para validações ricas</li>
+                        <li>✅ <strong>ADR-004:</strong> Repository Pattern para abstração de dados</li>
+                        <li>✅ <strong>ADR-005:</strong> FluentValidation para regras de validação</li>
+                        <li>✅ <strong>ADR-006:</strong> Serilog para logging estruturado (auditoria SOX)</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="exemplo2" class="content-section">
+                <h2 class="section-title"><i class="fas fa-network-wired"></i> Exemplo 2: Microservices com Event-Driven Architecture</h2>
+                <div class="info-card">
+                    <h4>Contexto:</h4>
+                    <p>Sistema de e-commerce com microservices, mensageria assíncrona e eventual consistency.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Arquitetura de Microservices:</h4>
+                    <pre><code>Microservices:
+┌─────────────────────────────────────────────────────────────────┐
+│                     API Gateway (YARP)                          │
+│              Autenticação, Rate Limit, Roteamento               │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+        ┌──────────────────┬──┴───────┬────────────────┐
+        │                  │          │                │
+   ┌────▼────┐      ┌─────▼─────┐  ┌─▼──────┐   ┌────▼─────┐
+   │ Catalog │      │  Orders   │  │Payment │   │ Shipping │
+   │ Service │      │  Service  │  │Service │   │ Service  │
+   └────┬────┘      └─────┬─────┘  └───┬────┘   └────┬─────┘
+        │                 │            │             │
+        │                 │            │             │
+   ┌────▼─────────────────▼────────────▼─────────────▼────┐
+   │         RabbitMQ / Azure Service Bus                │
+   │    (Events: OrderCreated, PaymentApproved, etc.)   │
+   └─────────────────────────────────────────────────────┘
+
+Bancos de Dados:
+- Catalog Service: PostgreSQL (dados relacionais)
+- Orders Service: SQL Server (transações ACID)
+- Payment Service: MongoDB (documentos flexíveis)
+- Shipping Service: Redis (cache status rastreamento)
+
+Observabilidade:
+- OpenTelemetry: Tracing distribuído
+- Prometheus + Grafana: Métricas
+- ELK Stack: Logs centralizados</code></pre>
+                </div>
+                <div class="info-card highlight">
+                    <h4>Patterns Implementados:</h4>
+                    <ul>
+                        <li>✅ <strong>API Gateway Pattern:</strong> YARP para roteamento unificado</li>
+                        <li>✅ <strong>Saga Pattern:</strong> Orquestração de transações distribuídas</li>
+                        <li>✅ <strong>Event Sourcing:</strong> Histórico imutável de eventos</li>
+                        <li>✅ <strong>CQRS:</strong> Separação leitura/escrita por microservice</li>
+                        <li>✅ <strong>Circuit Breaker:</strong> Polly para resiliência</li>
+                        <li>✅ <strong>Outbox Pattern:</strong> Garantia entrega de eventos</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-toolbox"></i> Tecnologias Recomendadas</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h4>Backend</h4>
+                        <p>.NET 8, ASP.NET Core, MediatR, FluentValidation, AutoMapper</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Persistência</h4>
+                        <p>EF Core, Dapper, SQL Server, PostgreSQL, MongoDB, Redis</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Mensageria</h4>
+                        <p>RabbitMQ, Azure Service Bus, MassTransit</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Observabilidade</h4>
+                        <p>Serilog, OpenTelemetry, Prometheus, Grafana</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="../index.html">Início</a></li><li><a href="../guia-agentes-individuais.html">Guia dos Agentes</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

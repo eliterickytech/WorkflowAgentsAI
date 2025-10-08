@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizando Agentes - ProsoftAgileAgent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-robot"></i><h1>ProsoftAgileAgent</h1></div>
+            <div class="version">v2.2.0</div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3><i class="fas fa-home"></i> Navegação</h3>
+                    <ul>
+                        <li><a href="index.html">← Voltar ao Início</a></li>
+                        <li><a href="#overview">Visão Geral</a></li>
+                        <li><a href="#processo">Processo</a></li>
+                        <li><a href="#boas-praticas">Boas Práticas</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="overview" class="content-section">
+                <h1 class="section-title"><i class="fas fa-sync-alt"></i> Atualizando Agentes</h1>
+                <div class="info-card highlight">
+                    <h3>🔄 Mantenha os Agentes Atualizados</h3>
+                    <p>Guia para atualizar, personalizar e manter os agentes especializados do ProsoftAgileAgent.</p>
+                </div>
+            </section>
+            <section id="processo" class="content-section">
+                <h2 class="section-title"><i class="fas fa-list-ol"></i> Processo de Atualização</h2>
+                <div class="workflow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Backup</h4>
+                            <p>Sempre faça backup da pasta agents/ antes de atualizar</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Pull Latest</h4>
+                            <p>Obter última versão do repositório oficial</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Mesclar Customizações</h4>
+                            <p>Reintegrar suas personalizações específicas</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Testar</h4>
+                            <p>Validar que agentes funcionam conforme esperado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h4>Comandos Git</h4>
+                    <pre><code># Backup manual
+cp -r agents agents_backup
+
+# Atualizar do repositório oficial
+git pull origin main
+
+# Ver diferenças
+git diff HEAD~1 agents/
+
+# Reverter se necessário
+git checkout HEAD~1 -- agents/</code></pre>
+                </div>
+            </section>
+            <section id="boas-praticas" class="content-section">
+                <h2 class="section-title"><i class="fas fa-star"></i> Boas Práticas</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Versionamento</h4><p>Manter agentes customizados em branch separada</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Documentação</h4><p>Documentar todas as customizações feitas</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Testes</h4><p>Testar após cada atualização em ambiente não-produção</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <div><h4>Changelog</h4><p>Manter registro de mudanças e motivos</p></div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h4>Estrutura de Customização Recomendada</h4>
+                    <pre><code>agents/
+├── manual/                    ← Agentes oficiais
+│   └── *.agent.md
+└── custom/                    ← Suas customizações
+    ├── company-specific.instructions.md
+    └── domain-specific.instructions.md</code></pre>
+                </div>
+                <div class="info-card">
+                    <h4>Enriquecimento de Agentes</h4>
+                    <p>Durante a instalação, você pode enriquecer automaticamente os agentes com instruções personalizadas:</p>
+                    <pre><code>.\Install\setup-workflow.ps1
+
+Deseja enriquecer os agentes? (s/n): s
+Pasta com arquivos .instructions.md: C:\MinhasInstrucoes
+
+[INFO] Enriquecendo 11 agentes...
+[INFO] product-owner.agent.md enriquecido
+[INFO] systems-architect.agent.md enriquecido
+...</code></pre>
+                </div>
+            </section>
+            <section class="content-section">
+                <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Avisos Importantes</h2>
+                <div class="info-card">
+                    <ul>
+                        <li>⚠️ <strong>Nunca edite</strong> agentes diretamente sem backup</li>
+                        <li>⚠️ <strong>Teste sempre</strong> em ambiente de desenvolvimento primeiro</li>
+                        <li>⚠️ <strong>Documente</strong> todas as mudanças para referência futura</li>
+                        <li>⚠️ <strong>Mantenha consistência</strong> entre todos os 11 agentes</li>
+                        <li>⚠️ <strong>Verifique compatibilidade</strong> ao atualizar versões</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>ProsoftAgileAgent</h4></div>
+            <div class="footer-section"><ul><li><a href="index.html">Início</a></li></ul></div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
