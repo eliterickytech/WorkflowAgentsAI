@@ -1,6 +1,6 @@
 <#$
 .SYNOPSIS
-  Instala e configura os Agentes ProsoftAgileAgent em um diretório especificado.
+  Instala e configura os Agentes WorkflowAgentDev em um diretório especificado.
 .DESCRIPTION
   - Checa e instala pre-requisitos (Python, Node.js, Git, .NET SDK)
   - Pergunta modo (Manual ou CrewAI), Sprint e Activity
@@ -1645,7 +1645,7 @@ function Create-GenericProject($projectPath, $projectName) {
     Ensure-Dir $projectPath
     New-Item -ItemType Directory -Path "$projectPath/src" -Force | Out-Null
     New-Item -ItemType Directory -Path "$projectPath/docs" -Force | Out-Null
-    "# $projectName`n`nProjeto criado via ProsoftAgileAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
+    "# $projectName`n`nProjeto criado via WorkflowAgentDev" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
     Write-Info "Projeto generico '$projectName' criado com sucesso!"
   } catch {
     Write-Warn "Erro ao criar projeto generico: $_"
