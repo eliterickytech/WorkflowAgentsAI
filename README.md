@@ -1,7 +1,13 @@
 # ProsoftAgileAgent - Agentes de Desenvolvimento Ágil
 
-**Versão:** 2.2.0 - **Parallel Execution Edition**
-**Autor:** Ricardo Macedo Perdigão
+[![CI](https://github.com/eliterickytech/WorkflowAgentsAI/actions/workflows/ci.yml/badge.svg)](https://github.com/eliterickytech/WorkflowAgentsAI/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/eliterickytech/WorkflowAgentsAI/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/eliterickytech/WorkflowAgentsAI/actions/workflows/codeql-analysis.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/eliterickytech?style=flat&logo=github)](https://github.com/sponsors/eliterickytech)
+
+**Versão:** 2.2.0 - **Parallel Execution Edition**  
+**Autor:** Ricardo Macedo Perdigão  
 **Data:** 30 de Setembro de 2025
 
 ## 🎯 **O que é o ProsoftAgileAgent?**
