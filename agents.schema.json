@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/eliterickytech/WorkflowAgentsAI/blob/main/agents.schema.json",
+  "title": "WorkflowAgentsAI Agents Index Schema",
+  "description": "Schema for validating the agents.index.json file structure",
+  "type": "object",
+  "required": ["agentsDirectory", "lastUpdated", "agents"],
+  "properties": {
+    "agentsDirectory": {
+      "type": "string",
+      "description": "Directory path where agent definition files are stored",
+      "pattern": "^[a-zA-Z0-9_/-]+/$"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "description": "Last update date in ISO format (YYYY-MM-DD)",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "agents": {
+      "type": "array",
+      "description": "Array of agent definitions",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/agent"
+      }
+    },
+    "integrationPoints": {
+      "type": "object",
+      "description": "Optional configuration for system integration points",
+      "additionalProperties": true
+    },
+    "qualityGates": {
+      "type": "object",
+      "description": "Optional quality gates and standards",
+      "additionalProperties": true
+    },
+    "workflowPatterns": {
+      "type": "object",
+      "description": "Optional workflow patterns and sequences",
+      "additionalProperties": true
+    }
+  },
+  "definitions": {
+    "agent": {
+      "type": "object",
+      "required": ["id", "name", "description", "playbook", "specialties", "inputs", "outputs", "triggers"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the agent (kebab-case)",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name of the agent",
+          "minLength": 3
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of the agent's purpose and capabilities",
+          "minLength": 10
+        },
+        "playbook": {
+          "type": "string",
+          "description": "Path to the agent's playbook markdown file",
+          "pattern": "^agents/manual/[a-z][a-z0-9-]*\\.agent\\.md$"
+        },
+        "specialties": {
+          "type": "array",
+          "description": "List of the agent's specialties and capabilities",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "description": "Types of input the agent consumes",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Types of output the agent produces",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "keyReferences": {
+          "type": "array",
+          "description": "Optional list of reference materials used by the agent",
+          "items": {
+            "type": "string"
+          }
+        },
+        "triggers": {
+          "type": "array",
+          "description": "Keywords that trigger or relate to this agent",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

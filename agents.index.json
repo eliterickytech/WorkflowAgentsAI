@@ -1,10 +1,9 @@
-﻿{
+{
   "agentsDirectory": "agents/manual/",
   "lastUpdated": "2025-09-28",
   "agents": [
     {
       "id": "product-owner",
-      "name": "Product Owner Agent",
       "name": "Product Owner Agent",
       "description": "Entende solicitacoes do cliente, define visao do produto e prioriza funcionalidades por valor de negocio",
       "playbook": "agents/manual/product-owner.agent.md",
@@ -49,9 +48,7 @@
     {
       "id": "requirements-analyst",
       "name": "Requirements Analyst Agent",
-      "name": "Requirements Analyst Agent",
       "description": "Transforma documentos de especificacao (.docx, .xlsx) em regras de negocio estruturadas seguindo padrao RN-00xx.md",
-      "playbook": "agents/manual/requirements-analyst.agent.md",
       "playbook": "agents/manual/requirements-analyst.agent.md",
       "specialties": [
         "Analise de documentos docx/xlsx",
@@ -78,7 +75,7 @@
         "references-data/pgdas-anexo-*.md",
         "references-data/business-rules/RN-0001.md",
         "references-data/datas/business-rules-files/",
-        "references-data/datas/tables/validation-business-rules-files/"
+        "references-data/datas/tables/validation-business-rules-files/",
         "references-data/pgdas-anexo-*.md",
         "references-data/business-rules/RN-0001.md",
         "references-data/datas/business-rules-files/",
@@ -97,10 +94,7 @@
     {
       "id": "systems-architect",
       "name": "Systems Architect Agent",
-      "id": "systems-architect",
-      "name": "Systems Architect Agent",
       "description": "Projeta e estrutura arquitetura do sistema seguindo principios DDD, SOLID e Clean Architecture",
-      "playbook": "agents/manual/systems-architect.agent.md",
       "playbook": "agents/manual/systems-architect.agent.md",
       "specialties": [
         "Design orientado a dominio (DDD)",
@@ -142,15 +136,12 @@
         "bounded context",
         "entidades",
         "agregados",
-        "adr"
+        "adr",
         "adr"
       ]
     },
     {
       "id": "expert-developer",
-      "name": "Expert Developer Agent",
-      "description": "Coordena implementacoes complexas no backend seguindo Clean Architecture e praticas de engenharia",
-      "playbook": "agents/manual/expert-developer.agent.md",
       "name": "Expert Developer Agent",
       "description": "Coordena implementacoes complexas no backend seguindo Clean Architecture e praticas de engenharia",
       "playbook": "agents/manual/expert-developer.agent.md",
@@ -160,7 +151,7 @@
         "Otimizacao de performance",
         "Mentoria de time",
         "Revisao de codigo",
-        "Padroes e convencoes do projeto"
+        "Padroes e convencoes do projeto",
         "Aplicacao de padroes SOLID",
         "Integracao com sistemas legado",
         "Otimizacao de performance",
@@ -206,9 +197,7 @@
     {
       "id": "testing-specialist",
       "name": "Testing Specialist Agent",
-      "name": "Testing Specialist Agent",
       "description": "Cria cenarios de teste abrangentes garantindo 90%+ cobertura e validacao de regras de negocio",
-      "playbook": "agents/manual/testing-specialist.agent.md",
       "playbook": "agents/manual/testing-specialist.agent.md",
       "specialties": [
         "Testes unitarios xUnit",
@@ -242,7 +231,7 @@
         "Bogus library",
         "FluentAssertions",
         "Moq framework",
-        "references-data/business-rules/"
+        "references-data/business-rules/",
         "references-data/business-rules/"
       ],
       "triggers": [
@@ -357,7 +346,6 @@
   "integrationPoints": {
     "copilot": {
       "instructionsFile": ".github/copilot-instructions.md",
-      "instructionsFile": ".github/copilot-instructions.md",
       "syncRequired": true
     },
     "mcp": {
@@ -409,10 +397,6 @@
       "frontend-specialist",
       "testing-specialist"
     ],
-    "uiRefactoring": [
-      "frontend-specialist",
-      "testing-specialist"
-    ],
     "documentation": [
       "requirements-analyst"
     ]
@@ -433,7 +417,6 @@
     "architecturalConstraints": {
       "layerSeparation": "Clean Architecture",
       "persistence": "PostgreSQL primary",
-      "messaging": "Asynchronous when applicable",
       "messaging": "Asynchronous when applicable",
       "validation": "FluentValidation required"
     }
