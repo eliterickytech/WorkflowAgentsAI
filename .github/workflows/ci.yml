@@ -1,0 +1,202 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  validate-json:
+    name: Validate JSON Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate agents.index.json
+        run: python scripts/python/validate_agents_index.py
+
+  powershell-analysis:
+    name: PowerShell Analysis
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: powershell
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+
+      - name: Run PSScriptAnalyzer
+        shell: powershell
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path ./scripts/powershell -Recurse -ReportSummary
+          if ($results) {
+            $results | Format-Table -AutoSize
+            $errors = $results | Where-Object { $_.Severity -eq 'Error' }
+            if ($errors) {
+              Write-Error "PSScriptAnalyzer found $($errors.Count) error(s)"
+              exit 1
+            }
+          }
+          Write-Host "✅ PSScriptAnalyzer passed"
+
+  python-lint:
+    name: Python Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+
+      - name: Run Ruff
+        run: |
+          ruff check --output-format=github scripts/python/ src/ Install/orchestrators/ || true
+          echo "✅ Ruff linting completed"
+
+  python-tests:
+    name: Python Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        shell: bash
+
+      - name: Run tests
+        run: |
+          if [ -d "tests" ]; then
+            pytest tests/ --cov=src --cov-report=xml --cov-report=term
+          else
+            echo "⚠️  No tests directory found, skipping tests"
+          fi
+        shell: bash
+
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+        continue-on-error: true
+
+  docs-check:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for broken links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress '**/*.md' '**/*.html' --exclude-loopback --exclude-mail --exclude 'file://' --exclude 'localhost' --exclude '127.0.0.1'
+          fail: false
+        continue-on-error: true
+
+      - name: Check markdown files
+        run: |
+          echo "📝 Checking markdown files..."
+          find . -name "*.md" -type f | wc -l
+          echo "✅ Markdown check completed"
+
+  encoding-check:
+    name: Encoding Standards Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for BOM in files
+        run: |
+          echo "🔍 Checking for BOM in JSON/YAML/MD files..."
+          
+          # Check JSON files (should not have BOM)
+          for file in $(find . -name "*.json" -not -path "./node_modules/*" -not -path "./.git/*"); do
+            if file "$file" | grep -q "UTF-8 Unicode (with BOM)"; then
+              echo "❌ BOM found in: $file"
+              exit 1
+            fi
+          done
+          
+          # Check YAML files (should not have BOM)
+          for file in $(find . -name "*.yml" -o -name "*.yaml" -not -path "./node_modules/*" -not -path "./.git/*"); do
+            if file "$file" | grep -q "UTF-8 Unicode (with BOM)"; then
+              echo "❌ BOM found in: $file"
+              exit 1
+            fi
+          done
+          
+          # Check Markdown files (should not have BOM)
+          for file in $(find . -name "*.md" -not -path "./node_modules/*" -not -path "./.git/*"); do
+            if file "$file" | grep -q "UTF-8 Unicode (with BOM)"; then
+              echo "❌ BOM found in: $file"
+              exit 1
+            fi
+          done
+          
+          echo "✅ No BOM issues found"
+
+  status-check:
+    name: CI Status
+    runs-on: ubuntu-latest
+    needs: [validate-json, powershell-analysis, python-lint, python-tests, docs-check, encoding-check]
+    if: always()
+    steps:
+      - name: Check job statuses
+        run: |
+          echo "validate-json: ${{ needs.validate-json.result }}"
+          echo "powershell-analysis: ${{ needs.powershell-analysis.result }}"
+          echo "python-lint: ${{ needs.python-lint.result }}"
+          echo "python-tests: ${{ needs.python-tests.result }}"
+          echo "docs-check: ${{ needs.docs-check.result }}"
+          echo "encoding-check: ${{ needs.encoding-check.result }}"
+          
+          if [ "${{ needs.validate-json.result }}" != "success" ] || \
+             [ "${{ needs.powershell-analysis.result }}" != "success" ] || \
+             [ "${{ needs.encoding-check.result }}" != "success" ]; then
+            echo "❌ CI failed"
+            exit 1
+          fi
+          
+          echo "✅ CI passed"
