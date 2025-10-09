@@ -341,7 +341,7 @@ function initDarkMode() {
 }
 
 // Export functions for external use
-window.ProsoftAgileAgentDocs = {
+window.WorkflowAgentDevDocs = {
   highlightActiveSection,
   initSearch,
   initNavigation,

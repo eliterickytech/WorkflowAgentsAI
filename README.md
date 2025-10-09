@@ -1,13 +1,13 @@
-# ProsoftAgileAgent - Agentes de Desenvolvimento Ágil
+# WorkflowAgentDev - Agentes de Desenvolvimento Ágil
 
 **Versão:** 2.2.0 - **Parallel Execution Edition**
 **Autor:** Ricardo Macedo Perdigão
 **Data:** 30 de Setembro de 2025
 
-## 🎯 **O que é o ProsoftAgileAgent?**
+## 🎯 **O que é o WorkflowAgentDev?**
 
 
-O ProsoftAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
+O WorkflowAgentDev é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
 
 **Para Desenvolvedores:** Imagine ter uma equipe de especialistas (Product Owner, Arquiteto, Desenvolvedor Sênior, etc.) que trabalha automaticamente para você, gerando toda a documentação e código necessário para implementar uma funcionalidade.
 
