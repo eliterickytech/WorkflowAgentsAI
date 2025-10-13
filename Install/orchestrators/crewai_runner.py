@@ -41,11 +41,14 @@ except Exception:
 
 # Leve skeleton: lê agentes e scrum_flow, depois materializa artefatos base na pasta data/out/sprint<sprint>
 
-ROOT = Path(__file__).resolve().parents[1]
-AGENTES_DIR = ROOT / "agentes"
-AGENTS_MANUAL_DIR = ROOT / "agents" / "manual"
-PROMPTS_DIR = ROOT / "prompts"
-OUT_DIR = ROOT / "out"
+ROOT = Path(
+    os.getenv("WORKFLOW_AGENTS_ROOT", Path(__file__).resolve().parents[1])
+).expanduser().resolve()
+DATA_DIR = Path(os.getenv("WORKFLOW_DATA_ROOT", ROOT / "data")).expanduser().resolve()
+OUT_DIR = Path(os.getenv("WORKFLOW_OUTPUT_ROOT", DATA_DIR / "out")).expanduser().resolve()
+AGENTES_DIR = Path(os.getenv("WORKFLOW_ORCHESTRATOR_AGENTS_DIR", ROOT / "agentes")).expanduser().resolve()
+AGENTS_MANUAL_DIR = Path(os.getenv("WORKFLOW_MANUAL_AGENTS_DIR", ROOT / "agents" / "manual")).expanduser().resolve()
+PROMPTS_DIR = Path(os.getenv("WORKFLOW_PROMPTS_DIR", ROOT / "prompts")).expanduser().resolve()
 
 
 def load_yaml(path: Path):
@@ -60,6 +63,13 @@ def ensure_dir(p: Path):
 def write_text(path: Path, content: str):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
+
+
+def safe_relative(path: Path, base: Path) -> str:
+    try:
+        return str(path.relative_to(base))
+    except ValueError:
+        return str(path)
 
 
 def render_header(title: str) -> str:
@@ -279,7 +289,10 @@ def main():
         "sprint": sprint,
         "agents": list(agents.keys()),
         "agents_source": source,
-        "artifacts": [str((sprint_dir / "backlog.md").relative_to(ROOT)), str((sprint_dir / "ceremonies.md").relative_to(ROOT))],
+        "artifacts": [
+            safe_relative(sprint_dir / "backlog.md", OUT_DIR),
+            safe_relative(sprint_dir / "ceremonies.md", OUT_DIR),
+        ],
     }
     write_text(sprint_dir / "manifest.json", json.dumps(manifest, indent=2, ensure_ascii=False))
 

@@ -37,6 +37,10 @@ prompts:
     4. **COBERTURA INDEPENDENTE**: Criar testes adicionais se necessario
     5. **RELATORIO DE CONFORMIDADE**: Documentar se cada criterio foi corretamente implementado
 
+    **PREPARO DO CONTEXTO**:
+    - Navegue até os mesmos diretórios e projetos modificados pelo desenvolvedor; nunca valide somente artefatos soltos.
+    - Quando identificar arquivos fora da estrutura esperada, registre como não-conformidade e oriente o ajuste antes da aprovação.
+
     **PROCESSO DE VALIDACAO**:
     - Ler matriz do Developer: Criterio → Implementacao → Teste
     - Executar cada teste mencionado pelo Developer

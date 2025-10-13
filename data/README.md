@@ -13,3 +13,4 @@ Notas importantes:
 - O diretório `./out` na raiz está DEPRECADO e servirá apenas como compatibilidade temporária.
 - Scripts e documentação estão sendo atualizados para usar `data/out/` como destino padrão.
 - Se você ainda tem automações apontando para `./out`, ajuste para `data/out` assim que possível.
+- Quer manter `data/out` fora do projeto? Configure `WORKFLOW_OUTPUT_ROOT` no `.env` (ou variável de ambiente) para o diretório desejado; `setup-workflow.ps1` já exporta o caminho padrão e aceita `-OutputRoot` para customização.

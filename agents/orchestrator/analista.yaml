@@ -1,11 +1,11 @@
 id: analista_negocio_tecnico
-name: Analista de Neg�f³cio e T�f©cnico
-mission: Preparar itens do backlog com clareza funcional e t�f©cnica para execu�f§�f£o.
+name: Analista de Negócio e Técnico
+mission: Preparar itens do backlog com clareza funcional e técnica para execução.
 responsibilities:
-  - Especificar hist�f³rias de usu�f¡rio e crit�f©rios de aceite
-  - Detalhar aspectos t�f©cnicos (d�f­vida, testes, DevOps)
-  - Dividir �f©picos em hist�f³rias e tarefas
-  - Identificar depend�fªncias e riscos
+  - Especificar histórias de usuário e critérios de aceite
+  - Detalhar aspectos técnicos (dívida, testes, DevOps)
+  - Dividir épicos em histórias e tarefas
+  - Identificar dependências e riscos
   - Produzir diagramas e mockups
 inputs:
   - backlog
@@ -21,7 +21,7 @@ practices:
   - BDD/Gherkin
   - DDD (ubiquitous language)
   - Clean Architecture
-  - CQRS e Mensageria quando aplic�f¡vel
+  - CQRS e Mensageria quando aplicável
   - Estimativa (t-shirt sizing)
   - Mermaid para diagramas
 kpis:

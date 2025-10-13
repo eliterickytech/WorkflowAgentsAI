@@ -1,4 +1,4 @@
-# ProsoftAgileAgent - Copilot Instructions
+# TOTVS-WorkflowAI - Copilot Instructions
 
 This document extends the default framework guidance. Read it fully before executing any agent or automation. Every section is written in ASCII to prevent encoding issues.
 
@@ -256,4 +256,4 @@ Optional agents (Frontend Specialist, UX/UI Specialist, Code Reviewer) follow si
 
 ---
 
-Adhering to this extended instruction set keeps the ProsoftAgileAgent workflow predictable, auditable, and aligned with both business goals and engineering excellence. Always begin new sessions by revisiting this document to ensure compliance.
+Adhering to this extended instruction set keeps the TOTVS-WorkflowAI workflow predictable, auditable, and aligned with both business goals and engineering excellence. Always begin new sessions by revisiting this document to ensure compliance.

@@ -23,8 +23,11 @@ except Exception:
     except Exception:
         AUTOGEN_AVAILABLE = False
 
-ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / "out"
+ROOT = Path(
+    os.getenv("WORKFLOW_AGENTS_ROOT", Path(__file__).resolve().parents[1])
+).expanduser().resolve()
+DATA_DIR = Path(os.getenv("WORKFLOW_DATA_ROOT", ROOT / "data")).expanduser().resolve()
+OUT_DIR = Path(os.getenv("WORKFLOW_OUTPUT_ROOT", DATA_DIR / "out")).expanduser().resolve()
 
 # Skeleton: consome data/out/sprint<sprint>/backlog.md e prepara diretórios para trabalho de engenharia
 

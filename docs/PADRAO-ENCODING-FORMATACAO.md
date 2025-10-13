@@ -1,368 +1,118 @@
-# Padrão de Encoding e Formatação - WorkflowAgentsAI
+# Padrão de Encoding e Formatação · WorkflowAgentsAI
 
-## �Y"< Padrão Oficial do Projeto
-
-### �o. Encoding Recomendado
-
-**Para todos os arquivos do projeto:**
-
-| Tipo de Arquivo | Encoding Padrão | BOM | Line Ending |
-|-----------------|-----------------|-----|-------------|
-| `*.md` (Markdown) | **UTF-8** | �O Sem BOM | CRLF (Windows) |
-| `*.ps1` (PowerShell) | **UTF-8** | �O Sem BOM | CRLF (Windows) |
-| `*.yaml`, `*.yml` | **UTF-8** | �O Sem BOM | LF (Unix) |
-| `*.feature` (Gherkin) | **UTF-8** | �O Sem BOM | LF (Unix) |
-| `*.json` | **UTF-8** | �O Sem BOM | LF (Unix) |
-| `*.cs` (C#) | **UTF-8** | �s�️ Com BOM | CRLF (Windows) |
-| `*.ts`, `*.js` | **UTF-8** | �O Sem BOM | LF (Unix) |
-
-### �YZ� Por que UTF-8 SEM BOM?
-
-**Vantagens:**
-- �o. Compatível com Git e GitHub
-- �o. Funciona em Linux, macOS e Windows
-- �o. Compatível com ferramentas de linha de comando
-- �o. Menor tamanho de arquivo (3 bytes a menos)
-- �o. Padrão da indústria para arquivos texto
-
-**Quando usar UTF-8 COM BOM:**
-- �s�️ Arquivos C# (.cs) - Visual Studio espera BOM
-- �s�️ Arquivos de configuração legados do Windows
+Este guia define, de forma objetiva, como trabalhamos com encoding, BOM, finais de linha e prevenção de mojibake em todo o ecossistema do WorkflowAgentsAI.
 
 ---
 
-## �Y>�️ Configuração do VS Code
+## 🎯 Padrão oficial do projeto
 
-### Arquivo `.vscode/settings.json`
+| Tipo de arquivo                           | Encoding | BOM         | Finais de linha |
+|-------------------------------------------|----------|-------------|-----------------|
+| `*.md` (Markdown)                         | UTF-8    | sem BOM     | CRLF            |
+| `*.ps1`, `*.psm1` (PowerShell)            | UTF-8    | sem BOM     | CRLF            |
+| `*.yaml`, `*.yml`, `*.feature`, `*.json`  | UTF-8    | sem BOM     | LF              |
+| `*.ts`, `*.js`, `*.html`, `*.css`         | UTF-8    | sem BOM     | LF              |
+| `*.cs` (C#)                               | UTF-8    | **com BOM** | CRLF            |
+
+### ✅ Por que padronizamos em UTF-8 sem BOM?
+
+- Compatível com Git/GitHub e evita deltas desnecessários.
+- Funciona de forma idêntica em Linux, macOS e Windows.
+- Evita caracteres “fantasma” introduzidos por shells ou pipelines.
+- Reduz o tamanho dos arquivos em 3 bytes.
+- É o padrão de mercado para praticamente todos os arquivos texto modernos.
+
+### 📌 Quando o BOM é obrigatório?
+
+- Arquivos C#, onde o Visual Studio ainda assume BOM por padrão.
+- Configurações legadas do Windows (ex.: `.reg`, `.ini`) **quando exigido explicitamente**.
+
+---
+
+## ⚙️ Configuração recomendada do editor
+
+### VS Code (`.vscode/settings.json`)
 
 ```json
 {
   "files.encoding": "utf8",
-  "files.eol": "\n",
   "files.autoGuessEncoding": false,
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
-
-  "[markdown]": {
-    "files.encoding": "utf8",
-    "files.eol": "\r\n",
-    "files.trimTrailingWhitespace": true
-  },
-
-  "[powershell]": {
-    "files.encoding": "utf8",
-    "files.eol": "\r\n"
-  },
-
-  "[csharp]": {
-    "files.encoding": "utf8bom",
-    "files.eol": "\r\n"
-  },
-
-  "[yaml]": {
-    "files.encoding": "utf8",
-    "files.eol": "\n"
-  },
-
-  "[json]": {
-    "files.encoding": "utf8",
-    "files.eol": "\n"
-  }
+  "files.eol": "\r\n",
+  "[yaml]": { "files.eol": "\n" },
+  "[json]": { "files.eol": "\n" },
+  "[typescript]": { "files.eol": "\n" },
+  "[javascript]": { "files.eol": "\n" },
+  "[html]": { "files.eol": "\n" }
 }
 ```
 
-### Arquivo `.editorconfig` (Raiz do Projeto)
+### EditorConfig (trecho relevante)
 
 ```ini
-# EditorConfig - Padrão de formatação para todos os editores
-# https://editorconfig.org
-
-root = true
-
-# Padrão para todos os arquivos
 [*]
 charset = utf-8
 insert_final_newline = true
 trim_trailing_whitespace = true
-indent_style = space
-indent_size = 2
 
-# Arquivos Markdown
 [*.md]
-charset = utf-8
 end_of_line = crlf
-indent_size = 2
-trim_trailing_whitespace = false  # Permite espaços para quebras de linha
 
-# PowerShell
 [*.ps1]
-charset = utf-8
 end_of_line = crlf
-indent_size = 4
 
-# YAML
-[*.{yaml,yml}]
-charset = utf-8
+[*.yaml]
 end_of_line = lf
-indent_size = 2
 
-# JSON
-[*.json]
-charset = utf-8
-end_of_line = lf
-indent_size = 2
-
-# Gherkin (BDD)
-[*.feature]
-charset = utf-8
-end_of_line = lf
-indent_size = 2
-
-# C# e .NET
 [*.cs]
 charset = utf-8-bom
 end_of_line = crlf
-indent_size = 4
-
-# TypeScript/JavaScript
-[*.{ts,js,tsx,jsx}]
-charset = utf-8
-end_of_line = lf
-indent_size = 2
-
-# HTML
-[*.{html,htm}]
-charset = utf-8
-end_of_line = lf
-indent_size = 2
 ```
 
 ---
 
-## �Y"� Como Verificar o Encoding Atual
+## 🔍 Diagnóstico de mojibake
 
-### No VS Code
+| O que aparece          | Deveria ser | Causa provável                | Correção                     |
+|-----------------------|-------------|--------------------------------|------------------------------|
+| `Ã§`, `Ã£`, `Ã³`      | `ç`, `ã`, `ó`| Texto UTF-8 lido como Latin-1  | Reabrir arquivo como UTF-8   |
+| `ï¿½`                  | Qualquer    | Caractere inválido/substituto | Revisar fonte original       |
+| `â€™`, `â€œ`, `â€�`    | `’`, `“`, `”`| Word/Excel colado sem limpeza  | Colar sem formatação         |
+| Emojis quebrados       | Emoji real  | Encode/double encode           | Copiar novamente da fonte    |
 
-1. **Verificar encoding atual:**
-   - Abra o arquivo
-   - Veja o canto **inferior direito** da janela
-   - Deve mostrar: `UTF-8` ou `UTF-8 with BOM`
+> 📌 **Alerta:** se o arquivo já está correto (acentos e emojis exibindo normalmente), **não** force regravação — isso evita regressões.
 
-2. **Converter encoding:**
-   - Clique no encoding (ex: `UTF-8 with BOM`)
-   - Selecione "Save with Encoding"
-   - Escolha `UTF-8` (sem BOM)
+---
 
-### Via PowerShell
+## 🛠️ Validação automatizada
+
+Execute o script oficial sempre que fizer importações em massa ou antes do commit:
 
 ```powershell
-# Verificar BOM de um arquivo
-$bytes = [System.IO.File]::ReadAllBytes("arquivo.md")
-if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
-    Write-Host "UTF-8 COM BOM"
-} else {
-    Write-Host "UTF-8 SEM BOM (correto!)"
-}
-
-# Verificar múltiplos arquivos
-Get-ChildItem -Recurse -Include *.md | ForEach-Object {
-    $bytes = [System.IO.File]::ReadAllBytes($_.FullName)
-    $hasBOM = ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF)
-    "$($_.Name): $(if($hasBOM){'COM BOM'}else{'SEM BOM �o"'})"
-}
+cd C:\Projetos\WorkflowAgentsAI
+.\scripts\powershell\validate-encoding.ps1 -Fix -RepairMojibake
 ```
+
+Ele verifica e corrige, quando autorizado por `-Fix`, os seguintes pontos:
+
+1. BOM presente/ausente conforme tabela.
+2. Quebra de linha (CRLF ou LF) de acordo com o tipo de arquivo.
+3. Sequências clássicas de mojibake (ex.: `Ã`, `â€™`, `ï¿½`), tentando reparo automático quando `-RepairMojibake` é informado.
 
 ---
 
-## �Ys� Caracteres que DEVEM Funcionar Corretamente
+## 🧭 Boas práticas diárias
 
-### Português Brasileiro
-
-| Caractere | Unicode | Bytes UTF-8 | Correto |
-|-----------|---------|-------------|---------|
-| ç | U+00E7 | `C3 A7` | �o. |
-| ã | U+00E3 | `C3 A3` | �o. |
-| õ | U+00F5 | `C3 B5` | �o. |
-| á | U+00E1 | `C3 A1` | �o. |
-| é | U+00E9 | `C3 A9` | �o. |
-| í | U+00ED | `C3 AD` | �o. |
-| ó | U+00F3 | `C3 B3` | �o. |
-| ú | U+00FA | `C3 BA` | �o. |
-| â | U+00E2 | `C3 A2` | �o. |
-| ê | U+00EA | `C3 AA` | �o. |
-| ô | U+00F4 | `C3 B4` | �o. |
-
-### Emojis Comuns no Projeto
-
-| Emoji | Nome | Unicode | Bytes UTF-8 |
-|-------|------|---------|-------------|
-| �YZ� | Alvo | U+1F3AF | `F0 9F 8E AF` |
-| �Ys? | Foguete | U+1F680 | `F0 9F 9A 80` |
-| �Y"s | Livros | U+1F4DA | `F0 9F 93 9A` |
-| �Y"� | Memo | U+1F4DD | `F0 9F 93 9D` |
-| �o. | Check | U+2705 | `E2 9C 85` |
-| �O | X | U+274C | `E2 9D 8C` |
-| �s�️ | Aviso | U+26A0 | `E2 9A A0` |
-| �Y'� | Lâmpada | U+1F4A1 | `F0 9F 92 A1` |
-
-### Símbolos Especiais
-
-| Símbolo | Nome | Unicode | Bytes UTF-8 |
-|---------|------|---------|-------------|
-| �?' | Seta direita | U+2192 | `E2 86 92` |
-| �?� | Seta esquerda | U+2190 | `E2 86 90` |
-| �?' | Seta cima | U+2191 | `E2 86 91` |
-| �?" | Seta baixo | U+2193 | `E2 86 93` |
-| �?� | Bullet | U+2022 | `E2 80 A2` |
-| �?� | Elipse | U+2026 | `E2 80 A6` |
-| �?" | Em dash | U+2014 | `E2 80 94` |
-| �?" | En dash | U+2013 | `E2 80 93` |
+1. Configure seu editor para salvar *sempre* em UTF-8.
+2. Ao copiar conteúdos externos (Word, Excel, PDF), cole primeiro em um editor puro (ex.: Notepad++) para eliminar formatação problemática.
+3. Revise diffs antes do commit e rejeite qualquer alteração que insira mojibake.
+4. Para automações, force a biblioteca/API a escrever em UTF-8 (com ou sem BOM, conforme o artefato).
+5. Se encontrar caracteres estranhos, pare, identifique a fonte correta e só então normalize — nunca “adivinhe” o texto original.
 
 ---
 
-## �Y"� Como Corrigir Encoding Incorreto
+## 📎 Referências rápidas
 
-### Método 1: VS Code (Recomendado)
-
-```
-1. Abrir arquivo
-2. Clicar no encoding (canto inferior direito)
-3. "Reopen with Encoding" �?' Escolher o encoding que MOSTRA corretamente
-4. "Save with Encoding" �?' UTF-8 (sem BOM)
-5. Salvar arquivo (Ctrl+S)
-```
-
-### Método 2: PowerShell
-
-```powershell
-# Ler arquivo e salvar com encoding correto
-$content = Get-Content "arquivo.md" -Raw -Encoding UTF8
-$utf8NoBOM = New-Object System.Text.UTF8Encoding $false
-[System.IO.File]::WriteAllText("arquivo.md", $content, $utf8NoBOM)
-```
-
-### Método 3: Script de Correção em Massa
-
-```powershell
-# Processar múltiplos arquivos
-Get-ChildItem -Recurse -Include *.md,*.ps1 | ForEach-Object {
-    try {
-        $content = Get-Content $_.FullName -Raw -Encoding UTF8
-        $utf8NoBOM = New-Object System.Text.UTF8Encoding $false
-        [System.IO.File]::WriteAllText($_.FullName, $content, $utf8NoBOM)
-        Write-Host "�o. $($_.Name)"
-    } catch {
-        Write-Host "�O $($_.Name): $_"
-    }
-}
-```
-
----
-
-## �Ys� Sintomas de Encoding Incorreto
-
-### Como Identificar
-
-| Você Vê | Deveria Ser | Problema |
-|---------|-------------|----------|
-| `�f§` | `ç` | Double UTF-8 encoding |
-| `�f�,§` | `ç` | Triple UTF-8 encoding |
-| `�f£` | `ã` | Double UTF-8 encoding |
-| `�f©` | `é` | Double UTF-8 encoding |
-| `â�,��"�` | `'` | Windows-1252 �?' UTF-8 |
-| `â�,�"` | `�?"` | Windows-1252 �?' UTF-8 |
-| `�` | Qualquer | Caractere inválido |
-| `ðŸš�,�` | `�Ys?` | Double UTF-8 em emoji |
-
-### Causas Comuns
-
-1. **Editor configurado errado**
-   - Editor lê UTF-8 como Latin-1/ISO-8859-1
-   - Solução: Configurar editor para UTF-8
-
-2. **Copy/paste de Word/Excel**
-   - Word usa Windows-1252, não UTF-8
-   - Solução: Limpar formatação ao colar
-
-3. **Git configurado incorreto**
-   - `core.autocrlf=true` pode causar problemas
-   - Solução: `git config core.autocrlf false`
-
-4. **PowerShell sem especificar encoding**
-   - Default pode ser ASCII ou Latin-1
-   - Solução: Sempre usar `-Encoding UTF8`
-
----
-
-## �o. Checklist de Qualidade
-
-### Antes de Commit
-
-- [ ] Todos os arquivos `.md` estão em **UTF-8 sem BOM**
-- [ ] Todos os arquivos `.ps1` estão em **UTF-8 sem BOM**
-- [ ] Arquivos `.cs` estão em **UTF-8 com BOM**
-- [ ] Line endings corretos (CRLF para Windows, LF para Unix)
-- [ ] Sem trailing whitespace (exceto Markdown)
-- [ ] Final newline presente em todos os arquivos
-- [ ] Caracteres acentuados aparecem corretamente
-- [ ] Emojis aparecem corretamente (se aplicável)
-
-### Validação Automática
-
-```powershell
-# Script de validação
-$errors = @()
-
-Get-ChildItem -Recurse -Include *.md,*.ps1,*.yaml,*.json | ForEach-Object {
-    $bytes = [System.IO.File]::ReadAllBytes($_.FullName)
-    $hasBOM = ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF)
-
-    # Markdown e PowerShell N�fO devem ter BOM
-    if ($_.Extension -in @('.md','.ps1') -and $hasBOM) {
-        $errors += "�O $($_.Name) tem BOM (deveria ser sem BOM)"
-    }
-
-    # C# DEVE ter BOM
-    if ($_.Extension -eq '.cs' -and -not $hasBOM) {
-        $errors += "�s�️ $($_.Name) não tem BOM (C# deveria ter)"
-    }
-}
-
-if ($errors.Count -eq 0) {
-    Write-Host "�o. Todos os arquivos estão corretos!"
-} else {
-    Write-Host "�O Encontrados $($errors.Count) problemas:"
-    $errors | ForEach-Object { Write-Host "  $_" }
-}
-```
-
----
-
-## �Y"s Referências
-
-- [UTF-8 Specification](https://www.unicode.org/versions/Unicode15.0.0/ch03.pdf)
+- [Standard UTF-8](https://www.unicode.org/versions/Unicode15.0.0/ch03.pdf)
 - [EditorConfig](https://editorconfig.org/)
-- [VS Code Encoding](https://code.visualstudio.com/docs/editor/codebasics#_file-encoding-support)
-- [PowerShell Encoding](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content)
-
----
-
-## �YZ� Resumo Executivo
-
-**Padrão oficial do WorkflowAgentsAI:**
-
-```
-�o. UTF-8 sem BOM
-�o. Line ending: CRLF (Windows) para .md e .ps1
-�o. Line ending: LF (Unix) para .yaml, .json, .feature
-�o. Indentação: 2 espaços (geral), 4 espaços (PowerShell e C#)
-�o. Trim trailing whitespace
-�o. Insert final newline
-```
-
-**Configuração mínima necessária:**
-1. Copiar `.editorconfig` para raiz do projeto �o. (já existe)
-2. Configurar VS Code settings (criar `.vscode/settings.json`)
-3. Instalar extensão "EditorConfig for VS Code"
-
-**Status atual do projeto:** �o. **100% correto** (87 arquivos em UTF-8 sem BOM)
+- [Guia de Encoding no VS Code](https://code.visualstudio.com/docs/editor/codebasics#_file-encoding-support)
+- [`validate-encoding.ps1`](../scripts/powershell/validate-encoding.ps1)

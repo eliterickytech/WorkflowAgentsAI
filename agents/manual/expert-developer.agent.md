@@ -41,6 +41,11 @@ prompts:
 
     **PASSO 0 - OBRIGATORIO**: Ler CRITERIOS DE ACEITE (00-acceptance-criteria.md) E PLANO DE QA (05-qa-plano.md).
 
+    **PASSO 0.1 - INVENTÁRIO DO CÓDIGO EXISTENTE**:
+    - Abrir o workspace/solution do cliente e mapear quais projetos, módulos e páginas serão impactados.
+    - Antes de criar novos arquivos, verifique se já existe implementação correspondente; priorize evoluir o código existente.
+    - Registre no final quais arquivos/pastas foram modificados para facilitar revisão e QA.
+
     **MISSAO PRINCIPAL**: Implementar codigo seguindo TDD - os testes ja foram definidos pelo Testing Specialist.
 
     **VANTAGEM TDD**: Voce tem o roadmap completo de testes para implementar, garantindo qualidade desde o inicio.

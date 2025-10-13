@@ -1,6 +1,6 @@
 <#$
 .SYNOPSIS
-  Instala e configura os Agentes ProsoftAgileAgent em um diretório especificado.
+  Instala e configura os Agentes TOTVS-WorkflowAI em um diretório especificado.
 .DESCRIPTION
   - Checa e instala pre-requisitos (Python, Node.js, Git, .NET SDK)
   - Pergunta modo (Manual ou CrewAI), Sprint e Activity
@@ -13,6 +13,7 @@
 #>
 param(
   [string]$TargetProjectPath,
+  [string]$OutputRoot,
   [switch]$Quiet
 )
 
@@ -80,7 +81,7 @@ function Configure-Env($mode, $sprint, $activity) {
   if ($activity) { $env:OUTPUT_ACTIVITY = $activity }
 }
 
-function Create-EnvFile($target, $mode, $sprint, $activity, $projectName) {
+function Create-EnvFile($target, $mode, $sprint, $activity, $projectName, $outputRoot) {
   $envExample = Join-Path $target '.env.example'
   $envFile = Join-Path $target '.env'
 
@@ -110,8 +111,26 @@ function Create-EnvFile($target, $mode, $sprint, $activity, $projectName) {
     $content = $content -replace '^PROJECT_NAME=.*', "PROJECT_NAME=$projectName"
   }
 
+  $resolvedTarget = try { (Resolve-Path $target -ErrorAction Stop).Path } catch { $target }
+  if ($content -match '^WORKFLOW_AGENTS_ROOT=') {
+    $content = $content -replace '^WORKFLOW_AGENTS_ROOT=.*', "WORKFLOW_AGENTS_ROOT=$resolvedTarget"
+  } else {
+    $content += "`nWORKFLOW_AGENTS_ROOT=$resolvedTarget"
+  }
+
+  if ($outputRoot) {
+    try { $resolvedOutput = (Resolve-Path $outputRoot -ErrorAction Stop).Path } catch { $resolvedOutput = $outputRoot }
+  } else {
+    $resolvedOutput = Join-Path $resolvedTarget 'data\out'
+  }
+  if ($content -match '^WORKFLOW_OUTPUT_ROOT=') {
+    $content = $content -replace '^WORKFLOW_OUTPUT_ROOT=.*', "WORKFLOW_OUTPUT_ROOT=$resolvedOutput"
+  } else {
+    $content += "`nWORKFLOW_OUTPUT_ROOT=$resolvedOutput"
+  }
+
   Set-Content -Path $envFile -Value $content -Encoding UTF8
-  Write-Info "Arquivo .env criado com as configuracoes: Modo=$mode, Sprint=$sprint, Activity=$activity, Projeto=$projectName"
+  Write-Info "Arquivo .env criado com as configuracoes: Modo=$mode, Sprint=$sprint, Activity=$activity, Projeto=$projectName, AgentsRoot=$resolvedTarget, OutputRoot=$resolvedOutput"
 }
 
 function Copy-Workflow($target) {
@@ -199,6 +218,22 @@ function Copy-Workflow($target) {
         }
       }
     }
+  }
+
+  # Copiar super-prompts preenchidos para o cliente (sempre que existirem no repositório)
+  $superPromptSrc = Join-Path $repoRoot 'docs/prompts/super-prompts'
+  if (Test-Path $superPromptSrc) {
+    $destPromptsRoot = Join-Path $target 'prompts-manual/prompts'
+    Ensure-Dir $destPromptsRoot
+    $destSuperPrompts = Join-Path $destPromptsRoot 'super-prompts'
+    if (Test-Path $destSuperPrompts) {
+      Remove-Item -Path $destSuperPrompts -Recurse -Force
+    }
+    Ensure-Dir $destSuperPrompts
+    Copy-Item -Path (Join-Path $superPromptSrc '*') -Destination $destSuperPrompts -Recurse -Force
+    Write-Info "Super-prompts preenchidos copiados para: $destSuperPrompts"
+  } else {
+    Write-Warn "Diretorio docs/prompts/super-prompts nao encontrado no repositório; nenhum super-prompt adicional foi copiado."
   }
 }
 
@@ -1645,7 +1680,7 @@ function Create-GenericProject($projectPath, $projectName) {
     Ensure-Dir $projectPath
     New-Item -ItemType Directory -Path "$projectPath/src" -Force | Out-Null
     New-Item -ItemType Directory -Path "$projectPath/docs" -Force | Out-Null
-    "# $projectName`n`nProjeto criado via ProsoftAgileAgent" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
+    "# $projectName`n`nProjeto criado via TOTVS-WorkflowAI" | Out-File -FilePath "$projectPath/README.md" -Encoding UTF8
     Write-Info "Projeto generico '$projectName' criado com sucesso!"
   } catch {
     Write-Warn "Erro ao criar projeto generico: $_"
@@ -1692,11 +1727,19 @@ try {
   }
 
   Configure-Env -mode $mode -sprint $sprint -activity $activity
+  $resolvedAgentsRoot = try { (Resolve-Path $TargetProjectPath -ErrorAction Stop).Path } catch { $TargetProjectPath }
+  $env:WORKFLOW_AGENTS_ROOT = $resolvedAgentsRoot
+  if ($OutputRoot) {
+    $resolvedOutputRoot = try { (Resolve-Path $OutputRoot -ErrorAction Stop).Path } catch { $OutputRoot }
+  } else {
+    $resolvedOutputRoot = Join-Path $resolvedAgentsRoot 'data\out'
+  }
+  $env:WORKFLOW_OUTPUT_ROOT = $resolvedOutputRoot
 
   Copy-Workflow -target $TargetProjectPath
 
   # Criar arquivo .env com as configuracoes
-  Create-EnvFile -target $TargetProjectPath -mode $mode -sprint $sprint -activity $activity -projectName $projectName
+  Create-EnvFile -target $TargetProjectPath -mode $mode -sprint $sprint -activity $activity -projectName $projectName -outputRoot $OutputRoot
 
   # Configurar super-prompt com dados do projeto (opcional: somente se existir)
   $maybeSuper = Join-Path $TargetProjectPath 'prompts-manual/prompts/super-prompt.md'

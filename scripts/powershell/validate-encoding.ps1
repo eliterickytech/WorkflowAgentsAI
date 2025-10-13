@@ -1,289 +1,278 @@
 <#
 .SYNOPSIS
-    Valida a politica de encoding (BOM) do repositorio.
+    Valida padrões de encoding (BOM), finais de linha e possíveis ocorrências de mojibake.
 
 .DESCRIPTION
-    Confere se os arquivos seguem a regra de BOM por tipo:
-     - UTF-8 sem BOM para: .md, .ps1, .psm1, .yaml/.yml, .json, .feature, .ts, .js, .html
-     - UTF-8 COM BOM para: .cs
-
-    Opcionalmente corrige arquivos com BOM indevido (remove BOM) e adiciona BOM em .cs quando ausente.
+    - Garante UTF-8 sem BOM para arquivos de texto, exceto .cs (que exigem BOM).
+    - Verifica finais de linha (CRLF para scripts/markdown, LF para arquivos web/config).
+    - Identifica sequências típicas de mojibake (ï¿½, ÃÂ, etc.) e pode repará-las automaticamente.
 
 .PARAMETER Fix
-    Quando presente, aplica correcoes automaticas.
+    Aplica correções automáticas para BOM e finais de linha.
+
+.PARAMETER RepairMojibake
+    Quando usado com -Fix, tenta reparar conteúdo com caracteres corrompidos (mojibake).
+
+.PARAMETER Root
+    Diretório raiz a inspecionar. Por padrão, assume o repositório (dois níveis acima deste script).
 
 .EXAMPLE
     .\validate-encoding.ps1
 
 .EXAMPLE
-    .\validate-encoding.ps1 -Fix
+    .\validate-encoding.ps1 -Fix -RepairMojibake
 #>
+[CmdletBinding()]
 param(
     [switch]$Fix,
     [switch]$RepairMojibake,
-    [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..\\..')).Path
+    [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 )
 
-    estão com encoding correto (UTF-8 sem BOM para maioria dos arquivos)
-
+Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-function Write-ColoredOutput {
+function Write-Status {
     param(
-        [Parameter(Mandatory=$true)][string]$Message,
-        [ValidateSet('Info','Success','Warning','Error')][string]$Type = 'Info'
+        [Parameter(Mandatory)][string]$Message,
+        [ValidateSet('Info','Success','Warning','Error')][string]$Level = 'Info'
     )
-    $colors = @{ Info='Cyan'; Success='Green'; Warning='Yellow'; Error='Red' }
-    Write-Host $Message -ForegroundColor $colors[$Type]
+    $colors = @{
+        Info    = 'Cyan'
+        Success = 'Green'
+        Warning = 'Yellow'
+        Error   = 'Red'
+    }
+    Write-Host $Message -ForegroundColor $colors[$Level]
 }
 
-function Get-FileBOMStatus {
-    param([Parameter(Mandatory=$true)][string]$FilePath)
-    $bytes = [System.IO.File]::ReadAllBytes($FilePath)
-    $hasBOM = ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF)
-    return @{ HasBOM = $hasBOM }
+function Get-BomStatus {
+    param([Parameter(Mandatory)][string]$Path)
+    $bytes = [System.IO.File]::ReadAllBytes($Path)
+    $hasBom = ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF)
+    return @{ HasBom = $hasBom }
 }
 
-function Set-FileEncodingUTF8 {
+function Set-FileUtf8 {
     param(
-        [Parameter(Mandatory=$true)][string]$FilePath,
-        [Parameter()][bool]$WithBOM = $false
+        [Parameter(Mandatory)][string]$Path,
+        [bool]$WithBom = $false
     )
-    $content = Get-Content -Path $FilePath -Raw -Encoding UTF8
-    $utf8 = New-Object System.Text.UTF8Encoding($WithBOM)
-    [System.IO.File]::WriteAllText($FilePath, $content, $utf8)
-    }
-
-# Regras de BOM por extensão
-$encodingRules = @{
-    '.md'      = @{ ExpectBOM = $false; Name = 'Markdown' }
-    '.ps1'     = @{ ExpectBOM = $false; Name = 'PowerShell' }
-    '.psm1'    = @{ ExpectBOM = $false; Name = 'PowerShell Module' }
-    '.yaml'    = @{ ExpectBOM = $false; Name = 'YAML' }
-    '.yml'     = @{ ExpectBOM = $false; Name = 'YAML' }
-    '.json'    = @{ ExpectBOM = $false; Name = 'JSON' }
-        '.feature' = @{ ExpectBOM = $false; Name = 'Gherkin' }
-    '.ts'      = @{ ExpectBOM = $false; Name = 'TypeScript' }
-    '.js'      = @{ ExpectBOM = $false; Name = 'JavaScript' }
-    '.html'    = @{ ExpectBOM = $false; Name = 'HTML' }
-    '.cs'      = @{ ExpectBOM = $true;  Name = 'C#' }
+    $content = [System.IO.File]::ReadAllText($Path)
+    $encoding = New-Object System.Text.UTF8Encoding($WithBom)
+    [System.IO.File]::WriteAllText($Path, $content, $encoding)
 }
 
-Write-ColoredOutput "`nValidando encoding (BOM) de arquivos..." 'Info'
-
-$files = Get-ChildItem -Path $Root -Recurse -File |
-    Where-Object {
-        $_.FullName -notmatch '\\node_modules\\|\\\.git\\|\\\.venv|\\obj\\|\\bin\\' -and
-        $encodingRules.ContainsKey([IO.Path]::GetExtension($_.Name).ToLowerInvariant())
-    }
-
-$total = $files.Count
-$ok = 0; $bad = 0; $fixed = 0
-$issues = @()
-
-Write-ColoredOutput "Analisando $total arquivos..." 'Info'
-
-foreach ($f in $files) {
-    $ext  = [IO.Path]::GetExtension($f.Name).ToLowerInvariant()
-    $rule = $encodingRules[$ext]
-    $bom  = Get-FileBOMStatus -FilePath $f.FullName
-    $has  = [bool]$bom.HasBOM
-    $exp  = [bool]$rule.ExpectBOM
-
-    if ($has -eq $exp) {
-        $ok++
-        continue
-    }
-
-    $expectedText = if ($exp) { 'UTF-8 COM BOM' } else { 'UTF-8 SEM BOM' }
-    $actualText   = if ($has) { 'UTF-8 COM BOM' } else { 'UTF-8 SEM BOM' }
-
-    $issue = [pscustomobject]@{
-        File     = $f.FullName
-        Type     = $rule.Name
-        Expected = $expectedText
-        Actual   = $actualText
-        Fixed    = $false
-            }
-
-    if ($Fix) {
-        try {
-            if (-not $exp -and $has) {
-                # remover BOM
-                Set-FileEncodingUTF8 -FilePath $f.FullName -WithBOM:$false
-                $issue.Fixed = $true; $fixed++
-                Write-ColoredOutput "  [FIX] Corrigido (removido BOM): $($f.FullName)" 'Warning'
-            } elseif ($exp -and -not $has) {
-                # adicionar BOM (ex.: .cs)
-                Set-FileEncodingUTF8 -FilePath $f.FullName -WithBOM:$true
-                $issue.Fixed = $true; $fixed++
-                Write-ColoredOutput "  [FIX] Corrigido (adicionado BOM): $($f.FullName)" 'Warning'
-            }
-        } catch {
-            Write-ColoredOutput "  ERRO: Falha ao corrigir: $($f.FullName) - $($_.Exception.Message)" 'Error'
+function Get-TargetFiles {
+    param([string]$RootPath, [hashtable]$Rules)
+    Get-ChildItem -Path $RootPath -Recurse -File |
+        Where-Object {
+            $_.FullName -notmatch '\\node_modules\\|\\\.git\\|\\\.venv|\\obj\\|\\bin\\' -and
+            $Rules.ContainsKey([IO.Path]::GetExtension($_.Name).ToLowerInvariant())
+        }
 }
 
-    $expectBOM = $rule.ExpectBOM
-
-# Resumo    $hasBOM = $encoding.HasBOM
-
-Write-Host "`n$("=" * 70)"
-
-Write-Host "RESUMO DA VALIDACAO" -ForegroundColor Cyan    if ($expectBOM -eq $hasBOM) {
-
-Write-Host ("=" * 70)        $correctFiles++
-
+function Normalize-LineEndings {
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [ValidateSet('CRLF','LF')][string]$Mode
+    )
+    $raw = [System.IO.File]::ReadAllText($Path)
+    if ($Mode -eq 'CRLF') {
+        $normalized = $raw -replace "`r?`n", "`r`n"
     } else {
+        $normalized = $raw -replace "`r?`n", "`n"
+    }
+    if ($normalized -ne $raw) {
+        $encoding = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllText($Path, $normalized, $encoding)
+        return $true
+    }
+    return $false
+}
 
-Write-Host "`nTotal de arquivos: $totalFiles"        $incorrectFiles++
+function Repair-MojibakeText {
+    param([Parameter(Mandatory)][string]$Text)
 
-Write-Host "Corretos: $correctFiles" -ForegroundColor Green
+    $customPairs = @(
+        @{ From = 'ï¿½fÂ¡'; To = 'á' }, @{ From = 'ï¿½fÂ£'; To = 'ã' },
+        @{ From = 'ï¿½fÂ§'; To = 'ç' }, @{ From = 'ï¿½fÂ¨'; To = 'è' },
+        @{ From = 'ï¿½fÂ©'; To = 'é' }, @{ From = 'ï¿½fÂª'; To = 'ê' },
+        @{ From = 'ï¿½fÂ«'; To = 'ë' }, @{ From = 'ï¿½fÂ­'; To = 'í' },
+        @{ From = 'ï¿½fÂ¯'; To = 'ï' }, @{ From = 'ï¿½fÂ±'; To = 'ñ' },
+        @{ From = 'ï¿½fÂ³'; To = 'ó' }, @{ From = 'ï¿½fÂ´'; To = 'ô' },
+        @{ From = 'ï¿½fÂµ'; To = 'õ' }, @{ From = 'ï¿½fÂº'; To = 'ú' },
+        @{ From = 'ï¿½fÂ¼'; To = 'ü' }, @{ From = 'ï¿½fÂ¢'; To = 'â' },
+        @{ From = 'ï¿½fÂ¤'; To = 'ä' },
+        @{ From = "f',Ã‚Â¡"; To = 'á' }, @{ From = "f',Ã‚Â£"; To = 'ã' },
+        @{ From = "f',Ã‚Â§"; To = 'ç' }, @{ From = "f',Ã‚Â©"; To = 'é' },
+        @{ From = "f',Ã‚Âª"; To = 'ê' }, @{ From = "f',Ã‚Â­"; To = 'í' },
+        @{ From = "f',Ã‚Â³"; To = 'ó' }, @{ From = "f',Ã‚Âµ"; To = 'õ' },
+        @{ From = "f',Ã‚Âº"; To = 'ú' }, @{ From = "f',Ã‚Â¢"; To = 'â' }
+    )
 
-        $expected = if($expectBOM) { "UTF-8 COM BOM" } else { "UTF-8 SEM BOM" }
+    $doubleEncoded = @(
+        @{ From = 'Ã¡'; To = 'á' }, @{ From = 'Ã¢'; To = 'â' },
+        @{ From = 'Ã£'; To = 'ã' }, @{ From = 'Ãª'; To = 'ê' },
+        @{ From = 'Ã©'; To = 'é' }, @{ From = 'Ã¨'; To = 'è' },
+        @{ From = 'Ã«'; To = 'ë' }, @{ From = 'Ã­'; To = 'í' },
+        @{ From = 'Ã³'; To = 'ó' }, @{ From = 'Ã´'; To = 'ô' },
+        @{ From = 'Ãµ'; To = 'õ' }, @{ From = 'Ãº'; To = 'ú' },
+        @{ From = 'Ã§'; To = 'ç' },
+        @{ From = 'Ã�'; To = 'Á' }, @{ From = 'Ã‚'; To = 'Â' },
+        @{ From = 'Ãƒ'; To = 'Ã' }, @{ From = 'Ã„'; To = 'Ä' },
+        @{ From = 'Ã‰'; To = 'É' }, @{ From = 'ÃŠ'; To = 'Ê' },
+        @{ From = 'ÃŒ'; To = 'Ì' }, @{ From = 'Ã�'; To = 'Í' },
+        @{ From = 'ÃŽ'; To = 'Î' }, @{ From = 'Ã“'; To = 'Ó' },
+        @{ From = 'Ã”'; To = 'Ô' }, @{ From = 'Ã•'; To = 'Õ' },
+        @{ From = 'Ãš'; To = 'Ú' }, @{ From = 'Ãœ'; To = 'Ü' },
+        @{ From = 'Ã‡'; To = 'Ç' }
+    )
 
-if ($incorrectFiles -gt 0) {        $actual = if($hasBOM) { "UTF-8 COM BOM" } else { "UTF-8 SEM BOM" }
+    foreach ($pair in $customPairs) {
+        $Text = $Text -replace [regex]::Escape($pair.From), $pair.To
+    }
+    foreach ($pair in $doubleEncoded) {
+        $Text = $Text -replace [regex]::Escape($pair.From), $pair.To
+    }
 
-    Write-Host "Incorretos: $incorrectFiles" -ForegroundColor Red
+    # Remover replacement char remanescente
+    $Text = $Text -replace [char]0xFFFD, ''
+    return $Text
+}
 
-            $errorObj = [PSCustomObject]@{
+function Repair-MojibakeFile {
+    param([Parameter(Mandatory)][string]$Path)
+    $original = [System.IO.File]::ReadAllText($Path)
+    $repaired = Repair-MojibakeText -Text $original
+    if ($repaired -ne $original) {
+        $encoding = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllText($Path, $repaired, $encoding)
+        return $true
+    }
+    return $false
+}
 
-    if ($Fix) {            File = $file.FullName.Replace($PSScriptRoot, '.')
+# Regras por extensão
+$encodingRules = @{
+    '.md'      = @{ ExpectBom = $false; LineEndings = 'CRLF' }
+    '.ps1'     = @{ ExpectBom = $false; LineEndings = 'CRLF' }
+    '.psm1'    = @{ ExpectBom = $false; LineEndings = 'CRLF' }
+    '.yaml'    = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.yml'     = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.json'    = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.feature' = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.ts'      = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.js'      = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.html'    = @{ ExpectBom = $false; LineEndings = 'LF'   }
+    '.cs'      = @{ ExpectBom = $true;  LineEndings = 'CRLF' }
+}
 
-        Write-Host "Corrigidos: $fixedFiles" -ForegroundColor Green            Type = $rule.Name
+Write-Status "`nValidando arquivos a partir de $Root" 'Info'
+$files = Get-TargetFiles -RootPath $Root -Rules $encodingRules
+$total = $files.Count
+Write-Status "Arquivos analisados: $total" 'Info'
 
-        if ($fixedFiles -lt $incorrectFiles) {            Expected = $expected
+$bomIssues    = @()
+$bomFixed     = 0
 
-            Write-Host "Nao corrigidos: $($incorrectFiles - $fixedFiles)" -ForegroundColor Yellow            Actual = $actual
+foreach ($file in $files) {
+    $rule = $encodingRules[[IO.Path]::GetExtension($file.Name).ToLowerInvariant()]
+    $status = Get-BomStatus -Path $file.FullName
+    $hasBom = [bool]$status.HasBom
+    $expect = [bool]$rule.ExpectBom
+    if ($hasBom -ne $expect) {
+        $bomIssues += [pscustomobject]@{
+            File     = $file.FullName
+            Expected = if ($expect) { 'UTF-8 com BOM' } else { 'UTF-8 sem BOM' }
+            Actual   = if ($hasBom) { 'UTF-8 com BOM' } else { 'UTF-8 sem BOM' }
+        }
+        if ($Fix) {
+            Set-FileUtf8 -Path $file.FullName -WithBom:$expect
+            $bomFixed++
+            Write-Status "  [FIX] Ajustado BOM: $($file.FullName)" 'Warning'
+        }
+    }
+}
 
-        }            Fixed = $false
-
-    }        }
-
+if ($bomIssues.Count -eq 0) {
+    Write-Status "BOM: nenhum problema encontrado." 'Success'
 } else {
-
-    Write-Host "`nTodos os arquivos estao com encoding correto!" -ForegroundColor Green        if ($Fix -and -not $expectBOM -and $hasBOM) {
-
-}            Write-ColoredOutput "  🔧 Corrigindo: $($errorObj.File)" 'Warning'
-
-            if (Repair-FileEncoding -FilePath $file.FullName) {
-
-# Detalhes                $errorObj.Fixed = $true
-
-if ($validationErrors.Count -gt 0 -and -not $Fix) {                $fixedFiles++
-
-    Write-Host "`nARQUIVOS COM PROBLEMAS:" -ForegroundColor Red                Write-ColoredOutput "    ✅ Corrigido!" 'Success'
-
-    $validationErrors | Format-Table -AutoSize File, Type, Expected, Actual            }
-
-            } else {
-    Write-ColoredOutput "  ERRO: $($f.FullName) - Esperado: $expectedText | Encontrado: $actualText" 'Error'
+    Write-Status "BOM: $($bomIssues.Count) arquivo(s) incorreto(s)." 'Error'
+    if (-not $Fix) {
+        $bomIssues | Format-Table -AutoSize
     }
-
-    $issues += $issue
-    $bad++
-    }
-
-Write-ColoredOutput "`nRESUMO" 'Info'
-Write-ColoredOutput ("Total: $total | Corretos: $ok | Incorretos: $bad" ) 'Info'
-if ($Fix -and $bad -gt 0) {
-    Write-ColoredOutput ("Corrigidos: $fixed | Nao corrigidos: " + [Math]::Max(0, $bad - $fixed)) 'Info'
 }
 
-if ($issues.Count -gt 0 -and -not $Fix) {
-    Write-ColoredOutput "`nDetalhes dos problemas:" 'Error'
-    $issues | Select-Object File, Type, Expected, Actual | Format-Table -AutoSize
-    Write-ColoredOutput "`nPara corrigir automaticamente, execute: .\\validate-encoding.ps1 -Fix" 'Info'
-}
-
-if ($bad -gt 0 -and -not $Fix) { exit 1 }
-elseif ($bad -gt 0 -and $Fix -and $fixed -lt $bad) { exit 1 }
-else {
-    # Continue to EOL and mojibake validation
-}
-
-# --- EOL and Mojibake validation ---
-$requiresCRLF = @('.md','.ps1','.psm1')
-$requiresLF   = @('.yml','.yaml','.json','.feature','.ts','.js','.html')
-
-$badEOL = 0; $fixedEOL = 0
-$badMoji = 0
-$repChar = [char]0xFFFD
-# Detect typical mojibake patterns: 'Ãx' or 'Âx' where x is Latin-1 supplement, plus replacement char
-$mojiRegex = "Ã[\u00A0-\u00FF]|Â[\u00A0-\u00FF]"
+# Verificação de finais de linha
 $eolIssues = @()
-$mojiIssues = @()
+$eolFixed  = 0
+foreach ($file in $files) {
+    $rule = $encodingRules[[IO.Path]::GetExtension($file.Name).ToLowerInvariant()]
+    $content = [System.IO.File]::ReadAllText($file.FullName)
+    $hasCRLF = $content -like "*`r`n*"
+    $hasLF   = $content -like "*`n*"
+    $hasLFOnly = ($hasLF -and -not $hasCRLF)
 
-foreach ($f in $files) {
-    $ext = [IO.Path]::GetExtension($f.Name).ToLowerInvariant()
-    $content = ''
-    try { $content = Get-Content -Path $f.FullName -Raw -ErrorAction Stop } catch { continue }
-
-    $hasCRLF = ($content -like "*`r`n*")
-    $hasAnyLF = ($content -like "*`n*")
-    $hasLFOnly = ($hasAnyLF -and -not $hasCRLF)
-
-    if ($requiresCRLF -contains $ext) {
-        if (-not $hasCRLF -and $hasAnyLF) {
-            $badEOL++
-            $eolIssues += [pscustomobject]@{ File=$f.FullName; Expected='CRLF'; Found='LF-only' }
-            if ($Fix) {
-                $lines = Get-Content -Path $f.FullName
-                $new = [string]::Join("`r`n", $lines)
-                [IO.File]::WriteAllText($f.FullName, $new, (New-Object System.Text.UTF8Encoding($false)))
-                $fixedEOL++
-                Write-ColoredOutput "  [FIX] Normalizado CRLF: $($f.FullName)" 'Warning'
-            }
+    if ($rule.LineEndings -eq 'CRLF' -and $hasLF -and -not $hasCRLF) {
+        $eolIssues += [pscustomobject]@{ File = $file.FullName; Expected = 'CRLF'; Found = 'LF' }
+        if ($Fix -and (Normalize-LineEndings -Path $file.FullName -Mode 'CRLF')) {
+            $eolFixed++
+            Write-Status "  [FIX] Normalizado CRLF: $($file.FullName)" 'Warning'
         }
-    } elseif ($requiresLF -contains $ext) {
-        if (-not $hasLFOnly -and $hasCRLF) {
-            $badEOL++
-            $eolIssues += [pscustomobject]@{ File=$f.FullName; Expected='LF'; Found='CRLF or mixed' }
-    if ($Fix) {
-                $lines = Get-Content -Path $f.FullName
-                $new = [string]::Join("`n", $lines)
-                [IO.File]::WriteAllText($f.FullName, $new, (New-Object System.Text.UTF8Encoding($false)))
-                $fixedEOL++
-                Write-ColoredOutput "  [FIX] Normalizado LF: $($f.FullName)" 'Warning'
+    } elseif ($rule.LineEndings -eq 'LF' -and $hasCRLF) {
+        $eolIssues += [pscustomobject]@{ File = $file.FullName; Expected = 'LF'; Found = 'CRLF/mixed' }
+        if ($Fix -and (Normalize-LineEndings -Path $file.FullName -Mode 'LF')) {
+            $eolFixed++
+            Write-Status "  [FIX] Normalizado LF: $($file.FullName)" 'Warning'
         }
     }
+}
+
+if ($eolIssues.Count -eq 0) {
+    Write-Status "Finais de linha: nenhum problema encontrado." 'Success'
 } else {
-    Write-ColoredOutput "`n🎉 Todos os arquivos estão com encoding correto!" 'Success'
+    Write-Status "Finais de linha: $($eolIssues.Count) arquivo(s) com divergência." 'Error'
+    if (-not $Fix) {
+        $eolIssues | Format-Table -AutoSize
+    }
 }
 
-    $hasMoji = $false
-    if ($content.IndexOf($repChar) -ge 0) { $hasMoji = $true }
-    elseif ([System.Text.RegularExpressions.Regex]::IsMatch($content, $mojiRegex)) { $hasMoji = $true }
-    if ($hasMoji) {
+# Detecção e reparo opcional de mojibake
+$mojiRegex = '(ï¿½|Ã[A-Za-zÃ‚Â]|Â[A-Za-z]|�)'
+$mojiIssues = @()
+$mojiFixed  = 0
+
+foreach ($file in $files) {
+    $raw = [System.IO.File]::ReadAllText($file.FullName)
+    if ([regex]::IsMatch($raw, $mojiRegex)) {
+        $mojiIssues += $file.FullName
         if ($Fix -and $RepairMojibake) {
-            # Attempt to repair by re-decoding Latin-1 string to UTF-8
-            $latin1 = [System.Text.Encoding]::GetEncoding(28591)
-            $origMatches = ([System.Text.RegularExpressions.Regex]::Matches($content, $mojiRegex)).Count
-            $bytes = $latin1.GetBytes($content)
-            $fixedContent = [System.Text.Encoding]::UTF8.GetString($bytes)
-            $fixedMatches = ([System.Text.RegularExpressions.Regex]::Matches($fixedContent, $mojiRegex)).Count
-            if ($fixedMatches -lt $origMatches) {
-                [IO.File]::WriteAllText($f.FullName, $fixedContent, (New-Object System.Text.UTF8Encoding($false)))
-                Write-ColoredOutput "  [FIX] Mojibake reparado: $($f.FullName)" 'Warning'
-                $content = $fixedContent
-                $hasMoji = $false
+            if (Repair-MojibakeFile -Path $file.FullName) {
+                $mojiFixed++
+                Write-Status "  [FIX] Mojibake reparado: $($file.FullName)" 'Warning'
             }
-        }
-        if ($hasMoji) {
-            $badMoji++
-            $mojiIssues += $f.FullName
         }
     }
 }
 
-Write-ColoredOutput "`nRESUMO EOL/MOJIBAKE" 'Info'
-Write-ColoredOutput ("Arquivos com problema de EOL: $badEOL | Corrigidos: $fixedEOL") 'Info'
-Write-ColoredOutput ("Arquivos com possivel mojibake: $badMoji") 'Info'
-
-if ($badEOL -gt 0 -and -not $Fix) { $exitCode = 1 } elseif ($badEOL -gt 0 -and $Fix -and $fixedEOL -lt $badEOL) { $exitCode = 1 } else { $exitCode = 0 }
-
-if ($badMoji -gt 0) {
-    Write-ColoredOutput "`nArquivos possivelmente com mojibake (verifique manualmente):" 'Warning'
-    foreach ($p in $mojiIssues) { Write-ColoredOutput ("  - " + $p) 'Warning' }
+if ($mojiIssues.Count -eq 0) {
+    Write-Status "Mojibake: nenhum problema detectado." 'Success'
+} else {
+    $msg = "Mojibake: $($mojiIssues.Count) arquivo(s) suspeito(s)."
+    Write-Status $msg ($Fix -and $RepairMojibake -and $mojiFixed -eq $mojiIssues.Count ? 'Success' : 'Warning')
+    if (-not $Fix -or -not $RepairMojibake) {
+        foreach ($path in $mojiIssues) {
+            Write-Status ("  - " + $path) 'Warning'
+        }
+        if (-not $Fix) {
+            Write-Status "Informe -Fix -RepairMojibake para tentar correção automática." 'Info'
+        }
+    }
 }
 
-exit $exitCode
+# Finalização / código de saída
+$hasBlockingIssues = ($bomIssues.Count -gt $bomFixed) -or ($eolIssues.Count -gt $eolFixed) -or ($mojiIssues.Count -gt $mojiFixed -and $RepairMojibake)
+if ($hasBlockingIssues -and -not $Fix) { exit 1 }
+if ($hasBlockingIssues -and $Fix)      { exit 1 }
+exit 0

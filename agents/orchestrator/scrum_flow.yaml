@@ -27,7 +27,7 @@ ceremonies:
     participants: [product_owner, analista_negocio_tecnico, dev_senior_1, dev_senior_2, qa_senior, stakeholders]
     inputs: [incremento, metricas_dora]
     outputs: [feedback, adrs_propostas, roadmap_atualizado]
-    practices: [Medi�f§�f£o_DORA, Demo, ADRs]
+    practices: [Medição_DORA, Demo, ADRs]
     gates:
       - incremento_potencialmente_entregavel
 artifacts:
