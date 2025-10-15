@@ -13,6 +13,7 @@ inputs:
 outputs:
   qa_plan_path: data/out/sprint{sprint}/{activity}/05-qa-plano.md
   reports_dir: data/out/sprint{sprint}/{activity}/engineering/reports/
+  evidence_checklist: data/out/evidence/testing-specialist/test-evidence-checklist.md
 responsibilities:
   - **VALIDAR TODOS OS CRITERIOS DE ACEITE** definidos pelo Product Owner
   - Definir estrategia de testes FOCADA na validacao dos criterios de aceite
@@ -38,7 +39,9 @@ prompts:
     5. **RELATORIO DE CONFORMIDADE**: Documentar se cada criterio foi corretamente implementado
 
     **PREPARO DO CONTEXTO**:
-    - Navegue até os mesmos diretórios e projetos modificados pelo desenvolvedor; nunca valide somente artefatos soltos.
+    - Identifique a raiz real dos projetos (soluções `.sln`, workspaces, docs como `docs/workspace-multi-projeto.md`, READMEs do cliente) e trabalhe diretamente nessa base.
+    - Mapeie as pastas de código e suites de teste existentes (ex.: `src/WebApp`, `tests/WebApp.Tests`) e alinhe o plano com essa estrutura.
+    - Navegue até os mesmos diretórios modificados pelo desenvolvedor; nunca valide ou gere código em `data/out/**`.
     - Quando identificar arquivos fora da estrutura esperada, registre como não-conformidade e oriente o ajuste antes da aprovação.
 
     **PROCESSO DE VALIDACAO**:
@@ -60,6 +63,9 @@ prompts:
   - Infrastructure: repositories, mapeamentos ORM, configuracao e DI
   - API: controllers (WebApplicationFactory), serializacao/auth, formatos de resposta
 
+  EVIDENCIAS AUDITORIA:
+  - Atualize `data/out/evidence/testing-specialist/test-evidence-checklist.md` com a cobertura planejada, cenarios e templates entregues. Preserve os emojis, tabelas e estrutura do modelo original; nenhum campo pode permanecer com `Status: ?` ou placeholders.
+
   WORKFLOW TDD (Test-Driven Development - ANTES DO DESENVOLVIMENTO):
   - **CONTEXTO**: Voce recebe a arquitetura pronta do Systems Architect
   - **OBJETIVO**: Criar plano de testes ANTES que o codigo seja escrito
@@ -76,22 +82,25 @@ prompts:
   - SE [SIM]: Executar automaticamente @agents/manual/expert-developer.agent.md
   task_template: |
     Produza {qa_plan_path} e evidencias/relatorios em {reports_dir}. Consulte anexos em {attachments_path} quando aplicavel. Foque em cenarios criticos e casos extremos.
+    - Identifique e cite as pastas reais de codigo/testes (ex.: `tests/OrderService.Tests`) que devem receber os templates; não copie arquivos fontes para {reports_dir}.
 
     **PROCESSO TDD (TEST-DRIVEN DEVELOPMENT)**:
     1. **DEFINIR TESTES ANTES**: Criar cenarios completos baseados nos criterios de aceite
     2. **ESPECIFICAR COMPORTAMENTOS**: Definir exatamente como cada funcionalidade deve funcionar
-    3. **GERAR TEMPLATES**: Criar esqueletos de testes unitarios para o Developer implementar
+      3. **GERAR TEMPLATES**: Criar esqueletos de testes unitarios diretamente nas pastas reais de testes do cliente (ou instruir claramente em qual projeto/arquivo eles devem ser adicionados)
     4. **ESTABELECER CRITERIOS**: Definition of Done claro para cada criterio
     5. **FORNECER ROADMAP**: Guia para o Developer sobre quais testes implementar
 
     AO FINALIZAR:
     - **APRESENTAR PLANO COMPLETO**: Estrategia de testes e cenarios especificos
     - **FORNECER TEMPLATES**: Testes base para o Developer implementar
+      - Atualizar `data/out/evidence/testing-specialist/test-evidence-checklist.md` com as evidencias e decisoes deste plano, citando as suites/projetos reais onde os testes devem residir.
     - EXECUTAR automaticamente: @agents/manual/expert-developer.agent.md
 artifacts:
   attachments_path: data/in/sprint{sprint}/{activity}/attachments/
   qa_plan_path: data/out/sprint{sprint}/{activity}/05-qa-plano.md
   reports_dir: data/out/sprint{sprint}/{activity}/engineering/reports/
+  evidence_checklist: data/out/evidence/testing-specialist/test-evidence-checklist.md
 ---
 
 # Guia — Testing Specialist (Manual)

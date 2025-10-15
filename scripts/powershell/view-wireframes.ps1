@@ -10,7 +10,7 @@ param(
 $baseDir = Join-Path (Join-Path $PSScriptRoot "..\out") ("sprint$Sprint\$Activity")
 $wireframesDir = Join-Path $baseDir "04-wireframes"
 
-Write-Host "👁️ AgileDevAgent - Wireframe Viewer" -ForegroundColor Blue
+Write-Host "👁️ WorkFlowAI - Wireframe Viewer" -ForegroundColor Blue
 Write-Host "Sprint: $Sprint | Activity: $Activity" -ForegroundColor Cyan
 Write-Host ""
 
@@ -31,11 +31,11 @@ Write-Host ""
 # Abrir no navegador
 if ($OpenBrowser) {
     $htmlPreview = Join-Path $wireframesDir "html-preview\wireframe-preview.html"
-    
+
     if (Test-Path $htmlPreview) {
         Write-Host "🌐 Abrindo preview no navegador..." -ForegroundColor Green
         Start-Process $htmlPreview
-        
+
         # Criar servidor local se Live Server estiver disponível
         if (Get-Command code -ErrorAction SilentlyContinue) {
             Write-Host "💡 Dica: Use Live Server no VS Code para hot reload" -ForegroundColor Cyan
@@ -50,25 +50,25 @@ if ($OpenBrowser) {
 # Exportar diagramas Mermaid para imagens
 if ($ExportImages) {
     Write-Host "🖼️ Exportando diagramas para imagens..." -ForegroundColor Yellow
-    
+
     $mermaidDir = Join-Path $wireframesDir "mermaid"
     $imagesDir = Join-Path $wireframesDir "images"
-    
+
     if (Test-Path $mermaidDir) {
         $null = New-Item -ItemType Directory -Force -Path $imagesDir
-        
+
         # Verificar se mermaid-cli está disponível
         if (Get-Command mmdc -ErrorAction SilentlyContinue) {
             Get-ChildItem $mermaidDir -Filter "*.md" | ForEach-Object {
                 $inputFile = $_.FullName
                 $baseName = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
                 $outputFile = Join-Path $imagesDir "$baseName.png"
-                
+
                 Write-Host "  🎨 Renderizando: $baseName.md → $baseName.png" -ForegroundColor Gray
-                
+
                 try {
                     & mmdc -i $inputFile -o $outputFile -t dark -b transparent 2>$null
-                    
+
                     if (Test-Path $outputFile) {
                         Write-Host "    ✅ Sucesso!" -ForegroundColor Green
                     } else {
@@ -78,7 +78,7 @@ if ($ExportImages) {
                     Write-Host "    ❌ Erro: $($_.Exception.Message)" -ForegroundColor Red
                 }
             }
-            
+
             Write-Host "  📁 Imagens salvas em: $imagesDir" -ForegroundColor Cyan
         } else {
             Write-Host "  ⚠️ Mermaid CLI não encontrado" -ForegroundColor Yellow
@@ -90,10 +90,10 @@ if ($ExportImages) {
 # Gerar Storybook para componentes
 if ($GenerateStorybook) {
     Write-Host "📚 Gerando Storybook..." -ForegroundColor Yellow
-    
+
     $storybookDir = Join-Path $baseDir "04-storybook"
     $null = New-Item -ItemType Directory -Force -Path $storybookDir
-    
+
     # Template de story para componentes
     $buttonStory = @"
 import type { Meta, StoryObj } from '@storybook/react';
@@ -149,9 +149,9 @@ export const Small: Story = {
   },
 };
 "@
-    
+
     $buttonStory | Out-File -FilePath (Join-Path $storybookDir "Button.stories.ts") -Encoding utf8
-    
+
     # Package.json para Storybook
     $storybookPackage = @{
         "name" = "$Activity-storybook"
@@ -166,9 +166,9 @@ export const Small: Story = {
             "storybook" = "^7.6.0"
         }
     }
-    
+
     $storybookPackage | ConvertTo-Json -Depth 3 | Out-File (Join-Path $storybookDir "package.json") -Encoding utf8
-    
+
     Write-Host "  📚 Storybook template criado em: $storybookDir" -ForegroundColor Green
     Write-Host "  💡 Para inicializar: cd $storybookDir && npm init storybook" -ForegroundColor Cyan
 }
@@ -226,7 +226,7 @@ $report = @"
 3. **Seguir especificações** de responsividade
 4. **Aplicar guidelines** de acessibilidade
 
-### Para UX/UI Designers  
+### Para UX/UI Designers
 1. **Refinar wireframes** com mais detalhes visuais
 2. **Criar protótipos** interativos no Figma
 3. **Definir animações** e microinterações
@@ -242,7 +242,7 @@ $report = @"
 
 ### ✅ Estrutura
 - [x] Layout base definido
-- [x] Componentes identificados  
+- [x] Componentes identificados
 - [x] Responsividade planejada
 - [x] Navegação mapeada
 
@@ -273,7 +273,7 @@ $report = @"
 
 ### Desenvolvimento
 - **Storybook**: Component documentation
-- **Chromatic**: Visual regression testing  
+- **Chromatic**: Visual regression testing
 - **Accessibility Insights**: A11y validation
 
 ### Testes
@@ -297,14 +297,14 @@ Write-Host "│ 📁 Diretório: $((Split-Path $wireframesDir -Leaf).PadRight(30
 $fileCount = (Get-ChildItem $wireframesDir -Recurse -File).Count
 Write-Host "│ 📄 Arquivos: $($fileCount.ToString().PadRight(32)) │" -ForegroundColor Gray
 
-$dirCount = (Get-ChildItem $wireframesDir -Recurse -Directory).Count  
+$dirCount = (Get-ChildItem $wireframesDir -Recurse -Directory).Count
 Write-Host "│ 📂 Diretórios: $($dirCount.ToString().PadRight(30)) │" -ForegroundColor Gray
 Write-Host "└────────────────────────────────────────────────┘" -ForegroundColor Gray
 
 Write-Host ""
 Write-Host "🎯 Comandos úteis:" -ForegroundColor Yellow
 Write-Host "  .\view-wireframes.ps1 -Sprint $Sprint -Activity $Activity -OpenBrowser" -ForegroundColor Gray
-Write-Host "  .\view-wireframes.ps1 -Sprint $Sprint -Activity $Activity -ExportImages" -ForegroundColor Gray  
+Write-Host "  .\view-wireframes.ps1 -Sprint $Sprint -Activity $Activity -ExportImages" -ForegroundColor Gray
 Write-Host "  code `"$wireframesDir`"" -ForegroundColor Gray
 Write-Host ""
 Write-Host "📋 Relatório criado: $(Split-Path $reportPath -Leaf)" -ForegroundColor Green

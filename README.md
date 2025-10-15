@@ -257,7 +257,7 @@ Notas:
 
 ### 🎨 **Ferramentas de Design e Wireframes (NOVO)**
 
-O AgileDevAgent agora inclui **ferramentas visuais integradas** para criar wireframes, protótipos e design systems:
+O WorkFlowAI agora inclui **ferramentas visuais integradas** para criar wireframes, protótipos e design systems:
 
 ```powershell
 # 🎨 Configurar ferramentas de design para uma atividade
@@ -2155,7 +2155,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 #### **🏗️ Script de Instalação (repositório):**
 | **Script** | **Objetivo** | **Quando Usar** | **Localização** |
 |------------|--------------|----------------|-----------------|
-| `setup-workflow.ps1` | **Instalação inicial completa** | Uma única vez por projeto | `.\Install\setup-workflow.ps1` *(repositório AgileDevAgent)* |
+| `setup-workflow.ps1` | **Instalação inicial completa** | Uma única vez por projeto | `.\Install\setup-workflow.ps1` *(repositório WorkFlowAI)* |
 
 #### **⚙️ Scripts do Cliente (copiados na instalação):**
 | **Script** | **Objetivo** | **Quando Usar** | **Localização** |
@@ -2182,7 +2182,7 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 
 **💻 Como executar:**
 ```powershell
-# No diretório do repositório AgileDevAgent
+# No diretório do repositório WorkFlowAI
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 ```
 
@@ -2208,7 +2208,7 @@ ProjetoCliente/
 └── .env             ← Configurações do projeto
 ```
 
-**⚠️ Importante:** O `setup-workflow.ps1` **NÃO é copiado** - ele fica apenas no repositório AgileDevAgent para instalações futuras.
+**⚠️ Importante:** O `setup-workflow.ps1` **NÃO é copiado** - ele fica apenas no repositório WorkFlowAI para instalações futuras.
 
 ---
 
@@ -2248,7 +2248,6 @@ data/out/sprint02/rn0025/        ← Criada quando agentes executam
 ├── 00-requirements-brief.md
 ├── 01-ata-mesa-redonda.md
 ├── 02-requisitos-bdd.md
-└── engineering/src/        ← Código gerado
 ```
 
 **✅ Workflow após criação:**
@@ -2486,8 +2485,8 @@ modulo-relatorios    [██████░░░░] 60% - Systems Architect
 ### **⚡ Comandos Rápidos - Cheat Sheet:**
 
 ```powershell
-# 🏗️ INSTALAÇÃO (uma vez só - no repositório AgileDevAgent)
-cd "C:\Repos\AgileDevAgent"
+# 🏗️ INSTALAÇÃO (uma vez só - no repositório WorkFlowAI)
+cd "C:\Repos\WorkFlowAI"
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 
 # ========== COMANDOS NO PROJETO DO CLIENTE ==========
@@ -2640,7 +2639,7 @@ Ele cria toda estrutura de pastas automaticamente e gera template pronto!
 
 | **Situação** | **Script para usar** | **Comando** | **Local** |
 |--------------|---------------------|-------------|-----------|
-| **Primeira vez (instalação)** | `setup-workflow.ps1` | `.\Install\setup-workflow.ps1` | 📁 *Repositório AgileDevAgent* |
+| **Primeira vez (instalação)** | `setup-workflow.ps1` | `.\Install\setup-workflow.ps1` | 📁 *Repositório WorkFlowAI* |
 | **Nova funcionalidade** | `new-activity.ps1` | `.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
 | **Execução automática** | `start-manual.ps1` | `.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
 | **Gerar imagens** | `render-diagrams.ps1` | `.\scripts\powershell\render-diagrams.ps1` | 📁 *Projeto do cliente* |
@@ -2939,8 +2938,7 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 ## 👤 **Autor e Informações**
 
 **👨‍💻 Desenvolvedor 1:** Ricardo Macedo Perdigão
-**‍🏫 Desenvolvedor 2:** Mauricio Chiaramonte
-**‍🏫 Desenvolvedor 2:** Marcos Araujo
+**‍🏫 Mentora:** Fabiana Rodrigues
 **📅 Versão:** 2.0.1 - Documentação do sistema
 **📅 Última atualização:** 30 de Setembro de 2025
 **✅ Status:** Produção (processo manual) | ⚠️ Preview (processos automáticos)
@@ -2967,3 +2965,49 @@ cd "C:\Projetos\Prosoft.System.AI"
 cd "C:\Projetos\Prosoft.System.AI"
 .\Install\setup-workflow.ps1
 ```
+
+---
+
+## 🧠 RAG — Como funciona (passo a passo)
+
+Quer que os agentes consultem automaticamente o conhecimento do seu projeto? Este repositório já traz um fluxo de RAG simples, offline‑friendly e sem alterar o prompts.system.
+
+### 🗂️ O que o RAG usa como fonte
+- `docs/` → guias, padrões e ADR template
+- `agents/manual/*.agent.md` → escopo/limites de cada agente
+- `data/out/sprint{}/activity{}/` → artefatos por etapa (00-*, 03-*, 05-*, evidências)
+
+### 🔄 Quando acontece
+- Ao finalizar uma etapa (ex.: Arquiteto, Dev, QA…), o orquestrador dispara um “hook” que ingere o que acabou de ser produzido.
+- Na próxima etapa, o agente já recebe esse contexto enriquecido automaticamente.
+
+### 🧩 Como o contexto entra no prompt (sem tocar no system)
+1) O agente mantém seu `prompts.system` intacto ✅
+2) O orquestrador lê `agents/manual/<agent>.enrichment.yaml`
+3) Busca no RAG e injeta os trechos como mensagem `developer`, logo após o `system` (com cabeçalho “CONTEXTO ENRIQUECIDO”)
+
+### 🏃 Passo a passo rápido
+1) Garanta o serviço RAG em execução (ex.: `http://127.0.0.1:8088`)
+2) Ao terminar um agente, rode o hook de enriquecimento (ex.: após o Desenvolvedor):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/powershell/enrich-after-step.ps1 -AgentId expert-developer -Sprint 01 -Activity rn0001 -RagEndpoint http://127.0.0.1:8088 -TopK 8 -Rerank
+```
+
+3) Inicie o próximo agente (ex.: Testing Validator). O orquestrador lê `testing-validator.enrichment.yaml` e injeta o contexto via mensagem `developer` automaticamente.
+
+### 📁 Arquivos importantes
+- `scripts/powershell/enrich-after-step.ps1` → hook pós‑etapa que chama `/ingest` e gera `_last-<agent>.json`
+- `agents/manual/<agent>.enrichment.yaml` → fontes, filtros e limites de tokens
+- `docs/enrichment-auto-run.md` → como plugar o hook no seu orquestrador
+
+### ✅ Benefícios
+- Sem alterar `prompts.system` (políticas continuam soberanas)
+- Funciona offline (coleção por sprint/atividade)
+- Contexto sempre fresco entre uma etapa e outra
+
+### ❓ FAQ rápido
+- Onde os dados ficam? Em uma coleção por sprint/atividade (ex.: `sprint01-activityrn0001`).
+- E se eu responder “NÃO” na transição? O orquestrador não enriquece nem avança (ou apenas pausa, conforme configuração).
+- Posso ajustar o quanto entra no prompt? Sim, com `topK`, `rerank` e `maxTokens` no `.enrichment.yaml`.
+

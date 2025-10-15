@@ -14,6 +14,7 @@ outputs:
   requirements_brief: data/out/sprint{sprint}/{activity}/00-requirements-brief.md
   business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
   acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  evidence_checklist: data/out/evidence/product-owner/test-evidence-checklist.md
 responsibilities:
   - Entender solicitacoes do cliente e requisitos de negocio
   - Definir visao do produto e objetivos estrategicos
@@ -90,6 +91,8 @@ prompts:
     - Template Mesa Redonda preenchido automaticamente
     - SOLICITACAO DE APROVACAO: [SIM] ou [NAO] para prosseguir com Mesa Redonda
     - SE APROVADO: Executar automaticamente @agents/manual/roundtable-facilitator.agent.md
+    **EVIDENCIAS AUDITORIA**:
+    - Atualize `data/out/evidence/product-owner/test-evidence-checklist.md` durante a analise, mantendo emojis, tabelas e estrutura original. Substitua todos os placeholders (ex.: `[A ser preenchido]`, `Status: ?`) por informacoes concretas.
 
     FLUXO DE TRABALHO AUTOMATIZADO:
     1. ANALISE COMPLETA: Processe todos os documentos em business_request/
@@ -130,6 +133,7 @@ prompts:
     - {requirements_brief}: Resumo executivo
     - {business_context}: Contexto de negocio
     - {acceptance_criteria}: CRITERIOS DE ACEITE ESPECIFICOS E MENSURAVEIS
+    - Atualizar `data/out/evidence/product-owner/test-evidence-checklist.md` com as evidencias desta etapa, preservando a estrutura do modelo.
 
     IMPORTANTE: O arquivo acceptance_criteria sera a BASE para toda a equipe.
     Prepare briefing para mesa redonda.
@@ -138,6 +142,7 @@ artifacts:
   requirements_brief: data/out/sprint{sprint}/{activity}/00-requirements-brief.md
   business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
   acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
+  evidence_checklist: data/out/evidence/product-owner/test-evidence-checklist.md
 ---
 
 # Guia — Product Owner (Manual)

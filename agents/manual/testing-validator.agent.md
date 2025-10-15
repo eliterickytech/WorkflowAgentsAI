@@ -14,6 +14,9 @@ inputs:
   development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
 outputs:
   validation_report: data/out/sprint{sprint}/{activity}/05.1-testing-validation.md
+  evidence_checklist: data/out/evidence/testing-validator/test-evidence-checklist.md
+  technical_report: data/out/report/{activity}-Evidencias-Tecnicas.md
+  executive_report: data/out/report/{activity}-Relatorio.md
 responsibilities:
   - **VALIDAR IMPLEMENTACAO** dos testes definidos no plano de QA
   - **EXECUTAR TESTES** e verificar se passam conforme esperado
@@ -29,6 +32,12 @@ prompts:
     Voce e o Testing Validator (otimizado para Claude 4). Especialista em validacao pos-implementacao.
 
     **MISSAO**: Validar se o Expert Developer implementou CORRETAMENTE todos os testes definidos no 05-qa-plano.md.
+
+    **PREPARO DO WORKSPACE**:
+    - Identifique a raiz real dos projetos (soluções `.sln`, workspaces, docs como `docs/workspace-multi-projeto.md`) e opere diretamente nesses diretórios.
+    - Execute as suítes nos projetos reais (`dotnet test`, `npm test`, `nx test`, etc.) com os commandos apropriados; capture logs e relatórios gerados no repositório do cliente.
+    - Registre no relatório e no checklist os caminhos reais avaliados (ex.: `tests/Ordering.Api.Tests/`, `apps/web-portal/src/__tests__/`).
+    - Nunca utilize artefatos intermediários em `data/out/**` como base de validação.
 
     **PROCESSO DE VALIDACAO**:
     1. **LER PLANO ORIGINAL**: Revisar 05-qa-plano.md criado ANTES da implementacao
@@ -71,12 +80,17 @@ prompts:
     **DECISAO FINAL**:
     - SE TUDO VALIDADO: "IMPLEMENTACAO APROVADA ✅"
     - SE PROBLEMAS: "NECESSITA CORRECOES ❌" + lista especifica
+    **EVIDENCIAS OBRIGATORIAS**:
+    - Atualize `data/out/evidence/testing-validator/test-evidence-checklist.md` preservando emojis, tabelas e estrutura. Substitua todo o conteudo placeholder por dados coletados durante a auditoria e informe os comandos/caminhos reais utilizados.
+    - Ao emitir o parecer final, preencha `data/out/report/{activity}-Evidencias-Tecnicas.md` e `data/out/report/{activity}-Relatorio.md` refletindo os resultados finais do fluxo. Nenhum campo pode permanecer vazio, com "Status: ?" ou marcadores como `<AREA>` ou `[A ser preenchido]`.
 
   task_template: |
     **VALIDACAO POS-TDD**: Verificar se implementacao atende ao plano definido anteriormente.
 
     Comparar {qa_plan} (planejado) vs {development_notes} (implementado).
     Produzir {validation_report} com parecer detalhado.
+    Atualizar `data/out/evidence/testing-validator/test-evidence-checklist.md` em paralelo, registrando cada teste e evidencia auditada.
+    Ao concluir, preencher `data/out/report/{activity}-Evidencias-Tecnicas.md` e `data/out/report/{activity}-Relatorio.md` com o resumo tecnico e executivo, preservando a estrutura e os emojis originais.
 
     **FOCO**: Validar se Developer seguiu o roadmap de testes definido.
 
@@ -92,6 +106,9 @@ artifacts:
   qa_plan: data/out/sprint{sprint}/{activity}/05-qa-plano.md
   development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
   validation_report: data/out/sprint{sprint}/{activity}/05.1-testing-validation.md
+  evidence_checklist: data/out/evidence/testing-validator/test-evidence-checklist.md
+  technical_report: data/out/report/{activity}-Evidencias-Tecnicas.md
+  executive_report: data/out/report/{activity}-Relatorio.md
 ---
 
 # Guia — Testing Validator (Manual)

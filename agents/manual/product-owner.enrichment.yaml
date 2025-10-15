@@ -1,0 +1,23 @@
+enrichment:
+  enabled: true
+  scope:
+    sprint: "{sprint}"
+    activity: "{activity}"
+  sources:
+    - path: "docs/**/*.md"
+    - path: "data/out/sprint{sprint}/{activity}/**/*.md"
+    - path: "data/out/evidence/**/*.md"
+    - path: "in/sprint{sprint}/{activity}/**/*"
+    - path: "agents/manual/*.agent.md"
+  retrieval:
+    topK: 8
+    rerank: true
+    filters:
+      role: ["product-owner","requirements-analyst","roundtable-facilitator"]
+  inject:
+    as: "developer"
+    position: "after-system"
+    header: "----- CONTEXTO ENRIQUECIDO (somente referência) -----"
+  constraints:
+    maxTokens: 2000
+    allowOverridePolicies: false

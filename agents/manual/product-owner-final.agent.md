@@ -18,6 +18,7 @@ inputs:
   qa_plan: data/out/sprint{sprint}/{activity}/05-qa-plano.md
 outputs:
   final_checklist: data/out/sprint{sprint}/{activity}/99-checklist-final.md
+  evidence_checklist: data/out/evidence/product-owner-final/test-evidence-checklist.md
 responsibilities:
   - **VALIDAR CADA CRITERIO DE ACEITE** definido no inicio da atividade
   - **VERIFICAR EVIDENCIAS** de que todos os criterios foram atendidos
@@ -76,6 +77,8 @@ prompts:
     - Critérios de aceitação validados
     - Decisão final: APROVADO ou NECESSITA AJUSTES
     - Próximos passos (se necessário)
+    AUDITORIA:
+    - Atualize `data/out/evidence/product-owner-final/test-evidence-checklist.md` consolidando a verificação de cada critério. Preserve emojis, tabelas e estrutura original; elimine marcadores como `[A ser preenchido]` ou `Status: ?`.
   task_template: |
     **PRIMEIRA PRIORIDADE**: Ler {acceptance_criteria} e listar TODOS os critérios de aceite definidos.
 
@@ -86,6 +89,7 @@ prompts:
     **DECISAO FINAL**:
     - Se TODOS os critérios estão atendidos: "ATIVIDADE ENTREGUE ✅"
     - Se algum critério não foi atendido: "NECESSITA AJUSTES ❌"
+    - Registrar `data/out/evidence/product-owner-final/test-evidence-checklist.md` com o parecer final e evidências consolidadas.
 artifacts:
   acceptance_criteria: data/out/sprint{sprint}/{activity}/00-acceptance-criteria.md
   business_context: data/out/sprint{sprint}/{activity}/00-business-context.md
@@ -96,6 +100,7 @@ artifacts:
   development_notes: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
   qa_plan: data/out/sprint{sprint}/{activity}/05-qa-plano.md
   final_checklist: data/out/sprint{sprint}/{activity}/99-checklist-final.md
+  evidence_checklist: data/out/evidence/product-owner-final/test-evidence-checklist.md
 ---
 
 # Guia — Product Owner Final (Manual)

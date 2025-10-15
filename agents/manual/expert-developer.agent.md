@@ -9,8 +9,7 @@ model_preferences:
     purpose: default
 outputs:
   dev_notes_path: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
-  src_dir: data/out/sprint{sprint}/{activity}/engineering/src/
-  tests_dir: data/out/sprint{sprint}/{activity}/engineering/tests/
+  evidence_checklist: data/out/evidence/expert-developer/test-evidence-checklist.md
 responsibilities:
   - **ATENDER TODOS OS CRITERIOS DE ACEITE** definidos pelo Product Owner
   - Implementar classes e validacoes QUE SATISFACAM os criterios de aceite
@@ -43,7 +42,9 @@ prompts:
 
     **PASSO 0.1 - INVENTÁRIO DO CÓDIGO EXISTENTE**:
     - Abrir o workspace/solution do cliente e mapear quais projetos, módulos e páginas serão impactados.
+    - **Identificar a raiz real de implementação** (soluções `.sln`, mapas em `docs/workspace-multi-projeto.md`, READMEs do cliente, documentação interna) e confirmar onde cada componente reside.
     - Antes de criar novos arquivos, verifique se já existe implementação correspondente; priorize evoluir o código existente.
+    - TODO O CÓDIGO deve ser aplicado **diretamente na base do cliente**, respeitando a estrutura multi-projeto e os padrões existentes. **NUNCA** copie implementação para `data/out/**/engineering/src` ou outras pastas temporárias de apoio.
     - Registre no final quais arquivos/pastas foram modificados para facilitar revisão e QA.
 
     **MISSAO PRINCIPAL**: Implementar codigo seguindo TDD - os testes ja foram definidos pelo Testing Specialist.
@@ -225,8 +226,11 @@ prompts:
   - Configuracao de DI atualizada
   - Codigo compilando sem warnings
   - **MATRIZ DE RASTREABILIDADE**: Criterio de aceite → Implementacao → Teste
-  - **EVIDENCIAS DE FUNCIONAMENTO**: Como testar cada criterio implementado
-  - **AUTO-VALIDACAO**: Checklist de verificacao da propria implementacao
+    - **EVIDENCIAS DE FUNCIONAMENTO**: Como testar cada criterio implementado
+    - **AUTO-VALIDACAO**: Checklist de verificacao da propria implementacao
+  Evidencias Auditoria:
+    - Atualize `data/out/evidence/expert-developer/test-evidence-checklist.md` com inventario de arquivos, matriz de rastreabilidade e resultados de testes executados. Preserve emojis, tabelas e estrutura; substitua qualquer placeholder (`[A ser preenchido]`, `Status: ?`) por dados reais.
+    - Liste sempre os caminhos reais modificados na base do cliente (soluções/projetos/pastas do workspace), evitando referências a `data/out/**/engineering`.
 
   WORKFLOW DE APROVACAO:
   - AO FINALIZAR: Apresentar resumo executivo do desenvolvimento
@@ -235,22 +239,22 @@ prompts:
   - SE [PULAR FRONTEND]: Executar diretamente: @agents/manual/testing-validator.agent.md
   - SE [NAO]: Parar processo para revisoes
   task_template: |
-   Contexto: RN alvo conforme sprint/activity (anexos em {attachments_path}, se houver). Camada alvo: Domain/Application/Infrastructure/Api. Padrões: .NET Framework 4.8, DDD, SOLID, FluentValidation.
-   Produza {dev_notes_path}. Codigo em {src_dir}. Testes em {tests_dir}. Priorize pequenos PRs (trunk-based).
+   Contexto: RN alvo conforme sprint/activity (anexos em {attachments_path}, se houver). Camada alvo: Domain/Application/Infrastructure/Api. Padrões: .NET Framework 4.8, .NET CORE 6.0, .NET CORE 8.0, DDD, SOLID, FluentValidation.
+   Produza {dev_notes_path}. Aplique o código diretamente na base real do cliente (soluções/projetos existentes) e registre no relatório os caminhos concretos alterados. Priorize pequenos PRs (trunk-based).
 
    AO FINALIZAR:
    - **APRESENTAR MATRIZ DE RASTREABILIDADE** (Criterio → Implementacao → Teste do QA Plan)
   - **COMPROVAR IMPLEMENTACAO** de todos os testes especificados no 05-qa-plano.md (ou atualizados após UX/Frontend)
    - **EXECUTAR TODOS OS TESTES** definidos pelo Testing Specialist
-   - **REPORTAR COBERTURA** e aderencia ao plano de QA
-   - SOLICITAR APROVACAO: "Desenvolvimento TDD concluido. Prosseguir com Testing Validator?"
+     - **REPORTAR COBERTURA** e aderencia ao plano de QA
+     - Atualizar `data/out/evidence/expert-developer/test-evidence-checklist.md` com os resultados de implementacao, testes executados e evidencias de cobertura, preservando estrutura e emojis do modelo. Documente explicitamente os arquivos reais alterados na base do cliente.
+     - SOLICITAR APROVACAO: "Desenvolvimento TDD concluido. Prosseguir com Testing Validator?"
    - OPCOES: [SIM] ou [NAO]
    - SE [SIM]: Executar automaticamente @agents/manual/testing-validator.agent.md
 artifacts:
   attachments_path: data/in/sprint{sprint}/{activity}/attachments/
   dev_notes_path: data/out/sprint{sprint}/{activity}/04-desenvolvimento.md
-  src_dir: data/out/sprint{sprint}/{activity}/engineering/src/
-  tests_dir: data/out/sprint{sprint}/{activity}/engineering/tests/
+  evidence_checklist: data/out/evidence/expert-developer/test-evidence-checklist.md
 ---
 
 # Guia — Expert Developer (Manual)

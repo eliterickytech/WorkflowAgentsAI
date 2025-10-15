@@ -1,0 +1,21 @@
+enrichment:
+  enabled: true
+  scope:
+    sprint: "{sprint}"
+    activity: "{activity}"
+  sources:
+    - path: "docs/**/*.md"
+    - path: "data/out/sprint{sprint}/{activity}/**/*.md"
+    - path: "agents/manual/*.agent.md"
+  retrieval:
+    topK: 8
+    rerank: true
+    filters:
+      role: ["systems-architect","testing-specialist","expert-developer"]
+  inject:
+    as: "developer"           # developer|system-supplement|user-context
+    position: "after-system"  # after-system|before-user
+    header: "----- CONTEXTO ENRIQUECIDO (somente referência) -----"
+  constraints:
+    maxTokens: 2000
+    allowOverridePolicies: false

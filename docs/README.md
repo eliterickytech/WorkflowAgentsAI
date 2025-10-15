@@ -5,11 +5,12 @@ Este diretório reúne os guias e diagramas do projeto.
 ## 🚦 Comece aqui
 - Fluxo principal: [Fluxo Completo: Do Zero à Mesa Redonda](./fluxo-completo.md) — LEIA PRIMEIRO
 - Exemplos práticos: [Pasta Examples – Exemplos reais dos 10 agentes](./examples/) — templates prontos
-- Paralelização: [Guia de Execução Paralela](./guia-paralelizacao.md) — múltiplas atividades simultâneas
-- Agentes individuais: [Guia Completo Agentes Individuais](./guia-agentes-individuais.md) — usar agentes separadamente
-- Referência rápida: [Guia de Referência Rápida](./guia-referencia-rapida-agentes.md) — prompts dos 10 agentes
-- Design & Wireframes: [Guia Design e Wireframes](./guia-design-wireframes.md) — ferramentas visuais
-- Novo TDD: [Exemplo Fluxo TDD Completo](./examples/exemplo-fluxo-tdd-completo.md) — com Testing Validator
+- Paralelização: [Guia de Execução Paralela](./guia-paralelizacao.md) - múltiplas atividades simultâneas
+- Agentes individuais: [Guia Completo Agentes Individuais](./guia-agentes-individuais.md) - usar agentes separadamente
+- Referência rápida: [Guia de Referência Rápida](./guia-referencia-rapida-agentes.md) - prompts dos 10 agentes
+- Design & Wireframes: [Guia Design e Wireframes](./guia-design-wireframes.md) - ferramentas visuais
+- Novo TDD: [Exemplo Fluxo TDD Completo](./examples/exemplo-fluxo-tdd-completo.md) - com Testing Validator
+- Entrega ao cliente: [Diretrizes de Evidências e Relatórios](./evidence-report-guidelines.md) - compliance e auditoria
 
 ## Índice rápido
 - Processo Automático (CrewAI): ./automatic-process.md

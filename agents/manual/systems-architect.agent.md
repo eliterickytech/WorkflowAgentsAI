@@ -13,6 +13,7 @@ outputs:
   architecture_path: data/out/sprint{sprint}/{activity}/03-arquitetura.md
   adrs_dir: data/out/sprint{sprint}/{activity}/adrs/
   diagrams_dir: data/out/sprint{sprint}/{activity}/diagrams/
+  evidence_checklist: data/out/evidence/systems-architect/test-evidence-checklist.md
 responsibilities:
   - Definir componentes e contratos
   - Documentar decisoes (ADR) e diagramas
@@ -37,6 +38,8 @@ prompts:
     - Plano de testes por camada
     - ADRs para decisoes complexas
     - Roadmap faseado com riscos/mitigacoes
+    Evidencias Auditoria:
+    - Atualize `data/out/evidence/systems-architect/test-evidence-checklist.md` com os artefatos, decisoes e metricas definidos, preservando emojis, tabelas e estrutura original. Remova qualquer placeholder como `[A ser preenchido]`, `Status: ?` ou campos vazios.
 
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da arquitetura
@@ -52,6 +55,7 @@ prompts:
     - SOLICITAR APROVACAO: "Arquitetura finalizada. Prosseguir com Testing Specialist para definir testes (TDD)?"
     - OPCOES: [SIM] ou [NAO]
     - SE [SIM]: Executar automaticamente @agents/manual/testing-specialist.agent.md
+    - Atualizar `data/out/evidence/systems-architect/test-evidence-checklist.md` com as evidencias e rastreabilidade desta etapa.
 
     FLUXO TDD (Test-Driven Development):
     - O Testing Specialist criara o plano de QA (05-qa-plano.md) ANTES da implementacao
@@ -62,6 +66,7 @@ artifacts:
   architecture_path: data/out/sprint{sprint}/{activity}/03-arquitetura.md
   adrs_dir: data/out/sprint{sprint}/{activity}/adrs/
   diagrams_dir: data/out/sprint{sprint}/{activity}/diagrams/
+  evidence_checklist: data/out/evidence/systems-architect/test-evidence-checklist.md
 ---
 
 # Guia — Systems Architect (Manual)

@@ -9,6 +9,7 @@ model_preferences:
     purpose: default
 outputs:
   minutes_path: data/out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
+  evidence_checklist: data/out/evidence/roundtable-facilitator/test-evidence-checklist.md
 responsibilities:
   - Facilitar mesa redonda entre especialistas
   - Sintetizar decisoes e plano de execucao
@@ -61,6 +62,8 @@ prompts:
     - Foco tecnico; garantir especialidade de cada agente; intervir para manter produtividade
     - Sintetizar pontos; buscar consenso; evitar monopolizacao e abstracoes excessivas
     - Garantir alinhamento entre camadas relevantes ao foco (ex.: frontend-backend para temas de UI)
+    EVIDENCIAS AUDITORIA:
+    - Atualize `data/out/evidence/roundtable-facilitator/test-evidence-checklist.md` durante a reuniao, preservando estrutura, emojis e tabelas do modelo. Nenhum campo pode permanecer com `Status: ?` ou placeholders similares.
 
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da mesa redonda
@@ -77,6 +80,7 @@ prompts:
     - Riscos e mitigacoes (tecnicos e de UX/performance conforme aplicavel)
     - Plano de implementacao refinado e ordem de execucao (relacionado ao foco)
     - Action items com responsaveis e criterios de aceite por etapa
+    - Atualizar `data/out/evidence/roundtable-facilitator/test-evidence-checklist.md` com os principais pontos debatidos e decisoes auditaveis.
 
     AO FINALIZAR:
     - Apresentar resumo da mesa redonda
@@ -85,6 +89,7 @@ prompts:
     - SE [SIM]: Executar automaticamente @agents/manual/requirements-analyst.agent.md
 artifacts:
   minutes_path: data/out/sprint{sprint}/{activity}/01-ata-mesa-redonda.md
+  evidence_checklist: data/out/evidence/roundtable-facilitator/test-evidence-checklist.md
 
 # Guia — Roundtable Facilitator (Manual)
 

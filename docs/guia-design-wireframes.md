@@ -1,23 +1,23 @@
 # Guia Completo - Ferramentas de Design e Wireframes
 
-**Versão:** 2.2.0  
-**Criado:** Dezembro 2024  
+**Versão:** 2.2.0
+**Criado:** Dezembro 2024
 **Atualizado:** Dezembro 2024
 
 ## 🎯 **Objetivo**
 
-Este guia apresenta as **ferramentas visuais integradas** ao AgileDevAgent para criação de wireframes, protótipos e design systems usando **texto, ASCII art e Mermaid diagrams**.
+Este guia apresenta as **ferramentas visuais integradas** ao WorkFlowAI para criação de wireframes, protótipos e design systems usando **texto, ASCII art e Mermaid diagrams**.
 
 ## 🎨 **Visão Geral do Sistema de Design**
 
-O AgileDevAgent revoluciona a criação de interfaces ao combinar:
+O WorkFlowAI revoluciona a criação de interfaces ao combinar:
 
 ### **📐 Text-Based Wireframing**
 - **ASCII Art**: Estrutura visual versionável
 - **Emojis**: Componentes identificáveis rapidamente
 - **Responsive Design**: Breakpoints documentados
 
-### **🔄 Interactive Diagrams**  
+### **🔄 Interactive Diagrams**
 - **User Flows**: Navegação e jornada do usuário
 - **Sitemaps**: Arquitetura de informação
 - **Component Trees**: Hierarquia de elementos
@@ -73,7 +73,7 @@ code out\sprint01\sistema-login\04-wireframes\
 │   │                                                       │
 │   │  📊 [Chart Area - Interactive Visualization]         │ Chart Section
 │   │  ████████████████████████▲                            │
-│   │                                                       │ 
+│   │                                                       │
 ├───┴───────────────────────────────────────────────────────┤
 │  © 2025 Company  │  📧 Support  │  🔗 Links  │  📱 Mobile  │ Footer (48px)
 └─────────────────────────────────────────────────────────────┘
@@ -124,9 +124,9 @@ graph TD
     H --> I[📋 Export Report]
     C --> J[⚙️ Settings]
     J --> K[👤 User Profile]
-    
+
     style A fill:#e1f5fe
-    style C fill:#f3e5f5  
+    style C fill:#f3e5f5
     style G fill:#e8f5e8
 ```
 
@@ -137,7 +137,7 @@ graph LR
     Home[🏠 Home] --> Auth[🔐 Authentication]
     Home --> Dashboard[📊 Dashboard]
     Dashboard --> Reports[📈 Reports]
-    Dashboard --> Analytics[📊 Analytics] 
+    Dashboard --> Analytics[📊 Analytics]
     Dashboard --> Settings[⚙️ Settings]
     Reports --> Export[📤 Export]
     Analytics --> Filters[🔍 Filters]
@@ -152,17 +152,17 @@ graph TD
     App[📱 App Shell] --> Header[🏢 Header]
     App --> Main[📄 Main Content]
     App --> Footer[📝 Footer]
-    
+
     Header --> Logo[🏢 Logo]
     Header --> Search[🔍 Search Bar]
     Header --> UserMenu[👤 User Menu]
-    
+
     Main --> Sidebar[📱 Sidebar Nav]
     Main --> Content[📊 Content Area]
-    
+
     Content --> KPIGrid[📈 KPI Grid]
     Content --> ChartArea[📊 Chart Section]
-    
+
     KPIGrid --> Card1[💰 Revenue Card]
     KPIGrid --> Card2[📈 Growth Card]
     KPIGrid --> Card3[👥 Users Card]
@@ -177,7 +177,7 @@ graph TD
 /* Mobile-First Approach */
 .wireframe-container {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "header"
         "main"
         "footer";
@@ -196,7 +196,7 @@ graph TD
     .main-layout {
         grid-template-columns: 240px 1fr;
     }
-    
+
     .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -219,13 +219,13 @@ graph TD
     --color-success: #4caf50;
     --color-warning: #ff9800;
     --color-error: #f44336;
-    
+
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 24px;
     --spacing-xl: 32px;
-    
+
     --border-radius: 8px;
     --shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -277,14 +277,14 @@ graph TD
       "600": "#1e88e5", "700": "#1976d2", "800": "#1565c0", "900": "#0d47a1"
     },
     "secondary": {
-      "50": "#fce4ec", "500": "#e91e63", "900": "#880e4f"  
+      "50": "#fce4ec", "500": "#e91e63", "900": "#880e4f"
     },
     "neutral": {
       "50": "#fafafa", "100": "#f5f5f5", "200": "#eeeeee",
       "500": "#9e9e9e", "700": "#616161", "900": "#212121"
     },
     "semantic": {
-      "success": "#4caf50", "warning": "#ff9800", 
+      "success": "#4caf50", "warning": "#ff9800",
       "error": "#f44336", "info": "#2196f3"
     }
   }
@@ -363,7 +363,7 @@ graph TD
 
 ```html
 <!-- Accessible Button -->
-<button 
+<button
     class="btn btn-primary"
     aria-describedby="btn-help"
     type="submit">
@@ -378,8 +378,8 @@ graph TD
     <label for="email" class="required">
         📧 Email Address
     </label>
-    <input 
-        type="email" 
+    <input
+        type="email"
         id="email"
         required
         aria-describedby="email-error"
@@ -441,7 +441,7 @@ npm install -g svgo
 
 ### **Chrome Extensions Úteis**
 - **axe DevTools** - Accessibility auditing
-- **Lighthouse** - Performance & best practices  
+- **Lighthouse** - Performance & best practices
 - **Responsive Viewer** - Multi-device preview
 - **ColorZilla** - Color picker & contrast checker
 
@@ -549,13 +549,13 @@ graph TD
     B --> C[📈 View Sales Chart]
     B --> D[👥 Manage Leads]
     B --> E[🎯 Check Goals]
-    
+
     C --> F[🔍 Filter by Date]
     C --> G[📤 Export Report]
-    
+
     D --> H[➕ Add Lead]
     D --> I[📞 Call Lead]
-    
+
     style B fill:#e8f5e8
     style C fill:#fff3e0
     style D fill:#f3e5f5
@@ -669,12 +669,12 @@ export const DashboardCard = ({ title, value, icon }) => {
 
 ## 🎉 **Conclusão**
 
-As **Ferramentas de Design integradas** ao AgileDevAgent proporcionam:
+As **Ferramentas de Design integradas** ao WorkFlowAI proporcionam:
 
 ### ✅ **Benefícios Alcançados:**
 - **📐 Wireframes versionáveis** em texto puro (Git-friendly)
 - **🔄 Prototipação rápida** com feedback visual imediato
-- **🎯 Design System consistente** com tokens reutilizáveis  
+- **🎯 Design System consistente** com tokens reutilizáveis
 - **♿ Acessibilidade por design** com guidelines WCAG 2.1 AA
 - **🚀 Handoff eficiente** para desenvolvedores
 

@@ -33,4 +33,4 @@ data/out/sprint<sprint>/<activity>/
 - Evite informações sensíveis (segredos/CPFs) nos arquivos
 - Siga o guia de encoding do repositório (UTF-8 sem BOM; CRLF em .md)
 - Mantenha a estrutura por sprint e activity para rastreabilidade
-- Gere evidências em `engineering/reports/` quando aplicável
+- Gere evidências em `data/out/evidence` quando aplicável

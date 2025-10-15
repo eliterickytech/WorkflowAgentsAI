@@ -1,6 +1,6 @@
-# 📋 Índice de Exemplos - AgileDevAgent
+# 📋 Índice de Exemplos - WorkFlowAI
 
-Esta pasta contém **exemplos práticos detalhados** de como usar cada um dos **10 agentes especializados** do AgileDevAgent para diferentes cenários de negócio.
+Esta pasta contém **exemplos práticos detalhados** de como usar cada um dos **10 agentes especializados** do WorkFlowAI para diferentes cenários de negócio.
 
 ---
 
@@ -109,7 +109,7 @@ Cada arquivo contém **6-8 exemplos reais** com prompts completos, contextos esp
 
 **Implementações TDD:**
 - 🧪 Seguindo Plano Testing Specialist
-- 🏗️ Clean Architecture + SOLID + DDD  
+- 🏗️ Clean Architecture + SOLID + DDD
 - ⚡ Performance Optimization
 - 🔗 Integração Sistemas Complexos
 - 🛡️ Security Implementation
@@ -171,7 +171,7 @@ Cada arquivo contém **6-8 exemplos reais** com prompts completos, contextos esp
 
 ### **2. Adapte os Exemplos:**
 - **Substitua contextos** pelos da sua empresa
-- **Ajuste stakeholders** conforme sua organização  
+- **Ajuste stakeholders** conforme sua organização
 - **Modifique tecnologias** conforme seu stack
 - **Adapte métricas** para seus KPIs específicos
 
@@ -221,4 +221,4 @@ Cada arquivo contém **6-8 exemplos reais** com prompts completos, contextos esp
 
 ---
 
-**💡 Estes exemplos garantem uso profissional e eficiente dos 10 agentes especializados do AgileDevAgent!**
+**💡 Estes exemplos garantem uso profissional e eficiente dos 10 agentes especializados do WorkFlowAI!**

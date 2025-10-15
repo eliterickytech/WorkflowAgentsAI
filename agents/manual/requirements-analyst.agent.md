@@ -14,6 +14,7 @@ inputs:
 outputs:
   bdd_path: data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md
   features_glob: data/out/sprint{sprint}/{activity}/features/*.feature
+  evidence_checklist: data/out/evidence/requirements-analyst/test-evidence-checklist.md
 responsibilities:
   - **ANALISAR CRITERIOS DE ACEITE** do Product Owner como base principal
   - Extrair regras de negocio que CUBRAM TODOS OS CRITERIOS DE ACEITE
@@ -113,7 +114,9 @@ prompts:
     - CoV Pass: resposta final reflete o plano de verificação executado
     - Fact-Check: amostras de afirmações ancoradas e verificadas por RAG
     - Terminologia: 100% das entidades aparecem no Glossário
-    - Context-Rot (se >10k tokens de entrada): sentinelas ≥ 85% de acerto; caso contrário, re-chunking
+      - Context-Rot (se >10k tokens de entrada): sentinelas ≥ 85% de acerto; caso contrário, re-chunking
+    Evidencias Auditoria:
+      - Atualize `data/out/evidence/requirements-analyst/test-evidence-checklist.md` com rastreabilidade, decisões e cobertura, mantendo estrutura, emojis e tabelas do modelo. Remova qualquer placeholder como `[A ser preenchido]` ou `Status: ?`.
 
     WORKFLOW DE APROVACAO:
     - AO FINALIZAR: Apresentar resumo executivo da análise de requisitos
@@ -129,10 +132,12 @@ prompts:
     - SOLICITAR APROVACAO: "Análise de requisitos finalizada. Prosseguir com Systems Architect?"
     - OPCOES: [SIM] ou [NAO]
     - SE [SIM]: Executar automaticamente @agents/manual/systems-architect.agent.md
+    - Atualizar `data/out/evidence/requirements-analyst/test-evidence-checklist.md` com as evidências geradas nesta fase.
 artifacts:
   attachments_path: data/in/sprint{sprint}/{activity}/attachments/
   bdd_path: data/out/sprint{sprint}/{activity}/02-requisitos-bdd.md
   features_glob: data/out/sprint{sprint}/{activity}/features/*.feature
+  evidence_checklist: data/out/evidence/requirements-analyst/test-evidence-checklist.md
 ---
 
 # Guia — Requirements Analyst (Manual)
