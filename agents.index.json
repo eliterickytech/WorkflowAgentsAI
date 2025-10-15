@@ -1,35 +1,39 @@
 ﻿{
   "agentsDirectory": "agents/manual/",
-  "lastUpdated": "2025-09-28",
+  "lastUpdated": "2025-10-15",
+  "technologyStack": {
+    "backend": ".NET 6.0",
+    "frontend": "Angular",
+    "node": ">=20.3"
+  },
   "agents": [
     {
       "id": "product-owner",
       "name": "Product Owner Agent",
-      "name": "Product Owner Agent",
-      "description": "Entende solicitacoes do cliente, define visao do produto e prioriza funcionalidades por valor de negocio",
+      "description": "Entende solicitações do cliente, define visão do produto e prioriza funcionalidades por valor de negócio.",
       "playbook": "agents/manual/product-owner.agent.md",
       "specialties": [
-        "Analise de solicitacoes de cliente",
-        "Definicao de visao de produto",
-        "Priorizacao por valor de negocio",
-        "Comunicacao com stakeholders",
-        "Gestao de expectativas",
-        "Criterios de aceitacao"
+        "Análise de solicitações de cliente",
+        "Definição de visão de produto",
+        "Priorização por valor de negócio",
+        "Comunicação com stakeholders",
+        "Gestão de expectativas",
+        "Critérios de aceitação"
       ],
       "inputs": [
-        "Solicitacoes do cliente",
-        "Requisitos de negocio",
-        "Objetivos estrategicos",
+        "Solicitações do cliente",
+        "Requisitos de negócio",
+        "Objetivos estratégicos",
         "Feedback de stakeholders",
-        "Restricoes de mercado"
+        "Restrições de mercado"
       ],
       "outputs": [
         "Requirements Brief estruturado",
         "Business Context documentado",
         "User Stories priorizadas",
-        "Criterios de aceitacao definidos",
+        "Critérios de aceitação definidos",
         "Roadmap de entregas",
-        "Briefing para equipe tecnica"
+        "Briefing para equipe técnica"
       ],
       "keyReferences": [
         "Scrum Guide",
@@ -47,93 +51,104 @@
       ]
     },
     {
-      "id": "requirements-analyst",
-      "name": "Requirements Analyst Agent",
-      "name": "Requirements Analyst Agent",
-      "description": "Transforma documentos de especificacao (.docx, .xlsx) em regras de negocio estruturadas seguindo padrao RN-00xx.md",
-      "playbook": "agents/manual/requirements-analyst.agent.md",
-      "playbook": "agents/manual/requirements-analyst.agent.md",
+      "id": "roundtable-facilitator",
+      "name": "Roundtable Facilitator Agent",
+      "description": "Facilita alinhamento técnico entre especialistas, consolidando decisões e pendências por etapa.",
+      "playbook": "agents/manual/roundtable-facilitator.agent.md",
       "specialties": [
-        "Analise de documentos docx/xlsx",
-        "Extracao de regras de negocio",
-        "Criacao de arquivos RN-00xx.md",
-        "Mapeamento de dependencias entre regras",
-        "Validacao de consistencia terminologica"
+        "Mediação técnica",
+        "Consolidação de decisões",
+        "Gestão de riscos e pendências",
+        "Orquestração de agentes"
       ],
       "inputs": [
-        "Documentos .docx em references-data/datas/business-rules-files/",
-        "Documentos .docx em references-data/datas/business-rules-files/",
-        "Planilhas .xlsx de validacao",
-        "Contexto do dominio (anexos, bases, formulas)",
-        "Numero da regra (RN-00xx) alvo"
+        "Saídas do Product Owner",
+        "Contexto do projeto",
+        "Questões dos especialistas"
       ],
       "outputs": [
-        "Arquivo references-data/business-rules/RN-00xx.md estruturado",
-        "Arquivo references-data/business-rules/RN-00xx.md estruturado",
-        "Casos de teste derivados em formato tabular",
-        "Mapeamento de dependencias e impactos",
-        "Validacao cruzada com regras existentes"
+        "Notas de alinhamento",
+        "Decisões registradas",
+        "Itens de ação por responsável"
       ],
       "keyReferences": [
-        "references-data/pgdas-anexo-*.md",
-        "references-data/business-rules/RN-0001.md",
-        "references-data/datas/business-rules-files/",
-        "references-data/datas/tables/validation-business-rules-files/"
-        "references-data/pgdas-anexo-*.md",
-        "references-data/business-rules/RN-0001.md",
-        "references-data/datas/business-rules-files/",
-        "references-data/datas/tables/validation-business-rules-files/"
+        "docs/guia-agentes-individuais.md",
+        "docs/fluxo-completo.md"
+      ],
+      "triggers": [
+        "mesa redonda",
+        "alinhamento",
+        "pendencias",
+        "decisoes"
+      ]
+    },
+    {
+      "id": "requirements-analyst",
+      "name": "Requirements Analyst Agent",
+      "description": "Transforma documentos de especificação em regras de negócio estruturadas seguindo padrão RN-00xx.md.",
+      "playbook": "agents/manual/requirements-analyst.agent.md",
+      "specialties": [
+        "Análise de documentos docx/xlsx",
+        "Extração de regras de negócio",
+        "Criação de arquivos RN-00xx.md",
+        "Mapeamento de dependências entre regras",
+        "Validação de consistência terminológica"
+      ],
+      "inputs": [
+        "Documentos .docx/.xlsx",
+        "Contexto do domínio (anexos, bases, fórmulas)",
+        "Número da regra (RN-00xx) alvo"
+      ],
+      "outputs": [
+        "Arquivo RN-00xx.md estruturado",
+        "Casos de teste derivados em formato tabular",
+        "Mapeamento de dependências e impactos",
+        "Validação cruzada com regras existentes"
+      ],
+      "keyReferences": [
+        "references-data/",
+        "data/out/"
       ],
       "triggers": [
         "analise de requisitos",
         "documento docx",
         "planilha xlsx",
-        "planilha xlsx",
         "regra RN-",
-        "extracao de regras",
-        "business rules"
+        "extracao de regras"
       ]
     },
     {
       "id": "systems-architect",
       "name": "Systems Architect Agent",
-      "id": "systems-architect",
-      "name": "Systems Architect Agent",
-      "description": "Projeta e estrutura arquitetura do sistema seguindo principios DDD, SOLID e Clean Architecture",
-      "playbook": "agents/manual/systems-architect.agent.md",
+      "description": "Projeta arquitetura do sistema seguindo DDD, SOLID e Clean Architecture (net6.0).",
       "playbook": "agents/manual/systems-architect.agent.md",
       "specialties": [
-        "Design orientado a dominio (DDD)",
-        "Arquitetura em camadas (Domain/Application/Infra/Api)",
-        "Definicao de bounded contexts e agregados",
-        "Contratos de servicos e interfaces",
-        "Estrategias de persistencia e integracao",
-        "Padroes SOLID e Clean Architecture"
+        "Design orientado a domínio (DDD)",
+        "Arquitetura em camadas (Domain/Application/Infra/API)",
+        "Bounded contexts e agregados",
+        "Contratos de serviços e interfaces",
+        "Estratégias de persistência e integração",
+        "Padrões SOLID e Clean Architecture"
       ],
       "inputs": [
-        "Especificacoes de regras de negocio (RN-00xx.md)",
-        "Requisitos funcionais e nao-funcionais",
-        "Requisitos funcionais e nao-funcionais",
-        "Restricoes tecnicas (.NET 4.8, PostgreSQL)",
-        "Padroes arquiteturais existentes",
-        "Terminologia do dominio (RBA, RBAA, etc.)"
+        "Regras de negócio (RN-00xx.md)",
+        "Requisitos funcionais e não-funcionais",
+        "Restrições técnicas (.NET 6.0, PostgreSQL)",
+        "Padrões arquiteturais existentes"
       ],
       "outputs": [
         "Diagramas de contexto e componentes",
-        "Estrutura de pastas e organizacao de projetos",
-        "Definicao de entidades, agregados e value objects",
-        "Contratos de servicos e interfaces",
-        "Estrategia de testes por camada",
-        "ADR (Architecture Decision Records)"
+        "Estrutura de pastas e organização de projetos",
+        "Definição de entidades, agregados e VOs",
+        "Contratos de serviços e interfaces",
+        "Estratégia de testes por camada",
+        "ADRs (Architecture Decision Records)"
       ],
       "keyReferences": [
         "src/ (estrutura atual)",
         "Domain-Driven Design principles",
-        "src/ (estrutura atual)",
-        "Domain-Driven Design principles",
         "SOLID principles",
-        "Clean Architecture patterns",
-        ".NET Framework 4.8 constraints"
+        "Clean Architecture patterns"
       ],
       "triggers": [
         "arquitetura",
@@ -143,55 +158,87 @@
         "entidades",
         "agregados",
         "adr"
-        "adr"
+      ]
+    },
+    {
+      "id": "testing-specialist",
+      "name": "Testing Specialist Agent",
+      "description": "Cria cenários de teste abrangentes garantindo 90%+ de cobertura e validação de regras de negócio.",
+      "playbook": "agents/manual/testing-specialist.agent.md",
+      "specialties": [
+        "Testes unitários xUnit",
+        "Testes de integração e2e",
+        "Geração de dados com Bogus",
+        "Validação de regras RN-00xx",
+        "Cobertura de código 90%+",
+        "Testes de performance",
+        "Cenários extremos e edge cases"
+      ],
+      "inputs": [
+        "Código implementado",
+        "Regras de negócio (RN-00xx.md)",
+        "Casos de teste derivados",
+        "Configuração de ambiente de teste"
+      ],
+      "outputs": [
+        "Testes unitários organizados por camada",
+        "Testes de integração funcionais",
+        "Fixtures e builders",
+        "Relatório de cobertura",
+        "Documentação de cenários críticos",
+        "Suite de testes executável"
+      ],
+      "keyReferences": [
+        "tests/",
+        "xUnit",
+        "Bogus",
+        "FluentAssertions",
+        "Moq"
+      ],
+      "triggers": [
+        "testes",
+        "coverage",
+        "unit tests",
+        "integration tests",
+        "xunit",
+        "bogus",
+        "cobertura",
+        "edge cases"
       ]
     },
     {
       "id": "expert-developer",
       "name": "Expert Developer Agent",
-      "description": "Coordena implementacoes complexas no backend seguindo Clean Architecture e praticas de engenharia",
-      "playbook": "agents/manual/expert-developer.agent.md",
-      "name": "Expert Developer Agent",
-      "description": "Coordena implementacoes complexas no backend seguindo Clean Architecture e praticas de engenharia",
+      "description": "Coordena implementações complexas no backend seguindo Clean Architecture e boas práticas.",
       "playbook": "agents/manual/expert-developer.agent.md",
       "specialties": [
-        "Aplicacao de padroes SOLID",
-        "Integracao com sistemas legado",
-        "Otimizacao de performance",
+        "Aplicação de padrões SOLID",
+        "Integração com legados",
+        "Otimização de performance",
         "Mentoria de time",
-        "Revisao de codigo",
-        "Padroes e convencoes do projeto"
-        "Aplicacao de padroes SOLID",
-        "Integracao com sistemas legado",
-        "Otimizacao de performance",
-        "Mentoria de time",
-        "Revisao de codigo",
-        "Padroes e convencoes do projeto"
+        "Revisão de código",
+        "Padrões e convenções do projeto"
       ],
       "inputs": [
-        "Regras de negocio validadas",
+        "Regras de negócio validadas",
         "Arquitetura proposta",
         "Planos de entrega",
-        "Regras de negocio validadas",
-        "Arquitetura proposta",
-        "Planos de entrega",
-        "Padroes e convencoes do projeto"
+        "Padrões e convenções do projeto"
       ],
       "outputs": [
-        "Classes implementadas com documentacao XML",
-        "Validadores FluentValidation configurados",
-        "Validadores FluentValidation configurados",
-        "Mapeamentos entre DTOs e entidades",
-        "Configuracao de DI atualizada",
-        "Logs estruturados implementados",
-        "Codigo pronto para testes unitarios"
+        "Classes implementadas com XML docs",
+        "Validadores FluentValidation",
+        "Mapeamentos DTOs ↔ entidades",
+        "Configuração de DI",
+        "Logs estruturados (Serilog)",
+        "Código pronto para testes"
       ],
       "keyReferences": [
-        "src/ (codigo existente)",
-        "Padroes de nomenclatura do projeto",
-        "FluentValidation patterns",
-        "Serilog configuration",
-        "Result envelope pattern"
+        "src/",
+        "Padrões de nomenclatura",
+        "FluentValidation",
+        "Serilog",
+        "Result pattern"
       ],
       "triggers": [
         "implementacao",
@@ -204,159 +251,186 @@
       ]
     },
     {
-      "id": "testing-specialist",
-      "name": "Testing Specialist Agent",
-      "name": "Testing Specialist Agent",
-      "description": "Cria cenarios de teste abrangentes garantindo 90%+ cobertura e validacao de regras de negocio",
-      "playbook": "agents/manual/testing-specialist.agent.md",
-      "playbook": "agents/manual/testing-specialist.agent.md",
+      "id": "frontend-specialist",
+      "name": "Frontend Specialist Agent",
+      "description": "Especialista em frontend com Angular, PO-UI e Material, práticas de acessibilidade e performance.",
+      "playbook": "agents/manual/frontend-specialist.agent.md",
       "specialties": [
-        "Testes unitarios xUnit",
-        "Testes de integracao end-to-end",
-        "Geracao de dados com Bogus",
-        "Validacao de regras RN-00xx",
-        "Cobertura de codigo 90%+",
-        "Testes de performance",
-        "Cenarios extremos e edge cases"
+        "Angular (2+)",
+        "PO-UI (TOTVS Design System)",
+        "Angular Material",
+        "UI/UX patterns e acessibilidade",
+        "Performance optimization frontend",
+        "Component-driven development",
+        "State management (NgRx)"
       ],
       "inputs": [
-        "Codigo implementado (entidades, servicos, controllers)",
-        "Especificacoes de regras de negocio (RN-00xx.md)",
-        "Casos de teste derivados da analise",
-        "Configuracao de ambiente de teste",
-        "Dados de validacao de referencia"
+        "Design e mockups",
+        "Especificações de arquitetura",
+        "Requisitos de UX/UI",
+        "Guidelines de marca"
       ],
       "outputs": [
-        "Testes unitarios organizados por camada",
-        "Testes de integracao funcionais",
-        "Testes de integracao funcionais",
-        "Fixtures e builders para geracao de dados",
-        "Relatorio de cobertura de codigo",
-        "Documentacao de cenarios criticos",
-        "Suite de testes executavel"
+        "Componentes frontend",
+        "Estrutura de componentes",
+        "Guidelines de UI/UX",
+        "Temas e customizações",
+        "Código responsivo e acessível",
+        "Documentação de componentes"
       ],
       "keyReferences": [
-        "tests/ (testes existentes)",
-        "tests/ (testes existentes)",
-        "xUnit framework",
-        "Bogus library",
-        "FluentAssertions",
-        "Moq framework",
-        "references-data/business-rules/"
-        "references-data/business-rules/"
+        "Angular Style Guide",
+        "PO-UI Docs",
+        "Material Design 3",
+        "WCAG 2.1 AA"
       ],
       "triggers": [
-        "testes",
-        "test coverage",
-        "unit tests",
-        "integration tests",
-        "integration tests",
-        "xunit",
-        "bogus",
-        "cobertura",
-        "edge cases"
+        "frontend",
+        "interface",
+        "angular",
+        "po-ui",
+        "material",
+        "ui/ux",
+        "componentes",
+        "responsivo",
+        "acessibilidade"
       ]
     },
     {
       "id": "testing-validator",
       "name": "Testing Validator Agent",
-      "description": "Valida pos-implementacao se todos os testes planejados foram implementados corretamente no fluxo TDD",
+      "description": "Valida se todos os testes planejados foram implementados e aprovados no fluxo TDD.",
       "playbook": "agents/manual/testing-validator.agent.md",
       "specialties": [
-        "Validacao de implementacao TDD",
-        "Comparacao plano vs execucao",
-        "Verificacao de cobertura de testes",
-        "Validacao de evidencias por criterio",
-        "Execucao e verificacao de testes",
-        "Parecer de conformidade com QA Plan"
+        "Validação de implementação TDD",
+        "Plano vs execução",
+        "Cobertura de testes",
+        "Evidências por critério",
+        "Parecer de conformidade"
       ],
       "inputs": [
         "Plano de QA (05-qa-plano.md)",
         "Notas de desenvolvimento (04-desenvolvimento.md)",
-        "Criterios de aceite definidos",
-        "Codigo implementado com testes"
+        "Critérios de aceite",
+        "Código com testes"
       ],
       "outputs": [
-        "Relatorio de validacao (05.1-testing-validation.md)",
+        "Relatório de validação (05.1-testing-validation.md)",
         "Comparativo planejado vs implementado",
-        "Verificacao de cobertura real vs meta",
-        "Evidencias por criterio de aceite",
-        "Parecer final: APROVADO ou NECESSITA CORRECOES"
+        "Cobertura real vs meta",
+        "Evidências por critério",
+        "Parecer final"
       ],
       "keyReferences": [
-        "Test-Driven Development practices",
-        "Quality assurance validation",
-        "Coverage analysis tools",
-        "Evidence-based validation"
+        "TDD",
+        "QA validation",
+        "Coverage tools"
       ],
       "triggers": [
         "validacao tdd",
         "verificacao testes",
         "cobertura",
         "evidencias",
-        "conformidade qa",
-        "validacao pos-implementacao"
+        "conformidade qa"
       ]
     },
     {
-      "id": "frontend-specialist",
-      "name": "Frontend Specialist Agent",
-      "description": "Especialista em desenvolvimento frontend com Angular, React, PO-UI, Material, Sean Themes e WPF",
-      "playbook": "agents/manual/frontend-specialist.agent.md",
+      "id": "code-reviewer",
+      "name": "Code Reviewer Agent",
+      "description": "Revisa código para garantir qualidade, segurança, padrões e alinhamento arquitetural.",
+      "playbook": "agents/manual/code-reviewer.agent.md",
       "specialties": [
-        "Angular (2+ ate versoes recentes)",
-        "React (Hooks, Context API, Suspense)",
-        "PO-UI (TOTVS Design System)",
-        "Material Design (Angular Material, MUI)",
-        "Sean Themes Color Admin",
-        "WPF (.NET Framework/Core)",
-        "UI/UX patterns e acessibilidade",
-        "Performance optimization frontend",
-        "Component-driven development",
-        "State management (NgRx, Redux, Zustand)"
+        "Boas práticas de C# e TypeScript",
+        "Revisão de testes e cobertura",
+        "Segurança e validações",
+        "Padrões arquiteturais",
+        "Observabilidade"
       ],
       "inputs": [
-        "Design e mockups de interface",
-        "Especificacoes de arquitetura",
-        "Requisitos de UX/UI",
-        "Contexto de negocio",
-        "Guidelines de marca/identidade",
-        "Requisitos de acessibilidade"
+        "PRs e diffs",
+        "Guidelines do projeto",
+        "Resultados de testes"
       ],
       "outputs": [
-        "Implementacao de componentes frontend",
-        "Estrutura de componentes organizados",
-        "Guidelines de UI/UX documentados",
-        "Temas e customizacoes implementados",
-        "Codigo responsivo e acessivel",
-        "Documentacao de componentes"
+        "Comentários de revisão",
+        "Sugestões de ajuste",
+        "Checklist de aprovação"
       ],
       "keyReferences": [
-        "Angular Style Guide",
-        "React Best Practices",
-        "Material Design 3",
-        "WCAG 2.1 AA guidelines",
-        "Component-driven development",
-        "Clean Code Frontend principles"
+        "docs/dev-tester-guidelines.md",
+        "docs/dotnet-integration.md"
       ],
       "triggers": [
-        "frontend",
-        "interface",
-        "angular",
-        "react",
-        "po-ui",
-        "material",
-        "ui/ux",
-        "componentes",
-        "wpf",
-        "responsivo",
-        "acessibilidade"
+        "code review",
+        "revisao",
+        "qualidade",
+        "seguranca"
+      ]
+    },
+    {
+      "id": "ux-ui-specialist",
+      "name": "UX/UI Specialist Agent",
+      "description": "Garante usabilidade, acessibilidade e consistência visual das interfaces.",
+      "playbook": "agents/manual/ux-ui-specialist.agent.md",
+      "specialties": [
+        "Pesquisa com usuários",
+        "Wireframes e protótipos",
+        "Acessibilidade",
+        "Design system",
+        "Testes de usabilidade"
+      ],
+      "inputs": [
+        "Brief de UX",
+        "Mockups",
+        "Diretrizes de marca"
+      ],
+      "outputs": [
+        "Guia de UI/UX",
+        "Ajustes de acessibilidade",
+        "Protótipos validados"
+      ],
+      "keyReferences": [
+        "docs/guia-design-wireframes.md",
+        "WCAG 2.1"
+      ],
+      "triggers": [
+        "ux",
+        "ui",
+        "acessibilidade",
+        "design"
+      ]
+    },
+    {
+      "id": "product-owner-final",
+      "name": "Product Owner Final Agent",
+      "description": "Confirma definição de pronto e coleta evidências finais de aprovação.",
+      "playbook": "agents/manual/product-owner-final.agent.md",
+      "specialties": [
+        "Checklist de aprovação",
+        "Confirmação de critérios de aceite",
+        "Validação de evidências"
+      ],
+      "inputs": [
+        "Artefatos de todas as etapas",
+        "Relatórios de testes",
+        "Evidências de validação"
+      ],
+      "outputs": [
+        "Checklist final (99-checklist-final.md)",
+        "Status de aprovação"
+      ],
+      "keyReferences": [
+        "docs/GUIA-RAPIDO-ARQUIVOS.md"
+      ],
+      "triggers": [
+        "aprovacao final",
+        "definicao de pronto",
+        "checklist"
       ]
     }
   ],
   "integrationPoints": {
     "copilot": {
-      "instructionsFile": ".github/copilot-instructions.md",
       "instructionsFile": ".github/copilot-instructions.md",
       "syncRequired": true
     },
@@ -378,7 +452,6 @@
     "newFeature": [
       "product-owner",
       "requirements-analyst",
-      "systems-architect",
       "systems-architect",
       "expert-developer",
       "frontend-specialist",
@@ -402,11 +475,6 @@
     "refactoring": [
       "systems-architect",
       "expert-developer",
-      "expert-developer",
-      "testing-specialist"
-    ],
-    "uiRefactoring": [
-      "frontend-specialist",
       "testing-specialist"
     ],
     "uiRefactoring": [
@@ -419,7 +487,7 @@
   },
   "qualityGates": {
     "codeCompliance": {
-      "dotnetVersion": ".NET Framework 4.8",
+      "dotnetVersion": ".NET 6.0",
       "codingStandards": "SOLID principles, DDD patterns",
       "documentation": "XML comments required",
       "naming": "English for code, Portuguese for messages"
@@ -434,8 +502,8 @@
       "layerSeparation": "Clean Architecture",
       "persistence": "PostgreSQL primary",
       "messaging": "Asynchronous when applicable",
-      "messaging": "Asynchronous when applicable",
-      "validation": "FluentValidation required"
+      "validation": "FluentValidation required",
+      "logging": "Serilog"
     }
   }
 }

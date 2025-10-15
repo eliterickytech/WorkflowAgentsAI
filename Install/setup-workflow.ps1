@@ -703,28 +703,53 @@ function Enrich-Agents($target, $instructionsPath) {
   }
 
   foreach ($role in $map.Keys) {
+    # Tenta localizar arquivo especifico por papel
     $fileBase = Get-ChildItem -Path $instructionsPath -Filter "$role.instructions.*" -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    # Alternativa: nome do papel com underscore (ex.: product_owner.instructions.md)
+    if ($null -eq $fileBase) {
+      $altRole = ($role -replace '-', '_')
+      $fileBase = Get-ChildItem -Path $instructionsPath -Filter "$altRole.instructions.*" -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    }
+    # Fallback: instrucoes default para todos os papeis
+    $usedDefault = $false
+    if ($null -eq $fileBase) {
+      $fileBase = Get-ChildItem -Path $instructionsPath -Filter "default.instructions.*" -File -ErrorAction SilentlyContinue | Select-Object -First 1
+      if ($null -eq $fileBase) {
+        $fileBase = Get-ChildItem -Path $instructionsPath -Filter "all.instructions.*" -File -ErrorAction SilentlyContinue | Select-Object -First 1
+      }
+      if ($null -ne $fileBase) { $usedDefault = $true }
+    }
     if ($null -ne $fileBase) {
-      $content = Get-Content -Path $fileBase.FullName -Raw
+      # Ler instrucoes como UTF-8 (sem BOM) e normalizar quebras de linha para CRLF
+      $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+      $content = [System.IO.File]::ReadAllText($fileBase.FullName, $utf8NoBom)
+      $content = ($content -replace "(\r?\n)", "`r`n")
       $agentFile = Join-Path $agentsPath $map[$role]
       if (Test-Path $agentFile) {
-        Write-Info "Atualizando agente $role com novas instrucoes (modo idempotente)..."
+        if ($usedDefault) {
+          Write-Info "Atualizando agente $role com instrucoes DEFAULT ('$($fileBase.Name)') (modo idempotente)..."
+        } else {
+          Write-Info "Atualizando agente $role com novas instrucoes (modo idempotente)..."
+        }
         $header = "### Custom Instructions (instalador)"
-        $agentText = Get-Content -Path $agentFile -Raw
+        $agentText = [System.IO.File]::ReadAllText($agentFile, $utf8NoBom)
         if ($agentText.IndexOf($header) -ge 0) {
           # Substitui o bloco existente a partir do header ate o fim do arquivo
           $idx = $agentText.IndexOf($header)
           $prefix = $agentText.Substring(0, $idx).TrimEnd("`r","`n")
-          $newBlock = "`n`n---`n### Custom Instructions (instalador)`n$content"
+          $newBlock = "`r`n`r`n---`r`n### Custom Instructions (instalador)`r`n$content"
           $newText = $prefix + $newBlock
-          Set-Content -Path $agentFile -Value $newText -Encoding UTF8
+          if (-not $newText.EndsWith("`r`n")) { $newText += "`r`n" }
+          [System.IO.File]::WriteAllText($agentFile, $newText, $utf8NoBom)
         } else {
           # Acrescenta o bloco ao final
-          Add-Content -Path $agentFile -Value "`n`n---`n### Custom Instructions (instalador)`n$content"
+          $append = "`r`n`r`n---`r`n### Custom Instructions (instalador)`r`n$content"
+          if (-not $agentText.EndsWith("`r`n")) { $append = "`r`n" + $append }
+          [System.IO.File]::AppendAllText($agentFile, $append, $utf8NoBom)
         }
       } else { Write-Warn "Arquivo do agente nao encontrado: $agentFile" }
     } else {
-      Write-Info "Nenhuma instrucao personalizada encontrada para $role (esperado: $($role).instructions.md|txt)"
+      Write-Info "Nenhuma instrucao personalizada encontrada para $role (esperado: $($role).instructions.md|txt, $($role -replace '-', '_').instructions.* ou default.instructions.*)"
     }
   }
 }

@@ -1,1740 +1,606 @@
-# ProsoftAgileAgent - Agentes de Desenvolvimento Ágil
+## 🗂️ Índice (guia prático)
 
-**Versão:** 2.2.0 - **Parallel Execution Edition**
-**Autor:** Ricardo Macedo Perdigão
-**Data:** 30 de Setembro de 2025
-
-## 🎯 **O que é o ProsoftAgileAgent?**
-
-
-O ProsoftAgileAgent é um **sistema de agentes inteligentes** que automatiza o processo completo de desenvolvimento de software seguindo metodologias ágeis. Ele transforma uma simples solicitação de negócio em documentação completa, código implementado e planos de teste.
-
-**Para Desenvolvedores:** Imagine ter uma equipe de especialistas (Product Owner, Arquiteto, Desenvolvedor Sênior, etc.) que trabalha automaticamente para você, gerando toda a documentação e código necessário para implementar uma funcionalidade.
-
-## 🚀 **Como Funciona o Sistema?**
-
-O sistema possui **11 agentes especializados** que trabalham em sequência:
-
-```
-1️⃣ Product Owner       → Analisa o negócio
-2️⃣ Mesa Redonda        → Alinha tecnicamente
-3️⃣ Requirements        → Cria cenários BDD
-4️⃣ Arquiteto           → Define a solução
-5️⃣ Testing Specialist  → Cria plano de QA (TDD) ⭐ ANTES do código
-6️⃣ Desenvolvedor       → Implementa seguindo TDD ⭐ DEPOIS do plano
-7️⃣ UX/UI Specialist    → Cria wireframes e design system (opcional)
-8️⃣ Frontend Specialist → Implementa frontend (opcional)
-9️⃣ Testing Validator   → Valida implementação (pós-frontend)
-🔟 Code Reviewer       → Auditoria qualidade (opcional)
-1️⃣ PO Final           → Valida critérios aceite
-```
-
-**🆕 FLUXO TDD (Test-Driven Development):**
-- ⭐ **Testing Specialist** cria o plano de QA **ANTES** da implementação
-- ⭐ **Expert Developer** implementa seguindo os testes já definidos
-- ⭐ **Testing Validator** valida se a implementação atende ao plano original
-
-**Cada agente pede sua aprovação antes de continuar para o próximo!**
-
-## 📚 Índice Geral de Documentação
-
-### 📁 **Documentação Principal**
-- **[📖 docs/fluxo-completo.md](./docs/fluxo-completo.md)** - **GUIA PRINCIPAL: Do zero à mesa redonda**
-- **[🚀 docs/guia-paralelizacao.md](./docs/guia-paralelizacao.md)** - **NOVO: Execução paralela de múltiplas atividades**
-- **[🎯 docs/guia-agentes-individuais.md](./docs/guia-agentes-individuais.md)** - **NOVO: Como usar cada agente individualmente**
-- **[🧪 docs/exemplo-fluxo-tdd-completo.md](./docs/exemplo-fluxo-tdd-completo.md)** - **NOVO: Exemplo prático TDD completo**
-- **[📖 docs/README.md](./docs/README.md)** - Índice completo da documentação técnica
-- **[📋 docs/resumo-melhorias-setup.md](./docs/resumo-melhorias-setup.md)** - Últimas melhorias implementadas no instalador
-
-### 🛠️ **Prompts e Agentes**
-- **[📝 prompts-manual/prompts/README.md](./prompts-manual/prompts/README.md)** - Guia principal dos prompts e agentes
-- **[📚 prompts-manual/prompts/reference/README.md](./prompts-manual/prompts/reference/README.md)** - Exemplos de referência para uso individual
-
-### 📦 **Resultados**
-- **[📊 out/README.md](./out/README.md)** - Estrutura e organização dos artefatos gerados
-
-### 📄 **Exemplos e Instruções**
-- **[💼 docs/exemplo-instrucoes-personalizada.md](./docs/exemplo-instrucoes-personalizada.md)** - Como personalizar agentes para sua empresa
-- **[👤 docs/exemplo-product-owner.instructions.md](./docs/exemplo-product-owner.instructions.md)** - Exemplo prático de instruções para Product Owner
-- **[🔍 docs/analise-projeto-existente.md](./docs/analise-projeto-existente.md)** - Análise automática de projetos existentes
-- **[🤖 docs/integracao-github-copilot.md](./docs/integracao-github-copilot.md)** - **NOVO:** Integração automática com GitHub Copilot
-
-### ⚙️ Super‑prompt e Enrich‑Agents (uso rápido)
-- Super‑prompt (opcional): crie/edite `prompts-manual/prompts/super-prompt.md`. O instalador pode gerar um modelo enriquecido com contexto (Sprint/Activity/Mapeamento de saídas) e não falha se o arquivo não existir.
-- Enrich‑Agents: prepare uma pasta com arquivos `<role>.instructions.md|txt` e informe o caminho quando solicitado no instalador. Padrões aceitos:
-  - `product-owner.instructions.*`, `requirements-analyst.instructions.*`, `systems-architect.instructions.*`, `testing-specialist.instructions.*`, `expert-developer.instructions.*`, `roundtable-facilitator.instructions.*`
-  - O instalador injeta um bloco "### Custom Instructions (instalador)" nos arquivos correspondentes em `agents/manual/*.agent.md` de forma idempotente (substitui o bloco anterior se já existir).
-  - Templates prontos em: `docs/prompts/agent-instructions-templates/`.
-
-## **Padrão de Encoding e Formatação**
-
-### ⚠️ **CRÍTICO: Leia Antes de Criar/Editar Arquivos**
-
-**Todos os arquivos devem seguir UTF-8 sem BOM** (exceto C#). Isso previne corrupção de caracteres (ç, ã, é, etc).
-
-| Tipo | Encoding | BOM | Line End | Indent |
-|------|----------|-----|----------|--------|
-| Markdown (.md) | UTF-8 | ❌ NÃO | CRLF | 2 sp |
-| PowerShell (.ps1) | UTF-8 | ❌ NÃO | CRLF | 4 sp |
-| YAML (.yaml) | UTF-8 | ❌ NÃO | LF | 2 sp |
-| JSON (.json) | UTF-8 | ❌ NÃO | LF | 2 sp |
-| C# (.cs) | UTF-8 | ✅ SIM | CRLF | 4 sp |
-
-**Documentação completa:**
-- 📖 [Guia Rápido de Arquivos](./docs/GUIA-RAPIDO-ARQUIVOS.md) - **Referência rápida**
-- 📘 [Padrão Completo de Encoding](./docs/PADRAO-ENCODING-FORMATACAO.md) - **400+ linhas de documentação**
-- ⚙️ [Copilot Instructions](./.github/copilot-instructions.md) - **Instruções para IA**
-
-**Status:** ✅ **100% compliant** (87/87 arquivos corretos)
+1) [Prefácio](#prefacio)
+2) [Pré-requisitos](#pre-requisitos)
+3) [Fluxo Completo (docs)](./docs/fluxo-completo.md)
+4) [Instalação ou Como criar nova atividade](#instalacao)
+5) [Orquestração e Scripts (visão geral)](#orquestracao)
+  - [🔄 Fluxo Automatizado (após instalação)](#fluxo-automatizado)
+6) [Modo Automático (CrewAI + AutoGen)](#modo-automatico)
+  - [Fluxo do modo automático (diagrama)](#fluxo-automatico)
+7) [Modo Manual (recomendado)](#modo-manual)
+  - [Passagem de bastão entre agentes](#passagem-bastao)
+  - [O que cada agente gera e por quê](#o-que-cada-agente-gera)
+  - [RAG explicado de forma simples](#rag-simples)
+  - [Vantagens do modo manual](#vantagens-modo-manual)
+8) [Enriquecimento do Agente (sempre aditivo) + RAG](#enriquecimento)
+9) [Fluxos de desenvolvimento (workflowPatterns)](#fluxos)
+10) [Exemplos de prompts por fluxo](#exemplos-prompts)
+11) [Prompts e responsabilidades de cada agente](#agentes)
+  - [🎯 Exemplos Práticos: Usando Agentes Isoladamente](#agentes-isolados)
+12) [Scripts PowerShell: o que são e por que existem](#scripts)
+   - [Paralelismo](#paralelismo)
+13) [Onde o código é gerado](#onde-codigo)
+14) [📊 Estrutura de Arquivos Gerados](#estrutura)
+15) [Como os agentes garantem a qualidade](#qualidade)
+16) [Padrão de commits](#commits)
+17) [Evitar code smells (SonarQube)](#sonarqube)
+18) [FAQ](#faq)
+19) [Solução de problemas](#solucao-problemas)
+20) [Recursos de aprendizado](#recursos)
+21) [Links úteis (todos os .md)](#links)
+22) [Autor e atualizações recentes](#autor)
 
 ---
 
-## 📋 **Pré-requisitos (O que você precisa ter instalado)**
+<a id="prefacio"></a>
+## 🧭 Prefácio
 
-- **Windows 10/11** com PowerShell
-- **Git** (para controle de versão)
-- **VS Code** com extensão GitHub Copilot (OBRIGATÓRIO)
-- **Conta GitHub** com Copilot ativo
+Este repositório organiza um “time de agentes” trabalhando em sequência para transformar uma solicitação de negócio em documentação, arquitetura, código e testes. Ele foi pensado para equipes .NET 6.0 com Frontend Angular e Node.js >= 20.3, mantendo simplicidade no uso e rastreabilidade completa dos artefatos.
 
----
-
-## 🎯 **NOVO: Guia de Agentes Individuais**
-
-**📖 [Acesse o Guia Completo](./docs/guia-agentes-individuais.md)**
-
-Quer usar apenas **1 agente específico** ao invés do fluxo completo? Agora você pode!
-
-**Exemplos rápidos:**
-- 🎯 **Product Owner** apenas: Analisar viabilidade de uma ideia
-- 🤝 **Mesa Redonda** apenas: Debater decisão arquitetural complexa
-- 🧪 **Testing Specialist** apenas: Criar plano de testes TDD
-- 💻 **Expert Developer** apenas: Implementar funcionalidade específica
-- ✅ **Product Owner Final** apenas: Validar critérios de aceite
-
-**Cada agente tem:**
-- ✅ **3+ exemplos práticos** (básico, intermediário, avançado)
-- ✅ **Templates de entrada** padronizados
-- ✅ **Troubleshooting** de problemas comuns
-- ✅ **Dicas de otimização** específicas
-
-**Perfeito para:** refinamento de backlog, validações pontuais, implementações específicas, debugging de processos.
+• Público-alvo: desenvolvedores, QAs, POs e arquitetos.
+• Valores: transparência, TDD, documentação viva, e automação pragmática.
+• Resultado: pastas data/in e data/out com evidências auditáveis e um ciclo previsível.
 
 ---
+<a id="pre-requisitos"></a>
+## Pré-requisitos
 
-## 🚀 **NOVO: Execução Paralela de Múltiplas Atividades**
+Checklist de ambiente para uso do WorkflowAgentsAI (instalação e execução):
 
-**📖 [Acesse o Guia Completo](./docs/guia-paralelizacao.md)**
+- Windows 10/11
+- Windows PowerShell 5.1+ (execute como Administrador para instalar dependências)
+- Git instalado e configurado (usuário e e‑mail)
+- Editor: VS Code OU Visual Studio (é necessário ter um dos dois)
+- OBRIGATÓRIO: GitHub Copilot Chat OU ChatGPT‑Codex disponível para conduzir os agentes
+- Python 3.12 (recomendado) — o instalador pode auxiliar na configuração
+- Node.js >= 20.3 (LTS recomendado) — necessário para utilitários/diagramas
+- .NET SDK 6.0+ (8.0 suportado) — obrigatório apenas se for gerar/compilar projetos .NET
+- Mermaid CLI (opcional) — para exportar diagramas a partir de arquivos Mermaid
+- Acesso à internet para baixar dependências (pip/npm) na primeira execução
 
-Agora você pode trabalhar com **múltiplas atividades simultaneamente**!
+Para o modo automático (CrewAI/AutoGen):
+- É necessário possuir e informar uma API key de um provedor LLM compatível (OpenAI, Azure OpenAI, etc.)
+- Defina a chave via `.env` quando solicitado pelo instalador ou configure como variável de ambiente
 
-### **⚡ Quick Start Paralelo:**
-```powershell
-# Interface simplificada - escolha entre 6 modos
-.\scripts\powershell\quick-start.ps1 -Sprint 02
-```
+Observação: muitos itens acima podem ser instalados/validados automaticamente pelo instalador. Ainda assim, execute o PowerShell em modo Administrador para evitar problemas de permissão.
 
-### **🚀 Execução Direta (Avançado):**
-```powershell
-# Múltiplas atividades com pipeline completo
-.\scripts\powershell\start-multi-activities.ps1 -Sprint 02 -Activities @("sistema-login", "modulo-relatorios", "integracao-sap") -ParallelSetup -CreatePipeline
-```
 
-### **📊 Monitoramento em Tempo Real:**
-```powershell
-# Dashboard de status das atividades
-.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action status
+<a id="instalacao"></a>
+## 🧩 Instalação ou Como criar nova atividade
 
-# Próximas execuções recomendadas
-.\scripts\powershell\manage-parallel-execution.ps1 -Sprint 02 -Action next
-```
+Você pode usar o instalador para preparar o ambiente e/ou criar novas atividades. Antes de começar, confira os [Pré-requisitos](#pre-requisitos). Abaixo está um guia rápido, no padrão enterprise, com comandos prontos para copiar.
 
-### **🎯 Benefícios da Paralelização:**
-- ⚡ **300% mais velocidade** na análise inicial (Product Owner simultâneo)
-- 📊 **Dashboard visual** com progresso em tempo real
-- 🧠 **Detecção automática** de dependências entre atividades
-- 🔄 **Pipeline escalonado** otimizado automaticamente
-- 🎯 **Múltiplos squads** trabalhando independentemente
+### 🔐 Abrir PowerShell como Administrador
+1) Clique Iniciar e digite “PowerShell”
+2) Botão direito em “Windows PowerShell” → Executar como administrador
 
-### **📋 Guias Automáticos Gerados:**
-- `parallel-execution-guide.md` - Instruções de execução paralela
-- `pipeline-schedule.md` - Cronograma otimizado por semanas
-- `dependency-matrix.md` - Análise de dependências entre atividades
-
-**Perfeito para:** projetos grandes, múltiplos squads, otimização de throughput, pipelines complexos.
-
-**O sistema instala automaticamente:**
-- Python 3.12 (para agentes automáticos)
-- Node.js LTS (para diagramas)
-- .NET SDK 8 (para projetos .NET)
-- Mermaid CLI (para gerar diagramas)
-
----
-
-## 🚀 **PASSO 1: Instalação (Comando Único)**
-
-**Abra o PowerShell como Administrador e execute:**
+### ⚙️ Executar o instalador (preparar ambiente)
+- Navegue até a raiz do repositório e execute:
 
 ```powershell
-# Navegue até a pasta do WorkflowAgentsAI
 cd "C:\Projetos\WorkflowAgentsAI"
-
-# Execute o instalador
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install\setup-workflow.ps1
 ```
 
-### 📝 **O que acontece durante a instalação:**
+O instalador pode: validar pré-requisitos, configurar pastas data/in e data/out, e opcionalmente criar/abrir um projeto de destino.
 
-```
-1️⃣ Onde gerar os agentes?
-  → Ex.: C:\Projetos\MeuWorkspace\IA
+## 🆕 Criar uma nova atividade (sem sair do PowerShell)
+Use o script de criação para organizar automaticamente a estrutura em `data/in` e `data/out`.
 
-2️⃣ Checagem/instalação de pré‑requisitos (automático)
-  → Python 3, Node.js LTS, Git, .NET SDK 8, Mermaid CLI (npm)
-
-3️⃣ Seleção de modo
-  → 1 = Manual (recomendado) | 2 = Automático (CrewAI)
-
-4️⃣ Informações do projeto
-  → Sprint (ex.: 01) | Activity (ex.: rn0001) | Nome do projeto (ex.: MeuSistema)
-
-5️⃣ Tipo de trabalho
-  → 1 = Projeto novo | 2 = Implementação em projeto existente
-
-6️⃣ Caminhos do projeto
-  → Se novo: "Onde CRIAR o novo projeto?" (ex.: C:\Projetos\MeuSistema)
-  → Se existente: "Onde ESTÁ o projeto?" (ex.: C:\Projetos\SistemaAtual)
-
-7️⃣ Cópia do workflow para o destino
-  → Copia: agents/, orchestrators/, scripts/powershell/, requirements.txt, .env.example
-  → Preserva sempre a .github do projeto destino (não copia a deste repositório)
-  → O instalador pode perguntar para copiar opcionais: prompts-manual/ e docs/
-
-8️⃣ Criação do arquivo .env (a partir de .env.example)
-  → Ajusta USE_CREWAI, SPRINT, OUTPUT_ACTIVITY, PROJECT_NAME
-
-9️⃣ Super‑prompt (opcional)
-  → Se existir prompts-manual/prompts/super-prompt.md: enriquece com contexto (pastas in/out)
-  → Se não existir: oferece copiar um template (opcional)
-
-🔟 Projeto novo (opcional)
-  → Oferece criar estrutura básica (.NET/Node.js/Angular/React/Genérico)
-
-1️⃣1 Análise de projeto existente (se informado)
-  → Gera project-analysis.md; detecta multi‑projeto e integra Copilot quando houver
-
-1️⃣2 Ambiente Python (opcional)
-  → "Criar .venv-1 e instalar requirements agora?" (instala requirements.txt)
-
-1️⃣3 Enriquecer agentes (opcional)
-  → Injeta arquivos <role>.instructions.* em agents/manual/*.agent.md (idempotente)
-
-1️⃣4 Execução automática (opcional)
-  → Se modo manual: "Executar o fluxo manual agora?" (scripts/powershell/start-manual.ps1)
-```
-
-Notas:
-- A pasta .github do projeto destino é sempre preservada e nunca sobrescrita.
-- O super‑prompt é totalmente opcional; a instalação não falha se ele não existir.
-- O instalador pode perguntar se você deseja copiar prompts-manual/ e docs/ (opcionais).
-- O arquivo .env é gerado automaticamente para facilitar execuções futuras.
-
-### ✅ **Resultado da Instalação:**
-
-```
-📁 C:\Projetos\MeuWorkspace\IA\     ← AGENTES (onde ficam os workflows)
-├── agents/manual/                      ← 11 agentes especializados
-├── data/in/sprint01/rn0001/            ← ENTRADA (você coloca documentos aqui)
-│   ├── business_request/               ← Solicitações do cliente
-│   └── attachments/                    ← Documentos técnicos
-├── data/out/sprint01/rn0001/           ← SAÍDA (agentes geram aqui)
-└── scripts/powershell/                 ← Scripts de automação
-
-📁 C:\Projetos\MeuSistema\          ← PROJETO (seu código fica aqui)
-├── src/                           ← Código-fonte
-├── docs/                          ← Documentação do projeto
-└── MeuSistema.sln                 ← Solution .NET
-```
-
-### 🎨 **Ferramentas de Design e Wireframes (NOVO)**
-
-O WorkFlowAI agora inclui **ferramentas visuais integradas** para criar wireframes, protótipos e design systems:
+🎯 Exemplos de Novas Atividades:
 
 ```powershell
-# 🎨 Configurar ferramentas de design para uma atividade
-.\scripts\powershell\setup-design-tools.ps1 -Sprint 01 -Activity rn0001 -InstallDesignTools -GenerateWireframes
+# Sistema de login
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
 
-# 👁️ Visualizar wireframes no navegador
-.\scripts\powershell\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -OpenBrowser -ExportImages
+# Relatório de vendas
+.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
+
+# Integração com API externa
+.\scripts\powershell\new-activity.ps1 -Sprint 03 -Activity rn0030
 ```
 
-#### **🛠️ Funcionalidades Incluídas:**
+Isso criará:
+- `data/in/sprint02/rn0020/business_request/` e `attachments/` para insumos
+- `data/out/sprint02/rn0020/` para os artefatos gerados pelos agentes
 
-**📐 Wireframes ASCII:**
-- Layout estrutural em texto (fácil versionamento)
-- Componentes visuais com emojis
-- Breakpoints responsivos documentados
+## 🔄 Trabalhando com Múltiplas Atividades
+Quando precisar criar e gerenciar várias atividades em paralelo:
 
-**🔄 Diagramas Mermaid:**
-- User flows interativos
-- Sitemaps e arquitetura de informação
-- Component trees exportáveis para PNG
+- Criação em lote: `scripts/powershell/start-multi-activities.ps1`
+- Dashboard e recomendações: `scripts/powershell/manage-parallel-execution.ps1`
+- Interface unificada: `scripts/powershell/quick-start.ps1`
 
-**🌐 Preview HTML:**
-- Protótipos clicáveis em tempo real
-- Grid system responsivo
-- Live Server integration (VS Code)
-
-**🎯 Design System:**
-- Design tokens (colors, typography, spacing)
-- Component library com CSS
-- Guidelines de acessibilidade WCAG 2.1 AA
-
-#### **📊 Estrutura Gerada:**
-
-```
-data/out/sprint01/rn0001/
-├── 04-wireframes/
-│   ├── ascii/              ← Wireframes em texto
-│   ├── mermaid/            ← Diagramas de fluxo
-│   ├── html-preview/       ← Protótipos navegáveis
-│   └── images/             ← PNGs exportados
-├── 04-components/          ← Especificações de componentes
-├── 04-design-system.md    ← Tokens e guidelines
-└── 04-wireframe-report.md ← Relatório completo
-```
-
-#### **🎨 Extensions VS Code Instaladas:**
-- **Figma for VS Code** - Integração com Figma
-- **Live Server** - Preview em tempo real
-- **Tailwind CSS IntelliSense** - Autocomplete CSS
-- **Mermaid Markdown** - Visualização de diagramas
-
-#### **⚡ Comandos Úteis:**
+Exemplos (PowerShell):
 ```powershell
-# Exportar diagramas para imagens
-mmdc -i wireframes/mermaid/user-flow.md -o user-flow.png
+.# Criar múltiplas atividades com pipeline sugerido
+./scripts/powershell/start-multi-activities.ps1 -Sprint 02 -Activities @("login","relatorios","sap") -ParallelSetup -CreatePipeline
 
-# Abrir workspace de design
-code out/sprint01/rn0001/04-wireframes/
-
-# Gerar Storybook para componentes
-.\view-wireframes.ps1 -Sprint 01 -Activity rn0001 -GenerateStorybook
+.# Acompanhar status e próximos passos
+./scripts/powershell/manage-parallel-execution.ps1 -Sprint 02 -Action status
+./scripts/powershell/manage-parallel-execution.ps1 -Sprint 02 -Action next
 ```
 
-**Perfeito para:** UX/UI designers, front-end developers, prototipação rápida, documentação visual.
+## ✨ Enriquecer um agente (instruções adicionais)
+Você pode enriquecer o comportamento dos agentes com arquivos de instruções adicionais. Duas formas:
+
+1) Via instalador (recomendado): informe a pasta que contém arquivos `*.instructions.md` para cada agente. O instalador injeta de forma idempotente no final de `agents/manual/*.agent.md`.
+2) Manual: crie arquivos como `product-owner.instructions.md`, `requirements-analyst.instructions.md` etc., e mantenha-os versionados. Na execução, copie o conteúdo como “contexto adicional” no chat do Copilot.
+
+Padrão de nomes aceitos (exemplos):
+- `product-owner.instructions.md`
+- `requirements-analyst.instructions.md`
+- `systems-architect.instructions.md`
+- `testing-specialist.instructions.md`
+- `expert-developer.instructions.md`
+- `frontend-specialist.instructions.md`
+- `testing-validator.instructions.md`
+
+Observação:
+- O enriquecimento é sempre aditivo; não substitui os prompts de sistema dos agentes.
+- Consulte o guia: `docs/exemplo-instrucoes-personalizada.md`.
+- Hook automático pós-etapa: `scripts/powershell/enrich-after-step.ps1` (executa ingestão/consulta no serviço RAG e salva um bundle de auditoria em `data/out/.../enrichment/`).
+
+## 🧠 RAG — Como funciona (essencial)
+Quer que os agentes consultem automaticamente o conhecimento do seu projeto? O fluxo de RAG é simples, local e não altera o prompts.system.
+
+- Fontes: `docs/`, `agents/manual/*.agent.md`, `data/out/sprint{}/activity{}/`
+- Momento: ao finalizar cada etapa, o hook ingere conteúdo; o próximo agente recebe contexto enriquecido
+- Injeção: adicionamos uma mensagem `developer` com “CONTEXTO ENRIQUECIDO” após o `system`
+
+Exemplo (PowerShell):
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/powershell/enrich-after-step.ps1 -AgentId expert-developer -Sprint 01 -Activity rn0001 -RagEndpoint http://127.0.0.1:8088 -TopK 8 -Rerank
+```
+
+Arquivos importantes:
+- `scripts/powershell/enrich-after-step.ps1` → chama `/ingest` e gera `_last-<agent>.json`
+- `agents/manual/<agent>.enrichment.yaml` → fontes/filtros por agente (quando aplicável)
+- `docs/enrichment-auto-run.md` → como plugar o hook no seu orquestrador (opcional)
+
+Benefícios: mantém `prompts.system` intocado; funciona offline; contexto sempre fresco.
+
+Explicando de uma forma simples, é um “leitor inteligente” dos seus arquivos. Quando você passa para o próximo agente:
+- O sistema lê os documentos mais relevantes (entrada e saídas anteriores).
+- Resumo do que importa é ACRESCENTADO como uma ajuda extra ao agente.
+- Nada é substituído; o agente mantém suas instruções originais e recebe contexto adicional.
+
+Vantagens práticas: menos esquecimento de detalhes, decisões mais consistentes e respostas mais assertivas.
 
 ---
 
-## 🎯 **PASSO 2: Como Usar - Processo Manual (RECOMENDADO)**
+<a id="orquestracao"></a>
+## 🧭 Orquestração e Scripts (visão geral)
 
-**Processo Manual:** Aqui você controla cada etapa e tem total visibilidade do que acontece. É o modo recomendado para começar.
+- Manual guiado (recomendado): `scripts/powershell/start-manual.ps1`
+- Automação avançada (preview): `scripts/powershell/start-orchestration.ps1`
+- Paralelização: `scripts/powershell/quick-start.ps1`, `start-multi-activities.ps1`, `manage-parallel-execution.ps1`
+- Utilidades: `render-diagrams.ps1`, `use-venv.ps1`, `validate-encoding.ps1`, `scan-encoding.ps1`, `validate-output-package.ps1`, `setup-design-tools.ps1`, `view-wireframes.ps1`, `enrich-after-step.ps1`
 
-### **📝 2.1: Preparar sua Solicitação**
-
-**Primeiro, crie um documento com sua solicitação:**
-
-```powershell
-# Vá para o workspace dos agentes
-cd "C:\Projetos\MeuWorkspace\IA"
-
-# Crie um documento com sua solicitação
-notepad .\in\sprint01\rn0001\business_request\minha_solicitacao.md
-```
-
-**Exemplo de conteúdo:**
-```markdown
-# Solicitação: Login com Google
-
-## O que preciso:
-Implementar login com Google OAuth no sistema de vendas
-
-## Por que preciso:
-Os usuários querem acessar o sistema usando sua conta Google
-
-## Critérios de sucesso:
-- Usuário clica em "Login com Google"
-- Sistema redireciona para Google
-- Usuário autoriza e volta logado no sistema
-```
-
-### **📱 2.2: Iniciar o Processo Manual**
-
-**QUEM INICIA:** Sempre o **Product Owner** (PO)
-**COMO INICIAR:** GitHub Copilot Chat no VS Code
-
-```powershell
-# Abra o VS Code no workspace dos agentes
-cd "C:\Projetos\MeuWorkspace\IA"
-code .
-```
-
-**No GitHub Copilot Chat (Ctrl+Shift+I), digite:**
-
-```
-@agents/manual/product-owner.agent.md
-
-RN-0001: Implementar login com Google OAuth
-Sprint: 01
-Activity: rn0001
-Sistema: Sistema de Vendas (.NET + React)
-
-Analise a solicitação e prepare a mesa redonda.
-```
-
-### **🔄 2.3: Fluxo de Execução Detalhado**
-
-**O que acontece depois que você executa o PO:**
-
-```
-🤖 Product Owner analisa e gera:
-├── 00-business-context.md        ← Contexto de negócio
-├── 00-requirements-brief.md      ← Resumo de requisitos
-└── 01-ata-mesa-redonda.md       ← Template da reunião
-
-🤖 Product Owner pergunta:
-"Mesa Redonda Preparada - Aguardando Aprovação
-Resumo: RN-0001, Média complexidade, OAuth Google, Frontend+Backend
-Posso prosseguir? [SIM/NAO/REVISAR]"
-
-Você responde: SIM
-
-🤖 Sistema executa automaticamente o próximo agente...
-```
-
-### **📋 2.4: Sequência Completa de Execução**
-
-**Sequência de Execução:** Cada agente faz uma parte específica do trabalho:
-
-| **Agente** | **O que faz** | **Gera** | **Pergunta** |
-|------------|---------------|----------|--------------|
-| **1️⃣ Product Owner** | Analisa o negócio | Requirements + Context | Posso fazer mesa redonda? |
-| **2️⃣ Mesa Redonda** | Alinha tecnicamente | Ata da reunião | Posso analisar requisitos? |
-| **3️⃣ Requirements** | Cria cenários BDD | Features de teste | Posso fazer arquitetura? |
-| **4️⃣ Systems Architect** | Define solução | ADRs + Diagramas | Posso criar wireframes? |
-| **5️⃣ UX/UI Specialist (opcional)** | Cria wireframes | Design System + Protótipos | Prosseguir com Frontend? |
-| **6️⃣ Testing Specialist** | Plano TDD | Estratégia de testes | Posso implementar código? |
-| **7️⃣ Expert Developer** | Implementa TDD | Classes + Testes | Prosseguir com Frontend (opcional) e depois validar? |
-| **8️⃣ Frontend Specialist (opcional)** | Implementa frontend | 04-frontend-implementation + components + UI guidelines | Prosseguir para validação? |
-| **9️⃣ Testing Validator** | Valida testes | Relatório conformidade | Posso revisar código? (opcional) |
-| **🔟 Code Reviewer (opcional)** | Auditoria código | Relatório qualidade | Posso validar critérios? (opcional) |
-| **1️⃣1 PO Final** | Validação final | Checklist aceite | CONCLUÍDO ✅ |
-
-### **🎮 2.5: Controlando o Fluxo**
-
-**Quando cada agente perguntar, você pode responder:**
-
-- **SIM** → Continua automaticamente para o próximo agente
-- **NAO** → Para o fluxo para você revisar e ajustar
+<a id="fluxo-automatizado"></a>
+### 🔄 Fluxo Automatizado (após instalação)
+Após cada etapa, os agentes pedem aprovação [SIM/NAO/REVISAR]. Confirmando [SIM], o próximo agente executa automaticamente, carregando o contexto enriquecido (RAG) quando configurado.
 
 ---
 
-## **🔥 Mesa Redonda: O "CrewAI Manual" Perfeito**
+<a id="modo-automatico"></a>
+## 🤖 Modo Automático (CrewAI + AutoGen)
 
-**⭐ RECURSO DESTAQUE:** A Mesa Redonda simula **debate entre múltiplos especialistas** de forma manual e controlada - como ter um CrewAI sem a complexidade e custo!
+No modo automático, os agentes são orquestrados por ferramentas como CrewAI ou AutoGen.
+Requisitos: é necessário informar uma API key do provedor de IA compatível (ex.: OpenAI, Azure OpenAI, etc.).
 
-### **🎯 Como Funciona o "CrewAI Manual":**
+Características:
+- Execução ponta-a-ponta com mínima intervenção.
+- Usa as mesmas pastas de entrada/saída do modo manual.
+- Pode ser pausado para revisão a cada grande etapa (configurável).
 
-#### **1️⃣ Execute APENAS o Mesa Redonda:**
-```
-@agents/manual/roundtable-facilitator.agent.md
+<a id="fluxo-automatico"></a>
+### 🗺️ Fluxo do modo automático (diagrama)
 
-Sprint: 02, Activity: sistema-pedidos
-Contexto: "E-commerce B2B com integração ERP - preciso debater arquitetura"
-```
-
-#### **2️⃣ O Facilitador Simula Esta Conversa:**
-
-```markdown
-## 🎤 RODADA INICIAL (5 min cada especialista)
-
-### Requirements Analyst (RA):
-"Vejo necessidade de integração com ERP. Sugiro BDD com cenários:
-- DADO pedido válido QUANDO sincronizar ERP ENTÃO atualizar estoque
-- Validação de crédito automática via API financeira"
-
-### Systems Architect (SA):
-"Concordo com RA. Proponho Clean Architecture:
-- Domain: Pedido, Cliente, Produto (DDD)
-- Application: CQRS para consultas vs comandos
-- Infrastructure: PostgreSQL + Redis cache
-- API: REST padronizada + Swagger"
-
-### Expert Developer (Dev):
-"Arquitetura sólida! Implementarei:
-- FluentValidation para regras de negócio
-- MediatR para CQRS
-- Entity Framework + Repository pattern
-- Background jobs para sincronização ERP"
-
-### Frontend Specialist (UI/UX):
-"Para B2B sugiro Angular + PO-UI:
-- Componentes de tabela avançada (filtros, paginação)
-- Dashboard responsivo para mobile
-- PWA para offline capability
-- Integração via HttpClient + interceptors"
-
-### Testing Specialist (QA):
-"Estratégia de testes:
-- Unit: 90% cobertura (domínio + application)
-- Integration: APIs + banco de dados
-- E2E: Cypress para fluxos críticos
-- Performance: carga para 1000+ usuários"
-
-## 🔥 DEBATE LIVRE (convergências e conflitos)
-
-SA: "Dev, considera Event Sourcing para auditoria?"
-Dev: "Para B2B é overkill. CQRS + audit log resolve."
-QA: "Event Sourcing complica testes. Concordo com Dev."
-Frontend: "Preciso de APIs GraphQL para componentes dinâmicos?"
-SA: "REST resolve. GraphQL adiciona complexidade desnecessária."
-
-## ✅ CONVERGÊNCIA E DECISÕES FINAIS
-- Backend: .NET + Clean Architecture + CQRS
-- Frontend: Angular + PO-UI
-- Banco: PostgreSQL + Redis
-- Testes: 90% cobertura + Cypress E2E
+```mermaid
+flowchart TD
+    A[Início: Definir Sprint/Activity] --> B[Setar API Key no .env]
+    B --> C{Orquestrador}
+    C -->|CrewAI| D[CrewAI: executar sequência de agentes]
+    C -->|AutoGen| E[AutoGen: executar sequência de agentes]
+    D --> F[Para cada agente: aplicar RAG automático]
+    E --> F
+  F --> G[Gerar artefatos em data/out/...]
+  G --> H{Revisar/Intervir?}
+    H -->|Sim| I[Parar, ajustar entradas e continuar]
+    H -->|Não| J[Fim: entregar documentação, código e testes]
 ```
 
-### **⚡ Vantagens do "CrewAI Manual":**
-
-| **Aspecto** | **CrewAI Manual (Mesa Redonda)** | **CrewAI Automático** | **Agentes Individuais** |
-|-------------|--------------------------------|---------------------|------------------------|
-| **Controle** | 🟢 **Total** (pode interromper/redirecionar) | 🔴 Execução automática | 🟡 Controle por etapa |
-| **Custo** | 🟢 **Baixo** (uma conversa) | 🔴 Alto (múltiplos agentes) | 🟢 Baixo |
-| **Debate** | 🟢 **Simulação realista** | 🟢 Debate real | 🔴 Sem debate |
-| **Customização** | 🟢 **Foco dirigido** | 🔴 Difícil controlar | 🟡 Individual |
-| **Velocidade** | 🟢 **Rápido** | 🟡 Médio | 🔴 Lento (5 execuções) |
-
-### **🚀 Técnicas Avançadas para "CrewAI Manual":**
-
-#### **1️⃣ Debate Dirigido:**
-```
-@agents/manual/roundtable-facilitator.agent.md
-
-"FOCO ESPECÍFICO: Debater apenas arquitetura de dados.
-Participantes devem decidir entre:
-- Microserviços + Event Sourcing
-- Monólito Modular + CQRS
-- Serverless + DynamoDB
-
-Cada especialista deve defender UMA opção com prós/contras detalhados."
-```
-
-#### **2️⃣ Cenários Conflitantes:**
-```
-@agents/manual/roundtable-facilitator.agent.md
-
-"CENÁRIO DE CONFLITO: Cliente quer delivery em 2 meses vs qualidade enterprise.
-- SA deve defender arquitetura robusta (6 meses)
-- Dev deve defender solução rápida (MVP em 2 meses)
-- QA deve apresentar riscos de cada abordagem
-- Frontend deve mostrar impacto na UX
-Facilitador deve levar ao consenso prático."
-```
-
-#### **3️⃣ Mesa Redonda Multi-Rodadas:**
-```powershell
-# Rodada 1: Arquitetura Geral
-@agents/manual/roundtable-facilitator.agent.md
-"Debater visão geral da solução"
-# → Você aprova: [SIM]
-
-# Rodada 2: Detalhamento Frontend
-@agents/manual/roundtable-facilitator.agent.md
-"FOCO: Apenas decisões de UI/UX, componentes e integração com backend"
-# → Você aprova: [SIM]
-
-# Rodada 3: Estratégia de Testes
-@agents/manual/roundtable-facilitator.agent.md
-"FOCO: Apenas cobertura, performance e automação de testes"
-# → Você aprova: [SIM] → Continua fluxo normal
-```
-
-### **🎯 Workflow "CrewAI Manual" Completo:**
-
-#### **Processo Otimizado:**
-```powershell
-# 1️⃣ Mesa Redonda = "CrewAI Simulado"
-@agents/manual/roundtable-facilitator.agent.md
-# → Debate entre 5 especialistas simultaneamente
-# → Decisões consensuais em uma única sessão
-# → Você aprova: [SIM/NÃO]
-
-# 2️⃣ Se aprovado, continua automaticamente:
-# → Requirements Analyst (BDD detalhado)
-# → Systems Architect (ADRs + diagramas)
-# → Expert Developer (código + testes)
-# → Testing Specialist (QA + validação)
-# → Product Owner Final (checklist)
-```
-
-#### **Exemplos de Contextos para Mesa Redonda:**
-
-```powershell
-# Exemplo 1: Projeto Novo
-@agents/manual/roundtable-facilitator.agent.md
-"Sistema de gestão escolar - debater se usar microserviços ou monólito modular"
-
-# Exemplo 2: Refatoração
-@agents/manual/roundtable-facilitator.agent.md
-"Sistema legado em .NET Framework - migrar para .NET 8 + Clean Architecture"
-
-# Exemplo 3: Performance
-@agents/manual/roundtable-facilitator.agent.md
-"API com lentidão - debater entre cache Redis vs otimização de queries vs CDN"
-
-# Exemplo 4: Tecnologia Nova
-@agents/manual/roundtable-facilitator.agent.md
-"Implementar IA no sistema - debater LLM local vs API OpenAI vs Azure Cognitive"
-```
-
-### **💡 Dica Pro: Re-execução com Focos Específicos**
-
-**Você pode "re-executar" a mesa redonda** quantas vezes quiser com focos diferentes:
-
-```powershell
-# Mesa Principal: Decisões gerais
-@agents/manual/roundtable-facilitator.agent.md
-"Visão geral - arquitetura, tecnologias, cronograma"
-
-# Mesa Técnica: Aprofundamento
-@agents/manual/roundtable-facilitator.agent.md
-"Redebater apenas aspectos de performance, escalabilidade e otimização"
-
-# Mesa de Segurança: Compliance
-@agents/manual/roundtable-facilitator.agent.md
-"Redebater apenas segurança, LGPD, auditoria e compliance"
-
-# Mesa de UX: Experiência
-@agents/manual/roundtable-facilitator.agent.md
-"Redebater apenas interface, usabilidade e acessibilidade"
-```
-
-### **🎯 Quando Usar Mesa Redonda vs Agentes Individuais:**
-
-| **Situação** | **Use Mesa Redonda** | **Use Agentes Individuais** |
-|--------------|---------------------|----------------------------|
-| **Decisões arquiteturais** | ✅ **Debate necessário** | ❌ Opiniões isoladas |
-| **Conflitos técnicos** | ✅ **Resolve consensualmente** | ❌ Cada um dá sua opinião |
-| **Brainstorming** | ✅ **Ideias cruzadas** | ❌ Pensamento linear |
-| **Validação rápida** | ✅ **Múltiplas perspectivas** | ❌ Uma perspectiva por vez |
-| **Implementação dirigida** | ❌ Decisão já tomada | ✅ **Execução focada** |
+Observação: sem uma API key válida, o modo automático não é habilitado.
 
 ---
 
-### **🏆 Resumo: Mesa Redonda é o "CrewAI Manual" Perfeito!**
+<a id="modo-manual"></a>
+## 🧑‍✈️ Modo Manual (recomendado)
 
-- 🤝 **Debate simulado** entre 5 especialistas
-- 🎮 **Controle total** do processo (pode parar/redirecionar)
-- 💰 **Custo baixo** vs CrewAI automático
-- ⚡ **Flexibilidade** para focos específicos
-- 🎯 **Qualidade superior** com validação humana
-- 🔄 **Re-executável** com contextos diferentes
+No modo manual, você aprova cada etapa, vê as saídas e controla a passagem para o próximo agente. É ideal para times que valorizam clareza, auditoria e aprendizado do processo.
 
-**Use sempre que precisar de múltiplas perspectivas técnicas em uma única sessão!**
-- **REVISAR** → Mostra os documentos gerados para validação
+<a id="passagem-bastao"></a>
+### 🔁 Passagem de bastão entre agentes
 
-**Exemplo prático:**
-```
-🤖 Requirements Analyst: "Posso prosseguir para arquitetura? [SIM/NAO/REVISAR]"
+Use este fluxo quando quiser controle total e aprovação etapa a etapa.
 
-👤 Se você digitar: REVISAR
-🤖 Sistema mostra: "Arquivos gerados: 02-requisitos-bdd.md, features/login.feature"
+```powershell
 
-👤 Se você digitar: SIM
-🤖 Sistema executa: Systems Architect automaticamente
-
-👤 Se você digitar: NAO
-🤖 Sistema para: Você pode ajustar os requisitos e reiniciar
 ```
 
----
+Como funciona na prática:
+- Você inicia com o Product Owner.
+- Ao finalizar cada agente, o PowerShell pergunta se deve passar ao próximo.
+- Você responde com: SIM / NAO / REVISAR.
+- Ao prosseguir, o próximo agente recebe automaticamente as saídas anteriores.
 
-## **🎭 Guia Completo dos Agentes Especializados**
+Perguntas interativas exibidas pelo PowerShell (modo manual):
+- Confirmar Sprint/Activity detectados? [SIM/NAO/ALTERAR]
+- Executar Mesa Redonda após Product Owner? [SIM/NAO]
+- Injetar enriquecimento (RAG/dev-messages) antes do agente atual? [SIM/NAO]
+- Abrir arquivos gerados pelo agente atual? [SIM/NAO]
+- Prosseguir para o próximo agente? [SIM/NAO/REVISAR]
+- Renderizar diagramas Mermaid agora (se houver .mmd)? [SIM/NAO]
+- Consolidar relatório final da atividade? [SIM/NAO]
+- Abrir a pasta de saída data/out/sprintXX/activityYY? [SIM/NAO]
 
-**Cada agente é um especialista com personalidade, conhecimentos e responsabilidades únicos. Conheça em detalhes como cada um trabalha:**
+Perguntas interativas exibidas durante a Instalação (setup-workflow.ps1):
+- Selecionar modo de execução: “Selecione o modo: 1) Manual 2) Automático (CrewAI)” e “Digite 1 ou 2” (padrão: 1)
+- Onde quer que gere os Agentes? (ex.: C:\Projetos\MeuProjeto)
+- Qual o número da sprint? (ex.: 01)
+- Qual a activity? (ex.: rn0001)
+- Qual o nome do projeto? (ex.: CalculationEngine, SistemaVendas)
+- Tipo de trabalho: (1) Projeto novo ou (2) Implementação em projeto existente?
+- [se 1 = Projeto novo] Onde CRIAR o novo projeto? (ex.: C:\Projetos\MeuNovoSistema)
+- [se 2 = Projeto existente] Onde ESTÁ o projeto existente? (ex.: C:\Projetos\MeuSistema)
+- Copiar opcional 'prompts-manual'? (s/n) [quando disponível]
+- Copiar opcional 'docs'? (s/n) [quando disponível]
+- Deseja copiar um template de super-prompt para o projeto? (s/n)
+- [se já existe] Arquivo super-prompt.md já existe; sobrescrever? (s/n)
+- Criar estrutura básica do projeto agora? (s/n)
+- [se sim] Tipo de projeto: (1) .NET, (2) Node.js, (3) Angular, (4) React, (5) Genérico
+- Criar .venv-1 e instalar requirements agora? (s/n)
+- Deseja enriquecer os agentes com instruções personalizadas? (s/n)
+- [se sim] Informe a pasta com arquivos *.instructions.md|txt (ex.: C:\temp\newInstruction)
+- Executar o fluxo manual automaticamente agora? (s/n)
+- [se habilitada a análise de projetos] Selecionar projeto PRINCIPAL para análise detalhada (1-N)
+- [se habilitada a análise de projetos] Incluir análise superficial dos outros projetos no contexto? (s/n)
 
-### **🎯 1. Product Owner Agent - O Visionário do Negócio**
+<a id="o-que-cada-agente-gera"></a>
+### 📄 O que cada agente gera e por quê
 
-#### **📋 O que faz:**
-- ✅ **Analisa solicitações** do cliente e identifica valor de negócio
-- ✅ **Define visão do produto** e objetivos estratégicos
-- ✅ **Prioriza funcionalidades** por impacto e ROI
-- ✅ **Comunica requisitos** de forma clara para equipe técnica
-- ✅ **Gerencia expectativas** e alinhamento de escopo
+- Product Owner → `00-requirements-brief.md`, `00-business-context.md` — Alinhar escopo e critérios de aceite.
+- Roundtable Facilitator → `01-ata-mesa-redonda.md` (notas/decisões) — Alinhamento técnico entre especialistas.
+- Requirements Analyst → `02-requisitos-bdd.md` + `.feature` — Regras de negócio legíveis por todos.
+- Systems Architect → `03-arquitetura.md`, ADRs, diagramas — Desenho da solução sustentável.
+- Testing Specialist → `05-qa-plano.md` — TDD definido antes do código.
+- Expert Developer → `04-desenvolvimento.md` + implementação — Código seguindo o plano de testes.
+- Frontend Specialist → Componentes/temas (Angular/PO-UI/Material) — UI consistente e acessível.
+- UX/UI Specialist → Wireframes, design system — Experiência de uso padronizada.
+- Testing Validator → `05.1-testing-validation.md` — Compara plano vs. implementação.
+- Code Reviewer → Checklist e comentários — Qualidade e segurança.
+- Product Owner Final → `99-checklist-final.md` — Confirmação de pronto (DoD).
 
-#### **💻 Como executar:**
-```
-@agents/manual/product-owner.agent.md
+<a id="vantagens-modo-manual"></a>
+### ✅ Vantagens do modo manual
 
-Sprint: 02, Activity: sistema-login
-Contexto: "Sistema de autenticação para ERP empresarial - precisa integrar com Active Directory"
-```
+<a id="agentes-isolados"></a>
+### 🎯 Exemplos Práticos: Usando Agentes Isoladamente
+Além do fluxo completo, você pode usar qualquer agente de forma independente para tarefas específicas. Abaixo, cenários no padrão enterprise:
 
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-├── 00-requirements-brief.md     ← Resumo executivo dos requisitos
-├── 00-business-context.md       ← Contexto de negócio detalhado
-└── 00-acceptance-criteria.md    ← CRITERIOS DE ACEITE (BASE PARA TODA A EQUIPE)
-```
-
-#### **🎯 Exemplo de output:**
-```markdown
-## Acceptance Criteria - Sistema Login
-
-### Critério 1: Integração com Active Directory
-- Sistema DEVE autenticar usuários via Active Directory
-- Login DEVE funcionar com credenciais corporativas existentes
-- Tempo de resposta DEVE ser inferior a 2 segundos
-- EVIDÊNCIA: Testes automatizados de integração AD
-
-### Critério 2: Interface Responsiva
-- Interface DEVE funcionar em desktop (1920x1080+)
-- Interface DEVE funcionar em mobile (360x640+)
-- Todos os elementos DEVEM ser acessíveis (WCAG 2.1)
-- EVIDÊNCIA: Testes E2E em múltiplas resoluções
-
-### Critério 3: Auditoria e Compliance
-- Sistema DEVE registrar todos os logins em log auditável
-- Logs DEVEM incluir: usuário, timestamp, IP, resultado
-- Retenção de logs DEVE ser mínimo 12 meses
-- EVIDÊNCIA: Relatório de auditoria automatizado
-
-### Definition of Done:
-- ✅ Todos os critérios implementados
-- ✅ Testes automatizados passando
-- ✅ Documentação técnica completa
-- ✅ Deploy em ambiente de homologação
-```
-
-#### **✅ Quando usar sozinho:**
-- **Definição de critérios de aceite** com stakeholders
-- Análise inicial de viabilidade
-- Validação de escopo com stakeholders
-- Priorização de backlog
-
----
-
-### **🎯 2. Requirements Analyst Agent - O Especialista em Regras**
-
-#### **📋 O que faz:**
-- ✅ **Analisa critérios de aceite** como base principal do trabalho
-- ✅ **Cria regras de negócio** que CUBRAM todos os critérios de aceite
-- ✅ **Traduz requisitos** de negócio para cenários técnicos (BDD)
-- ✅ **Cria features Gherkin** que VALIDEM cada critério de aceite
-- ✅ **Identifica regras de negócio** complexas e validações
-- ✅ **Mapeia fluxos alternativos** e exceções
-
-#### **💻 Como executar:**
-```
-@agents/manual/requirements-analyst.agent.md
-
-Sprint: 02, Activity: sistema-login
-Contexto: "Baseado nos CRITERIOS DE ACEITE do PO, criar cenários BDD que garantam cobertura completa de todos os critérios"
-```
-
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-├── 02-requisitos-bdd.md          ← Análise técnica completa
-└── features/
-    ├── autenticacao.feature      ← Cenários BDD Gherkin
-    ├── recuperacao-senha.feature
-    └── auditoria-acesso.feature
-```
-
-#### **🎯 Exemplo de output:**
-```gherkin
-# features/autenticacao.feature
-
-Funcionalidade: Autenticação via Active Directory
-  Como usuário corporativo
-  Quero fazer login com minhas credenciais AD
-  Para acessar o sistema sem criar nova conta
-
-  Cenário: Login válido com usuário AD
-    Dado que o usuário "joao.silva" existe no Active Directory
-    E o usuário está na tela de login
-    Quando informar login "joao.silva" e senha correta
-    Então deve ser redirecionado para dashboard principal
-    E deve exibir mensagem "Bem-vindo, João Silva"
-
-  Cenário: Falha de conexão com AD
-    Dado que o Active Directory está indisponível
-    Quando tentar fazer login
-    Então deve exibir "Serviço temporariamente indisponível"
-    E deve permitir login com cache local (se habilitado)
-```
-
-#### **✅ Quando usar sozinho:**
-- **Análise de cobertura** dos critérios de aceite
-- Refinamento de user stories existentes
-- Criação de cenários de teste detalhados
-- Validação de regras de negócio
-
----
-
-### **🎯 3. Systems Architect Agent - O Mestre da Arquitetura**
-
-#### **📋 O que faz:**
-- ✅ **Define arquitetura técnica** (Clean Architecture, DDD, SOLID)
-- ✅ **Cria ADRs** (Architecture Decision Records)
-- ✅ **Desenha diagramas** Mermaid (componentes, sequência, ER)
-- ✅ **Escolhe tecnologias** e padrões adequados
-- ✅ **Planeja integrações** e APIs
-
-#### **💻 Como executar:**
+📝 Cenário 1: Refatoração de Código Legacy
 ```
 @agents/manual/systems-architect.agent.md
 
-Sprint: 02, Activity: sistema-login
-Contexto: "Arquitetura para autenticação AD + cache local + auditoria completa"
+Sprint: 04, Activity: refactoring-usuarios
+Contexto: "Refatorar módulo usuários (5 anos, God classes, 0% cobertura).
+Aplicar SOLID + Clean Architecture mantendo compatibilidade API."
+
+Problema atual:
+- UsuarioManager com 800+ linhas
+- Lógica misturada (validação + persistência + email)
+- Dependências hardcoded
+- Impossível testar unitariamente
+
+Meta: Clean Architecture + 90% cobertura
 ```
 
-#### **📁 Arquivos gerados:**
+🎨 Cenário 2: Design de Interface
 ```
-out/sprint02/sistema-login/
-├── 03-arquitetura.md             ← Documento arquitetural
-├── adrs/
-│   ├── 001-clean-architecture.md
-│   ├── 002-cache-redis.md
-│   └── 003-audit-pattern.md
-└── diagrams/
-    ├── components.mmd           ← Diagrama de componentes
-    ├── sequence-login.mmd       ← Fluxo de autenticação
-    └── database-er.mmd          ← Modelo de dados
-```
+@agents/manual/ux-ui-specialist.agent.md
 
-#### **🎯 Exemplo de output:**
-```markdown
-## ADR-001: Clean Architecture
+Sprint: 02, Activity: dashboard-executivo
+Contexto: "Dashboard para C-Level com KPIs real-time, gráficos interativos,
+filtros avançados. Prioridade: informação crítica 'above the fold'."
 
-### Contexto:
-Sistema de autenticação crítico com requisitos de:
-- Alta disponibilidade (99.9%)
-- Integração com múltiplos provedores (AD, OAuth)
-- Auditoria completa para compliance
-
-### Decisão:
-Clean Architecture com camadas bem definidas:
-- Domain: Entidades User, Session, AuditLog
-- Application: Use cases + CQRS para queries
-- Infrastructure: AD Client, Redis Cache, SQL Server
-- WebAPI: Controllers + JWT middleware
-
-### Consequências:
-✅ Testabilidade alta (mocks fáceis)
-✅ Independência de frameworks
-❌ Complexidade inicial maior
-❌ Curva de aprendizado para equipe
+Usuários: CEO, CFO, diretores (baixa literacy digital)
+Dispositivos: Desktop principal + mobile para consultas
+Restrições: Identidade visual corporativa + acessibilidade WCAG 2.1 AA
 ```
 
-#### **✅ Quando usar sozinho:**
-- Decisões arquiteturais complexas
-- Refatoração de sistemas legados
-- Planejamento de integrações
-
----
-
-### **🎯 4. Expert Developer Agent - O Implementador Master**
-
-#### **📋 O que faz:**
-- ✅ **ATENDE TODOS os critérios de aceite** definidos pelo Product Owner
-- ✅ **Implementa código** que SATISFAÇA cada critério de aceite
-- ✅ **Cria classes de domínio** com DDD e validações FluentValidation
-- ✅ **Desenvolve APIs** com Swagger/OpenAPI completo
-- ✅ **Escreve testes unitários** com xUnit e FluentAssertions
-- ✅ **EVIDENCIA cumprimento** de cada critério no código
-- ✅ **Configura DI** e logging estruturado com Serilog
-
-#### **💻 Como executar:**
-```
-@agents/manual/expert-developer.agent.md
-
-Sprint: 02, Activity: sistema-login
-Contexto: "Implementar código que ATENDA TODOS os critérios de aceite definidos - AD + responsividade + auditoria + testes 90%+ cobertura"
-```
-
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-├── 04-desenvolvimento.md         ← Documentação + MATRIZ DE RASTREABILIDADE
-└── engineering/
-    ├── src/
-    │   ├── Core/                ← Domain entities
-    │   ├── Application/         ← Use cases + CQRS
-    │   ├── Infrastructure/      ← AD client + cache
-    │   └── WebAPI/             ← Controllers + middleware
-    ├── tests/
-    │   ├── UnitTests/          ← Testes de domínio
-    │   ├── IntegrationTests/   ← Testes de API
-    │   └── ArchitectureTests/  ← Testes de arquitetura
-    └── validation/
-        ├── traceability-matrix.md  ← Critério → Implementação → Teste
-        ├── evidence-guide.md        ← Como testar cada critério
-        └── self-validation.md       ← Auto-verificação do Developer
-```
-
-#### **🎯 Exemplo de código gerado:**
-```csharp
-// Domain/Entities/User.cs
-public class User : BaseEntity
-{
-    public string Username { get; private set; }
-    public string DisplayName { get; private set; }
-    public UserRole Role { get; private set; }
-    public DateTime LastLoginAt { get; private set; }
-
-    public static Result<User> Create(string username, string displayName)
-    {
-        var validator = new UserValidator();
-        var validationResult = validator.Validate(new { username, displayName });
-
-        if (!validationResult.IsValid)
-            return Result<User>.Failure(validationResult.Errors);
-
-        return Result<User>.Success(new User
-        {
-            Username = username,
-            DisplayName = displayName,
-            Role = UserRole.Standard
-        });
-    }
-
-    public void RecordLogin()
-    {
-        LastLoginAt = DateTime.UtcNow;
-        AddDomainEvent(new UserLoggedInEvent(Id, Username));
-    }
-}
-```
-
-#### **✅ Quando usar sozinho:**
-- **Implementação dirigida por critérios de aceite**
-- **Auto-validação de implementações** (com matriz de rastreabilidade)
-- Implementação de funcionalidades específicas
-- Refatoração de código existente
-- Code review de arquitetura
-
----
-
-### **🎯 5. Frontend Specialist Agent - O Mestre da Interface**
-
-#### **📋 O que faz:**
-- ✅ **Desenvolve interfaces** modernas e responsivas (Angular/React)
-- ✅ **Implementa componentes** com bibliotecas UI (PO-UI, Material Design)
-- ✅ **Integra com APIs** backend via HttpClient/Axios
-- ✅ **Cria experiências** acessíveis (WCAG) e performantes
-- ✅ **Desenvolve PWAs** com offline capability
-
-#### **💻 Como executar:**
-```
-@agents/manual/frontend-specialist.agent.md
-
-Sprint: 02, Activity: sistema-login
-Contexto: "Interface de login responsiva + dashboard + integração com API JWT"
-```
-
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-├── 04-frontend-implementation.md  ← Documentação frontend
-└── engineering/
-    └── frontend/
-        ├── src/app/
-        │   ├── auth/           ← Módulo autenticação
-        │   ├── dashboard/      ← Dashboard principal
-        │   └── shared/         ← Componentes reutilizáveis
-        └── e2e/               ← Testes E2E Cypress
-```
-
-#### **🎯 Exemplo de código gerado:**
-```typescript
-// auth/components/login/login.component.ts
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
-})
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  isLoading = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private notificationService: NotificationService
-  ) {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
-
-  async onSubmit() {
-    if (this.loginForm.invalid) return;
-
-    this.isLoading = true;
-
-    try {
-      const result = await this.authService.authenticate(this.loginForm.value);
-
-      if (result.success) {
-        this.notificationService.success(`Bem-vindo, ${result.user.displayName}`);
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.notificationService.error(result.message);
-      }
-    } catch (error) {
-      this.notificationService.error('Erro de conexão. Tente novamente.');
-    } finally {
-      this.isLoading = false;
-    }
-  }
-}
-```
-
-#### **✅ Quando usar sozinho:**
-- Desenvolvimento focado em UX/UI
-- Prototipagem de interfaces
-- Integração com APIs específicas
-
----
-
-### **🎯 6. Testing Specialist Agent - O Guardião da Qualidade**
-
-#### **📋 O que faz:**
-- ✅ **VALIDA TODOS os critérios de aceite** definidos pelo Product Owner
-- ✅ **Garante que cada critério seja testável e testado**
-- ✅ **Cria estratégia de testes** FOCADA nos critérios de aceite
-- ✅ **Desenvolve planos de QA** com cobertura 90%+
-- ✅ **Produz evidências** que COMPROVEM o atendimento dos critérios
-- ✅ **Implementa testes automatizados** (xUnit, Cypress, Playwright)
-- ✅ **Define cenários de performance** e carga
-- ✅ **Planeja testes de segurança** e penetração
-
-#### **💻 Como executar:**
+🧪 Cenário 3: Planejamento TDD
 ```
 @agents/manual/testing-specialist.agent.md
 
-Sprint: 02, Activity: sistema-login
-Contexto: "VALIDAR todos os critérios de aceite com evidências - AD + responsividade + auditoria + performance 1000 usuários"
+Sprint: 03, Activity: calculo-comissao
+Contexto: "Criar plano TDD ANTES da implementação. Regras complexas:
+base + performance + metas + bônus trimestral."
+
+Critérios de aceite:
+1. Cálculo correto conforme RN-0030 a RN-0035
+2. Performance < 100ms para 1000 vendedores
+3. Tratamento de cenários extremos (vendas negativas)
+4. Auditoria completa de cálculos
+
+Meta: 95% cobertura + evidências automatizadas
 ```
 
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-├── 05-qa-plano.md                ← Estratégia de QA completa
-└── engineering/
-    ├── tests/
-    │   ├── LoadTests/           ← Testes de carga K6/NBomber
-    │   ├── SecurityTests/       ← Testes OWASP
-    │   └── E2E/cypress/         ← Testes E2E Cypress
-    └── reports/
-        ├── coverage/            ← Relatórios de cobertura
-        ├── performance/         ← Métricas de performance
-        └── security/           ← Relatórios de segurança
-```
-
-#### **🎯 Exemplo de testes gerados:**
-```typescript
-// E2E/cypress/integration/auth.spec.ts
-describe('Sistema de Autenticação', () => {
-  it('deve realizar login com credenciais válidas', () => {
-    cy.visit('/login');
-
-    cy.get('[data-testid="username-input"]')
-      .type('joao.silva');
-
-    cy.get('[data-testid="password-input"]')
-      .type('senha123');
-
-    cy.get('[data-testid="login-button"]')
-      .click();
-
-    cy.url().should('include', '/dashboard');
-    cy.get('[data-testid="welcome-message"]')
-      .should('contain', 'Bem-vindo, João Silva');
-  });
-
-  it('deve funcionar offline com cache local', () => {
-    cy.mockOfflineMode();
-
-    cy.get('[data-testid="username-input"]').type('usuario.cached');
-    cy.get('[data-testid="password-input"]').type('senha123');
-    cy.get('[data-testid="login-button"]').click();
-
-    cy.get('[data-testid="offline-indicator"]')
-      .should('be.visible');
-
-    cy.url().should('include', '/dashboard');
-  });
-});
-```
-
-#### **✅ Quando usar sozinho:**
-- **Validação de critérios de aceite** com evidências
-- Planejamento de testes para features específicas
-- Auditoria de qualidade de código existente
-- Definição de critérios de aceite técnicos
-
----
-
-### **🎯 7. Code Reviewer Agent - O Auditor Independente (OPCIONAL)**
-
-#### **📋 O que faz:**
-- ✅ **AUDITORIA INDEPENDENTE** da implementação do Expert Developer
-- ✅ **VALIDAÇÃO DE PADRÕES** (nomenclatura, indentação, commits, estrutura)
-- ✅ **VALIDAÇÃO DE QUALIDADE** (Clean Code, SOLID, DDD, segurança)
-- ✅ **VERIFICAÇÃO DE EVIDÊNCIAS** fornecidas pelo Developer
-- ✅ **PARECER TÉCNICO** independente sobre cada critério de aceite
-- ✅ **CODE REVIEW** focado em qualidade, padrões e performance
-
-#### **💻 Como executar:**
-```
-@agents/manual/code-reviewer.agent.md
-
-Sprint: 02, Activity: sistema-login
-Contexto: "Auditoria independente da implementação - todos os critérios foram corretamente implementados com qualidade?"
-```
-
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-└── 04.1-code-review.md          ← Parecer técnico independente
-    ├── Critério 1: ✅ APROVADO
-    ├── Critério 2: ❌ NECESSITA CORREÇÕES
-    ├── Critério 3: ✅ APROVADO
-    └── DECISÃO: NECESSITA CORREÇÕES
-```
-
-#### **🎯 Exemplo de parecer:**
-```markdown
-## Code Review Report - Sistema Login
-
-## ✅ PADRÕES DE DESENVOLVIMENTO
-- **NOMENCLATURA**: ✅ PascalCase classes, camelCase variáveis, nomes descritivos
-- **INDENTAÇÃO**: ✅ Consistente, 4 espaços, sem tabs mistos
-- **COMMITS**: ❌ INCORRETO - "fix login" → Deveria ser "🐛 fix - Resolve AD timeout issue"
-- **ESTRUTURA**: ✅ Clean Architecture respeitada (Core/Application/Infrastructure/API)
-- **DOCUMENTAÇÃO**: ✅ XML docs presentes, README atualizado
-- **WARNINGS**: ✅ Zero warnings de compilação
-- **CONSISTÊNCIA**: ✅ Padrões uniformes em todo código
-
-### Critério 1: Integração com Active Directory
-- **STATUS**: ✅ APROVADO
-- **IMPLEMENTAÇÃO**: AuthenticationService.cs - Bem estruturada
-- **QUALIDADE**: Clean Architecture respeitada, SOLID aplicado
-- **PADRÕES**: Nomenclatura e indentação corretas
-- **TESTES**: AuthenticationTests.cs - Cobertura adequada
-- **EVIDÊNCIA**: Comando "dotnet test" validado - funcional
-- **OBSERVAÇÕES**: Excelente tratamento de exceções
-
-### Critério 2: Interface Responsiva
-- **STATUS**: ✅ APROVADO
-- **IMPLEMENTAÇÃO**: LoginComponent.ts - Estrutura correta
-- **QUALIDADE**: Código limpo e bem organizado
-- **PADRÕES**: camelCase correto, indentação consistente
-- **TESTES**: E2E desktop e mobile validados
-- **EVIDÊNCIA**: Testes responsivos funcionais
-- **OBSERVAÇÕES**: Implementação exemplar
-
-### DECISÃO FINAL: ❌ NECESSITA CORREÇÕES
-**Pendências**:
-- Corrigir mensagens de commit para seguir padrão gitemoji
-- Exemplo: "🐛 fix - Resolve AD timeout in authentication service"
-```
-
-#### **✅ Quando usar:**
-- **Projetos críticos** que precisam de validação extra
-- **Sistemas de segurança** ou compliance
-- **Quando há dúvidas** sobre a qualidade da implementação
-- **Para garantia adicional** antes dos testes finais
-
----
-
-### **🧪 7.1. Testing Validator Agent - O Validador TDD**
-
-#### **📋 O que faz:**
-- ✅ **VALIDA IMPLEMENTAÇÃO** dos testes definidos no plano de QA
-- ✅ **COMPARA plano vs execução** - todos os cenários foram implementados?
-- ✅ **EXECUTA TODOS OS TESTES** e verifica se passam conforme esperado
-- ✅ **VERIFICA COBERTURA REAL** vs planejada (ex: meta 95%, atingido?)
-- ✅ **VALIDA EVIDÊNCIAS** de cada critério de aceite
-- ✅ **EMITE PARECER FINAL** - APROVADO ou NECESSITA CORREÇÕES
-- ✅ **Específico para fluxo TDD** - valida pós-implementação
-
-#### **💻 Como executar:**
+🔍 Cenário 4: Validação Pós-Implementação
 ```
 @agents/manual/testing-validator.agent.md
 
-Sprint: 02, Activity: sistema-login
-Contexto: "Validar se implementação seguiu o plano de QA definido - todos os testes foram implementados corretamente?"
+Sprint: 03, Activity: validacao-modulo-pagamentos
+Contexto: "Validar se Expert Developer implementou corretamente o plano
+TDD. Verificar todos cenários, cobertura real vs planejada."
+
+Entrada necessária:
+- 05-qa-plano.md (plano original do Testing Specialist)
+- 04-desenvolvimento.md (implementação do Expert Developer)
+- Código fonte + testes implementados
+
+Validar: Conformidade plano → implementação
 ```
 
-#### **📁 Arquivos gerados:**
+🤝 Cenário 5: Debate de Decisões Arquiteturais
 ```
-out/sprint02/sistema-login/
-└── 05.1-testing-validation.md    ← Relatório de validação TDD
-```
+@agents/manual/roundtable-facilitator.agent.md
 
-#### **🎯 Exemplo de parecer:**
-```markdown
-## VALIDAÇÃO DO PLANO DE QA
+Contexto: "Decisão: Microserviços vs Monolito Modular para novo módulo
+de relatórios. Avaliar: escalabilidade, complexidade, skills do time, prazo 6 meses."
 
-### Cenários Implementados vs. Planejados:
-- ✅ Cenário 01: Login válido → Implementado e PASSA
-- ✅ Cenário 02: Senha inválida → Implementado e PASSA
-- ❌ Cenário 03: Usuário bloqueado → NÃO IMPLEMENTADO
-- ✅ Cenário 04: Timeout AD → Implementado e PASSA
+Restrições conhecidas:
+- .NET Framework 4.8 (não pode migrar ainda)
+- Time de 4 desenvolvedores (2 sêniores, 2 plenos)
+- Infraestrutura on-premise
+- 500+ usuários simultâneos esperados
 
-### Cobertura de Código:
-- **Planejado**: 95%
-- **Atingido**: 92%
-- **Status**: ❌ ABAIXO DA META
-
-### Evidências por Critério:
-- ✅ Critério 1: Integração AD → Evidência validada (ADServiceTests.cs)
-- ❌ Critério 2: Tratamento bloqueio → Evidência insuficiente
-- ✅ Critério 3: Performance → Evidência validada (< 2s)
-
-### DECISÃO FINAL:
-❌ **NECESSITA CORREÇÕES**
-
-**Pendências**:
-1. Implementar cenário 03 (usuário bloqueado)
-2. Aumentar cobertura para 95% (adicionar testes edge cases)
-3. Completar evidências do critério 2
+Foco: arquitetura, manutenibilidade, time skills
 ```
 
-#### **✅ Quando usar:**
-- **Fluxo TDD completo** - após Expert Developer implementar
-- **Validação rigorosa** de que plano foi seguido
-- **Garantia de qualidade** antes de Product Owner Final
-- **Projetos onde qualidade é crítica**
-
-#### **🔄 Fluxo recomendado:**
+💻 Cenário 6: Implementação Guiada por Testes
 ```
-Testing Specialist (plano) → Expert Developer (implementação) → Testing Validator (validação) → PO Final
-```
-
----
-
-### **🎯 9. Product Owner Final Agent - O Validador Final**
-
-#### **📋 O que faz:**
-- ✅ **VALIDA CADA critério de aceite** definido no início da atividade
-- ✅ **VERIFICA EVIDÊNCIAS** de que todos os critérios foram atendidos
-- ✅ **Cria checklist final** baseado nos critérios de aceite
-- ✅ **DECLARA "ATIVIDADE ENTREGUE"** apenas se TODOS critérios estão OK
-- ✅ **Verifica compliance** com requisitos de negócio
-- ✅ **Documenta pendências** e próximos passos
-- ✅ **Aprova ou rejeita** a entrega final
-
-#### **💻 Como executar:**
-```
-@agents/manual/product-owner-final.agent.md
-
-Sprint: 02, Activity: sistema-login
-Contexto: "Validar CADA critério de aceite contra as evidências da equipe - todos foram atendidos?"
-```
-
-#### **📁 Arquivos gerados:**
-```
-out/sprint02/sistema-login/
-└── 99-checklist-final.md         ← Checklist de validação completo
-```
-
-#### **🎯 Exemplo de checklist gerado:**
-```markdown
-# Checklist Final - Sistema Login
-
-## VALIDAÇÃO DOS CRITÉRIOS DE ACEITE
-
-### Critério 1: Integração com Active Directory
-- ✅ **ATENDIDO** - Evidência: Código em AuthenticationService.cs + testes em ADIntegrationTests.cs
-- ✅ **ATENDIDO** - Tempo resposta: 1.2s (meta < 2s) - Evidência: Relatório performance
-
-### Critério 2: Interface Responsiva
-- ✅ **ATENDIDO** - Evidência: CSS responsivo + testes E2E em múltiplas resoluções
-- ✅ **ATENDIDO** - Acessibilidade WCAG 2.1 - Evidência: Auditoria automática passando
-
-### Critério 3: Auditoria e Compliance
-- ✅ **ATENDIDO** - Evidência: AuditLogger.cs + testes + relatório 12 meses retenção
-- ✅ **ATENDIDO** - Logs estruturados - Evidência: Serilog configurado + exemplos
-
-## DECISÃO FINAL:
-✅ **ATIVIDADE ENTREGUE** - Todos os 3 critérios de aceite foram atendidos com evidências
-
-## 🎯 Próximos Passos
-1. Deploy em ambiente de homologação
-2. Testes de aceite com usuários finais
-3. Go-live planejado para sprint 03
-```
-
-#### **✅ Quando usar sozinho:**
-- **Validação critério por critério** de aceite
-- Validação final de entregáveis
-- Auditoria de qualidade antes do release
-- Checklist de go-live
-
----
-
-## **🎯 Estratégias de Uso dos Agentes**
-
-### **🔥 Fluxos Completos:**
-
-#### **📊 Fluxo Padrão (Recomendado):**
-```powershell
-Product Owner → Mesa Redonda → Requirements → Architect → Developer → Testing → PO Final
-```
-
-Prompt pronto (copiar e colar no Copilot Chat):
-```
-@agents/manual/product-owner.agent.md
-Sprint: 01, Activity: rn0001
-Sistema: Nome do Sistema (stack)
-
-POLÍTICA DE FLUXO:
-- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
-- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
-- Se [REVISAR], listar os arquivos gerados e aguardar
-- Se [NAO], encerrar e aguardar novas instruções
-
-ORDEM:
-1) Product Owner (gera 00-*)
-  APROVACAO NECESSARIA → Prosseguir com Mesa Redonda? [SIM/NAO/REVISAR]
-  SE [SIM] → executar: @agents/manual/roundtable-facilitator.agent.md
-2) Mesa Redonda (gera 01-*)
-  APROVACAO NECESSARIA → Prosseguir com Requirements Analyst? [SIM/NAO/REVISAR]
-  SE [SIM] → executar: @agents/manual/requirements-analyst.agent.md
-3) Requirements Analyst (gera 02-* e features/)
-  APROVACAO NECESSARIA → Prosseguir com Systems Architect? [SIM/NAO/REVISAR]
-  SE [SIM] → executar: @agents/manual/systems-architect.agent.md
-4) Systems Architect (gera 03-*, adrs/, diagrams/)
-  APROVACAO NECESSARIA → Prosseguir com Expert Developer? [SIM/NAO/REVISAR]
-  SE [SIM] → executar: @agents/manual/expert-developer.agent.md
-5) Expert Developer (gera 04-*, engineering/src e tests)
-  APROVACAO NECESSARIA → Prosseguir com Testing Specialist? [SIM/NAO/REVISAR]
-  SE [SIM] → executar: @agents/manual/testing-specialist.agent.md
-6) Testing Specialist (gera 05-qa-plano.md e reports)
-  APROVACAO NECESSARIA → Prosseguir com Product Owner Final? [SIM/NAO/REVISAR]
-  SE [SIM] → executar: @agents/manual/product-owner-final.agent.md
-7) Product Owner Final (gera 99-checklist-final.md)
-```
-
-#### **🧪 Fluxo TDD (Test-Driven Development) - RECOMENDADO:**
-```powershell
-Product Owner → Mesa Redonda → Requirements → Architect → Testing Specialist → Expert Developer → Testing Validator → PO Final
-```
-**✨ Novo fluxo otimizado:** Testing Specialist cria o plano ANTES do desenvolvimento, Expert Developer implementa seguindo TDD, Testing Validator valida se tudo foi implementado conforme o plano.
-
-Prompt pronto (copiar e colar no Copilot Chat):
-```
-@agents/manual/product-owner.agent.md
-Sprint: 01, Activity: rn0001
-Sistema: Nome do Sistema (stack)
-
-POLÍTICA DE FLUXO (TDD):
-- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
-- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
-- Manter ordem TDD: QA ANTES do código, Validador após implementação
-
-ORDEM TDD:
-1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
-2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
-3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
-4) Systems Architect → SE [SIM] → @agents/manual/testing-specialist.agent.md
-5) Testing Specialist (plano TDD) → SE [SIM] → @agents/manual/expert-developer.agent.md
-6) Expert Developer (implementa conforme plano) → SE [SIM] → @agents/manual/testing-validator.agent.md
-7) Testing Validator (valida implementação x plano) → SE [SIM] → @agents/manual/product-owner-final.agent.md
-8) Product Owner Final
-```
-
-#### **🛡️ Fluxo com Validação Rigorosa (Projetos Críticos):**
-```powershell
-Product Owner → Mesa Redonda → Requirements → Architect → Developer → Code Reviewer → Testing → PO Final
-```
-
-Prompt pronto (copiar e colar no Copilot Chat):
-```
-@agents/manual/product-owner.agent.md
-Sprint: 01, Activity: rn0001
-Sistema: Nome do Sistema (stack)
-
-POLÍTICA DE FLUXO (Validação Rigorosa):
-- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
-- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
-- Incluir auditoria independente antes de Testing
-
-ORDEM:
-1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
-2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
-3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
-4) Systems Architect → SE [SIM] → @agents/manual/expert-developer.agent.md
-5) Expert Developer → SE [SIM] → @agents/manual/code-reviewer.agent.md
-6) Code Reviewer (auditoria) → SE [SIM] → @agents/manual/testing-specialist.agent.md
-7) Testing Specialist → SE [SIM] → @agents/manual/product-owner-final.agent.md
-8) Product Owner Final
-```
-
-#### **🎨 Fluxo Full-Stack (Backend + Frontend):**
-```powershell
-Product Owner → Mesa Redonda → Requirements → Architect → Developer → Frontend → Testing → PO Final
-```
-
-Prompt pronto (copiar e colar no Copilot Chat):
-```
-@agents/manual/product-owner.agent.md
-Sprint: 01, Activity: rn0001
-Sistema: Nome do Sistema (Backend + Frontend)
-
-POLÍTICA DE FLUXO (Full-Stack):
-- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
-- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
-- Executar Frontend após Backend e antes de Testing
-
-ORDEM:
-1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
-2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
-3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
-4) Systems Architect → SE [SIM] → @agents/manual/expert-developer.agent.md
-5) Expert Developer (backend) → SE [SIM] → @agents/manual/frontend-specialist.agent.md
-6) Frontend Specialist → SE [SIM] → @agents/manual/testing-specialist.agent.md
-7) Testing Specialist → SE [SIM] → @agents/manual/product-owner-final.agent.md
-8) Product Owner Final
-```
-
-#### **🧪 Fluxo TDD + FULL STACK (Test-Driven Development):**
-```powershell
-Product Owner → Mesa Redonda → Requirements → Architect → Testing Specialist → Expert Developer → Frontend Specialist → Testing Validator → PO Final
-```
-
-Prompt pronto (copiar e colar no Copilot Chat):
-```
-@agents/manual/product-owner.agent.md
-Sprint: 01, Activity: rn0001
-Sistema: Nome do Sistema (Backend + Frontend)
-
-POLÍTICA DE FLUXO (TDD + Full-Stack):
-- Sempre perguntar entre etapas: [SIM] [NAO] [REVISAR]
-- Se [SIM], EXECUTAR AUTOMATICAMENTE o PRÓXIMO AGENTE
-- TDD: QA ANTES do código; validar após backend+frontend
-
-ORDEM:
-1) Product Owner → SE [SIM] → @agents/manual/roundtable-facilitator.agent.md
-2) Mesa Redonda → SE [SIM] → @agents/manual/requirements-analyst.agent.md
-3) Requirements Analyst → SE [SIM] → @agents/manual/systems-architect.agent.md
-4) Systems Architect → SE [SIM] → @agents/manual/testing-specialist.agent.md
-5) Testing Specialist (plano TDD) → SE [SIM] → @agents/manual/expert-developer.agent.md
-6) Expert Developer (backend) → SE [SIM] → @agents/manual/frontend-specialist.agent.md
-7) Frontend Specialist → SE [SIM] → @agents/manual/testing-validator.agent.md
-8) Testing Validator → SE [SIM] → @agents/manual/product-owner-final.agent.md
-9) Product Owner Final
-```
-
-### **⚡ Fluxos Parciais Especializados:**
-
-#### **📊 Análise e Planejamento:**
-```powershell
-Product Owner → Mesa Redonda → Requirements
-# Para: Refinamento de backlog, análise de viabilidade
-```
-
-#### **🏗️ Arquitetura e Design:**
-```powershell
-Mesa Redonda → Systems Architect → Frontend Specialist
-# Para: Decisões técnicas, prototipagem de UI
-```
-
-#### **💻 Implementação com Validação:**
-```powershell
-Expert Developer → Code Reviewer → Testing Specialist → PO Final
-# Para: Desenvolvimento com auditoria independente
-```
-
-#### **🔍 Qualidade e Validação:**
-```powershell
-Testing Specialist → PO Final
-# Para: Auditoria de qualidade, preparação de release
-```
-
-#### **🛡️ Validação Crítica:**
-```powershell
-Code Reviewer → Testing Specialist → PO Final
-# Para: Projetos que precisam de dupla validação técnica
-```
-
-### **💡 Dicas Pro para Máximo Aproveitamento:**
-
-1. **💬 Use contexto específico** em cada agente para resultados mais precisos
-2. **🎯 Combine agentes** conforme necessidade (não precisa usar todos sempre)
-3. **🔄 Re-execute agentes** com focos diferentes quando necessário
-4. **✋ Aproveite as aprovações [SIM/NÃO]** para controlar o fluxo
-5. **💾 Salve outputs importantes** como referência para próximas execuções
-
-**Cada agente é uma ferramenta poderosa - use-os estrategicamente conforme sua necessidade!** 🚀
-
----
-
-## **🔒 Garantias de Qualidade: Como o Sistema Valida a Implementação**
-
-**⭐ PERGUNTA CRÍTICA**: "Quem garante que o desenvolvedor implementou corretamente?"
-
-### **🛡️ Múltiplas Camadas de Validação:**
-
-#### **1️⃣ Auto-Validação do Expert Developer:**
-- ✅ **Matriz de Rastreabilidade**: Criterio → Implementação → Teste
-- ✅ **Auto-Verificação**: Developer revisa próprio código antes de entregar
-- ✅ **Evidências de Funcionamento**: Como testar cada critério implementado
-- ✅ **Checklist Técnico**: Compilação, testes unitários, cobertura 90%+
-
-#### **2️⃣ Code Reviewer (Opcional - Projetos Críticos):**
-- ✅ **Auditoria Independente**: Revisão técnica por agente especializado
-- ✅ **Validação de Qualidade**: Clean Code, SOLID, DDD, segurança
-- ✅ **Teste de Evidências**: Valida se evidências do Developer estão corretas
-- ✅ **Parecer Técnico**: APROVADO ou NECESSITA CORREÇÕES
-
-#### **3️⃣ Testing Specialist (Validação Rigorosa):**
-- ✅ **Auditoria da Implementação**: Revisa matriz do Developer
-- ✅ **Teste das Evidências**: Executa/valida cada evidência fornecida
-- ✅ **Parecer de Conformidade**: Para cada critério - APROVADO ou REJEITADO
-- ✅ **Cobertura Independente**: Testes adicionais se necessário
-
-#### **4️⃣ Product Owner Final (Validação de Negócio):**
-- ✅ **Validação Critério por Critério**: Baseado nas evidências dos especialistas
-- ✅ **Decisão Final**: "ATIVIDADE ENTREGUE" só se TODOS critérios OK
-- ✅ **Rastreabilidade Completa**: Da solicitação até a evidência final
-
-### **🔄 Fluxos de Validação Disponíveis:**
-
-#### **📊 Fluxo Padrão (Recomendado):**
-```mermaid
-graph TD
-    A[Expert Developer] --> B[Auto-Validação]
-    B --> C[Testing Specialist]
-    C --> D{Todos critérios OK?}
-    D -->|SIM| E[Product Owner Final]
-    D -->|NÃO| F[Volta para Developer]
-    E --> G[ATIVIDADE ENTREGUE ✅]
-```
-
-#### **🛡️ Fluxo Crítico (Projetos Sensíveis):**
-```mermaid
-graph TD
-    A[Expert Developer] --> B[Auto-Validação]
-    B --> C[Code Reviewer]
-    C --> D{Implementação OK?}
-    D -->|SIM| E[Testing Specialist]
-    D -->|NÃO| F[Volta para Developer]
-    E --> G{Todos critérios OK?}
-    G -->|SIM| H[Product Owner Final]
-    G -->|NÃO| F
-    H --> I[ATIVIDADE ENTREGUE ✅]
-```
-
-### **📋 Garantias Específicas por Camada:**
-
-| **Validação** | **O que garante** | **Como garante** |
-|---------------|-------------------|------------------|
-| **Auto-Validação** | Implementação básica correta | Matriz de rastreabilidade + checklist técnico |
-| **Code Review** | Qualidade e padrões | Auditoria independente + parecer técnico |
-| **Testing** | Funcionamento real | Execução de evidências + testes independentes |
-| **PO Final** | Atendimento ao cliente | Validação critério por critério vs. solicitação original |
-
-### **✅ Exemplo de Validação Completa:**
-
-```markdown
-## Critério 1: Autenticação AD em < 2s
-
-### Expert Developer (Auto-Validação):
-- ✅ Implementado em: AuthenticationService.cs
-- ✅ Teste unitário: AuthenticationTests.cs
-- ✅ Evidência: "dotnet test --filter AuthenticationAD"
-
-### Code Reviewer (Auditoria):
-- ✅ APROVADO - Clean Architecture respeitada
-- ✅ APROVADO - Tratamento de exceções adequado
-- ✅ APROVADO - Performance otimizada com cache
-
-### Testing Specialist (Validação):
-- ✅ APROVADO - Teste executado com sucesso
-- ✅ APROVADO - Performance 1.2s (meta < 2s)
-- ✅ APROVADO - Cenários de falha cobertos
-
-### Product Owner Final:
-- ✅ CRITÉRIO ATENDIDO - Evidências validadas por 3 especialistas
-```
-
-### **🎯 Como Executar Validação Rigorosa:**
-
-#### **Projetos Padrão:**
-```powershell
 @agents/manual/expert-developer.agent.md
-# → Auto-validação + matriz de rastreabilidade
 
-@agents/manual/testing-specialist.agent.md
-# → Validação rigorosa das evidências
+Sprint: 03, Activity: implementar-notificacoes
+Contexto: "Implementar sistema de notificações seguindo TDD rigoroso.
+Usar plano do Testing Specialist + arquitetura do Systems Architect."
 
-@agents/manual/product-owner-final.agent.md
-# → Decisão final baseada nas validações
+Entrada obrigatória:
+- 05-qa-plano.md (plano TDD detalhado)
+- 03-arquitetura.md (design técnico)
+- 05-ux-wireframes.md (especificações UI)
+
+Tecnologias: .NET 8 + SignalR + PostgreSQL + Redis
+Padrões: Clean Architecture + CQRS + Domain Events
 ```
 
-#### **Projetos Críticos:**
-```powershell
-@agents/manual/expert-developer.agent.md
-# → Auto-validação + matriz de rastreabilidade
+📊 Cenário 7: Análise de Requisitos Complexos
+```
+@agents/manual/requirements-analyst.agent.md
 
-@agents/manual/code-reviewer.agent.md
-# → Auditoria independente da implementação
+Sprint: 02, Activity: integracao-sap
+Contexto: "Analisar integração bi-direcional com SAP ERP. Documentos:
+120 páginas de specs + planilhas de mapeamento + casos de teste."
 
-@agents/manual/testing-specialist.agent.md
-# → Validação rigorosa das evidências
+Arquivos de entrada:
+- SAP_Integration_Specs_v2.1.docx (120 páginas)
+- Entity_Mapping_Tables.xlsx (15 planilhas)
+- Test_Cases_SAP_Integration.xlsx (200+ cenários)
 
-@agents/manual/product-owner-final.agent.md
-# → Decisão final baseada em 3 validações
+Foco: extrair regras RN-0050 a RN-0070, criar cenários BDD
+Complexidade: sincronização real-time + tratamento conflitos
 ```
 
-**Resultado:** **Tripla garantia** de que cada critério de aceite foi corretamente implementado, testado e validado! 🛡️
+✅ Cenário 8: Validação Final de Entrega
+```
+@agents/manual/product-owner-final.agent.md
+
+Sprint: 04, Activity: go-live-sistema-vendas
+Contexto: "Validação final antes do go-live. Verificar CADA critério de
+aceite contra evidências técnicas. Decisão: APROVAR ou PENDÊNCIAS."
+
+Critérios para validar:
+1. Performance: Carregamento < 2s (evidência: relatório Lighthouse)
+2. Segurança: Autenticação 2FA (evidência: testes automatizados)
+3. Integração: Sincronização SAP (evidência: logs + testes E2E)
+4. Usabilidade: Acessibilidade WCAG (evidência: audit axe-core)
+5. Monitoramento: Alertas configurados (evidência: dashboards)
+
+Entrada: Todos artefatos + código + documentação técnica
+```
+
+- Controle total e aprovações por etapa.
+- Transparência: você vê exatamente o que cada agente produziu.
+- Aprendizado: entendimento profundo do processo e do domínio.
+- Ajustes finos: alterar a direção cedo evita retrabalho caro no fim.
+
+### 💰 Custos x Benefícios: Automático vs Manual
+
+| Modo | Custo (tempo/config) | Benefícios | Quando usar | Requisitos |
+|---|---|---|---|---|
+| Automático (CrewAI/AutoGen) | Médio/Alto (API key, orquestração) | Rapidez, baixo atrito operacional | Backlog grande e claro; tarefas repetitivas | API key válida; configuração orquestrador |
+| Manual (recomendado) | Baixo/Médio | Clareza, controle, qualidade e auditoria | Descoberta, escopo incerto, requisitos críticos | Aprovação humana por etapa |
 
 ---
 
-## **📏 Padrões de Desenvolvimento Obrigatórios**
+## ➕ Enriquecimento do Agente (sempre aditivo)
 
-**O Code Reviewer valida não apenas a funcionalidade, mas também a qualidade e consistência do código:**
+O enriquecimento não substitui as instruções do agente. Sempre adicionamos informação útil (documentos resumidos, fatos relevantes) como uma “camada extra” de orientação.
+Isso é feito via YAML por agente e um hook pós-etapa que executa automaticamente o RAG quando você avança de fase.
 
-### **🎯 Padrões de Nomenclatura:**
+---
 
-#### **✅ Nomenclatura Correta (.NET/C#):**
-```csharp
-// Classes: PascalCase
-public class AuthenticationService
-public class UserRepository
+## 🧭 Fluxos de desenvolvimento (workflowPatterns)
 
-// Métodos: PascalCase
-public async Task<Result> AuthenticateAsync()
-public User GetUserById()
+Conforme `agents.index.json`:
 
-// Variáveis/Parâmetros: camelCase
-private readonly IUserRepository userRepository;
-public string userName { get; set; }
+- newFeatureTDD: product-owner → requirements-analyst → systems-architect → testing-specialist → expert-developer → testing-validator → product-owner-final
+- newFeature: product-owner → requirements-analyst → systems-architect → expert-developer → frontend-specialist → testing-specialist
+- frontendFeature: product-owner → requirements-analyst → frontend-specialist → testing-specialist
+- bugfixTDD: testing-specialist → expert-developer → testing-validator
+- bugfix: expert-developer → testing-specialist
+- refactoring: systems-architect → expert-developer → testing-specialist
+- uiRefactoring: frontend-specialist → testing-specialist
+- documentation: requirements-analyst
 
-// Constantes: UPPER_CASE ou PascalCase
-public const int MAX_LOGIN_ATTEMPTS = 3;
-public static readonly TimeSpan SessionTimeout = TimeSpan.FromMinutes(30);
+---
+
+## 🗣️ Exemplos de prompts por fluxo
+
+- newFeatureTDD: “Iniciar fluxo newFeatureTDD para RN-0001 (Sprint 01 / Activity rn0001). Projeto .NET 6 + Angular. Gere o plano TDD e siga a sequência.”
+- newFeature: “Iniciar fluxo newFeature para RN-0002 (Sprint 02 / Activity rn0002). Crie arquitetura, implemente backend e frontend, depois testes.”
+- frontendFeature: “Fluxo frontendFeature para a tela de pedidos. Gerar componentes Angular com PO-UI e testes.”
+- bugfixTDD: “Fluxo bugfixTDD: reproduzir bug X, planejar testes, corrigir e validar.”
+- bugfix: “Fluxo bugfix: corrigir exceção no serviço Y e cobrir com testes.”
+- refactoring: “Fluxo refactoring: extrair value objects e ajustar DI.”
+- uiRefactoring: “Fluxo uiRefactoring: padronizar botões e tipografia no Angular Material.”
+- documentation: “Fluxo documentation: atualizar RN-0010 com novas regras tributárias.”
+
+---
+
+## 🧩 Prompts e responsabilidades de cada agente
+
+- Product Owner: “Analise esta solicitação e produza 00-requirements-brief.md e 00-business-context.md com critérios de aceite.”
+- Roundtable Facilitator: “Organize a mesa redonda e registre decisões e pendências.”
+- Requirements Analyst: “Converter anexos .docx/.xlsx em 02-requisitos-bdd.md e .feature.”
+- Systems Architect: “Definir 03-arquitetura.md com ADRs e diagramas.”
+- Testing Specialist: “Criar 05-qa-plano.md garantindo 90%+ cobertura.”
+- Expert Developer: “Implementar conforme TDD e documentar em 04-desenvolvimento.md.”
+- Frontend Specialist: “Criar componentes e temas Angular (PO-UI/Material) com acessibilidade.”
+- UX/UI Specialist: “Gerar wireframes e design system com guidelines.”
+- Testing Validator: “Comparar plano vs. execução e emitir 05.1-testing-validation.md.”
+- Code Reviewer: “Auditar qualidade, segurança e alinhamento arquitetural.”
+- Product Owner Final: “Consolidar evidências e checklist final de aprovação.”
+
+---
+
+## 🧰 Scripts PowerShell: o que são e por que existem
+
+- Install/setup-workflow.ps1: instala pré-requisitos, prepara ambiente e copia estrutura.
+- scripts/powershell/start-manual.ps1: inicia execução manual guiada.
+- scripts/powershell/enrich-after-step.ps1: hook pós-etapa; injeta RAG e gera bundle de enriquecimento.
+- scripts/powershell/new-activity.ps1: cria estrutura de pastas para nova atividade.
+- scripts/powershell/start-multi-activities.ps1: executar várias atividades em paralelo.
+- scripts/powershell/manage-parallel-execution.ps1: acompanha status e próximas execuções.
+- scripts/powershell/render-diagrams.ps1: exporta Mermaid para imagens.
+- scripts/powershell/scan-encoding.ps1 e validate-encoding.ps1: valida encodings.
+- scripts/powershell/validate-output-package.ps1: verifica pacote de saída.
+- scripts/powershell/use-venv.ps1: ativa ambiente Python local.
+- scripts/powershell/setup-design-tools.ps1 e view-wireframes.ps1: suporte a wireframes e visualização.
+- scripts/powershell/start-orchestration.ps1: inicia orquestração automática (se configurada).
+
+### 🧵 Paralelismo
+
+Permite rodar várias atividades ao mesmo tempo, respeitando dependências.
+Benefícios: ganho de throughput, melhor ocupação do time, feedback mais rápido.
+Guia completo: `docs/guia-paralelizacao.md`.
+
+---
+
+## 📦 Onde o código é gerado
+
+- Projeto novo: a estrutura é criada onde você indicar, com solução .NET 6.0 e/ou frontend Angular conforme sua escolha.
+- Projeto existente: se você escolher “implementar em código existente”, as alterações são feitas diretamente no repositório selecionado. Evidências permanecem em `data/out/...` no workspace dos agentes.
+
+---
+
+<a id="estrutura"></a>
+## 📊 Estrutura de Arquivos Gerados
+
+Estrutura canônica sob `data/out/sprint<sprint>/<activity>/` para auditoria e navegação:
+
+```
+data/out/sprint01/rn0001/
+├── 00-business-context.md         # Contexto de negócio e stakeholders
+├── 00-requirements-brief.md       # Objetivos e escopo resumidos
+├── 01-ata-mesa-redonda.md         # Decisões e pendências (se houver)
+├── 02-requisitos-bdd.md           # Regras + cenários BDD consolidados
+├── 03-arquitetura.md              # Visão técnica, camadas, integrações
+├── 04-desenvolvimento.md          # Notas técnicas, matriz e evidências
+├── 05-qa-plano.md                 # Estratégia TDD, datasets, cobertura
+├── 05.1-testing-validation.md     # Validação da implementação vs plano
+├── 99-checklist-final.md          # Aprovação final do PO
+├── features/                      # .feature (Gherkin) por cenário
+├── adrs/                          # Architecture Decision Records
+├── diagrams/                      # .mmd e imagens exportadas
+├── enrichment/                    # _last-<agent>.json (RAG pós-etapa)
+├── engineering/                   # Código e testes gerados (quando houver)
+└── reports/                       # Cobertura, performance, segurança
 ```
 
-#### **❌ Nomenclatura Incorreta:**
-```csharp
-// ❌ Nomes não descritivos
-public class srv
-public void proc()
-public string s1, s2;
+Resumo rápido dos principais artefatos:
 
-// ❌ Convenção errada
-public class authentication_service  // snake_case incorreto
-public void GetUserBYId()           // typo + convenção mista
-private string UserName;            // deveria ser camelCase
-```
+| Item | Descrição | Quem usa |
+|------|-----------|----------|
+| 00-business-context.md | Por que fazer; contexto e stakeholders | PO, Liderança |
+| 00-requirements-brief.md | O que fazer; escopo e metas | Todos |
+| 01-ata-mesa-redonda.md | Decisões técnicas e pendências | Arq, Dev |
+| 02-requisitos-bdd.md | Regras e cenários legíveis | QA, PO |
+| 03-arquitetura.md | Desenho técnico da solução | Arq, Dev |
+| 04-desenvolvimento.md | Implementação e evidências | Dev |
+| 05-qa-plano.md | Estratégia de testes (TDD) | QA |
+| 05.1-testing-validation.md | Auditoria de implementação | QA, PO Final |
+| 99-checklist-final.md | DoD e aprovação final | PO Final |
+| features/ | Cenários Gherkin | QA, Dev |
+| adrs/ | Decisões arquiteturais | Arq, Dev |
+| diagrams/ | Diagramas da solução | Todos |
+| enrichment/ | Bundle de contexto RAG | Próximo agente |
+| engineering/ | Código/testes gerados | Dev |
+| reports/ | Cobertura/performance | QA, Liderança |
 
-### **🎯 Padrões de Commits (Obrigatório):**
+Observações:
+- Pode variar conforme o fluxo e agentes executados.
+- Para detalhes e convenções, veja `data/out/README.md`.
 
-#### **✅ Commits Corretos:**
-```bash
-# Formato: [gitemoji] [tipo] - [Descrição clara em português]
+---
 
-✨ feat - Add user authentication with Active Directory integration
-🐛 fix - Resolve null reference exception in payment validation
-📝 docs - Update API documentation for notification service
-♻️ refactor - Restructure domain entities using DDD patterns
-✅ test - Add unit tests for calculation engine with 95% coverage
-🔧 chore - Update NuGet packages to latest stable versions
-🚀 perf - Optimize database queries for user search
-🔒 security - Add input validation and XSS protection
-```
+## 🛡️ Como os agentes garantem a qualidade
 
-#### **❌ Commits Incorretos:**
-```bash
-# ❌ Sem padrão, não descritivos
-"fix bug"
-"update code"
-"added feature"
-"changes"
-"wip"
-```
+- TDD: plano de QA antes do código; validação após implementação.
+- Cobertura: meta 90%+ em módulos críticos.
+- Arquitetura: Clean Architecture, DDD, SOLID.
+- Validação: checklists, code review, validações automáticas e logs estruturados.
+- Observabilidade: preferência por Serilog e práticas de diagnóstico.
 
-### **🎯 Padrões de Indentação:**
+---
 
-#### **✅ Indentação Correta:**
-```csharp
-public class AuthenticationService
-{
-    private readonly IUserRepository _userRepository;
+## 🧾 Padrão de commits
 
-    public AuthenticationService(IUserRepository userRepository)
-    {
-        _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
-    }
+Formato: `[emoji-code] tipo - descrição curta`
 
-    public async Task<Result<User>> AuthenticateAsync(string username, string password)
-    {
-        if (string.IsNullOrWhiteSpace(username))
-        {
-            return Result<User>.Failure("Username is required");
-        }
+Exemplos:
+- :sparkles: feature - nova funcionalidade
+- :bug: fix - correção de bug
+- :memo: docs - documentação
+- :white_check_mark: tests - testes
+- :recycle: refactor - refatoração
+- :wrench: chore - tarefas/configuração
 
-        try
-        {
-            var user = await _userRepository.GetByUsernameAsync(username);
+---
 
-            if (user == null)
-            {
-                return Result<User>.Failure("Invalid credentials");
-            }
+## 🧼 Evitar code smells (SonarQube)
 
-            return Result<User>.Success(user);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Authentication failed for user {Username}", username);
-            return Result<User>.Failure("Authentication service unavailable");
-        }
-    }
-}
-```
+- Manter funções pequenas e coesas; evitar duplicação.
+- Tratar exceções corretamente; não suprimir erros relevantes.
+- Escrever testes determinísticos e nomeados claramente.
+- Aplicar regras de lint e padrões de nomenclatura.
+- Documentar intenções e decisões (ADRs).
 
-### **🎯 Estrutura de Pastas (Clean Architecture):**
+---
 
-#### **✅ Estrutura Correta:**
-```
-src/
-├── Core/
-│   ├── Domain/
-│   │   ├── Entities/
-│   │   │   ├── User.cs
-│   │   │   └── Session.cs
-│   │   ├── ValueObjects/
-│   │   └── Interfaces/
-│   └── Application/
-│       ├── UseCases/
-│       ├── DTOs/
-│       └── Validators/
-├── Infrastructure/
-│   ├── Data/
-│   ├── ExternalServices/
-│   └── Configuration/
-└── WebAPI/
-    ├── Controllers/
-    ├── Middleware/
-    └── Configuration/
-```
-
-### **🎯 Documentação Obrigatória:**
-
-#### **✅ XML Documentation:**
-```csharp
+<!-- FAQ/Recursos/Links/Autor consolidados ao final; bloco duplicado removido -->
 /// <summary>
 /// Authenticates a user using Active Directory credentials
 /// </summary>
@@ -2090,7 +956,7 @@ python .\orchestrators\crewai_runner.py 1
 **1️⃣ Preparar solicitação:**
 ```powershell
 cd "C:\Projetos\MeuWorkspace\IA"
-echo "Preciso trocar a cor dos botões de sucesso de verde para roxo no sistema de vendas" > .\in\sprint01\rn0001\business_request\mudanca_cor.md
+echo "Preciso trocar a cor dos botões de sucesso de verde para roxo no sistema de vendas" > .\data\in\sprint01\rn0001\business_request\mudanca_cor.md
 ```
 
 **2️⃣ Executar Product Owner:**
@@ -2131,7 +997,6 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 📁 data/out/sprint01/rn0001/
 ├── 00-business-context.md          ← Por que mudar a cor
 ├── 00-requirements-brief.md        ← O que precisa ser feito
-├── 00-requirements-brief.md        ← O que precisa ser feito
 ├── 01-ata-mesa-redonda.md         ← Decisões técnicas
 ├── 02-requisitos-bdd.md           ← Cenários de teste
 ├── 03-arquitetura.md              ← Como implementar
@@ -2147,7 +1012,6 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 
 ## 🛠️ **Scripts PowerShell Disponíveis**
 
-**Para Desenvolvedores:** Além do GitHub Copilot, você pode usar scripts PowerShell para automação avançada e gerenciamento de atividades.
 **Para Desenvolvedores:** Além do GitHub Copilot, você pode usar scripts PowerShell para automação avançada e gerenciamento de atividades.
 
 ### **📜 Scripts Disponíveis:**
@@ -2166,15 +1030,25 @@ Posso prosseguir? [SIM/NAO/REVISAR]
 | `use-venv.ps1` | **Ativar ambiente Python** | Para trabalhar com CrewAI/AutoGen | `.\scripts\powershell\use-venv.ps1` |
 | `start-orchestration.ps1` | **Executar CrewAI/AutoGen** | Para processo automatizado com IA | `.\scripts\powershell\start-orchestration.ps1` |
 
+#### 🧭 Tabela: Qual script usar por situação
+
+| Situação | Script para usar | Comando | Local |
+|---------|------------------|---------|------|
+| Primeira vez (instalação) | `setup-workflow.ps1` | `\.\Install\setup-workflow.ps1` | 📁 Repositório WorkFlowAI |
+| Nova funcionalidade | `new-activity.ps1` | `\.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 Projeto do cliente |
+| Execução automática do fluxo | `start-manual.ps1` | `\.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 Projeto do cliente |
+| Gerar imagens de diagramas | `render-diagrams.ps1` | `\.\scripts\powershell\render-diagrams.ps1` | 📁 Projeto do cliente |
+| Usar orquestração por IA | `start-orchestration.ps1` | `\.\scripts\powershell\start-orchestration.ps1 -Sprint 02` | 📁 Projeto do cliente |
+
 ---
 
-### **🔧 Guia Detalhado de Cada Script**
+### **🔧 Guia Detalhado de Cada Script (PowerShell)**
 
 #### **1️⃣ setup-workflow.ps1** - 🏗️ **Instalação Inicial**
 
 **📋 O que faz:**
 - Instala todos os agentes no projeto do cliente
-- Cria estrutura de pastas (in/, out/, agents/, etc.)
+- Cria estrutura de pastas (data/in/, data/out/, agents/, etc.)
 - Configura ambiente Python (.venv-1)
 - Instala dependências (requirements.txt)
 - Cria primeira atividade automaticamente
@@ -2388,7 +1262,7 @@ python .\orchestrators\autogen_dev_team.py
 
 ---
 
-## 🚀 **NOVOS Scripts de Paralelização**
+## 🚀 Scripts de Paralelização
 
 ### **⚡ quick-start.ps1** - 🎯 **Interface Unificada**
 
@@ -2516,72 +1390,7 @@ cd "C:\Projetos\MeuWorkspace\IA"
 
 ---
 
-## 🔄 **Trabalhando com Múltiplas Atividades**
-
-### **🆕 Criando Nova Atividade (APÓS Instalação Inicial)**
-
-**Cenário:** Você já tem os agentes instalados e precisa trabalhar numa nova funcionalidade.
-
-#### **📋 Passo a Passo:**
-
-**1️⃣ Criar estrutura da nova atividade:**
-```powershell
-cd "C:\Projetos\MeuWorkspace\IA"
-.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
-```
-
-**2️⃣ O script cria automaticamente:**
-```
-📁 data/in/sprint02/rn0025/
-├── 📁 business_request/
-│   └── 📄 solicitacao.md        ← Template pronto para editar
-└── 📁 attachments/              ← Para documentos técnicos
-
-📁 data/out/sprint02/rn0025/          ← Onde os agentes vão gerar resultados
-├── 📁 features/
-├── 📁 adrs/
-└── 📁 diagrams/
-```
-
-**3️⃣ Editar sua solicitação:**
-```powershell
-notepad .\in\sprint02\rn0025\business_request\solicitacao.md
-```
-
-**4️⃣ Executar os agentes:**
-```
-# GitHub Copilot Chat:
-@agents/manual/product-owner.agent.md
-
-Sprint: 02, Activity: rn0025
-[Descreva sua nova funcionalidade]
-```
-
-### **🎯 Exemplos de Novas Atividades:**
-
-```powershell
-# Sistema de login
-.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0020
-
-# Relatório de vendas
-.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0021
-
-# Integração com API externa
-.\scripts\powershell\new-activity.ps1 -Sprint 03 -Activity rn0030
-```
-
-### **📊 Organização por Sprint:**
-
-**Sprint 01:**
-- `rn0001` - Primeira funcionalidade
-- `rn0002` - Segunda funcionalidade
-
-**Sprint 02:**
-- `rn0020` - Sistema de login
-- `rn0021` - Relatórios
-- `rn0025` - Nova feature
-
-**Cada atividade tem sua estrutura independente!**
+<!-- Seção 'Trabalhando com Múltiplas Atividades' duplicada removida (mantida próxima à Instalação) -->
 
 ---
 
@@ -2611,7 +1420,6 @@ Tudo é salvo na pasta `data/out/sprint01/rn0001/` do seu workspace
 Sim! O sistema detecta automaticamente:
 - .NET (C#, ASP.NET Core)
 - Node.js (JavaScript, TypeScript)
-- Node.js (JavaScript, TypeScript)
 - Angular
 - React
 - Projetos genéricos
@@ -2623,27 +1431,13 @@ Sem problema! Você pode:
 - Executar novamente com parâmetros diferentes
 
 ### **🤔 "Preciso saber programar?"**
-### **🤔 "Preciso saber programar?"**
 Para **usar** o sistema: NÃO
 Para **entender** os resultados: Ajuda, mas não é obrigatório
 O sistema gera documentação explicativa para cada parte.
 
-### **🤔 "Como criar uma nova atividade depois da instalação?"**
-Use o script específico para isso:
-```powershell
-.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0025
-```
-Ele cria toda estrutura de pastas automaticamente e gera template pronto!
+<!-- Duplicata de 'Como criar nova atividade' removida. Essa orientação já aparece na seção de Instalação. -->
 
-### **🤔 "Qual script PowerShell devo usar para cada situação?"**
-
-| **Situação** | **Script para usar** | **Comando** | **Local** |
-|--------------|---------------------|-------------|-----------|
-| **Primeira vez (instalação)** | `setup-workflow.ps1` | `.\Install\setup-workflow.ps1` | 📁 *Repositório WorkFlowAI* |
-| **Nova funcionalidade** | `new-activity.ps1` | `.\scripts\powershell\new-activity.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
-| **Execução automática** | `start-manual.ps1` | `.\scripts\powershell\start-manual.ps1 -Sprint 02 -Activity rn0030` | 📁 *Projeto do cliente* |
-| **Gerar imagens** | `render-diagrams.ps1` | `.\scripts\powershell\render-diagrams.ps1` | 📁 *Projeto do cliente* |
-| **Usar IA avançada** | `start-orchestration.ps1` | `.\scripts\powershell\start-orchestration.ps1 -Sprint 02` | 📁 *Projeto do cliente* |
+<!-- Tabela de mapeamento de scripts movida para a seção 'Scripts PowerShell Disponíveis' para evitar duplicação. -->
 
 ### **🤔 "Os scripts PowerShell ficam no projeto do cliente?"**
 **SIM!** Após a instalação, os scripts **operacionais** ficam funcionais no projeto do cliente:
@@ -2694,6 +1488,19 @@ winget install Python.Python.3.12
 4. Use o processo PowerShell alternativo
 
 ### **❌ "Script PowerShell não executa"**
+### **❌ "Enriquecimento não carregou nos agentes do cliente"**
+Verifique:
+- Você respondeu “s” em “Deseja enriquecer os agentes com instruções personalizadas? (s/n)”.
+- A pasta informada existe e contém arquivos no formato esperado, por exemplo:
+  - `product-owner.instructions.md` ou `product_owner.instructions.md`
+  - `requirements-analyst.instructions.md` etc.
+  - Alternativas gerais: `default.instructions.md` ou `all.instructions.md` (aplicadas a todos os papéis)
+- Após a instalação, abra um arquivo de agente (ex.: `agents/manual/product-owner.agent.md`) e procure pelo bloco:
+  - `### Custom Instructions (instalador)` — o conteúdo é inserido ao final do arquivo.
+- Se você rodou o instalador novamente, o bloco é substituído idempotentemente. Se não atualizou, verifique permissões de escrita.
+
+Se ainda falhar, rode novamente o instalador e observe o log “Atualizando agente <papel> com novas instruções...”.
+
 **Possíveis soluções:**
 ```powershell
 # 1. Executar sempre com parâmetros completos:
@@ -2703,7 +1510,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\start-m
 cd "C:\Projetos\MeuWorkspace\IA"
 
 # 3. Verificar se pastas existem
-ls .\in\sprint01\rn0001\business_request\
+ls .\data\in\sprint01\rn0001\business_request\
 ```
 
 ### **❌ "Erro: 'Cannot find path' no PowerShell"**
@@ -2885,20 +1692,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\powershell\render-
   - Expert Developer: [`agents/manual/expert-developer.agent.md`](./agents/manual/expert-developer.agent.md)
   - Testing Specialist: [`agents/manual/testing-specialist.agent.md`](./agents/manual/testing-specialist.agent.md)
 
-### **🔄 Fluxo Automatizado:**
-Todos os agentes agora **pedem aprovação [SIM/NÃO]** e **executam o próximo automaticamente** após confirmação.
+<!-- Seção 'Fluxo Automatizado' duplicada removida (mantida no topo) -->
 
-Observações:
-- Defina modelos por agente em `model_preferences` (front matter YAML) nos arquivos acima.
-- Entradas padrão: `data/in/sprint<sprint>/<activity>/attachments/`. Saídas: `data/out/sprint<sprint>/<activity>/`.
-
-## Orquestração (scripts)
-
-- **⚠️ CrewAI (PREVIEW):** [`orchestrators/crewai_runner.py`](./orchestrators/crewai_runner.py) - **NÃO TESTADO**
-- **⚠️ AutoGen (PREVIEW):** [`orchestrators/autogen_dev_team.py`](./orchestrators/autogen_dev_team.py) - **NÃO TESTADO**
-- **✅ Scripts manuais (RECOMENDADO):** [`scripts/powershell/`](./scripts/powershell/) - **TESTADO E FUNCIONAL**
-
-Detalhes de execução e variáveis de ambiente estão nos guias da seção “Documentação principal”.
+<!-- Seção de Orquestração duplicada removida; usar '🧭 Orquestração e Scripts (visão geral)' no topo -->
 
 ## Ambiente e configuração
 
@@ -2918,7 +1714,7 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 | **Ver exemplos práticos** | [📚 Prompts de referência](./prompts-manual/prompts/reference/README.md) |
 | **Analisar projeto existente** | [🔍 Análise automática](./docs/analise-projeto-existente.md) |
 | **Integrar com GitHub Copilot** | [🤖 Integração automática](./docs/integracao-github-copilot.md) |
-| **Entender a estrutura** | [📊 Organização dos resultados](./out/README.md) |
+| **Entender a estrutura** | [📊 Organização dos resultados](./data/out/README.md) |
 | **Resolver problemas** | [📋 Melhorias recentes](./docs/resumo-melhorias-setup.md) |
 
 ---
@@ -2948,66 +1744,6 @@ Detalhes de execução e variáveis de ambiente estão nos guias da seção “D
 - **Dúvidas sobre uso:** Consulte [FAQ](#-faq---perguntas-frequentes-para-iniciantes)
 - **Documentação adicional:** [docs/README.md](./docs/README.md)
 
-### **🔄 Atualizações Recentes:**
-- ✅ **Instalação simplificada** em um comando
-- ✅ **Fluxo com aprovações** para controle total
-- ✅ **Detecção automática** de projetos existentes
-- ✅ **Integração GitHub Copilot** automática
-- ✅ **Documentação para iniciantes** completa
-
----
-
-**🚀 PRONTO PARA COMEÇAR? Execute a instalação e siga o guia de primeiros passos!**
-
-```powershell
-# Comando para começar AGORA:
-cd "C:\Projetos\Prosoft.System.AI"
-cd "C:\Projetos\Prosoft.System.AI"
-.\Install\setup-workflow.ps1
-```
-
----
-
-## 🧠 RAG — Como funciona (passo a passo)
-
-Quer que os agentes consultem automaticamente o conhecimento do seu projeto? Este repositório já traz um fluxo de RAG simples, offline‑friendly e sem alterar o prompts.system.
-
-### 🗂️ O que o RAG usa como fonte
-- `docs/` → guias, padrões e ADR template
-- `agents/manual/*.agent.md` → escopo/limites de cada agente
-- `data/out/sprint{}/activity{}/` → artefatos por etapa (00-*, 03-*, 05-*, evidências)
-
-### 🔄 Quando acontece
-- Ao finalizar uma etapa (ex.: Arquiteto, Dev, QA…), o orquestrador dispara um “hook” que ingere o que acabou de ser produzido.
-- Na próxima etapa, o agente já recebe esse contexto enriquecido automaticamente.
-
-### 🧩 Como o contexto entra no prompt (sem tocar no system)
-1) O agente mantém seu `prompts.system` intacto ✅
-2) O orquestrador lê `agents/manual/<agent>.enrichment.yaml`
-3) Busca no RAG e injeta os trechos como mensagem `developer`, logo após o `system` (com cabeçalho “CONTEXTO ENRIQUECIDO”)
-
-### 🏃 Passo a passo rápido
-1) Garanta o serviço RAG em execução (ex.: `http://127.0.0.1:8088`)
-2) Ao terminar um agente, rode o hook de enriquecimento (ex.: após o Desenvolvedor):
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/powershell/enrich-after-step.ps1 -AgentId expert-developer -Sprint 01 -Activity rn0001 -RagEndpoint http://127.0.0.1:8088 -TopK 8 -Rerank
-```
-
-3) Inicie o próximo agente (ex.: Testing Validator). O orquestrador lê `testing-validator.enrichment.yaml` e injeta o contexto via mensagem `developer` automaticamente.
-
-### 📁 Arquivos importantes
-- `scripts/powershell/enrich-after-step.ps1` → hook pós‑etapa que chama `/ingest` e gera `_last-<agent>.json`
-- `agents/manual/<agent>.enrichment.yaml` → fontes, filtros e limites de tokens
-- `docs/enrichment-auto-run.md` → como plugar o hook no seu orquestrador
-
-### ✅ Benefícios
-- Sem alterar `prompts.system` (políticas continuam soberanas)
-- Funciona offline (coleção por sprint/atividade)
-- Contexto sempre fresco entre uma etapa e outra
-
-### ❓ FAQ rápido
-- Onde os dados ficam? Em uma coleção por sprint/atividade (ex.: `sprint01-activityrn0001`).
-- E se eu responder “NÃO” na transição? O orquestrador não enriquece nem avança (ou apenas pausa, conforme configuração).
-- Posso ajustar o quanto entra no prompt? Sim, com `topK`, `rerank` e `maxTokens` no `.enrichment.yaml`.
+<!-- Seções duplicadas removidas: Atualizações Recentes e RAG (passo a passo) estavam repetidas.
+Consulte a seção "🧠 RAG — Como funciona (essencial)" acima para detalhes atualizados. -->
 
