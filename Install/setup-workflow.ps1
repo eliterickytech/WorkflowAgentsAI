@@ -722,7 +722,9 @@ function Enrich-Agents($target, $instructionsPath) {
     if ($null -ne $fileBase) {
       # Ler instrucoes como UTF-8 (sem BOM) e normalizar quebras de linha para CRLF
       $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-      $content = [System.IO.File]::ReadAllText($fileBase.FullName, $utf8NoBom)
+  $content = [System.IO.File]::ReadAllText($fileBase.FullName, $utf8NoBom)
+  # Remover BOM (U+FEFF) caso presente no inicio
+  if ($content.Length -gt 0 -and $content[0] -eq [char]0xFEFF) { $content = $content.Substring(1) }
       $content = ($content -replace "(\r?\n)", "`r`n")
       $agentFile = Join-Path $agentsPath $map[$role]
       if (Test-Path $agentFile) {
