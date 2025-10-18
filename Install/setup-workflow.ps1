@@ -688,6 +688,13 @@ function Enrich-Agents($target, $instructionsPath) {
   if (-not (Test-Path $agentsPath)) { Write-Warn "Pasta de agentes manuais nao encontrada em $agentsPath"; return }
 
   Write-Info "Enriquecendo agentes com instrucoes em: $instructionsPath"
+  # Logar arquivos de instrucoes detectados para auditoria
+  $detectedInstr = Get-ChildItem -Path $instructionsPath -File -Filter "*.instructions.*" -ErrorAction SilentlyContinue
+  if ($detectedInstr) {
+    Write-Info ("Arquivos de instrucoes detectados: " + (($detectedInstr | Select-Object -ExpandProperty Name) -join ', '))
+  } else {
+    Write-Warn "Nenhum arquivo *.instructions.* encontrado na pasta informada. Um bloco TEMPLATE sera inserido nos agentes."
+  }
   $map = @{
     'product-owner'          = 'product-owner.agent.md'
     'roundtable-facilitator' = 'roundtable-facilitator.agent.md'
@@ -751,8 +758,100 @@ function Enrich-Agents($target, $instructionsPath) {
         }
       } else { Write-Warn "Arquivo do agente nao encontrado: $agentFile" }
     } else {
-      Write-Info "Nenhuma instrucao personalizada encontrada para $role (esperado: $($role).instructions.md|txt, $($role -replace '-', '_').instructions.* ou default.instructions.*)"
+      Write-Info "Nenhuma instrucao personalizada encontrada para $role (esperado: $($role).instructions.md|txt, $($role -replace '-', '_').instructions.* ou default.instructions.*). Inserindo bloco TEMPLATE."
+      # Inserir um bloco TEMPLATE mesmo sem arquivo especifico, para padronizar a secao no agente
+      $agentFile = Join-Path $agentsPath $map[$role]
+      if (Test-Path $agentFile) {
+        $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+        $agentText = [System.IO.File]::ReadAllText($agentFile, $utf8NoBom)
+        $header = "### Custom Instructions (instalador)"
+        if ($agentText.IndexOf($header) -ge 0) {
+          # Ja existe; nao fazer nada
+          Write-Info "Bloco de Custom Instructions ja existe em $($map[$role])."
+        } else {
+          $template = @"
+---
+### Custom Instructions (instalador)
+# $role - Custom Instructions (Template)
+
+- Adicione aqui diretrizes especificas deste projeto para o papel '$role'.
+- Exemplos: pastas reais afetadas, integracoes obrigatorias, padroes de log, checagens extras de seguranca.
+
+"@
+          $agentText = ($agentText -replace "(\r?\n)", "`r`n")
+          $append = "`r`n" + $template.Replace("`n", "`r`n")
+          [System.IO.File]::AppendAllText($agentFile, $append, $utf8NoBom)
+          Write-Info "Inserido bloco TEMPLATE em $($map[$role])."
+        }
+      } else {
+        Write-Warn "Arquivo do agente nao encontrado: $agentFile"
+      }
     }
+  }
+}
+
+function Replace-Placeholders($target, $sprint, $activity) {
+  try {
+    $agentsDir = Join-Path $target 'agents/manual'
+    if (-not (Test-Path $agentsDir)) { Write-Warn "Pasta de agentes nao encontrada para substituir placeholders: $agentsDir"; return }
+
+    Write-Info "Substituindo placeholders {sprint}/{activity} nos agentes (.agent.md e .enrichment.yaml)..."
+
+    $files = Get-ChildItem -Path $agentsDir -Recurse -File -Include '*.agent.md','*.enrichment.yaml' -ErrorAction SilentlyContinue
+    if (-not $files -or $files.Count -eq 0) { Write-Warn "Nenhum arquivo de agente/enrichment encontrado para substituicao em $agentsDir"; return }
+
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    foreach ($f in $files) {
+      try {
+        $text = [System.IO.File]::ReadAllText($f.FullName, $utf8NoBom)
+        # Normalizar quebras de linha para CRLF antes das substituicoes
+        $text = ($text -replace "(\r?\n)", "`r`n")
+
+        # Substituir tokens canonicos
+        $text = $text.Replace('{sprint}', $sprint)
+        $text = $text.Replace('{activity}', $activity)
+
+        # Substituir formas compostas de caminho (ex.: sprint{sprint})
+        $text = $text.Replace("sprint{sprint}", "sprint$sprint")
+
+        # Se for arquivo de agente (.agent.md), deduplicar itens consecutivos em responsibilities
+        if ($f.Name -like '*.agent.md') {
+          $lines = $text -split "`r`n"
+          $outLines = New-Object System.Collections.Generic.List[string]
+          $inResp = $false
+          for ($i = 0; $i -lt $lines.Length; $i++) {
+            $line = $lines[$i]
+            if (-not $inResp) {
+              $outLines.Add($line)
+              if ($line.TrimStart().StartsWith('responsibilities:')) { $inResp = $true }
+              continue
+            }
+
+            # dentro de responsibilities enquanto a linha começar com dois espaços e '- '
+            if ($line -match '^[\t ]+- ') {
+              $prev = if ($outLines.Count -gt 0) { $outLines[$outLines.Count - 1] } else { '' }
+              if ($prev -ne $line) { $outLines.Add($line) }
+              # não adiciona se for duplicado consecutivo
+            } else {
+              # saiu da seção responsibilities
+              $inResp = $false
+              $outLines.Add($line)
+            }
+          }
+          $text = [string]::Join("`r`n", $outLines)
+        }
+
+        # Garantir terminador de linha final e salvar como UTF-8 sem BOM
+        if (-not $text.EndsWith("`r`n")) { $text += "`r`n" }
+        [System.IO.File]::WriteAllText($f.FullName, $text, $utf8NoBom)
+      } catch {
+        Write-Warn "Falha ao substituir placeholders em: $($f.FullName). Erro: $_"
+      }
+    }
+
+    Write-Info "Placeholders substituidos com sucesso."
+  } catch {
+    Write-Warn "Erro ao executar Replace-Placeholders: $_"
   }
 }
 
@@ -885,6 +984,9 @@ function Generate-ProjectContext($analysis, $target) {
 
   $content = @"
 # Análise Automática do Projeto Existente
+
+Nota sobre prioridade das instruções:
+- Fonte de verdade (repo): `.github/copilot-instructions.md`
 
 **Projeto analisado:** ``$($analysis.ProjectPath)``
 **Tipo de projeto:** ``$($analysis.ProjectType.ToUpper())``
@@ -1107,8 +1209,10 @@ A nova funcionalidade deve parecer que **sempre fez parte do projeto**, seguindo
 ### **Lema da Implementacao:**
 > *"Não reinvente, INTEGRE. Não substitua, COMPLEMENTE. Não quebre, HARMONIZE."*
 "@
-
-  Set-Content -Path $contextFile -Value $content -Encoding UTF8
+  # Garantir CRLF e UTF-8 sem BOM conforme padrão do repositório (Markdown)
+  $contentCrLf = $content -replace "`r?`n", "`r`n"
+  $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllText($contextFile, $contentCrLf, $utf8NoBom)
   Write-Info "Contexto do projeto salvo em: $contextFile"
 }
 
@@ -1831,9 +1935,16 @@ try {
 
   $doEnrich = Ask 'Deseja enriquecer os agentes com instrucoes personalizadas? (s/n)' 'n'
   if ($doEnrich -match '^[sSyY]') {
-    $instr = Ask 'Informe a pasta com arquivos *.instructions.md|txt (ex.: C:\\temp\\newInstruction)'
-    if (-not [string]::IsNullOrWhiteSpace($instr)) { Enrich-Agents -target $TargetProjectPath -instructionsPath $instr }
+    $instr = Ask 'Informe a pasta com arquivos *.instructions.md|txt (ex.: C:\\temp\\newInstruction). Deixe em branco para inserir apenas o TEMPLATE.'
+    if ([string]::IsNullOrWhiteSpace($instr)) {
+      Write-Info 'Nenhum caminho informado. Usando a raiz do projeto alvo para inserir blocos TEMPLATE.'
+      $instr = $TargetProjectPath
+    }
+    Enrich-Agents -target $TargetProjectPath -instructionsPath $instr
   }
+
+  # Após copiar e eventualmente enriquecer, substituir placeholders {sprint}/{activity}
+  Replace-Placeholders -target $TargetProjectPath -sprint $sprint -activity $activity
 
   Write-Host "\nTudo pronto!" -ForegroundColor Green
 

@@ -257,3 +257,18 @@ Optional agents (Frontend Specialist, UX/UI Specialist, Code Reviewer) follow si
 ---
 
 Adhering to this extended instruction set keeps the TOTVS-WorkflowAI workflow predictable, auditable, and aligned with both business goals and engineering excellence. Always begin new sessions by revisiting this document to ensure compliance.
+
+---
+
+## 13. Azure DevOps MCP Defaults
+
+- Organization (ADO): totvstfs
+- Default Project (ADO): HR-PeopleBudget
+- Tools: When using Azure DevOps MCP tools, always include the `project` parameter for operations that require it (for example: repositories, pipelines, work, work-items, test-plans, wiki, search). If unspecified by the user, assume `project = HR-PeopleBudget`.
+- Domains: All domains are enabled in the MCP configuration; you do not need to request additional domains.
+- Authentication: Request the PAT via the secret input (`ado_pat`) and never echo it in outputs. Use least-privilege scopes.
+
+Example prompts to prefer:
+- "List repos for project 'HR-PeopleBudget' containing 'hr-peoplebudget'"
+- "List builds (pipelines) for project 'HR-PeopleBudget' from last 7 days"
+- "Get wiki pages in project 'HR-PeopleBudget' under '/Architecture'"
